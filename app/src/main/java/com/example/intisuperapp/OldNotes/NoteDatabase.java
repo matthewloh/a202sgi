@@ -1,4 +1,4 @@
-package com.example.intisuperapp;
+package com.example.intisuperapp.OldNotes;
 
 import android.content.Context;
 
@@ -38,7 +38,7 @@ public abstract class NoteDatabase extends RoomDatabase {
         return instance;
     }
 
-    public static Callback sWordDatabaseCallBack = new Callback() {
+    public static NoteDatabase.Callback sWordDatabaseCallBack = new NoteDatabase.Callback() {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);

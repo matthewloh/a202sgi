@@ -1,6 +1,5 @@
-package com.example.intisuperapp;
+package com.example.intisuperapp.OldNotes;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.intisuperapp.R;
 import com.example.intisuperapp.databinding.FragmentMainBinding;
 
 import java.util.List;
@@ -28,7 +28,6 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class MainFragment extends Fragment {
-
     public static final int ADD_NOTE_REQUEST = 1;
 
     private FragmentMainBinding binding;
@@ -118,7 +117,6 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 int REQUEST_CODE = 1;
-
                 NavHostFragment.findNavController(MainFragment.this)
                         .navigate(R.id.action_mainFragment_to_addNoteFragment);
 

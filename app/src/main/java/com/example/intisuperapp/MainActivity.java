@@ -1,7 +1,14 @@
 package com.example.intisuperapp;
 
+import android.os.Bundle;
+
+import com.example.intisuperapp.OldNotes.NoteViewModel;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.view.MenuInflater;
+
 import androidx.core.view.MenuProvider;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -10,14 +17,11 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import android.os.Bundle;
+import com.example.intisuperapp.databinding.ActivityMainBinding;
+
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
-
-import com.example.intisuperapp.R;
-import com.example.intisuperapp.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         addMenuProvider(new MenuProvider() {
             @Override
             public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
-                menuInflater.inflate(R.menu.main_menu, menu);
+                menuInflater.inflate(R.menu.menu_main, menu);
             }
 
             @Override

@@ -1,4 +1,4 @@
-package com.example.intisuperapp;
+package com.example.intisuperapp.OldNotes;
 
 import android.app.Application;
 

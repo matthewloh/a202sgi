@@ -1,4 +1,4 @@
-package com.example.intisuperapp;
+package com.example.intisuperapp.OldNotes;
 
 import android.os.Bundle;
 
@@ -18,6 +18,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.intisuperapp.MainActivity;
+import com.example.intisuperapp.R;
 import com.example.intisuperapp.databinding.FragmentAddNoteBinding;
 
 /**
@@ -31,7 +33,7 @@ public class AddNoteFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
-    public static final String EXTRA_ID = "com.example.architecture.example.EXTRA_ID";
+    public static final String EXTRA_ID = "com.example.intisuperapp.EXTRA_ID";
     private static final String EXTRA_TITLE = "com.example.intisuperapp.EXTRA_TITLE";
     private static final String EXTRA_DESCRIPTION = "com.example.intisuperapp.EXTRA_DESCRIPTION";
     private static final String EXTRA_PRIORITY = "com.example.intisuperapp.EXTRA_PRIORITY";
@@ -88,6 +90,8 @@ public class AddNoteFragment extends Fragment {
         requireActivity().addMenuProvider(new MenuProvider() {
             @Override
             public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
+                // remove the previous menu
+                menu.clear();
                 menuInflater.inflate(R.menu.add_note_menu, menu);
 
             }

@@ -1,5 +1,6 @@
-package com.example.intisuperapp;
+package com.example.intisuperapp.OldNotes;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
