@@ -34,6 +34,9 @@ public class LoginFragment extends Fragment {
         getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         // Remove action bar
         ((MainActivity) getActivity()).getSupportActionBar().hide();
+
+
+
         binding.button.setOnClickListener(
                 v -> {
 
@@ -46,6 +49,8 @@ public class LoginFragment extends Fragment {
                 }
         );
     }
+
+
 
     @Override
     public void onDestroyView() {
