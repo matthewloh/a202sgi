@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@color/inti_superapp_logo_background"/>
+    <foreground android:drawable="@mipmap/inti_superapp_logo_foreground"/>
+</adaptive-icon>

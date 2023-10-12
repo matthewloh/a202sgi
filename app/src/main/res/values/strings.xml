@@ -5,5 +5,15 @@
     <string name="Email">Email</string>
     <string name="pwHint">Password</string>
     <string name="loginBtnString">LOGIN</string>
+    <string name="hamburger_menu_icon_des">hamburger menu icon</string>
+    <string name="inti_superapp_logo_des">INTI Superapp logo</string>
+    <string name="home">Home</string>
+    <string name="notifications">Notifications</string>
+    <string name="events">Events</string>
+    <string name="profile">Profile</string>
+    <string name="events_fragment">Events Fragment</string>
+    <string name="profile_fragment">Profile Fragment</string>
+    <string name="notifications_fragment">Notifications Fragment</string>
+    <string name="home_fragment">Home Fragment</string>
 
 </resources>
