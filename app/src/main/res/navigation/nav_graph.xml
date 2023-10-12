@@ -61,6 +61,9 @@
         <action
             android:id="@+id/action_homeFragment_to_notificationsFragment"
             app:destination="@id/notificationsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_bookingsFragment"
+            app:destination="@id/bookingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/eventsFragment"
@@ -77,4 +80,30 @@
         android:name="com.example.intisuperapp.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/bookingsFragment"
+        android:name="com.example.intisuperapp.BookingsFragment"
+        android:label="fragment_bookings"
+        tools:layout="@layout/fragment_bookings" >
+        <action
+            android:id="@+id/action_bookingsFragment_to_showAllBookings"
+            app:destination="@id/showAllBookings" />
+        <action
+            android:id="@+id/action_bookingsFragment_to_createBookings"
+            app:destination="@id/createBookings" />
+    </fragment>
+    <fragment
+        android:id="@+id/createBookings"
+        android:name="com.example.intisuperapp.CreateBookings"
+        android:label="fragment_create_bookings"
+        tools:layout="@layout/fragment_create_bookings" />
+    <fragment
+        android:id="@+id/showAllBookings"
+        android:name="com.example.intisuperapp.ShowAllBookings"
+        android:label="fragment_show_all_bookings"
+        tools:layout="@layout/fragment_show_all_bookings" >
+        <action
+            android:id="@+id/action_showAllBookings_to_bookingsFragment"
+            app:destination="@id/bookingsFragment" />
+    </fragment>
 </navigation>
