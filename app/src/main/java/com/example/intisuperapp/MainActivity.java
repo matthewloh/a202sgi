@@ -65,14 +65,25 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
-        //remove bottom navigation bar
+//        //remove top action bar in login and registration
+//        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+//            if (destination.getId() == R.id.loginFragment || destination.getId() == R.id.registrationFragment) {
+//                getSupportActionBar().hide();
+//            } else {
+//                getSupportActionBar().show();
+//            }
+//        });
+
+        //remove top action bar and bottom navigation bar in login and registration
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
             public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
                 if (destination.getId() == R.id.loginFragment || destination.getId()==R.id.registrationFragment) {
                     bottomNavigationView.setVisibility(View.GONE);
+                    getSupportActionBar().hide();
                 } else {
                     bottomNavigationView.setVisibility(View.VISIBLE);
+                    getSupportActionBar().show();
                 }
             }
         });
