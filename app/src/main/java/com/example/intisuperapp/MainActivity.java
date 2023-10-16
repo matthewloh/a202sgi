@@ -50,8 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
         noteViewModel = new ViewModelProvider(this).get(NoteViewModel.class);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.home) {
                 navController.navigate(R.id.homeFragment);
@@ -79,10 +78,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
                 if (destination.getId() == R.id.loginFragment || destination.getId()==R.id.registrationFragment) {
-                    bottomNavigationView.setVisibility(View.GONE);
+                    binding.bottomNavigationView.setVisibility(View.GONE);
                     getSupportActionBar().hide();
                 } else {
-                    bottomNavigationView.setVisibility(View.VISIBLE);
+                    binding.bottomNavigationView.setVisibility(View.VISIBLE);
                     getSupportActionBar().show();
                 }
             }
@@ -92,25 +91,25 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        addMenuProvider(new MenuProvider() {
-            @Override
-            public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
-                menuInflater.inflate(R.menu.menu_main, menu);
-            }
-
-            @Override
-            public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
-                if (menuItem.getItemId() == R.id.delete_all_notes) {
-                    noteViewModel.deleteAllNotes();
-                    Toast.makeText(MainActivity.this, "All notes deleted", Toast.LENGTH_SHORT).show();
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-
-        });
+//        addMenuProvider(new MenuProvider() {
+//            @Override
+//            public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
+//                menuInflater.inflate(R.menu.menu_main, menu);
+//            }
+//
+//            @Override
+//            public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
+//                if (menuItem.getItemId() == R.id.delete_all_notes) {
+//                    noteViewModel.deleteAllNotes();
+//                    Toast.makeText(MainActivity.this, "All notes deleted", Toast.LENGTH_SHORT).show();
+//                    return true;
+//                } else {
+//                    return false;
+//                }
+//            }
+//
+//
+//        });
     }
 
 //    @Override
