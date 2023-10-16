@@ -1,5 +1,6 @@
 package com.example.intisuperapp;
 
+import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 
@@ -10,25 +11,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 
 public class CreateBookings extends Fragment {
 
-    EditText chooseStartTime, chooseEndTime;
+    EditText chooseStartTime, chooseEndTime, chooseDate;
     TimePickerDialog timePickerDialog;
+    DatePickerDialog datePickerDialog;
     Calendar calendar;
     int currentHour;
     int currentMinute;
+    int year, month, day;
     String amPm;
     Spinner chooseVenueSpinner;
     Button addBookingButton;
-
 
 
     @Override
@@ -40,6 +45,8 @@ public class CreateBookings extends Fragment {
         chooseStartTime = view.findViewById(R.id.bookingStartTime);
         chooseEndTime = view.findViewById(R.id.bookingEndTime);
         addBookingButton =view.findViewById(R.id.add_booking_btn);
+        chooseDate = view.findViewById(R.id.bookingDate);
+
 
 
         chooseVenueSpinner = view.findViewById(R.id.booking_venue_spinner);
@@ -50,6 +57,15 @@ public class CreateBookings extends Fragment {
         );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         chooseVenueSpinner.setAdapter(adapter);
+
+        chooseDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePicker(); // Show the DatePicker when the EditText is clicked
+            }
+        });
+
+
 
 
         chooseStartTime.setOnClickListener(new View.OnClickListener() {
@@ -72,6 +88,29 @@ public class CreateBookings extends Fragment {
         return view;
     }
 
+    private void showDatePicker() {
+        final Calendar currentDate = Calendar.getInstance();
+        year = currentDate.get(Calendar.YEAR);
+        month = currentDate.get(Calendar.MONTH);
+        day = currentDate.get(Calendar.DAY_OF_MONTH);
+
+        datePickerDialog = new DatePickerDialog(requireContext(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDay) {
+                // Set the chosen date in the format "dd/MM/yyyy"
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+                calendar = Calendar.getInstance();
+                calendar.set(selectedYear, selectedMonth, selectedDay);
+                String formattedDate = sdf.format(calendar.getTime());
+                chooseDate.setText(formattedDate);
+            }
+        }, year, month, day);
+
+        datePickerDialog.show();
+    }
+
+
+
     private void showTimePicker(final EditText timeEditText) {
         calendar = Calendar.getInstance();
         currentHour = calendar.get(Calendar.HOUR);
@@ -91,5 +130,7 @@ public class CreateBookings extends Fragment {
 
         timePickerDialog.show();
     }
+
+
 
 }

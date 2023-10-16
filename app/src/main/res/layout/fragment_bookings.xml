@@ -40,6 +40,7 @@
         app:layout_constraintTop_toBottomOf="@+id/bookingsTitle" />
 
     <LinearLayout
+        android:id="@+id/currentBookingsTitleLayout"
         android:layout_width="wrap_content"
         android:layout_height="75dp"
         android:orientation="horizontal"
@@ -57,7 +58,7 @@
             android:layout_marginTop="10dp"
             android:text="@string/current_bookings"
             android:textColor="@color/black"
-            android:textSize="24sp"
+            android:textSize="26sp"
             android:textStyle="bold"/>
 
         <TextView
@@ -74,6 +75,111 @@
             android:textStyle="bold" />
 
     </LinearLayout>
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10sp"
+    app:layout_constraintTop_toBottomOf="@+id/currentBookingsTitleLayout"
+    app:layout_constraintStart_toStartOf="@+id/createBookingRectangle"
+    app:layout_constraintEnd_toEndOf="@+id/createBookingRectangle"
+    >
+
+    <LinearLayout
+        android:id="@+id/currentBookingRow1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10sp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/booking_row_border"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Booking 1: "
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Venue: Discussion Room 2"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Date: 12/12/2023"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Time: 12:00pm - 1:00pm"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/currentBookingRow2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10sp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/booking_row_border"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Booking 2: "
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Venue: Music Room "
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Date: 13/12/2023"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Time: 10:00am - 11:30am"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
+
 
 
     <Button

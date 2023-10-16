@@ -26,6 +26,7 @@
     <string name="create_booking">Create a Booking</string>
     <string name="add_booking_btn">Add\n booking</string>
     <string name="venue">"Venue: "</string>
+    <string name="booking_date">"Date: "</string>
     <string name="booking_time">"Time: "</string>
     <string name="booking_contact">"Contact: "</string>
     <string name="booking_contact2">Contact</string>
@@ -50,6 +51,7 @@ Vel facilisis volutpat est velit egestas dui id. Scelerisque in dictum non conse
 Egestas congue quisque egestas diam. Tortor aliquam nulla facilisi cras. Dolor sit amet consectetur adipiscing. Vitae turpis massa sed elementum tempus egestas sed. Dolor purus non enim praesent. A pellentesque sit amet porttitor eget dolor morbi non. Vitae sapien pellentesque habitant morbi tristique senectus. Volutpat odio facilisis mauris sit amet. Pharetra diam sit amet nisl suscipit adipiscing. Massa tincidunt nunc pulvinar sapien. Amet massa vitae tortor condimentum lacinia quis vel eros donec. Enim facilisis gravida neque convallis a cras semper auctor. Volutpat consequat mauris nunc congue nisi. Eget lorem dolor sed viverra ipsum nunc aliquet. Ut morbi tincidunt augue interdum velit euismod in pellentesque. Ultrices dui sapien eget mi.
 
 Et odio pellentesque diam volutpat commodo. Fermentum posuere urna nec tincidunt praesent. Consequat id porta nibh venenatis cras sed felis eget velit. Facilisis gravida neque convallis a. Diam donec adipiscing tristique risus nec. Laoreet sit amet cursus sit amet dictum sit. Elit duis tristique sollicitudin nibh sit amet. Nulla porttitor massa id neque aliquam. Morbi tempus iaculis urna id volutpat lacus laoreet non curabitur. Enim nunc faucibus a pellentesque sit amet porttitor eget dolor. Tempus egestas sed sed risus pretium. Dictum varius duis at consectetur lorem donec. Ipsum consequat nisl vel pretium lectus.</string>
+    <string name="booking_date2">Date</string>
 
     <string-array name="venue_array">
         <item>Please select</item>
