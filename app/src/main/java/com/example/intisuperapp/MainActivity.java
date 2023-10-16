@@ -65,14 +65,6 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
-//        //remove top action bar in login and registration
-//        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-//            if (destination.getId() == R.id.loginFragment || destination.getId() == R.id.registrationFragment) {
-//                getSupportActionBar().hide();
-//            } else {
-//                getSupportActionBar().show();
-//            }
-//        });
 
         //remove top action bar and bottom navigation bar in login and registration
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
@@ -87,9 +79,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
 
 
         addMenuProvider(new MenuProvider() {

@@ -63,7 +63,11 @@
             app:destination="@id/notificationsFragment" />
         <action
             android:id="@+id/action_homeFragment_to_bookingsFragment"
-            app:destination="@id/bookingsFragment" />
+            app:destination="@id/bookingsFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/eventsFragment"
@@ -87,10 +91,18 @@
         tools:layout="@layout/fragment_bookings" >
         <action
             android:id="@+id/action_bookingsFragment_to_showAllBookings"
-            app:destination="@id/showAllBookings" />
+            app:destination="@id/showAllBookings"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in"
+            app:popExitAnim="@anim/slide_out" />
         <action
             android:id="@+id/action_bookingsFragment_to_createBookings"
-            app:destination="@id/createBookings" />
+            app:destination="@id/createBookings"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in"
+            app:popExitAnim="@anim/slide_out" />
     </fragment>
     <fragment
         android:id="@+id/createBookings"
