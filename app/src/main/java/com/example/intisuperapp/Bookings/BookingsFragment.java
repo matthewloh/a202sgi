@@ -1,4 +1,4 @@
-package com.example.intisuperapp;
+package com.example.intisuperapp.Bookings;
 
 import android.os.Bundle;
 
@@ -10,11 +10,9 @@ import androidx.navigation.fragment.NavHostFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 
-import com.example.intisuperapp.LoginAndRegistration.RegistrationFragment;
+import com.example.intisuperapp.R;
 import com.example.intisuperapp.databinding.FragmentBookingsBinding;
-import com.example.intisuperapp.databinding.FragmentRegistrationBinding;
 
 
 public class BookingsFragment extends Fragment {
