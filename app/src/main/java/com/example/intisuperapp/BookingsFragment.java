@@ -1,4 +1,4 @@
-package com.example.intisuperapp.LoginAndRegistration;
+package com.example.intisuperapp;
 
 import android.os.Bundle;
 
@@ -11,22 +11,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Button;
 
-import com.example.intisuperapp.HomeFragment;
-import com.example.intisuperapp.MainActivity;
-import com.example.intisuperapp.R;
-import com.example.intisuperapp.databinding.FragmentLoginBinding;
+import com.example.intisuperapp.LoginAndRegistration.RegistrationFragment;
+import com.example.intisuperapp.databinding.FragmentBookingsBinding;
 import com.example.intisuperapp.databinding.FragmentRegistrationBinding;
 
-public class RegistrationFragment extends Fragment {
 
-private FragmentRegistrationBinding binding;
+public class BookingsFragment extends Fragment {
 
-    @Nullable
+    private FragmentBookingsBinding binding;
+
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentRegistrationBinding.inflate(inflater, container, false);
+        binding = FragmentBookingsBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -34,17 +32,20 @@ private FragmentRegistrationBinding binding;
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
-
-        binding.materialButton.setOnClickListener(
+        binding.createABookingButton.setOnClickListener(
                 v -> {
-                    NavHostFragment.findNavController(RegistrationFragment.this)
-                            .navigate(R.id.action_registrationFragment_to_homeFragment);
+                    NavHostFragment.findNavController(BookingsFragment.this)
+                            .navigate(R.id.action_bookingsFragment_to_createBookings);
                 }
         );
-    }
 
-
+        binding.seeAllText.setOnClickListener(
+                v -> {
+                    NavHostFragment.findNavController(BookingsFragment.this)
+                            .navigate(R.id.action_bookingsFragment_to_showAllBookings);
+                }
+        );
+}
     @Override
     public void onDestroyView() {
         super.onDestroyView();

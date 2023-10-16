@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.example.intisuperapp.OldNotes.NoteViewModel;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.MenuInflater;
@@ -12,15 +13,18 @@ import android.view.MenuInflater;
 import androidx.core.view.MenuProvider;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.intisuperapp.databinding.ActivityMainBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -45,6 +49,49 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
 
         noteViewModel = new ViewModelProvider(this).get(NoteViewModel.class);
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.home) {
+                navController.navigate(R.id.homeFragment);
+            } else if (itemId == R.id.events) {
+                navController.navigate(R.id.eventsFragment);
+            } else if (itemId == R.id.profile) {
+                navController.navigate(R.id.profileFragment);
+            } else if (itemId == R.id.notifications) {
+                navController.navigate(R.id.notificationsFragment);
+            }
+            return true;
+        });
+
+//        //remove top action bar in login and registration
+//        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+//            if (destination.getId() == R.id.loginFragment || destination.getId() == R.id.registrationFragment) {
+//                getSupportActionBar().hide();
+//            } else {
+//                getSupportActionBar().show();
+//            }
+//        });
+
+        //remove top action bar and bottom navigation bar in login and registration
+        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+            @Override
+            public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
+                if (destination.getId() == R.id.loginFragment || destination.getId()==R.id.registrationFragment) {
+                    bottomNavigationView.setVisibility(View.GONE);
+                    getSupportActionBar().hide();
+                } else {
+                    bottomNavigationView.setVisibility(View.VISIBLE);
+                    getSupportActionBar().show();
+                }
+            }
+        });
+
+
+
+
+
         addMenuProvider(new MenuProvider() {
             @Override
             public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
@@ -61,6 +108,8 @@ public class MainActivity extends AppCompatActivity {
                     return false;
                 }
             }
+
+
         });
     }
 
@@ -86,4 +135,6 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration) || super.onSupportNavigateUp();
     }
+
+
 }
