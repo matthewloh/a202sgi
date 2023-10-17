@@ -53,7 +53,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.intisuperapp.HomeFragment"
-        android:label="fragment_home"
+        android:label=""
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_eventsFragment"
@@ -71,22 +71,22 @@
     <fragment
         android:id="@+id/eventsFragment"
         android:name="com.example.intisuperapp.Events.EventsFragment"
-        android:label="fragment_events"
+        android:label=""
         tools:layout="@layout/fragment_events" />
     <fragment
         android:id="@+id/notificationsFragment"
         android:name="com.example.intisuperapp.NotificationsFragment"
-        android:label="fragment_notifications"
+        android:label=""
         tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.intisuperapp.ProfileFragment"
-        android:label="fragment_profile"
+        android:label=""
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/bookingsFragment"
         android:name="com.example.intisuperapp.Bookings.BookingsFragment"
-        android:label="fragment_bookings"
+        android:label=""
         tools:layout="@layout/fragment_bookings" >
         <action
             android:id="@+id/action_bookingsFragment_to_showAllBookings"
@@ -98,12 +98,12 @@
     <fragment
         android:id="@+id/createBookings"
         android:name="com.example.intisuperapp.Bookings.CreateBookings"
-        android:label="fragment_create_bookings"
+        android:label=""
         tools:layout="@layout/fragment_create_bookings" />
     <fragment
         android:id="@+id/showAllBookings"
         android:name="com.example.intisuperapp.Bookings.ShowAllBookings"
-        android:label="fragment_show_all_bookings"
+        android:label=""
         tools:layout="@layout/fragment_show_all_bookings" >
         <action
             android:id="@+id/action_showAllBookings_to_bookingsFragment"

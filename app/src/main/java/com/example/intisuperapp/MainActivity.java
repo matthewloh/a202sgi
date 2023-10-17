@@ -49,7 +49,11 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
 
         noteViewModel = new ViewModelProvider(this).get(NoteViewModel.class);
-
+        binding.hamburgerMenuIcon.setOnClickListener(
+                v -> {
+                    Toast.makeText(this, "nice", Toast.LENGTH_SHORT).show();
+                }
+        );
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.home) {
@@ -77,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
             public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
-                if (destination.getId() == R.id.loginFragment || destination.getId()==R.id.registrationFragment) {
+                if (destination.getId() == R.id.loginFragment || destination.getId() == R.id.registrationFragment) {
                     binding.bottomNavigationView.setVisibility(View.GONE);
                     getSupportActionBar().hide();
                 } else {
@@ -86,9 +90,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
 
 
 //        addMenuProvider(new MenuProvider() {
