@@ -1,29 +1,20 @@
-package com.example.intisuperapp;
+package com.example.intisuperapp.HomePage;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
-import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Lifecycle;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.example.intisuperapp.LoginAndRegistration.RegistrationFragment;
+import com.example.intisuperapp.MainActivity;
+import com.example.intisuperapp.R;
 import com.example.intisuperapp.databinding.FragmentHomeBinding;
-import com.example.intisuperapp.databinding.FragmentRegistrationBinding;
-import com.google.android.material.appbar.MaterialToolbar;
 
 
 public class HomeFragment extends Fragment {
@@ -50,6 +41,31 @@ public class HomeFragment extends Fragment {
         // Set title to the fragment
         actionBar.setTitle("");
         // Obtaining a reference to the hamburger menu icon ImageView
+
+        binding.appointmentsButton.setOnClickListener(
+                v -> {
+                    NavHostFragment.findNavController(HomeFragment.this)
+                            .navigate(R.id.action_homeFragment_to_appointmentsFragment);
+                }
+        );
+        binding.discussionsButton.setOnClickListener(
+                v -> {
+                    NavHostFragment.findNavController(HomeFragment.this)
+                            .navigate(R.id.action_homeFragment_to_discussionsFragment);
+                }
+        );
+        binding.lostAndFoundButton.setOnClickListener(
+                v -> {
+                    NavHostFragment.findNavController(HomeFragment.this)
+                            .navigate(R.id.action_homeFragment_to_lostAndFoundFragment);
+                }
+        );
+        binding.eventsButton.setOnClickListener(
+                v -> {
+                    NavHostFragment.findNavController(HomeFragment.this)
+                            .navigate(R.id.action_homeFragment_to_eventsFragment);
+                }
+        );
 
         binding.goToBookingsPageBtn.setOnClickListener(
                 v -> {
