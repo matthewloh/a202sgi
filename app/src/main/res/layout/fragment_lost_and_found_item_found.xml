@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1D89D3"
-    android:backgroundTint="#1D8AD4">
+    android:backgroundTint="#1D8AD4"
+    tools:context=".LostAndFound.LostAndFoundFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"

@@ -22,57 +22,12 @@ import com.example.intisuperapp.databinding.FragmentMainBinding;
 
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MainFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class MainFragment extends Fragment {
     public static final int ADD_NOTE_REQUEST = 1;
 
     private FragmentMainBinding binding;
 
     private NoteViewModel noteViewModel;
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public MainFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MainFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MainFragment newInstance(String param1, String param2) {
-        MainFragment fragment = new MainFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -98,12 +53,11 @@ public class MainFragment extends Fragment {
         binding.recyclerView.setHasFixedSize(true);
 
         // If we were using Fragments instead of Activities, we would use the following line:
-        // Still, we would need to use the ViewModelProvider constructor that takes a ViewModelProvider.Factory
-        // The object returned by the ViewModelProvider.Factory would be the same for both the Activity and the Fragment
         // noteViewModel = new ViewModelProvider(this).get(NoteViewModel.class);
         // getActivity() could also be used instead of "this" to
         // the ViewModel will be scoped to the lifecycle of the Activity instead of the Fragment
         // to allow the ViewModel to be shared between the Activity and the Fragment
+
         noteViewModel = new ViewModelProvider(getActivity()).get(NoteViewModel.class);
         noteViewModel.getAllNotes().observe(getViewLifecycleOwner(), new Observer<List<Note>>() {
             @Override
@@ -146,7 +100,7 @@ public class MainFragment extends Fragment {
 //            intent.putExtra(AddEditNoteActivity.EXTRA_TITLE, note.getTitle());
 //            intent.putExtra(AddEditNoteActivity.EXTRA_DESCRIPTION, note.getDescription());
 //            intent.putExtra(AddEditNoteActivity.EXTRA_PRIORITY, note.getPriority());
-            //            startActivityForResult(intent, EDIT_NOTE_REQUEST);
+        //            startActivityForResult(intent, EDIT_NOTE_REQUEST);
 //            editActivityResultLauncher.launch(intent);
 //        });
     }

@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
             public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
-                if (destination.getId() == R.id.loginFragment || destination.getId() == R.id.registrationFragment) {
+                if (destination.getId() == R.id.loginFragment || destination.getId() == R.id.registrationFragment || destination.getId() == R.id.roleRegistrationFragment) {
                     binding.bottomNavigationView.setVisibility(View.GONE);
                     getSupportActionBar().hide();
                 } else {

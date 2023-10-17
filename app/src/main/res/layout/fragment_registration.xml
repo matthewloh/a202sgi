@@ -141,15 +141,5 @@
             app:layout_constraintTop_toBottomOf="@+id/editTextConfirmPass"
             app:layout_constraintVertical_bias="0.19999999"
             app:shapeAppearanceOverlay="@style/MyShapeAppearance" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            app:layout_constraintBottom_toBottomOf="parent"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@android:drawable/ic_dialog_email" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

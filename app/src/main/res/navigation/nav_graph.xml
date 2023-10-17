@@ -33,7 +33,7 @@
         android:id="@+id/loginFragment"
         android:name="com.example.intisuperapp.LoginAndRegistration.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_registrationFragment"
             app:destination="@id/registrationFragment" />
@@ -42,19 +42,27 @@
         android:id="@+id/registrationFragment"
         android:name="com.example.intisuperapp.LoginAndRegistration.RegistrationFragment"
         android:label="fragment_registration"
-        tools:layout="@layout/fragment_registration" >
+        tools:layout="@layout/fragment_registration">
         <action
-            android:id="@+id/action_registrationFragment_to_homeFragment"
+            android:id="@+id/action_registrationFragment_to_roleRegistrationFragment"
+            app:destination="@id/roleRegistrationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/roleRegistrationFragment"
+        android:name="com.example.intisuperapp.LoginAndRegistration.RoleRegistrationFragment"
+        android:label="fragment_role_registration"
+        tools:layout="@layout/fragment_role_registration">
+        <action
+            android:id="@+id/action_roleRegistrationFragment_to_homeFragment"
             app:destination="@id/homeFragment"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true"
-            />
+            app:popUpTo="@id/roleRegistrationFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.intisuperapp.HomeFragment"
+        android:name="com.example.intisuperapp.HomePage.HomeFragment"
         android:label=""
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_eventsFragment"
             app:destination="@id/eventsFragment" />
@@ -71,6 +79,15 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_homeFragment_to_lostAndFoundFragment"
+            app:destination="@id/lostAndFoundFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_appointmentsFragment"
+            app:destination="@id/appointmentsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_discussionsFragment"
+            app:destination="@id/discussionsFragment" />
     </fragment>
     <fragment
         android:id="@+id/eventsFragment"
@@ -91,7 +108,7 @@
         android:id="@+id/bookingsFragment"
         android:name="com.example.intisuperapp.Bookings.BookingsFragment"
         android:label=""
-        tools:layout="@layout/fragment_bookings" >
+        tools:layout="@layout/fragment_bookings">
         <action
             android:id="@+id/action_bookingsFragment_to_showAllBookings"
             app:destination="@id/showAllBookings"
@@ -116,9 +133,25 @@
         android:id="@+id/showAllBookings"
         android:name="com.example.intisuperapp.Bookings.ShowAllBookings"
         android:label=""
-        tools:layout="@layout/fragment_show_all_bookings" >
+        tools:layout="@layout/fragment_show_all_bookings">
         <action
             android:id="@+id/action_showAllBookings_to_bookingsFragment"
             app:destination="@id/bookingsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/lostAndFoundFragment"
+        android:name="com.example.intisuperapp.LostAndFound.LostAndFoundFragment"
+        android:label=""
+        tools:layout="@layout/lost_and_found_main_page" />
+    <fragment
+        android:id="@+id/appointmentsFragment"
+        android:name="com.example.intisuperapp.Appointments.AppointmentsFragment"
+        android:label=""
+        tools:layout="@layout/fragment_appointments" />
+    <fragment
+        android:id="@+id/discussionsFragment"
+        android:name="com.example.intisuperapp.Discussions.DiscussionsFragment"
+        android:label=""
+        tools:layout="@layout/fragment_discussions" />
+
 </navigation>
