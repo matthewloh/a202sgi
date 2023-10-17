@@ -1,9 +1,69 @@
 <resources>
     <string name="app_name">INTI Superapp</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="Email">Email</string>
     <string name="pwHint">Password</string>
     <string name="loginBtnString">LOGIN</string>
+    <string name="hamburger_menu_icon_des">hamburger menu icon</string>
+    <string name="inti_superapp_logo_des">INTI Superapp logo</string>
+    <string name="home">Home</string>
+    <string name="notifications">Notifications</string>
+    <string name="events">Events</string>
+    <string name="profile">Profile</string>
+    <string name="events_fragment">Events Fragment</string>
+    <string name="profile_fragment">Profile Fragment</string>
+    <string name="notifications_fragment">Notifications Fragment</string>
+    <string name="home_fragment">Home Fragment</string>
+    <string name="go_to_bookings_page">Go to Bookings Page</string>
+    <string name="bookings_fragment">Bookings Fragment</string>
+    <string name="create_bookings_fragment">Create Bookings Fragment</string>
+    <string name="show_all_bookings_fragment">Show All Bookings Fragment</string>
+    <string name="bookings_title">Bookings</string>
+    <string name="bookings_button">Create a new booking</string>
+    <string name="current_bookings">Current Bookings:</string>
+    <string name="see_all"><u>see all</u></string>
+    <string name="create_booking">Create a Booking</string>
+    <string name="add_booking_btn">Add\n booking</string>
+    <string name="venue">"Venue: "</string>
+    <string name="booking_date">"Date: "</string>
+    <string name="booking_time">"Time: "</string>
+    <string name="booking_contact">"Contact: "</string>
+    <string name="booking_contact2">Contact</string>
+    <string name="booking_time2">Time</string>
+    <string name="start_time">Start \ntime:</string>
+    <string name="end_time">End \ntime:</string>
+    <string name="all_bookings">All Bookings</string>
+    <string name="done">Done</string>
+
+    <string name="sample_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eget felis eget nunc lobortis mattis aliquam faucibus. Eu non diam phasellus vestibulum lorem sed risus. Tempus urna et pharetra pharetra massa massa ultricies mi quis. Faucibus vitae aliquet nec ullamcorper. Feugiat in ante metus dictum at tempor commodo. Malesuada nunc vel risus commodo. In nulla posuere sollicitudin aliquam ultrices sagittis orci. Vel facilisis volutpat est velit egestas dui id ornare. Vitae congue mauris rhoncus aenean. Eu facilisis sed odio morbi quis commodo odio aenean sed. Arcu non odio euismod lacinia at quis risus. Dui nunc mattis enim ut tellus elementum sagittis vitae et. Lobortis elementum nibh tellus molestie nunc non. Senectus et netus et malesuada. Sed nisi lacus sed viverra tellus in hac habitasse platea. Et netus et malesuada fames. Cras sed felis eget velit aliquet sagittis. Magna sit amet purus gravida quis blandit turpis cursus.
+
+Orci nulla pellentesque dignissim enim sit amet. Arcu dui vivamus arcu felis. Vitae semper quis lectus nulla. Mi sit amet mauris commodo quis imperdiet massa tincidunt. Suspendisse potenti nullam ac tortor vitae purus faucibus. Euismod lacinia at quis risus. Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque. Duis tristique sollicitudin nibh sit amet commodo nulla facilisi. Id venenatis a condimentum vitae sapien pellentesque habitant. Nam aliquam sem et tortor consequat id. Et sollicitudin ac orci phasellus egestas tellus. Faucibus nisl tincidunt eget nullam non nisi est. Blandit massa enim nec dui. Vitae tortor condimentum lacinia quis. Turpis cursus in hac habitasse platea dictumst quisque sagittis. Quam viverra orci sagittis eu volutpat odio facilisis. Aliquam malesuada bibendum arcu vitae elementum curabitur vitae. Sem fringilla ut morbi tincidunt augue interdum velit euismod. Enim ut tellus elementum sagittis vitae et.
+
+Non enim praesent elementum facilisis leo vel. Viverra maecenas accumsan lacus vel facilisis volutpat est velit egestas. Est placerat in egestas erat imperdiet sed. Bibendum enim facilisis gravida neque. Porta lorem mollis aliquam ut porttitor leo a diam sollicitudin. Facilisi morbi tempus iaculis urna id volutpat. Vitae proin sagittis nisl rhoncus mattis. Diam vulputate ut pharetra sit amet. Porttitor eget dolor morbi non arcu risus quis varius quam. Quisque sagittis purus sit amet volutpat consequat mauris nunc. Interdum varius sit amet mattis vulputate enim. Et malesuada fames ac turpis egestas integer eget aliquet. Cras sed felis eget velit. Lacus sed viverra tellus in. Imperdiet massa tincidunt nunc pulvinar sapien et. Augue interdum velit euismod in pellentesque massa placerat duis. Dui nunc mattis enim ut tellus elementum sagittis.
+
+Mattis aliquam faucibus purus in massa. Netus et malesuada fames ac turpis egestas sed tempus. Id diam vel quam elementum pulvinar etiam non quam. Nunc faucibus a pellentesque sit amet porttitor eget. Senectus et netus et malesuada fames ac turpis egestas. Sit amet volutpat consequat mauris. Mauris rhoncus aenean vel elit scelerisque mauris pellentesque. Nunc lobortis mattis aliquam faucibus purus in massa. Ac auctor augue mauris augue neque gravida in fermentum. Aliquam purus sit amet luctus venenatis lectus magna. Sit amet nisl suscipit adipiscing bibendum est ultricies. Libero id faucibus nisl tincidunt. Ut tortor pretium viverra suspendisse. Sed vulputate mi sit amet mauris. Hendrerit gravida rutrum quisque non tellus orci. Vestibulum mattis ullamcorper velit sed ullamcorper morbi. Faucibus in ornare quam viverra orci sagittis eu volutpat. Odio euismod lacinia at quis risus sed vulputate odio.
+
+Pellentesque habitant morbi tristique senectus. Ut faucibus pulvinar elementum integer enim neque volutpat. Porttitor eget dolor morbi non arcu risus quis varius. Ac auctor augue mauris augue neque gravida in fermentum. Cras tincidunt lobortis feugiat vivamus at augue. Vivamus at augue eget arcu dictum varius. Sed tempus urna et pharetra pharetra massa. Luctus venenatis lectus magna fringilla. Pretium vulputate sapien nec sagittis aliquam malesuada. Ut lectus arcu bibendum at varius. Odio ut sem nulla pharetra diam sit amet nisl.
+
+Vel facilisis volutpat est velit egestas dui id. Scelerisque in dictum non consectetur a erat. Lacus vestibulum sed arcu non odio euismod. Convallis a cras semper auctor neque vitae tempus quam pellentesque. Non nisi est sit amet facilisis. Aliquet risus feugiat in ante. Nulla porttitor massa id neque aliquam vestibulum morbi blandit. Varius vel pharetra vel turpis nunc eget. Interdum consectetur libero id faucibus nisl tincidunt eget nullam. Ornare suspendisse sed nisi lacus sed. Quisque non tellus orci ac auctor augue mauris augue. Nisi lacus sed viverra tellus in hac habitasse platea dictumst. Odio facilisis mauris sit amet massa vitae tortor condimentum. Magna fermentum iaculis eu non diam phasellus vestibulum lorem. Diam in arcu cursus euismod quis viverra. Nulla aliquet porttitor lacus luctus accumsan tortor. Ut etiam sit amet nisl purus in mollis nunc. Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque. Arcu non odio euismod lacinia. Tellus cras adipiscing enim eu turpis egestas pretium.
+
+Egestas congue quisque egestas diam. Tortor aliquam nulla facilisi cras. Dolor sit amet consectetur adipiscing. Vitae turpis massa sed elementum tempus egestas sed. Dolor purus non enim praesent. A pellentesque sit amet porttitor eget dolor morbi non. Vitae sapien pellentesque habitant morbi tristique senectus. Volutpat odio facilisis mauris sit amet. Pharetra diam sit amet nisl suscipit adipiscing. Massa tincidunt nunc pulvinar sapien. Amet massa vitae tortor condimentum lacinia quis vel eros donec. Enim facilisis gravida neque convallis a cras semper auctor. Volutpat consequat mauris nunc congue nisi. Eget lorem dolor sed viverra ipsum nunc aliquet. Ut morbi tincidunt augue interdum velit euismod in pellentesque. Ultrices dui sapien eget mi.
+
+Et odio pellentesque diam volutpat commodo. Fermentum posuere urna nec tincidunt praesent. Consequat id porta nibh venenatis cras sed felis eget velit. Facilisis gravida neque convallis a. Diam donec adipiscing tristique risus nec. Laoreet sit amet cursus sit amet dictum sit. Elit duis tristique sollicitudin nibh sit amet. Nulla porttitor massa id neque aliquam. Morbi tempus iaculis urna id volutpat lacus laoreet non curabitur. Enim nunc faucibus a pellentesque sit amet porttitor eget dolor. Tempus egestas sed sed risus pretium. Dictum varius duis at consectetur lorem donec. Ipsum consequat nisl vel pretium lectus.</string>
+    <string name="booking_date2">Date</string>
+
+    <string-array name="venue_array">
+        <item>Please select</item>
+        <item>Discussion Room 1</item>
+        <item>Discussion Room 2</item>
+        <item>Discussion Room 3</item>
+        <item>Discussion Room 4</item>
+        <item>Discussion Room 5</item>
+        <item>Pool Table 1</item>
+        <item>Pool Table 2</item>
+        <item>Music Room</item>
+    </string-array>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
