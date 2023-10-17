@@ -63,7 +63,7 @@ Et odio pellentesque diam volutpat commodo. Fermentum posuere urna nec tincidunt
         <item>Pool Table 2</item>
         <item>Music Room</item>
     </string-array>
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

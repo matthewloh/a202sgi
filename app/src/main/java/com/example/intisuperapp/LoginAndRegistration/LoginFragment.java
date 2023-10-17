@@ -32,8 +32,6 @@ public class LoginFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-
-
         binding.button.setOnClickListener(
                 v -> {
 
@@ -46,8 +44,6 @@ public class LoginFragment extends Fragment {
                 }
         );
     }
-
-
 
     @Override
     public void onDestroyView() {

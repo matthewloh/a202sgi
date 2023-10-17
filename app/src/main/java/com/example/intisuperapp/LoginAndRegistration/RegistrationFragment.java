@@ -10,18 +10,14 @@ import androidx.navigation.fragment.NavHostFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.Button;
 
-import com.example.intisuperapp.HomeFragment;
-import com.example.intisuperapp.MainActivity;
 import com.example.intisuperapp.R;
 import com.example.intisuperapp.databinding.FragmentLoginBinding;
 import com.example.intisuperapp.databinding.FragmentRegistrationBinding;
 
 public class RegistrationFragment extends Fragment {
 
-private FragmentRegistrationBinding binding;
+    private FragmentRegistrationBinding binding;
 
     @Nullable
     @Override
@@ -35,15 +31,13 @@ private FragmentRegistrationBinding binding;
         super.onViewCreated(view, savedInstanceState);
 
 
-
         binding.materialButton.setOnClickListener(
                 v -> {
                     NavHostFragment.findNavController(RegistrationFragment.this)
-                            .navigate(R.id.action_registrationFragment_to_homeFragment);
+                            .navigate(R.id.action_registrationFragment_to_roleRegistrationFragment);
                 }
         );
     }
-
 
     @Override
     public void onDestroyView() {
