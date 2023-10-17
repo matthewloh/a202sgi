@@ -10,36 +10,32 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:theme="@style/Theme.Material3.Light.NoActionBar"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+            app:popupTheme="@style/Theme.Material3.Light.NoActionBar">
 
-        <ImageView
-            android:id="@+id/hamburger_menu_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:contentDescription="@string/hamburger_menu_icon_des"
-            android:src="@drawable/baseline_menu_24"/>
+            <ImageView
+                android:id="@+id/hamburger_menu_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/hamburger_menu_icon_des"
+                android:src="@drawable/baseline_menu_24" />
 
-        <ImageView
-            android:id="@+id/inti_superapp_logo"
-            android:contentDescription="@string/inti_superapp_logo_des"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/inti_superapp_logo"
-            android:layout_gravity="center"
-            />
+            <ImageView
+                android:id="@+id/inti_superapp_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/inti_superapp_logo_des"
+                android:src="@drawable/inti_superapp_logo" />
+
 
         </com.google.android.material.appbar.MaterialToolbar>
-
 
     </com.google.android.material.appbar.AppBarLayout>
 

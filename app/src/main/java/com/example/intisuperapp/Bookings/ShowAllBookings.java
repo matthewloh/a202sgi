@@ -1,4 +1,4 @@
-package com.example.intisuperapp;
+package com.example.intisuperapp.Bookings;
 
 import android.os.Bundle;
 
@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.intisuperapp.R;
 import com.example.intisuperapp.databinding.FragmentRegistrationBinding;
 import com.example.intisuperapp.databinding.FragmentShowAllBookingsBinding;
 

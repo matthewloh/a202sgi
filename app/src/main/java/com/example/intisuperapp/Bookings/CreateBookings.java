@@ -1,4 +1,4 @@
-package com.example.intisuperapp;
+package com.example.intisuperapp.Bookings;
 
 import android.app.TimePickerDialog;
 import android.os.Bundle;
@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.example.intisuperapp.R;
 
 import java.util.Calendar;
 
