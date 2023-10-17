@@ -41,25 +41,19 @@
         app:layout_constraintTop_toBottomOf="@+id/allBookingsTitle"
         tools:ignore="ImageContrastCheck" />
 
-    <ScrollView
+    <ListView
+        android:id="@+id/allBookingsListView"
         android:layout_width="match_parent"
         android:layout_height="500dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="30dp"
+        android:dividerHeight="10.0sp"
+        android:divider="@color/grey"
         app:layout_constraintStart_toStartOf="@+id/allBookingsRectangle"
-        app:layout_constraintTop_toTopOf="@+id/allBookingsRectangle">
+        app:layout_constraintTop_toTopOf="@+id/allBookingsRectangle"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="25dp"
-            android:text="@string/sample_text"
-            android:textColor="@color/black"
-            android:textSize="20sp"
 
-            />
-    </ScrollView>
 
     <Button
         android:id="@+id/doneBtn"

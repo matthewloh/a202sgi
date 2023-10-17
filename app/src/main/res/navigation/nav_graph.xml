@@ -111,7 +111,15 @@
         android:id="@+id/createBookings"
         android:name="com.example.intisuperapp.Bookings.CreateBookings"
         android:label=""
-        tools:layout="@layout/fragment_create_bookings" />
+        tools:layout="@layout/fragment_create_bookings" >
+        <action
+            android:id="@+id/action_createBookings_to_bookingsFragment"
+            app:destination="@id/bookingsFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+    </fragment>
     <fragment
         android:id="@+id/showAllBookings"
         android:name="com.example.intisuperapp.Bookings.ShowAllBookings"
@@ -119,6 +127,10 @@
         tools:layout="@layout/fragment_show_all_bookings" >
         <action
             android:id="@+id/action_showAllBookings_to_bookingsFragment"
-            app:destination="@id/bookingsFragment" />
+            app:destination="@id/bookingsFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
 </navigation>

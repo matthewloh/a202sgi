@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import com.example.intisuperapp.LoginAndRegistration.RegistrationFragment;
 import com.example.intisuperapp.databinding.FragmentBookingsBinding;
 import com.example.intisuperapp.databinding.FragmentRegistrationBinding;
+import com.example.intisuperapp.R;
 
 
 public class BookingsFragment extends Fragment {
@@ -33,12 +34,9 @@ public class BookingsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-<<<<<<<<< Temporary merge branch 1:app/src/main/java/com/example/intisuperapp/BookingsFragment.java
 
 
 
-=========
->>>>>>>>> Temporary merge branch 2:app/src/main/java/com/example/intisuperapp/Bookings/BookingsFragment.java
         binding.createABookingButton.setOnClickListener(
                 v -> {
                     NavHostFragment.findNavController(BookingsFragment.this)

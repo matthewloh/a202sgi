@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,13 +20,10 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-<<<<<<<<< Temporary merge branch 1:app/src/main/java/com/example/intisuperapp/CreateBookings.java
 import java.text.SimpleDateFormat;
-=========
 import com.example.intisuperapp.MainActivity;
 import com.example.intisuperapp.R;
 
->>>>>>>>> Temporary merge branch 2:app/src/main/java/com/example/intisuperapp/Bookings/CreateBookings.java
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -92,6 +90,9 @@ public class CreateBookings extends Fragment {
             public void onClick(View v) {
                 // Show a Toast message when the "Done" button is clicked
                 Toast.makeText(requireContext(), "Booking Added", Toast.LENGTH_SHORT).show();
+
+                NavHostFragment.findNavController(CreateBookings.this)
+                        .navigate(R.id.action_createBookings_to_bookingsFragment);
             }
         });
 
