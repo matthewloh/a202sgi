@@ -6,15 +6,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.example.intisuperapp.MainActivity;
 import com.example.intisuperapp.R;
 import com.example.intisuperapp.databinding.FragmentBookingsBinding;
+import com.example.intisuperapp.databinding.FragmentRegistrationBinding;
 
 
 public class BookingsFragment extends Fragment {
@@ -44,7 +47,7 @@ public class BookingsFragment extends Fragment {
                             .navigate(R.id.action_bookingsFragment_to_showAllBookings);
                 }
         );
-}
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
