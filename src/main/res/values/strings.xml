@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Android application true</string>
+    <string name="Event">Event</string>
+    <string name="Event1">Event 1</string>
+    <string name="Event2">Event 2</string>
+    <string name="Event3">Event 3</string>
+    <string name="Yes">Yes</string>
+    <string name="No">No</string>
+    <string name="More_Info">More Info</string>
+</resources>
