@@ -5,14 +5,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomePage.HomeFragment">
+    <!-- fragment_home.xml -->
 
+    <ImageButton
+        android:id="@+id/eventsButton"
+        android:layout_width="0dp"
+        android:layout_height="113dp"
+        android:background="@null"
+        android:src="@drawable/eventsimage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/lostAndFoundButton"
+        app:layout_constraintTop_toBottomOf="@+id/discussionsButton" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler"
-        android:layout_width="match_parent"
-        android:layout_height="200sp"
-        android:orientation="horizontal"
-        app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
+    <ImageButton
+        android:id="@+id/appointmentsButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        android:src="@drawable/appointmentsimage"
+        app:layout_constraintBottom_toTopOf="@+id/lostAndFoundButton"
+        app:layout_constraintEnd_toStartOf="@+id/discussionsButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/lostAndFoundButton"
+        android:layout_width="0dp"
+        android:layout_height="113dp"
+        android:background="@null"
+        android:src="@drawable/lostandfoundimage"
+        app:layout_constraintEnd_toStartOf="@+id/eventsButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appointmentsButton" />
+
+    <ImageButton
+        android:id="@+id/discussionsButton"
+        android:layout_width="0dp"
+        android:layout_height="113dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        android:src="@drawable/discussionsimage"
+        app:layout_constraintBottom_toTopOf="@+id/eventsButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/appointmentsButton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -24,6 +60,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/recycler" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -79,6 +79,15 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_homeFragment_to_lostAndFoundFragment"
+            app:destination="@id/lostAndFoundFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_appointmentsFragment"
+            app:destination="@id/appointmentsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_discussionsFragment"
+            app:destination="@id/discussionsFragment" />
     </fragment>
     <fragment
         android:id="@+id/eventsFragment"
@@ -129,5 +138,20 @@
             android:id="@+id/action_showAllBookings_to_bookingsFragment"
             app:destination="@id/bookingsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/lostAndFoundFragment"
+        android:name="com.example.intisuperapp.LostAndFound.LostAndFoundFragment"
+        android:label=""
+        tools:layout="@layout/lost_and_found_main_page" />
+    <fragment
+        android:id="@+id/appointmentsFragment"
+        android:name="com.example.intisuperapp.Appointments.AppointmentsFragment"
+        android:label=""
+        tools:layout="@layout/fragment_appointments" />
+    <fragment
+        android:id="@+id/discussionsFragment"
+        android:name="com.example.intisuperapp.Discussions.DiscussionsFragment"
+        android:label=""
+        tools:layout="@layout/fragment_discussions" />
 
 </navigation>

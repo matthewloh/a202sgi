@@ -42,6 +42,31 @@ public class HomeFragment extends Fragment {
         actionBar.setTitle("");
         // Obtaining a reference to the hamburger menu icon ImageView
 
+        binding.appointmentsButton.setOnClickListener(
+                v -> {
+                    NavHostFragment.findNavController(HomeFragment.this)
+                            .navigate(R.id.action_homeFragment_to_appointmentsFragment);
+                }
+        );
+        binding.discussionsButton.setOnClickListener(
+                v -> {
+                    NavHostFragment.findNavController(HomeFragment.this)
+                            .navigate(R.id.action_homeFragment_to_discussionsFragment);
+                }
+        );
+        binding.lostAndFoundButton.setOnClickListener(
+                v -> {
+                    NavHostFragment.findNavController(HomeFragment.this)
+                            .navigate(R.id.action_homeFragment_to_lostAndFoundFragment);
+                }
+        );
+        binding.eventsButton.setOnClickListener(
+                v -> {
+                    NavHostFragment.findNavController(HomeFragment.this)
+                            .navigate(R.id.action_homeFragment_to_eventsFragment);
+                }
+        );
+
         binding.goToBookingsPageBtn.setOnClickListener(
                 v -> {
                     NavHostFragment.findNavController(HomeFragment.this)
