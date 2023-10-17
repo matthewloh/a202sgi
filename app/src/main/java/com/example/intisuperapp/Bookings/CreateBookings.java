@@ -1,9 +1,10 @@
-package com.example.intisuperapp;
+package com.example.intisuperapp.Bookings;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -16,6 +17,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.example.intisuperapp.MainActivity;
+import com.example.intisuperapp.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -40,7 +44,9 @@ public class CreateBookings extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        ActionBar actionBar = ((MainActivity) getActivity()).getSupportActionBar();
 
+        actionBar.setTitle("");
         View view = inflater.inflate(R.layout.fragment_create_bookings, container, false);
         chooseStartTime = view.findViewById(R.id.bookingStartTime);
         chooseEndTime = view.findViewById(R.id.bookingEndTime);
@@ -130,7 +136,5 @@ public class CreateBookings extends Fragment {
 
         timePickerDialog.show();
     }
-
-
 
 }

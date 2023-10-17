@@ -1,9 +1,10 @@
-package com.example.intisuperapp;
+package com.example.intisuperapp.Bookings;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.fragment.NavHostFragment;
@@ -13,7 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
-import com.example.intisuperapp.LoginAndRegistration.RegistrationFragment;
+import com.example.intisuperapp.MainActivity;
+import com.example.intisuperapp.R;
 import com.example.intisuperapp.databinding.FragmentBookingsBinding;
 import com.example.intisuperapp.databinding.FragmentRegistrationBinding;
 
@@ -32,9 +34,6 @@ public class BookingsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
-
         binding.createABookingButton.setOnClickListener(
                 v -> {
                     NavHostFragment.findNavController(BookingsFragment.this)

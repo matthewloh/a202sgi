@@ -49,9 +49,12 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
 
         noteViewModel = new ViewModelProvider(this).get(NoteViewModel.class);
-
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+        binding.hamburgerMenuIcon.setOnClickListener(
+                v -> {
+                    Toast.makeText(this, "nice", Toast.LENGTH_SHORT).show();
+                }
+        );
+        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.home) {
                 navController.navigate(R.id.homeFragment);
@@ -65,41 +68,49 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
+//        //remove top action bar in login and registration
+//        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+//            if (destination.getId() == R.id.loginFragment || destination.getId() == R.id.registrationFragment) {
+//                getSupportActionBar().hide();
+//            } else {
+//                getSupportActionBar().show();
+//            }
+//        });
 
         //remove top action bar and bottom navigation bar in login and registration
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
             public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
-                if (destination.getId() == R.id.loginFragment || destination.getId()==R.id.registrationFragment) {
-                    bottomNavigationView.setVisibility(View.GONE);
+                if (destination.getId() == R.id.loginFragment || destination.getId() == R.id.registrationFragment) {
+                    binding.bottomNavigationView.setVisibility(View.GONE);
                     getSupportActionBar().hide();
                 } else {
-                    bottomNavigationView.setVisibility(View.VISIBLE);
+                    binding.bottomNavigationView.setVisibility(View.VISIBLE);
                     getSupportActionBar().show();
                 }
             }
         });
 
 
-        addMenuProvider(new MenuProvider() {
-            @Override
-            public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
-                menuInflater.inflate(R.menu.menu_main, menu);
-            }
-
-            @Override
-            public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
-                if (menuItem.getItemId() == R.id.delete_all_notes) {
-                    noteViewModel.deleteAllNotes();
-                    Toast.makeText(MainActivity.this, "All notes deleted", Toast.LENGTH_SHORT).show();
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-
-        });
+//        addMenuProvider(new MenuProvider() {
+//            @Override
+//            public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
+//                menuInflater.inflate(R.menu.menu_main, menu);
+//            }
+//
+//            @Override
+//            public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
+//                if (menuItem.getItemId() == R.id.delete_all_notes) {
+//                    noteViewModel.deleteAllNotes();
+//                    Toast.makeText(MainActivity.this, "All notes deleted", Toast.LENGTH_SHORT).show();
+//                    return true;
+//                } else {
+//                    return false;
+//                }
+//            }
+//
+//
+//        });
     }
 
 //    @Override
