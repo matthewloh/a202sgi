@@ -93,7 +93,11 @@
         android:id="@+id/eventsFragment"
         android:name="com.example.intisuperapp.Events.EventsFragment"
         android:label=""
-        tools:layout="@layout/fragment_events" />
+        tools:layout="@layout/fragment_events" >
+        <action
+            android:id="@+id/action_eventsFragment_to_infoEventFragment"
+            app:destination="@id/infoEventFragment" />
+    </fragment>
     <fragment
         android:id="@+id/notificationsFragment"
         android:name="com.example.intisuperapp.NotificationsFragment"
@@ -153,5 +157,11 @@
         android:name="com.example.intisuperapp.Discussions.DiscussionsFragment"
         android:label=""
         tools:layout="@layout/fragment_discussions" />
+    <fragment
+        android:id="@+id/infoEventFragment"
+        android:name="com.example.intisuperapp.Events.InfoEventFragment"
+        android:label=""
+        tools:layout="@layout/fragment_info_event" />
+
 
 </navigation>

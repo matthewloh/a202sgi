@@ -13,5 +13,7 @@
     <color name="booking_oval">#FBEC5D</color>
     <color name="booking_btn">#FFCCCB</color>
     <color name="booking_bg">#799496</color>
+    <color name="brown">#C4A484</color>
+    <color name="beige">#f5f5dc</color>
 
 </resources>
