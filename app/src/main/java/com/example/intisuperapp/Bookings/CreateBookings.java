@@ -1,5 +1,7 @@
 package com.example.intisuperapp.Bookings;
 
+import static android.text.format.DateUtils.isToday;
+
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
@@ -52,9 +54,8 @@ public class CreateBookings extends Fragment {
         View view = inflater.inflate(R.layout.fragment_create_bookings, container, false);
         chooseStartTime = view.findViewById(R.id.bookingStartTime);
         chooseEndTime = view.findViewById(R.id.bookingEndTime);
-        addBookingButton =view.findViewById(R.id.add_booking_btn);
+        addBookingButton = view.findViewById(R.id.add_booking_btn);
         chooseDate = view.findViewById(R.id.bookingDate);
-
 
 
         chooseVenueSpinner = view.findViewById(R.id.booking_venue_spinner);
@@ -66,38 +67,32 @@ public class CreateBookings extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         chooseVenueSpinner.setAdapter(adapter);
 
-        chooseDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDatePicker(); // Show the DatePicker when the EditText is clicked
-            }
+        chooseDate.setOnClickListener(v -> {
+            showDatePicker();
         });
 
 
-
-
-        chooseStartTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showTimePicker(chooseStartTime);
-            }
-        });
+        chooseStartTime.setOnClickListener(v -> showTimePicker(chooseStartTime));
 
         chooseEndTime.setOnClickListener(v -> showTimePicker(chooseEndTime));
 
-        addBookingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Show a Toast message when the "Done" button is clicked
+        addBookingButton.setOnClickListener(v -> {
+
+            if (chooseDate.getText().toString().isEmpty() || chooseStartTime.getText().toString().isEmpty() || chooseEndTime.getText().toString().isEmpty()) {
+                Toast.makeText(requireContext(), "Please fill in all the fields", Toast.LENGTH_SHORT).show();
+            }
+            else{
                 Toast.makeText(requireContext(), "Booking Added", Toast.LENGTH_SHORT).show();
 
                 NavHostFragment.findNavController(CreateBookings.this)
                         .navigate(R.id.action_createBookings_to_bookingsFragment);
             }
+
         });
 
         return view;
     }
+
 
     private void showDatePicker() {
         final Calendar currentDate = Calendar.getInstance();
@@ -105,14 +100,15 @@ public class CreateBookings extends Fragment {
         month = currentDate.get(Calendar.MONTH);
         day = currentDate.get(Calendar.DAY_OF_MONTH);
 
-        datePickerDialog = new DatePickerDialog(requireContext(), new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDay) {
-                // Set the chosen date in the format "dd/MM/yyyy"
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
-                calendar = Calendar.getInstance();
-                calendar.set(selectedYear, selectedMonth, selectedDay);
-                String formattedDate = sdf.format(calendar.getTime());
+        datePickerDialog = new DatePickerDialog(requireContext(), (view, selectedYear, selectedMonth, selectedDay) -> {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+            Calendar selectedDate = Calendar.getInstance();
+            selectedDate.set(selectedYear, selectedMonth, selectedDay);
+
+            if (selectedDate.before(currentDate)) {
+                Toast.makeText(requireContext(), "Please choose an upcoming date", Toast.LENGTH_SHORT).show();
+            } else {
+                String formattedDate = sdf.format(selectedDate.getTime());
                 chooseDate.setText(formattedDate);
             }
         }, year, month, day);
@@ -121,27 +117,27 @@ public class CreateBookings extends Fragment {
     }
 
 
-
     private void showTimePicker(final EditText timeEditText) {
         calendar = Calendar.getInstance();
         currentHour = calendar.get(Calendar.HOUR);
         currentMinute = calendar.get(Calendar.MINUTE);
 
-        timePickerDialog = new TimePickerDialog(requireContext(), new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                if (hourOfDay >= 12) {
-                    amPm = "PM";
-                } else {
-                    amPm = "AM";
-                }
-                timeEditText.setText(String.format("%02d:%02d", hourOfDay, minute) + amPm);
+        timePickerDialog = new TimePickerDialog(requireContext(), (view, hourOfDay, minute) -> {
+            Calendar selectedTime = Calendar.getInstance();
+            selectedTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            selectedTime.set(Calendar.MINUTE, minute);
+
+            if (hourOfDay >= 12) {
+                amPm = "PM";
+            } else {
+                amPm = "AM";
             }
+            timeEditText.setText(String.format("%02d:%02d", hourOfDay, minute) + amPm);
+
         }, currentHour, currentMinute, false);
 
         timePickerDialog.show();
     }
-
 
 
 }
