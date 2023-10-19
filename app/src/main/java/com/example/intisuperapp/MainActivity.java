@@ -62,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
                 navController.navigate(R.id.eventsFragment);
             } else if (itemId == R.id.profile) {
                 navController.navigate(R.id.profileFragment);
-            } else if (itemId == R.id.notifications) {
-                navController.navigate(R.id.notificationsFragment);
+            } else if (itemId == R.id.bookings) {
+                navController.navigate(R.id.bookingsFragment);
             }
             return true;
         });

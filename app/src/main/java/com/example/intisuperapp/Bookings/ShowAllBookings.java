@@ -26,32 +26,22 @@ public class ShowAllBookings extends Fragment {
     private FragmentShowAllBookingsBinding binding;
     ListView listView;
     String[] maintitle ={
-            "Booking 1","Booking 2",
-            "Booking 3","Booking 4",
-            "Booking 5","Booking 6",
-            "Booking 7","Booking 8",
-            "Booking 9","Booking 10",
+            "Booking 1: ","Booking 2: ",
+            "Booking 3: ","Booking 4: ",
+
     };
     String[] venues = {
-            "Venue 1", "Venue 2",
-            "Venue 3", "Venue 4",
-            "Venue 5", "Venue 6",
-            "Venue 7", "Venue 8",
-            "Venue 9", "Venue 10",
+            "Venue: Discussion Room 2", "Venue: Music Room",
+            "Venue: Discussion Room 1", "Venue: Pool Table 1",
+
     };
     String[] dates = {
-            "Date 1", "Date 2",
-            "Date 3", "Date 4",
-            "Date 5", "Date 6",
-            "Date 7", "Date 8",
-            "Date 9", "Date 10",
+            "Date: 12/12/2023", "Date: 13/12/2023",
+            "Date: 14/12/2023", "Date: 14/12/2023",
     };
     String[] times = {
-            "Time 1", "Time 2",
-            "Time 3", "Time 4",
-            "Time 5", "Time 6",
-            "Time 7", "Time 8",
-            "Time 9", "Time 10",
+            "Time: 12:00PM - 1:00PM", "Time: 10:00AM - 11:30AM",
+            "Time: 2:00PM - 3:00PM", "Time: 3:00PM - 4:00PM",
     };
 
 

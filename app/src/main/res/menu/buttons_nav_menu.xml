@@ -9,11 +9,11 @@
         android:icon="@drawable/baseline_home_24"
         />
     <item
-        android:id="@+id/notifications"
+        android:id="@+id/bookings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="@string/notifications"
-        android:icon="@drawable/baseline_notifications_24"/>
+        android:title="@string/bookings"
+        android:icon="@drawable/baseline_schedule_24"/>
     <item
         android:id="@+id/events"
         android:layout_width="wrap_content"
