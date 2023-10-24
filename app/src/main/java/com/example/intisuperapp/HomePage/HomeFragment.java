@@ -11,6 +11,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.intisuperapp.MainActivity;
 import com.example.intisuperapp.R;
@@ -71,6 +72,14 @@ public class HomeFragment extends Fragment {
                 v -> {
                     NavHostFragment.findNavController(HomeFragment.this)
                             .navigate(R.id.action_homeFragment_to_bookingsFragment);
+                }
+        );
+
+        binding.logoutBtn.setOnClickListener(
+                v -> {
+                    Toast.makeText(requireContext(), "Logged Out", Toast.LENGTH_SHORT).show();
+                    NavHostFragment.findNavController(HomeFragment.this)
+                            .navigate(R.id.action_homeFragment_to_loginFragment);
                 }
         );
     }

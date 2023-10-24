@@ -11,14 +11,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.example.intisuperapp.MainActivity;
 import com.example.intisuperapp.OldNotes.AddNoteFragment;
 import com.example.intisuperapp.R;
 import com.example.intisuperapp.databinding.FragmentLoginBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginFragment extends Fragment {
     private FragmentLoginBinding binding;
+    FirebaseAuth fAuth;
 
     @Nullable
     @Override
@@ -31,9 +34,40 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        fAuth = FirebaseAuth.getInstance();
 
-        binding.button.setOnClickListener(
+
+        binding.loginBtn.setOnClickListener(
                 v -> {
+                    String email = binding.editTextTextEmailAddress.getText().toString().trim();
+                    String password = binding.editTextTextPassword.getText().toString().trim();
+
+                    if(email.isEmpty()){
+                        binding.editTextTextEmailAddress.setError("Email is Required.");
+                        return;
+                    }
+
+                    if(password.isEmpty()){
+                        binding.editTextTextPassword.setError("Password is Required.");
+                        return;
+                    }
+
+                    if(password.length() < 6){
+                        binding.editTextTextPassword.setError("Password Must be >= 6 Characters");
+                        return;
+                    }
+
+                    fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(
+                            task -> {
+                                if(task.isSuccessful()){
+                                    Toast.makeText(getActivity(), "Logged in Successfully", Toast.LENGTH_SHORT).show();
+                                    NavHostFragment.findNavController(LoginFragment.this)
+                                            .navigate(R.id.action_loginFragment_to_homeFragment);
+                                }else {
+                                    Toast.makeText(getActivity(), "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                    );
 
                 }
         );
