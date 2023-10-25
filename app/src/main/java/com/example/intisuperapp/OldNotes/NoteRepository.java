@@ -4,6 +4,8 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.intisuperapp.INTISuperappDatabase;
+
 import java.util.List;
 
 public class NoteRepository {
@@ -11,7 +13,7 @@ public class NoteRepository {
     private LiveData<List<Note>> mAllNotes;
 
     public NoteRepository(Application application) {
-        NoteDatabase database = NoteDatabase.getInstance(application);
+        INTISuperappDatabase database = INTISuperappDatabase.getInstance(application);
         mNoteDao = database.noteDao();
         mAllNotes = mNoteDao.getAllNotes();
     }
@@ -25,18 +27,18 @@ public class NoteRepository {
     // These APIs are exposed to the ViewModel so that it can call them
     // only from this repository, not from the database directly
     public void insert(Note note) {
-        NoteDatabase.databaseWriteExecutor.execute(() -> mNoteDao.insert(note));
+        INTISuperappDatabase.databaseWriteExecutor.execute(() -> mNoteDao.insert(note));
     }
 
     public void update(Note note) {
-        NoteDatabase.databaseWriteExecutor.execute(() -> mNoteDao.update(note));
+        INTISuperappDatabase.databaseWriteExecutor.execute(() -> mNoteDao.update(note));
     }
 
     public void delete(Note note) {
-        NoteDatabase.databaseWriteExecutor.execute(() -> mNoteDao.delete(note));
+        INTISuperappDatabase.databaseWriteExecutor.execute(() -> mNoteDao.delete(note));
     }
 
     public void deleteAllNotes() {
-        NoteDatabase.databaseWriteExecutor.execute(() -> mNoteDao.deleteAllNotes());
+        INTISuperappDatabase.databaseWriteExecutor.execute(() -> mNoteDao.deleteAllNotes());
     }
 }
