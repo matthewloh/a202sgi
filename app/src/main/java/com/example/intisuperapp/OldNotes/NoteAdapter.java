@@ -70,8 +70,8 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
 
         public NoteHolder(@NonNull View itemView) {
             super(itemView);
-            textViewTitle = itemView.findViewById(R.id.text_view_title);
-            textViewDescription = itemView.findViewById(R.id.text_view_description);
+            textViewTitle = itemView.findViewById(R.id.appointment_title);
+            textViewDescription = itemView.findViewById(R.id.appointment_desc);
             textViewPriority = itemView.findViewById(R.id.text_view_priority);
 
             itemView.setOnClickListener(view -> {

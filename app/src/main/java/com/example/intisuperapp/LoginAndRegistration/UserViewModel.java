@@ -15,13 +15,17 @@ public class UserViewModel extends AndroidViewModel {
 
 
     // First Login Command - Check if the email exists
-    public LiveData<User> queryUserByEmail(String email) {
+    public LiveData<User> getUserByEmail(String email) {
         return mRepository.getUserByEmail(email);
     }
 
     // Second Login Command - After getting the email, check if the password is correct
-    public LiveData<User> queryUserByEmailAndPassword(String email, String password) {
+    public LiveData<User> getUserByEmailAndPassword(String email, String password) {
         return mRepository.queryUserByEmailAndPassword(email, password);
+    }
+
+    public LiveData<User> getUserByFullName(String fullName) {
+        return mRepository.getUserByFullName(fullName);
     }
 
     // Sign up button
