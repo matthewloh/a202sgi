@@ -6,7 +6,6 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
-import androidx.room.Upsert;
 
 import java.util.List;
 
@@ -47,5 +46,13 @@ public interface UserDao {
 
     @Query("SELECT * FROM User ORDER by id DESC")
     LiveData<List<User>> getAllUsers();
+
+    // Get use by name
+    @Query("SELECT * FROM User WHERE full_name = :name")
+    LiveData<User> getUserByFullName(String name);
+
+    // Get use by name
+    @Query("SELECT * FROM User WHERE full_name = :name")
+    User getUserByFullNameSync(String name);
 
 }

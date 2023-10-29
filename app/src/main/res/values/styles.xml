@@ -14,4 +14,9 @@
         <item name="cornerSizeBottomLeft">32dp</item>
         <item name="backgroundTint">#e30613</item>
     </style>
+
+    <style name="roundedImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

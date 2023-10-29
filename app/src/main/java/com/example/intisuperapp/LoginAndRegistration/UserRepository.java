@@ -45,6 +45,10 @@ public class UserRepository {
         return mUserDao.getUserByEmail(email);
     }
 
+    public LiveData<User> getUserByFullName(String name) {
+        return mUserDao.getUserByFullName(name);
+    }
+
     public void deleteAllUsers() {
         INTISuperappDatabase.databaseWriteExecutor.execute(() -> mUserDao.deleteAllUsers());
     }
