@@ -45,7 +45,6 @@ public class LoginFragment extends Fragment {
                 Toast.makeText(getActivity(), "User exists", Toast.LENGTH_SHORT).show();
             }
         });
-
         binding.loginBtn.setOnClickListener(v -> {
             String email = binding.emailEntry.getText().toString();
             String password = binding.passwordEntry.getText().toString();
