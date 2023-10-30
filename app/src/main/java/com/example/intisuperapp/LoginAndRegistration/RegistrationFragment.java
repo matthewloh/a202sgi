@@ -46,7 +46,7 @@ public class  RegistrationFragment extends Fragment {
         binding.materialButton.setOnClickListener(
                 v -> {
                     String email = binding.editTextEmailAddress.getText().toString().trim();
-                    String password = binding.editTextTextPassword.getText().toString().trim();
+                    String password = binding.passwordEntry.getText().toString().trim();
                     String confirmPassword = binding.editTextConfirmPass.getText().toString().trim();
                     String fullName = binding.editTextFullName.getText().toString().trim();
 
@@ -62,7 +62,7 @@ public class  RegistrationFragment extends Fragment {
                     }
 
                     if(password.length() < 6){
-                        binding.editTextTextPassword.setError("Password must have more than 6 characters");
+                        binding.passwordEntry.setError("Password must have more than 6 characters");
                         return;
                     }
 

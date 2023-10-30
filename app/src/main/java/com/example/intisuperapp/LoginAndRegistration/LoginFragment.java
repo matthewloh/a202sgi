@@ -38,54 +38,48 @@ public class LoginFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         userViewModel = new ViewModelProvider(getActivity()).get(UserViewModel.class);
-        userViewModel.getUserByEmail("g").observe(
-                getViewLifecycleOwner(),
-                user -> {
-                    if (user == null) {
-                        Toast.makeText(getActivity(), "User does not exist", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getActivity(), "User exists", Toast.LENGTH_SHORT).show();
-                    }
-                }
-        );
-        binding.button.setOnClickListener(v -> {
+        userViewModel.getUserByEmail("g").observe(getViewLifecycleOwner(), user -> {
+            if (user == null) {
+                Toast.makeText(getActivity(), "User does not exist", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getActivity(), "User exists", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        binding.loginBtn.setOnClickListener(v -> {
             String email = binding.emailEntry.getText().toString();
             String password = binding.passwordEntry.getText().toString();
-        fAuth = FirebaseAuth.getInstance();
+            fAuth = FirebaseAuth.getInstance();
+        });
 
-
-        binding.loginBtn.setOnClickListener(
-                v -> {
-                    String email = binding.editTextTextEmailAddress.getText().toString().trim();
-                    String password = binding.editTextTextPassword.getText().toString().trim();
-
-                    if(email.isEmpty()){
-                        binding.editTextTextEmailAddress.setError("Email is Required.");
-                        return;
-                    }
-
-                    if(password.isEmpty()){
-                        binding.editTextTextPassword.setError("Password is Required.");
-                        return;
-                    }
-
-                    if(password.length() < 6){
-                        binding.editTextTextPassword.setError("Password Must be >= 6 Characters");
-                        return;
-                    }
-
-                    fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(
-                            task -> {
-                                if(task.isSuccessful()){
-                                    Toast.makeText(getActivity(), "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                                    NavHostFragment.findNavController(LoginFragment.this)
-                                            .navigate(R.id.action_loginFragment_to_homeFragment);
-                                }else {
-                                    Toast.makeText(getActivity(), "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                    );
-
+        binding.loginBtn.setOnClickListener(v -> {
+            String email = binding.emailEntry.getText().toString().trim();
+            String password = binding.passwordEntry.getText().toString().trim();
+//
+//            if (email.isEmpty()) {
+//                binding.emailEntry.setError("Email is Required.");
+//                return;
+//            }
+//
+//            if (password.isEmpty()) {
+//                binding.emailEntry.setError("Password is Required.");
+//                return;
+//            }
+//
+//            if (password.length() < 6) {
+//                binding.emailEntry.setError("Password Must be >= 6 Characters");
+//                return;
+//            }
+//
+//            fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+//                if (task.isSuccessful()) {
+//                    Toast.makeText(getActivity(), "Logged in Successfully", Toast.LENGTH_SHORT).show();
+//                    NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.action_loginFragment_to_homeFragment);
+//                } else {
+//                    Toast.makeText(getActivity(), "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+//                }
+//            });
+//
             userViewModel.getUserByEmailAndPassword(email, password).observe(getViewLifecycleOwner(), user -> {
                 if (user == null) {
                     Toast.makeText(getActivity(), "Login failed. Please check your credentials.", Toast.LENGTH_SHORT).show();
@@ -95,12 +89,9 @@ public class LoginFragment extends Fragment {
                 }
             });
         });
-        binding.registerText.setOnClickListener(
-                v -> {
-                    NavHostFragment.findNavController(LoginFragment.this)
-                            .navigate(R.id.action_loginFragment_to_registrationFragment);
-                }
-        );
+        binding.registerText.setOnClickListener(v -> {
+            NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.action_loginFragment_to_registrationFragment);
+        });
     }
 
     @Override
