@@ -147,26 +147,37 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
                     e.printStackTrace();
                 }
                 User john = userDao.getUserByFullNameSync("John Doe");
-                Appointment appointment = new Appointment(
-                        "Title",
-                        "Description",
-                        "Location",
-                        "Notes",
-                        startDate,
-                        endDate,
-                        john.getId()
-                );
-                appointmentDao.insert(appointment);
-                appointment = new Appointment(
-                        "Title 2",
-                        "Description 2",
-                        "Location 2",
-                        "Notes 2",
-                        startDate,
-                        endDate,
-                        john.getId()
-                );
-                appointmentDao.insert(appointment);
+//                Appointment appointment = new Appointment(
+//                        "Title",
+//                        "Description",
+//                        "Location",
+//                        "Notes",
+//                        startDate,
+//                        endDate,
+//                        john.getId()
+//                );
+//                appointmentDao.insert(appointment);
+//                appointment = new Appointment(
+//                        "Title 2",
+//                        "Description 2",
+//                        "Location 2",
+//                        "Notes 2",
+//                        startDate,
+//                        endDate,
+//                        john.getId()
+//                );
+//                appointmentDao.insert(appointment);
+                User jane = userDao.getUserByFullNameSync("Jane Doe");
+//                Appointment appointment = new Appointment(
+//                        "Title 3",
+//                        "Description 3",
+//                        "Location 3",
+//                        "Notes 3",
+//                        startDate,
+//                        endDate,
+//                        jane.getId()
+//                );
+//                appointmentDao.insert(appointment);
             });
         }
     };

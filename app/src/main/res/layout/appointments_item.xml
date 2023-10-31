@@ -7,6 +7,8 @@
     android:layout_marginStart="8dp"
     android:layout_marginTop="8dp"
     android:layout_marginEnd="8dp"
+    android:layout_marginBottom="8dp"
+    app:cardBackgroundColor="#ffffef"
     app:cardCornerRadius="34dp">
 
     <RelativeLayout
@@ -75,6 +77,7 @@
             android:layout_toStartOf="@+id/appointment_image"
             android:drawableStart="@drawable/baseline_calendar_month_24"
             android:drawablePadding="4dp"
+            android:maxLines="1"
             android:ellipsize="end"
             android:paddingVertical="12dp"
             android:text="20/11/2022"
@@ -115,5 +118,47 @@
             android:scaleType="centerCrop"
             app:shapeAppearanceOverlay="@style/roundedImageView"
             tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/appointment_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/appointment_image"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp"
+            android:layout_toStartOf="@id/appointment_image"
+            android:drawableStart="@drawable/ic_location"
+            android:drawablePadding="4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingVertical="12dp"
+            android:text="Location"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/appointment_notes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/appointment_image"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@id/appointment_location"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp"
+            android:drawableStart="@drawable/ic_notes"
+            android:drawablePadding="4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingVertical="12dp"
+            android:text="Notes"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold" />
+
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

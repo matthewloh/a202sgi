@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#799496"
+    android:orientation="vertical"
+    android:padding="8dp">
+    <!--
+        this.title = title;
+        this.description = description;
+        this.location = location;
+        this.notes = notes;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    -->
+    <RelativeLayout
+        android:id="@+id/bookingsTitleLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#799496"
+        android:paddingVertical="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@id/appointmentsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/appointment_chip"
+            android:gravity="center"
+            android:padding="12dp"
+            android:text="Create an Appointment"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bookingsTitleLayout"
+        tools:layout_editor_absoluteX="8dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bookingsTitleLayout"
+            app:layout_constraintVertical_bias="0.0">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/appointment_title_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="24dp"
+                android:paddingStart="0dp"
+                android:paddingEnd="24dp"
+                android:text="Title:"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/appointment_title_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@id/appointment_title_text_view"
+                android:hint="Title"
+                android:inputType="text"
+                android:padding="24dp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/appointment_description_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/appointment_title_text"
+                android:paddingStart="0dp"
+                android:paddingTop="24dp"
+                android:paddingEnd="24dp"
+                android:paddingBottom="0dp"
+                android:text="Description:"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/appointment_description_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/appointment_description_text_view"
+                android:layout_alignParentStart="true"
+                android:layout_toEndOf="@id/appointment_description_text_view"
+                android:hint="Description"
+                android:inputType="textMultiLine"
+                android:padding="24dp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/appointment_location_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/appointment_description_text"
+                android:paddingVertical="24dp"
+                android:paddingStart="0dp"
+                android:paddingEnd="24dp"
+                android:text="Location:"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/appointment_location_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/appointment_description_text"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@id/appointment_location_text_view"
+                android:hint="Location"
+                android:inputType="text"
+                android:padding="24dp" />
+
+            <com.google.android.material.textview.MaterialTextView
+
+                android:id="@+id/appointment_notes_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/appointment_location_text"
+                android:paddingStart="0dp"
+                android:paddingTop="24dp"
+                android:paddingEnd="24dp"
+                android:paddingBottom="0dp"
+                android:text="Notes:"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/appointment_notes_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/appointment_notes_text_view"
+                android:layout_alignParentStart="true"
+                android:layout_toEndOf="@id/appointment_notes_text_view"
+                android:hint="Notes"
+                android:inputType="textMultiLine"
+                android:paddingTop="24dp" />
+
+            <com.google.android.material.textview.MaterialTextView
+
+                android:id="@+id/appointment_start_date_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/appointment_notes_text"
+                android:paddingVertical="24dp"
+                android:paddingStart="0dp"
+                android:paddingEnd="24dp"
+                android:text="Start Date:"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/appointment_start_date_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/appointment_notes_text"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@id/appointment_start_date_text_view"
+                android:drawableStart="@drawable/baseline_calendar_month_24"
+                android:drawablePadding="12dp"
+                android:hint="Start Date"
+                android:inputType="date"
+                android:padding="24dp" />
+
+            <com.google.android.material.textview.MaterialTextView
+
+                android:id="@+id/appointment_end_date_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/appointment_start_date_text"
+                android:paddingVertical="24dp"
+                android:paddingStart="0dp"
+                android:paddingEnd="24dp"
+                android:text="End Date:"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/appointment_end_date_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/appointment_start_date_text"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@id/appointment_end_date_text_view"
+                android:drawableStart="@drawable/baseline_calendar_month_24"
+                android:drawablePadding="12dp"
+                android:hint="End Date"
+                android:inputType="date"
+                android:padding="24dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/appointment_create_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/appointment_end_date_text"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@id/appointment_end_date_text_view"
+                android:background="@color/colorPrimary"
+                android:text="Create Appointment"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

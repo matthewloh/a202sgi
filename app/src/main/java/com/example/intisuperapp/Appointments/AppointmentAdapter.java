@@ -55,6 +55,8 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         holder.binding.appointmentDate.setText(currentAppointment.getStartDate().toString());
         holder.binding.appointmentStartTimeEndTime.setText(currentAppointment.getStartDate().toString() + " - " + currentAppointment.getEndDate().toString());
         holder.binding.appointmentImage.setImageResource(R.drawable.ic_launcher_foreground);
+        holder.binding.appointmentLocation.setText(currentAppointment.getLocation());
+        holder.binding.appointmentNotes.setText(currentAppointment.getNotes());
     }
 
     @Override

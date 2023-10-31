@@ -42,8 +42,8 @@
             app:destination="@id/homeFragment"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
-            app:popUpTo="@id/homeFragment"
-            app:launchSingleTop="true" />
+            app:launchSingleTop="true"
+            app:popUpTo="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -95,6 +95,9 @@
         <action
             android:id="@+id/action_homeFragment_to_discussionsFragment"
             app:destination="@id/discussionsFragment" />
+        <argument
+            android:name="userId"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/eventsFragment"
@@ -154,11 +157,26 @@
         android:id="@+id/appointmentsFragment"
         android:name="com.example.intisuperapp.Appointments.AppointmentsFragment"
         android:label=""
-        tools:layout="@layout/fragment_appointments" />
+        tools:layout="@layout/fragment_appointments">
+        <argument
+            android:name="userId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_appointmentsFragment_to_addAppointmentsFragment"
+            app:destination="@id/addAppointmentsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/discussionsFragment"
         android:name="com.example.intisuperapp.Discussions.DiscussionsFragment"
         android:label=""
         tools:layout="@layout/fragment_discussions" />
-
+    <fragment
+        android:id="@+id/addAppointmentsFragment"
+        android:name="com.example.intisuperapp.Appointments.AddAppointmentFragment"
+        android:label=""
+        tools:layout="@layout/fragment_add_appointment" >
+        <argument
+            android:name="userId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

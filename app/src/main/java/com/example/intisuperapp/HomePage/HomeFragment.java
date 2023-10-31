@@ -34,18 +34,19 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
+        int userId = HomeFragmentArgs.fromBundle(getArguments()).getUserId();
         ActionBar actionBar = ((MainActivity) getActivity()).getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(false);
         actionBar.setDisplayShowHomeEnabled(false);
         // Set title to the fragment
         actionBar.setTitle("");
         // Obtaining a reference to the hamburger menu icon ImageView
-
+        // Override the bottom nav home view to use userId
         binding.appointmentsButton.setOnClickListener(
                 v -> {
+                    HomeFragmentDirections.ActionHomeFragmentToAppointmentsFragment action = HomeFragmentDirections.actionHomeFragmentToAppointmentsFragment(userId);
                     NavHostFragment.findNavController(HomeFragment.this)
-                            .navigate(R.id.action_homeFragment_to_appointmentsFragment);
+                            .navigate(action);
                 }
         );
         binding.discussionsButton.setOnClickListener(
@@ -73,5 +74,19 @@ public class HomeFragment extends Fragment {
                             .navigate(R.id.action_homeFragment_to_bookingsFragment);
                 }
         );
+
+//        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+//            int itemId = item.getItemId();
+//            if (itemId == R.id.home) {
+//                navController.navigate(R.id.homeFragment);
+//            } else if (itemId == R.id.events) {
+//                navController.navigate(R.id.eventsFragment);
+//            } else if (itemId == R.id.profile) {
+//                navController.navigate(R.id.profileFragment);
+//            } else if (itemId == R.id.notifications) {
+//                navController.navigate(R.id.notificationsFragment);
+//            }
+//            return true;
+//        });
     }
 }

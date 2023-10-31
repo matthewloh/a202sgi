@@ -52,7 +52,8 @@ public class LoginFragment extends Fragment {
                     Toast.makeText(getActivity(), "Login failed. Please check your credentials.", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getActivity(), "Login successful", Toast.LENGTH_SHORT).show();
-                    NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.action_loginFragment_to_homeFragment);
+                    LoginFragmentDirections.ActionLoginFragmentToHomeFragment action = LoginFragmentDirections.actionLoginFragmentToHomeFragment(user.getId());
+                    NavHostFragment.findNavController(LoginFragment.this).navigate(action);
                 }
             });
         });
