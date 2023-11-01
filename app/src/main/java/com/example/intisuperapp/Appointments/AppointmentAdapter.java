@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -18,8 +19,10 @@ import com.example.intisuperapp.databinding.FragmentAppointmentsBinding;
 import java.util.List;
 
 public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.AppointmentHolder> {
-    private NoteAdapter.OnItemClickListener mListener;
-
+    private OnItemClickListener mListener;
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
+    }
     // Save a reference to the List of Appointments
     private List<Appointment> mAppointmentList;
 
@@ -29,7 +32,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
 
     @NonNull
     @Override
-    public AppointmentAdapter.AppointmentHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AppointmentHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         AppointmentsItemBinding binding = AppointmentsItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new AppointmentHolder(binding);
     }
@@ -57,6 +60,18 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         holder.binding.appointmentImage.setImageResource(R.drawable.ic_launcher_foreground);
         holder.binding.appointmentLocation.setText(currentAppointment.getLocation());
         holder.binding.appointmentNotes.setText(currentAppointment.getNotes());
+
+        holder.binding.appointmentCardView.setOnClickListener(view -> {
+            if (mListener != null) {
+                mListener.onItemClick(currentAppointment);
+            }
+        });
+        holder.binding.appointmentCardView.setOnLongClickListener(
+                view -> {
+                    Toast.makeText(view.getContext(), "Long Clicked", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+        );
     }
 
     @Override

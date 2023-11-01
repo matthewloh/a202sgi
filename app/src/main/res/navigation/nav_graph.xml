@@ -95,9 +95,6 @@
         <action
             android:id="@+id/action_homeFragment_to_discussionsFragment"
             app:destination="@id/discussionsFragment" />
-        <argument
-            android:name="userId"
-            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/eventsFragment"
@@ -158,12 +155,12 @@
         android:name="com.example.intisuperapp.Appointments.AppointmentsFragment"
         android:label=""
         tools:layout="@layout/fragment_appointments">
-        <argument
-            android:name="userId"
-            app:argType="integer" />
         <action
             android:id="@+id/action_appointmentsFragment_to_addAppointmentsFragment"
             app:destination="@id/addAppointmentsFragment" />
+        <argument
+            android:name="userId"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/discussionsFragment"

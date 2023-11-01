@@ -1,17 +1,18 @@
 package com.example.intisuperapp.HomePage;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
+import com.example.intisuperapp.LoginAndRegistration.UserSharedViewModel;
 import com.example.intisuperapp.MainActivity;
 import com.example.intisuperapp.R;
 import com.example.intisuperapp.databinding.FragmentHomeBinding;
@@ -21,6 +22,9 @@ public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
 
+    private UserSharedViewModel userSharedViewModel;
+
+    private int userId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,15 +37,18 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        int userId = HomeFragmentArgs.fromBundle(getArguments()).getUserId();
         ActionBar actionBar = ((MainActivity) getActivity()).getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(false);
         actionBar.setDisplayShowHomeEnabled(false);
         // Set title to the fragment
         actionBar.setTitle("");
-        // Obtaining a reference to the hamburger menu icon ImageView
-        // Override the bottom nav home view to use userId
+        userSharedViewModel = new ViewModelProvider(getActivity()).get(UserSharedViewModel.class);
+        userSharedViewModel.getUser().observe(
+                getViewLifecycleOwner(),
+                user -> {
+                    userId = user.getId();
+                }
+        );
         binding.appointmentsButton.setOnClickListener(
                 v -> {
                     HomeFragmentDirections.ActionHomeFragmentToAppointmentsFragment action = HomeFragmentDirections.actionHomeFragmentToAppointmentsFragment(userId);

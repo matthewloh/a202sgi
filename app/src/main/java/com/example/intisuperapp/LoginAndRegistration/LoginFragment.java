@@ -21,6 +21,8 @@ public class LoginFragment extends Fragment {
 
     private UserViewModel userViewModel;
 
+    private UserSharedViewModel userSharedViewModel;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class LoginFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         userViewModel = new ViewModelProvider(getActivity()).get(UserViewModel.class);
+        userSharedViewModel = new ViewModelProvider(getActivity()).get(UserSharedViewModel.class);
         userViewModel.getUserByEmail("g").observe(
                 getViewLifecycleOwner(),
                 user -> {
@@ -52,8 +55,10 @@ public class LoginFragment extends Fragment {
                     Toast.makeText(getActivity(), "Login failed. Please check your credentials.", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getActivity(), "Login successful", Toast.LENGTH_SHORT).show();
-                    LoginFragmentDirections.ActionLoginFragmentToHomeFragment action = LoginFragmentDirections.actionLoginFragmentToHomeFragment(user.getId());
-                    NavHostFragment.findNavController(LoginFragment.this).navigate(action);
+                    userSharedViewModel.setUser(user);
+                    NavHostFragment.findNavController(LoginFragment.this).navigate(
+                            R.id.action_loginFragment_to_homeFragment
+                    );
                 }
             });
         });

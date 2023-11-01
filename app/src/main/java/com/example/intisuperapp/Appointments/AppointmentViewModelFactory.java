@@ -13,8 +13,8 @@ public class AppointmentViewModelFactory implements ViewModelProvider.Factory {
         mAuthorId = authorId;
     }
 
-    @Override
-    public <T extends androidx.lifecycle.ViewModel> T create(Class<T> modelClass) {
-        return (T) new AppointmentViewModel(mApplication, mAuthorId);
-    }
+//    @Override
+//    public <T extends androidx.lifecycle.ViewModel> T create(Class<T> modelClass) {
+//        return (T) new AppointmentViewModel(mApplication, mAuthorId);
+//    }
 }

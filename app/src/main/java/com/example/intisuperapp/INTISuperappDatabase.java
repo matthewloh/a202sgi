@@ -168,15 +168,15 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
 //                );
 //                appointmentDao.insert(appointment);
                 User jane = userDao.getUserByFullNameSync("Jane Doe");
-//                Appointment appointment = new Appointment(
-//                        "Title 3",
-//                        "Description 3",
-//                        "Location 3",
-//                        "Notes 3",
-//                        startDate,
-//                        endDate,
-//                        jane.getId()
-//                );
+                Appointment appointment = new Appointment(
+                        "Title 3",
+                        "Description 3",
+                        "Location 3",
+                        "Notes 3",
+                        startDate,
+                        endDate,
+                        jane.getId()
+                );
 //                appointmentDao.insert(appointment);
             });
         }
