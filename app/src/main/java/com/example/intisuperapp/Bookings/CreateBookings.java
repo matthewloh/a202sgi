@@ -83,6 +83,9 @@ public class CreateBookings extends Fragment {
             }
             else{
                 Toast.makeText(requireContext(), "Booking Added", Toast.LENGTH_SHORT).show();
+                // add to database
+
+
 
                 NavHostFragment.findNavController(CreateBookings.this)
                         .navigate(R.id.action_createBookings_to_bookingsFragment);

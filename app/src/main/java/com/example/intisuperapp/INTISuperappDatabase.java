@@ -11,6 +11,8 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.intisuperapp.Appointments.Appointment;
 import com.example.intisuperapp.Appointments.AppointmentDao;
+import com.example.intisuperapp.Bookings.Bookings;
+import com.example.intisuperapp.Bookings.BookingsDao;
 import com.example.intisuperapp.LoginAndRegistration.User;
 import com.example.intisuperapp.LoginAndRegistration.UserDao;
 import com.example.intisuperapp.OldNotes.Note;
@@ -18,10 +20,11 @@ import com.example.intisuperapp.OldNotes.NoteDao;
 
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Note.class, User.class, Appointment.class}, version = 1)
+@Database(entities = {Note.class, User.class, Appointment.class, Bookings.class}, version = 2)
 // entities = {Note.class} is an array of entities, to add more entities, just add a comma and the next entity
 public abstract class INTISuperappDatabase extends RoomDatabase {
     // We create a singleton, so that we don't create multiple instances of the database
@@ -38,6 +41,8 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
     public abstract UserDao userDao();
 
     public abstract AppointmentDao appointmentDao();
+
+    public abstract BookingsDao bookingsDao();
 
     // Synchronized means that only one thread at a time can access this method
     public static synchronized INTISuperappDatabase getInstance(Context context) {
@@ -64,20 +69,20 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
                 NoteDao dao = instance.noteDao();
                 dao.deleteAllNotes();
 
-                Note note = new Note("Title 1", "Description 1", 1);
-                dao.insert(note);
-                note = new Note("Title 2", "Description 2", 2);
-                dao.insert(note);
-                note = new Note("Title 3", "Description 3", 3);
-                dao.insert(note);
+//                Note note = new Note("Title 1", "Description 1", 1);
+//                dao.insert(note);
+//                note = new Note("Title 2", "Description 2", 2);
+//                dao.insert(note);
+//                note = new Note("Title 3", "Description 3", 3);
+//                dao.insert(note);
 
                 UserDao userDao = instance.userDao();
                 userDao.deleteAllUsers();
 
-                User user = new User("John696969 Doe", "j@.com", "12", "student");
-                userDao.insert(user);
-                user = new User("Jane Doe", "g", "12", "student");
-                userDao.insert(user);
+//                User user = new User("John696969 Doe", "j@.com", "12", "student");
+//                userDao.insert(user);
+//                user = new User("Jane Doe", "g", "12", "student");
+//                userDao.insert(user);
 
                 AppointmentDao appointmentDao = instance.appointmentDao();
                 appointmentDao.deleteAllAppointments();
@@ -110,6 +115,13 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
 //                        1
 //                );
 //                appointmentDao.insert(appointment);
+
+                BookingsDao bookingsDao = instance.bookingsDao();
+                bookingsDao.deleteAllBookings();
+
+
+
+
             });
         }
 
@@ -132,41 +144,55 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
 //                userDao.insert(user);
 //                user = new User("Jane Doe", "g", "12", "student");
 //                userDao.insert(user);
+////
+////
+//                AppointmentDao appointmentDao = instance.appointmentDao();
+////                appointmentDao.deleteAllAppointments();
 //
+//                Date startDate = new Date();
+//                Date endDate = new Date();
+//                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//                try {
+//                    startDate = sdf.parse("2020-12-12 12:12:12");
+//                    endDate = sdf.parse("2020-12-12 12:12:12");
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//                User john = userDao.getUserByFullNameSync("John Doe");
+//                Appointment appointment = new Appointment(
+//                        "Title",
+//                        "Description",
+//                        "Location",
+//                        "Notes",
+//                        startDate,
+//                        endDate,
+//                        john.getId()
+//                );
+//                appointmentDao.insert(appointment);
+//                appointment = new Appointment(
+//                        "Title 2",
+//                        "Description 2",
+//                        "Location 2",
+//                        "Notes 2",
+//                        startDate,
+//                        endDate,
+//                        john.getId()
+//                );
+//                appointmentDao.insert(appointment);
 //
-                AppointmentDao appointmentDao = instance.appointmentDao();
-//                appointmentDao.deleteAllAppointments();
+//                String currentTime = new SimpleDateFormat("h:mm a", Locale.getDefault()).format(new Date());
+//
+//                BookingsDao bookingsDao = instance.bookingsDao();
+////              bookingsDao.deleteAllBookings();
+//
+//                Date Date1 = new Date();
+//                Date Date2 = new Date();
+//
+//                Bookings bookings = new Bookings("Title",Date1 , Date2, Date2, "012345678",  1);
+//                bookingsDao.insert(bookings);
+//                bookings = new Bookings("Title 2", Date1, Date2, Date1, "0164527895",  1);
+//                bookingsDao.insert(bookings);
 
-                Date startDate = new Date();
-                Date endDate = new Date();
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                try {
-                    startDate = sdf.parse("2020-12-12 12:12:12");
-                    endDate = sdf.parse("2020-12-12 12:12:12");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                User john = userDao.getUserByFullNameSync("John Doe");
-                Appointment appointment = new Appointment(
-                        "Title",
-                        "Description",
-                        "Location",
-                        "Notes",
-                        startDate,
-                        endDate,
-                        john.getId()
-                );
-                appointmentDao.insert(appointment);
-                appointment = new Appointment(
-                        "Title 2",
-                        "Description 2",
-                        "Location 2",
-                        "Notes 2",
-                        startDate,
-                        endDate,
-                        john.getId()
-                );
-                appointmentDao.insert(appointment);
             });
         }
     };
