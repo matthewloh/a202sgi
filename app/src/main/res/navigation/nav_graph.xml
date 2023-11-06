@@ -64,6 +64,12 @@
             app:destination="@id/homeFragment"
             app:popUpTo="@id/roleRegistrationFragment"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="fullName"
+            app:argType="string" />
+        <argument android:name="email"
+            app:argType="string" />
+        <argument android:name="password" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -158,9 +164,6 @@
         <action
             android:id="@+id/action_appointmentsFragment_to_addAppointmentsFragment"
             app:destination="@id/addAppointmentsFragment" />
-        <argument
-            android:name="userId"
-            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/discussionsFragment"
@@ -172,8 +175,5 @@
         android:name="com.example.intisuperapp.Appointments.AddAppointmentFragment"
         android:label=""
         tools:layout="@layout/fragment_add_appointment" >
-        <argument
-            android:name="userId"
-            app:argType="integer" />
     </fragment>
 </navigation>

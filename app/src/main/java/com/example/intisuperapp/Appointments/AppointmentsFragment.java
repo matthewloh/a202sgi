@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.intisuperapp.LoginAndRegistration.User;
 import com.example.intisuperapp.LoginAndRegistration.UserSharedViewModel;
+import com.example.intisuperapp.R;
 import com.example.intisuperapp.databinding.FragmentAppointmentsBinding;
 
 import java.util.List;
@@ -72,14 +73,13 @@ public class AppointmentsFragment extends Fragment {
                                 binding.appointmentsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                                 binding.addAppointmentFab.setOnClickListener(view1 -> {
                                     // Navigate to the AddAppointmentFragment
-                                    AppointmentsFragmentDirections.ActionAppointmentsFragmentToAddAppointmentsFragment action =
-                                            AppointmentsFragmentDirections.actionAppointmentsFragmentToAddAppointmentsFragment(userId);
-                                    NavHostFragment.findNavController(AppointmentsFragment.this).navigate(action);
+                                    NavHostFragment.findNavController(AppointmentsFragment.this).navigate(
+                                            R.id.action_appointmentsFragment_to_addAppointmentsFragment
+                                    );
                                 });
                             });
                 }
         );
-        int userId = AppointmentsFragmentArgs.fromBundle(getArguments()).getUserId();
     }
 
     @Override

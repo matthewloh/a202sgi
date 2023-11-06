@@ -34,21 +34,11 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        userViewModel = new ViewModelProvider(getActivity()).get(UserViewModel.class);
-        userSharedViewModel = new ViewModelProvider(getActivity()).get(UserSharedViewModel.class);
-        userViewModel.getUserByEmail("g").observe(
-                getViewLifecycleOwner(),
-                user -> {
-                    if (user == null) {
-                        Toast.makeText(getActivity(), "User does not exist", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getActivity(), "User exists", Toast.LENGTH_SHORT).show();
-                    }
-                }
-        );
-        binding.button.setOnClickListener(v -> {
+        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+        userSharedViewModel = new ViewModelProvider(requireActivity()).get(UserSharedViewModel.class);
+        binding.loginButton.setOnClickListener(v -> {
             String email = binding.emailEntry.getText().toString();
-            String password = binding.passwordEntry.getText().toString();
+            String password = binding.password.getText().toString();
 
             userViewModel.getUserByEmailAndPassword(email, password).observe(getViewLifecycleOwner(), user -> {
                 if (user == null) {

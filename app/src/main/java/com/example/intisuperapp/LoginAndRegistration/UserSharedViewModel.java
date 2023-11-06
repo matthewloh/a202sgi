@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class UserSharedViewModel extends ViewModel {
-    private MutableLiveData<User> user = new MutableLiveData<>();
+    private final MutableLiveData<User> user = new MutableLiveData<>();
 
     public void setUser(User user) {
         this.user.setValue(user);
@@ -13,5 +13,8 @@ public class UserSharedViewModel extends ViewModel {
 
     public LiveData<User> getUser() {
         return user;
+    }
+    public User getUserValue() {
+        return user.getValue();
     }
 }

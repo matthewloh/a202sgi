@@ -74,11 +74,6 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
                 UserDao userDao = instance.userDao();
                 userDao.deleteAllUsers();
 
-                User user = new User("John696969 Doe", "j@.com", "12", "student");
-                userDao.insert(user);
-                user = new User("Jane Doe", "g", "12", "student");
-                userDao.insert(user);
-
                 AppointmentDao appointmentDao = instance.appointmentDao();
                 appointmentDao.deleteAllAppointments();
 //                Date startDate = new Date();
@@ -137,46 +132,24 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
                 AppointmentDao appointmentDao = instance.appointmentDao();
 //                appointmentDao.deleteAllAppointments();
 
-                Date startDate = new Date();
-                Date endDate = new Date();
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                try {
-                    startDate = sdf.parse("2020-12-12 12:12:12");
-                    endDate = sdf.parse("2020-12-12 12:12:12");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                User john = userDao.getUserByFullNameSync("John Doe");
+//                Date startDate = new Date();
+//                Date endDate = new Date();
+//                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//                try {
+//                    startDate = sdf.parse("2020-12-12 12:12:12");
+//                    endDate = sdf.parse("2020-12-12 12:12:12");
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
 //                Appointment appointment = new Appointment(
-//                        "Title",
-//                        "Description",
-//                        "Location",
-//                        "Notes",
+//                        "Title 3",
+//                        "Description 3",
+//                        "Location 3",
+//                        "Notes 3",
 //                        startDate,
 //                        endDate,
-//                        john.getId()
+//                        jane.getId()
 //                );
-//                appointmentDao.insert(appointment);
-//                appointment = new Appointment(
-//                        "Title 2",
-//                        "Description 2",
-//                        "Location 2",
-//                        "Notes 2",
-//                        startDate,
-//                        endDate,
-//                        john.getId()
-//                );
-//                appointmentDao.insert(appointment);
-                User jane = userDao.getUserByFullNameSync("Jane Doe");
-                Appointment appointment = new Appointment(
-                        "Title 3",
-                        "Description 3",
-                        "Location 3",
-                        "Notes 3",
-                        startDate,
-                        endDate,
-                        jane.getId()
-                );
 //                appointmentDao.insert(appointment);
             });
         }

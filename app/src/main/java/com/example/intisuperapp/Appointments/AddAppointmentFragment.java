@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.intisuperapp.LoginAndRegistration.UserSharedViewModel;
 import com.example.intisuperapp.MainActivity;
 import com.example.intisuperapp.R;
 import com.example.intisuperapp.databinding.FragmentAddAppointmentBinding;
@@ -29,6 +30,10 @@ public class AddAppointmentFragment extends Fragment {
 
     private AppointmentViewModel appointmentViewModel;
 
+    private UserSharedViewModel userSharedViewModel;
+
+    public int userId;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentAddAppointmentBinding.inflate(inflater, container, false);
@@ -40,6 +45,8 @@ public class AddAppointmentFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         // insert code here
         appointmentViewModel = new ViewModelProvider(requireActivity()).get(AppointmentViewModel.class);
+        userSharedViewModel = new ViewModelProvider(requireActivity()).get(UserSharedViewModel.class);
+        userId = userSharedViewModel.getUserValue().getId();
         ((MainActivity) requireActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
         // Setting Home As Up Indicator in Fragment
         ((MainActivity) requireActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
@@ -56,8 +63,7 @@ public class AddAppointmentFragment extends Fragment {
                 view1 -> showTimePickerDialog(binding.appointmentEndTimeText)
         );
         binding.appointmentCreateButton.setOnClickListener(view1 -> {
-            int userId = AddAppointmentFragmentArgs.fromBundle(getArguments()).getUserId();
-            String title = binding.appointmentsTitle.getText().toString();
+            String title = binding.appointmentTitleText.getText().toString();
             String description = binding.appointmentDescriptionText.getText().toString();
             String location = binding.appointmentLocationText.getText().toString();
             String notes = binding.appointmentNotesText.getText().toString();
