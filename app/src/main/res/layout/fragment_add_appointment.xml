@@ -48,10 +48,13 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bookingsTitleLayout"
-        tools:layout_editor_absoluteX="8dp">
+        app:layout_constraintVertical_bias="0.0">
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/white"
@@ -72,23 +75,27 @@
                 android:paddingEnd="24dp"
                 android:text="Title:"
                 android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/appointment_title_text"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@id/appointment_title_text_view"
                 android:hint="Title"
                 android:inputType="text"
-                android:padding="24dp" />
+                android:padding="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/appointment_title_text_view"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/appointment_description_text_view"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/appointment_title_text"
                 android:paddingStart="0dp"
                 android:paddingTop="24dp"
                 android:paddingEnd="24dp"
@@ -96,49 +103,56 @@
                 android:text="Description:"
                 android:textAlignment="viewStart"
                 android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appointment_title_text_view" />
 
             <EditText
                 android:id="@+id/appointment_description_text"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/appointment_description_text_view"
-                android:layout_alignParentStart="true"
-                android:layout_toEndOf="@id/appointment_description_text_view"
                 android:hint="Description"
                 android:inputType="textMultiLine"
-                android:padding="24dp" />
+                android:padding="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/appointment_description_text_view" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/appointment_location_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/appointment_description_text"
+                android:layout_marginEnd="32dp"
                 android:paddingVertical="24dp"
                 android:paddingStart="0dp"
                 android:paddingEnd="24dp"
                 android:text="Location:"
                 android:textAlignment="viewStart"
                 android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appointment_description_text" />
 
             <EditText
                 android:id="@+id/appointment_location_text"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/appointment_description_text"
-                android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@id/appointment_location_text_view"
                 android:hint="Location"
                 android:inputType="text"
-                android:padding="24dp" />
+                android:padding="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/appointment_location_text_view"
+                app:layout_constraintTop_toBottomOf="@+id/appointment_description_text" />
 
             <com.google.android.material.textview.MaterialTextView
 
                 android:id="@+id/appointment_notes_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/appointment_location_text"
+                android:layout_marginTop="2dp"
                 android:paddingStart="0dp"
                 android:paddingTop="24dp"
                 android:paddingEnd="24dp"
@@ -146,142 +160,200 @@
                 android:text="Notes:"
                 android:textAlignment="viewStart"
                 android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appointment_location_text_view" />
 
             <EditText
                 android:id="@+id/appointment_notes_text"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/appointment_notes_text_view"
-                android:layout_alignParentStart="true"
-                android:layout_toEndOf="@id/appointment_notes_text_view"
                 android:hint="Notes"
                 android:inputType="textMultiLine"
-                android:paddingTop="24dp" />
+                android:paddingTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/appointment_notes_text_view"
+                app:layout_constraintTop_toBottomOf="@+id/appointment_location_text_view" />
 
             <com.google.android.material.textview.MaterialTextView
 
                 android:id="@+id/appointment_start_date_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/appointment_notes_text"
+                android:layout_marginTop="7dp"
                 android:paddingVertical="24dp"
                 android:paddingStart="0dp"
                 android:paddingEnd="24dp"
                 android:text="Start Date:"
                 android:textAlignment="viewStart"
                 android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appointment_notes_text_view" />
 
             <EditText
                 android:id="@+id/appointment_start_date_text"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/appointment_notes_text"
-                android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@id/appointment_start_date_text_view"
                 android:drawableStart="@drawable/baseline_calendar_month_24"
                 android:drawablePadding="12dp"
                 android:focusable="false"
                 android:hint="Start Date"
                 android:inputType="date"
-                android:padding="24dp" />
+                android:padding="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/appointment_start_date_text_view"
+                app:layout_constraintTop_toBottomOf="@+id/appointment_notes_text_view" />
 
             <com.google.android.material.textview.MaterialTextView
 
                 android:id="@+id/appointment_end_date_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/appointment_start_date_text"
                 android:paddingVertical="24dp"
                 android:paddingStart="0dp"
                 android:paddingEnd="24dp"
                 android:text="End Date:"
                 android:textAlignment="viewStart"
                 android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appointment_start_date_text_view" />
 
             <EditText
                 android:id="@+id/appointment_end_date_text"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/appointment_start_date_text"
-                android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@id/appointment_end_date_text_view"
+                android:layout_marginTop="2dp"
                 android:drawableStart="@drawable/baseline_calendar_month_24"
                 android:drawablePadding="12dp"
                 android:focusable="false"
                 android:hint="End Date"
                 android:inputType="date"
-                android:padding="24dp" />
+                android:padding="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/appointment_end_date_text_view"
+                app:layout_constraintTop_toBottomOf="@+id/appointment_start_date_text_view" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/appointment_start_time_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/appointment_end_date_text"
                 android:paddingVertical="24dp"
                 android:paddingStart="0dp"
                 android:paddingEnd="24dp"
                 android:text="Start Time:"
                 android:textAlignment="viewStart"
                 android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appointment_end_date_text_view" />
 
             <EditText
                 android:id="@+id/appointment_start_time_text"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/appointment_end_date_text"
-                android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@id/appointment_start_time_text_view"
                 android:drawableStart="@drawable/ic_clock"
                 android:drawablePadding="12dp"
                 android:focusable="false"
                 android:hint="Start Time"
                 android:inputType="time"
-                android:padding="24dp" />
+                android:padding="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/appointment_start_time_text_view"
+                app:layout_constraintTop_toBottomOf="@+id/appointment_end_date_text_view" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/appointment_end_time_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/appointment_start_time_text"
                 android:paddingVertical="24dp"
                 android:paddingStart="0dp"
                 android:paddingEnd="24dp"
                 android:text="End Time:"
                 android:textAlignment="viewStart"
                 android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appointment_start_time_text_view" />
 
             <EditText
                 android:id="@+id/appointment_end_time_text"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/appointment_start_time_text"
-                android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@id/appointment_end_time_text_view"
                 android:drawableStart="@drawable/ic_clock"
                 android:drawablePadding="12dp"
                 android:focusable="false"
                 android:hint="End Time"
                 android:inputType="time"
-                android:padding="24dp" />
+                android:padding="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/appointment_end_time_text_view"
+                app:layout_constraintTop_toBottomOf="@+id/appointment_start_time_text_view" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/appointment_image_view"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/colorPrimary"
+                android:scaleType="centerCrop"
+                android:src="@drawable/baseline_upload_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appointment_end_time_text_view"
+                app:shapeAppearanceOverlay="@style/roundedImageView" />
+
+            <ProgressBar
+                android:id="@+id/indeterminateBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appointment_image_view"
+                app:layout_constraintVertical_bias="0.19999999" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/appointment_upload_image_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/appointment_image_view"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorPrimary"
+                android:text="Upload Image"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/indeterminateBar" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/appointment_create_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/appointment_end_time_text"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="20dp"
-                android:layout_toEndOf="@id/appointment_end_date_text_view"
+                android:layout_below="@id/appointment_upload_image_button"
+                android:layout_marginTop="24dp"
                 android:background="@color/colorPrimary"
                 android:text="Create Appointment"
                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appointment_upload_image_button" />
 
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
