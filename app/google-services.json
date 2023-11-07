@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "408565987548",
+    "project_id": "intisuperapp",
+    "storage_bucket": "intisuperapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:408565987548:android:73c4c0265460ad896adc19",
+        "android_client_info": {
+          "package_name": "com.example.intisuperapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAl2Gmmq-JU1dW1DhWchAm4DGzs0MDHowg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

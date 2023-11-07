@@ -1,18 +1,20 @@
 package com.example.intisuperapp.Appointments;
 
-import androidx.annotation.Nullable;
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 import com.example.intisuperapp.DBUtils.Converters;
+import com.example.intisuperapp.Firebase.model.Photo;
 import com.example.intisuperapp.LoginAndRegistration.User;
 
 import java.util.Date;
 
-@Entity(tableName = "Appointment", foreignKeys = @ForeignKey(entity = User.class, parentColumns = "id", childColumns = "authorId", onDelete = ForeignKey.CASCADE))
+@Entity(tableName = "Appointment", foreignKeys = {
+        @ForeignKey(entity = User.class, parentColumns = "id", childColumns = "authorId", onDelete = ForeignKey.CASCADE),
+        @ForeignKey(entity = Photo.class, parentColumns = "id", childColumns = "imageId", onDelete = ForeignKey.CASCADE)
+})
 @TypeConverters(Converters.class)
 public class Appointment {
 
@@ -24,7 +26,7 @@ public class Appointment {
     }
 
     public Appointment(String title, String description, String location, String notes,
-                       Date startDate, Date endDate, int authorId) {
+                       Date startDate, Date endDate, int authorId, int imageId) {
         this.title = title;
         this.description = description;
         this.location = location;
@@ -32,6 +34,7 @@ public class Appointment {
         this.startDate = startDate;
         this.endDate = endDate;
         this.authorId = authorId;
+        this.imageId = imageId;
     }
 
     public void setId(int id) {
@@ -46,13 +49,21 @@ public class Appointment {
 
     private String notes;
 
-    private int authorId;
-
     private Date startDate;
 
     private Date endDate;
 
-    private String imageUri;
+    private int authorId;
+
+    public int getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(int imageId) {
+        this.imageId = imageId;
+    }
+
+    private int imageId;
 
     public String getTitle() {
         return title;
@@ -69,7 +80,6 @@ public class Appointment {
     public void setDescription(String description) {
         this.description = description;
     }
-
 
     public String getLocation() {
         return location;
@@ -102,15 +112,6 @@ public class Appointment {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
-
-    public String getImageUri() {
-        return imageUri;
-    }
-
-    public void setImageUri(String imageUri) {
-        this.imageUri = imageUri;
-    }
-
 
     public int getAuthorId() {
         return authorId;

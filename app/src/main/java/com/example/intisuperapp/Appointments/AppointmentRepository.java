@@ -59,4 +59,7 @@ public class AppointmentRepository {
         return mAppointmentDao.getAppointmentsByTitleAsc(authorId);
     }
 
+    public LiveData<List<AppointmentWithPhoto>> getAllAppointmentsWithPhoto(int authorId) {
+        return mAppointmentDao.getAllAppointmentsWithPhoto(authorId);
+    }
 }

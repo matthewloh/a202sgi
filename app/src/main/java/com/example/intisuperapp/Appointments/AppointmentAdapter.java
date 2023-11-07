@@ -3,15 +3,13 @@ package com.example.intisuperapp.Appointments;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.intisuperapp.OldNotes.NoteAdapter;
+import com.bumptech.glide.Glide;
 import com.example.intisuperapp.R;
 import com.example.intisuperapp.databinding.AppointmentsItemBinding;
 import com.example.intisuperapp.databinding.FragmentAppointmentsBinding;
@@ -24,6 +22,7 @@ import java.util.Locale;
 public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.AppointmentHolder> {
     private OnItemClickListener mListener;
 
+
     private SimpleDateFormat originalDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
     private SimpleDateFormat targetDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
 
@@ -34,10 +33,10 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
     }
 
     // Save a reference to the List of Appointments
-    private List<Appointment> mAppointmentList;
+    private List<AppointmentWithPhoto> mAppointmentList;
 
     public interface OnItemClickListener {
-        void onItemClick(Appointment appointment);
+        void onItemClick(AppointmentWithPhoto appointment);
     }
 
     @NonNull
@@ -56,15 +55,22 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         }
     }
 
-    public AppointmentAdapter(List<Appointment> appointmentList) {
+    public AppointmentAdapter(List<AppointmentWithPhoto> appointmentList) {
         mAppointmentList = appointmentList;
     }
 
     @Override
     public void onBindViewHolder(@NonNull AppointmentAdapter.AppointmentHolder holder, int position) {
-        Appointment currentAppointment = mAppointmentList.get(position);
+        AppointmentWithPhoto currentAppointment = mAppointmentList.get(position);
         holder.binding.appointmentTitle.setText(currentAppointment.getTitle());
         holder.binding.appointmentDesc.setText(currentAppointment.getDescription());
+        holder.binding.appointmentDate.setText(currentAppointment.getStartDate().toString());
+        holder.binding.appointmentStartTimeEndTime.setText(currentAppointment.getStartDate().toString() + " - " + currentAppointment.getEndDate().toString());
+        // Image url of currentAppointment is obtained by selecting image_url from photo_table where photo_id = currentAppointment.getPhotoId()
+        //
+        Glide.with(holder.binding.getRoot()).load(currentAppointment.getImageUrl())
+                .into(holder.binding.appointmentImage);
+        holder.binding.appointmentImage.setImageResource(R.drawable.ic_launcher_foreground);
         Date tempStartDate = currentAppointment.getStartDate();
         Date tempEndDate = currentAppointment.getEndDate();
         Date tempStartTime = currentAppointment.getStartDate();

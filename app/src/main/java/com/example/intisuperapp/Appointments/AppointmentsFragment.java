@@ -24,7 +24,7 @@ import java.util.List;
 public class AppointmentsFragment extends Fragment {
     private FragmentAppointmentsBinding binding;
 
-    LiveData<List<Appointment>> appointments;
+    LiveData<List<AppointmentWithPhoto>> appointments;
 
     private AppointmentViewModel appointmentViewModel;
 
@@ -54,7 +54,7 @@ public class AppointmentsFragment extends Fragment {
                     appointmentViewModel = new ViewModelProvider(requireActivity())
 //                            new AppointmentViewModelFactory(requireActivity().getApplication(), userId))
                             .get(AppointmentViewModel.class);
-                    appointments = appointmentViewModel.getAllAppointmentsForUser(userId);
+                    appointments = appointmentViewModel.getAllAppointmentsWithPhoto(userId);
                     appointments.observe(
                             getViewLifecycleOwner(),
                             retrieved -> {
