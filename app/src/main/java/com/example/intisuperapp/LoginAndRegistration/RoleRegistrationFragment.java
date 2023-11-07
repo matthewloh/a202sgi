@@ -50,10 +50,7 @@ public class RoleRegistrationFragment extends Fragment {
             userViewModel.insert(newUser);
             // Set user
             userViewModel.getUserByEmail(email).observe(getViewLifecycleOwner(), user -> {
-                if (user == null) {
-                    Toast.makeText(getActivity(), "User does not exist", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getActivity(), "User exists", Toast.LENGTH_SHORT).show();
+                if (user != null) {
                     userSharedViewModel.setUser(user);
                     NavHostFragment.findNavController(RoleRegistrationFragment.this)
                             .navigate(R.id.action_roleRegistrationFragment_to_homeFragment);
@@ -66,10 +63,7 @@ public class RoleRegistrationFragment extends Fragment {
             userViewModel.insert(newUser);
             // Set user
             userViewModel.getUserByEmail(email).observe(getViewLifecycleOwner(), user -> {
-                if (user == null) {
-                    Toast.makeText(getActivity(), "User does not exist", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getActivity(), "User exists", Toast.LENGTH_SHORT).show();
+                if (user != null) {
                     userSharedViewModel.setUser(user);
                     NavHostFragment.findNavController(RoleRegistrationFragment.this)
                             .navigate(R.id.action_roleRegistrationFragment_to_homeFragment);
