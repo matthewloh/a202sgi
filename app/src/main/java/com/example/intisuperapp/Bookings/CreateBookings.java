@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
@@ -22,17 +23,19 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import com.example.intisuperapp.MainActivity;
 import com.example.intisuperapp.R;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 
 public class CreateBookings extends Fragment {
 
-    EditText chooseStartTime, chooseEndTime, chooseDate;
+    EditText chooseStartTime, chooseEndTime, chooseDate, contactInput;
     TimePickerDialog timePickerDialog;
     DatePickerDialog datePickerDialog;
     Calendar calendar;
@@ -56,6 +59,7 @@ public class CreateBookings extends Fragment {
         chooseEndTime = view.findViewById(R.id.bookingEndTime);
         addBookingButton = view.findViewById(R.id.add_booking_btn);
         chooseDate = view.findViewById(R.id.bookingDate);
+        contactInput = view.findViewById(R.id.bookingContact);
 
 
         chooseVenueSpinner = view.findViewById(R.id.booking_venue_spinner);
@@ -72,20 +76,45 @@ public class CreateBookings extends Fragment {
         });
 
 
-        chooseStartTime.setOnClickListener(v -> showTimePicker(chooseStartTime));
+        chooseStartTime.setOnClickListener(v -> {
+            showTimePicker(chooseStartTime);
+        });
 
-        chooseEndTime.setOnClickListener(v -> showTimePicker(chooseEndTime));
+        chooseEndTime.setOnClickListener(v -> {
+            showTimePicker(chooseEndTime);
+        });
 
         addBookingButton.setOnClickListener(v -> {
 
-            if (chooseDate.getText().toString().isEmpty() || chooseStartTime.getText().toString().isEmpty() || chooseEndTime.getText().toString().isEmpty()) {
+            if (chooseDate.getText().toString().isEmpty() || chooseStartTime.getText().toString().isEmpty() || chooseEndTime.getText().toString().isEmpty() || contactInput.getText().toString().isEmpty()) {
                 Toast.makeText(requireContext(), "Please fill in all the fields", Toast.LENGTH_SHORT).show();
             }
             else{
-                Toast.makeText(requireContext(), "Booking Added", Toast.LENGTH_SHORT).show();
                 // add to database
+                String venue = chooseVenueSpinner.getSelectedItem().toString();
 
+                java.util.Date date = new java.util.Date();
+                java.util.Date startTime = new java.util.Date();
+                java.util.Date endTime = new java.util.Date();
 
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+                SimpleDateFormat sdf2 = new SimpleDateFormat("hh:mm a", Locale.US);
+                try {
+                    date = sdf.parse(chooseDate.getText().toString());
+                    startTime = sdf2.parse(chooseStartTime.getText().toString());
+                    endTime = sdf2.parse(chooseEndTime.getText().toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                String contact = contactInput.getText().toString();
+                int authorId = 1;
+
+                Bookings bookings = new Bookings(venue, date, startTime, endTime, contact, authorId);
+                BookingsViewModel bookingsViewModel = new ViewModelProvider(getActivity()).get(BookingsViewModel.class);
+                bookingsViewModel.insert(bookings);
+
+                Toast.makeText(requireContext(), "Booking Added", Toast.LENGTH_SHORT).show();
 
                 NavHostFragment.findNavController(CreateBookings.this)
                         .navigate(R.id.action_createBookings_to_bookingsFragment);
@@ -126,6 +155,7 @@ public class CreateBookings extends Fragment {
         currentMinute = calendar.get(Calendar.MINUTE);
 
         timePickerDialog = new TimePickerDialog(requireContext(), (view, hourOfDay, minute) -> {
+            SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a", Locale.US);
             Calendar selectedTime = Calendar.getInstance();
             selectedTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
             selectedTime.set(Calendar.MINUTE, minute);
@@ -135,12 +165,11 @@ public class CreateBookings extends Fragment {
             } else {
                 amPm = "AM";
             }
-            timeEditText.setText(String.format("%02d:%02d", hourOfDay, minute) + amPm);
+            String formattedTime = sdf.format(selectedTime.getTime());
+            timeEditText.setText(formattedTime);
 
         }, currentHour, currentMinute, false);
 
         timePickerDialog.show();
     }
-
-
 }

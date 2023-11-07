@@ -29,7 +29,7 @@ public interface BookingsDao {
     void deleteBookingsById(int id);
 
     // Get all bookings for a user
-    @Query("SELECT * FROM Bookings WHERE authorId = :id ORDER by id DESC")
+    @Query("SELECT * FROM Bookings WHERE authorId = :id ORDER by id ASC")
     LiveData<List<Bookings>> getAllBookingsForUser(int id);
 
     //    // Retrieve bookings details by id
@@ -43,11 +43,18 @@ public interface BookingsDao {
     @Query("SELECT * FROM Bookings WHERE authorId = :id ORDER BY date ASC")
     LiveData<List<Bookings>> getBookingsByDateAsc(int id);
 
+    @Query("SELECT * FROM Bookings WHERE authorId = :id ORDER BY startTime DESC")
+    LiveData<List<Bookings>> getBookingsByStartTime(int id);
+
+    @Query("SELECT * FROM Bookings WHERE authorId = :id ORDER BY startTime ASC")
+    LiveData<List<Bookings>> getBookingsByStartTimeAsc(int id);
+
+
     @Query("SELECT * FROM Bookings WHERE authorId = :id ORDER BY venue DESC")
-    LiveData<List<Bookings>> getBookingsByTitle(int id);
+    LiveData<List<Bookings>> getBookingsByVenue(int id);
 
     @Query("SELECT * FROM Bookings WHERE authorId = :id ORDER BY venue ASC")
-    LiveData<List<Bookings>> getBookingsByTitleAsc(int id);
+    LiveData<List<Bookings>> getBookingsByVenueAsc(int id);
 
 }
 

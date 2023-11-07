@@ -49,12 +49,20 @@ public class BookingsRepository {
         return mBookingsDao.getBookingsByDateAsc(authorId);
     }
 
-    public LiveData<List<Bookings>> getBookingsByTitle(int authorId) {
-        return mBookingsDao.getBookingsByTitle(authorId);
+    public LiveData<List<Bookings>> getBookingsByStartTime(int authorId) {
+        return mBookingsDao.getBookingsByStartTime(authorId);
     }
 
-    public LiveData<List<Bookings>> getBookingsByTitleAsc(int authorId) {
-        return mBookingsDao.getBookingsByTitleAsc(authorId);
+    public LiveData<List<Bookings>> getBookingsByStartTimeAsc(int authorId) {
+        return mBookingsDao.getBookingsByStartTimeAsc(authorId);
+    }
+
+    public LiveData<List<Bookings>> getBookingsByVenue(int authorId) {
+        return mBookingsDao.getBookingsByVenue(authorId);
+    }
+
+    public LiveData<List<Bookings>> getBookingsByVenueAsc(int authorId) {
+        return mBookingsDao.getBookingsByVenueAsc(authorId);
     }
 
 }

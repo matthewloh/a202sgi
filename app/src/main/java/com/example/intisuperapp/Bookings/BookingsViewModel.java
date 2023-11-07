@@ -39,12 +39,20 @@ public class BookingsViewModel extends AndroidViewModel {
         return mRepository.getBookingsByDateAsc(authorId);
     }
 
-    public LiveData<List<Bookings>> getBookingsByTitle(int authorId) {
-        return mRepository.getBookingsByTitle(authorId);
+    public LiveData<List<Bookings>> getBookingsByStartTime(int authorId) {
+        return mRepository.getBookingsByStartTime(authorId);
     }
 
-    public LiveData<List<Bookings>> getBookingsByTitleAsc(int authorId) {
-        return mRepository.getBookingsByTitleAsc(authorId);
+    public LiveData<List<Bookings>> getBookingsByStartTimeAsc(int authorId) {
+        return mRepository.getBookingsByStartTimeAsc(authorId);
+    }
+
+    public LiveData<List<Bookings>> getBookingsByVenue(int authorId) {
+        return mRepository.getBookingsByVenue(authorId);
+    }
+
+    public LiveData<List<Bookings>> getBookingsByVenueAsc(int authorId) {
+        return mRepository.getBookingsByVenueAsc(authorId);
     }
 
     public LiveData<List<Bookings>> getAllBookingsForUser(int authorId) {

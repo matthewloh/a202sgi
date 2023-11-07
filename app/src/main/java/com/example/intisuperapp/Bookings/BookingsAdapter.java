@@ -21,6 +21,9 @@ public class BookingsAdapter extends RecyclerView.Adapter<BookingsAdapter.Bookin
     // Save a reference to the List of Bookings
     private List<Bookings> mBookingsList;
 
+    // Create an interface for the OnItemClickListener
+    private OnItemClickListener mOnItemClickListener;
+
     public interface OnItemClickListener {
         void onItemClick(Bookings bookings);
     }
@@ -35,25 +38,41 @@ public class BookingsAdapter extends RecyclerView.Adapter<BookingsAdapter.Bookin
     public static class BookingsViewHolder extends RecyclerView.ViewHolder {
         private final BookingpageItemBinding binding;
 
-        public BookingsViewHolder(BookingpageItemBinding binding) {
+        public BookingsViewHolder(BookingpageItemBinding binding){
             super(binding.getRoot());
             this.binding = binding;
+
+
         }
     }
 
-    public BookingsAdapter(List<Bookings> bookingsList) {
+    public BookingsAdapter(List<Bookings> bookingsList, OnItemClickListener listener) {
         mBookingsList = bookingsList;
+        mOnItemClickListener = listener;
     }
 
     @Override
     public void onBindViewHolder(@NonNull BookingsAdapter.BookingsViewHolder holder, int position) {
         Bookings currentBookings = mBookingsList.get(position);
-        holder.binding.bookingTitle.setText("Booking "+currentBookings.getAuthorId());
+        holder.binding.bookingTitle.setText("Booking "+currentBookings.getId());
         holder.binding.bookingVenue.setText("Venue: "+currentBookings.getVenue());
 
-        holder.binding.bookingDate.setText("Date: "+currentBookings.getDate().toString());
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String strDate = formatter.format(currentBookings.getDate());
 
-        holder.binding.bookingTime.setText("Time: "+currentBookings.getStartTime().toString() + " - " + currentBookings.getEndTime().toString());
+        holder.binding.bookingDate.setText("Date: "+strDate);
+
+        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm a ");
+        String strStartTime = timeFormatter.format(currentBookings.getStartTime());
+        String strEndTime = timeFormatter.format(currentBookings.getEndTime());
+
+        holder.binding.bookingTime.setText("Time: "+strStartTime + " - " + strEndTime);
+
+        holder.binding.currentBookingRow1.setOnClickListener(v -> {
+            if (mOnItemClickListener != null) {
+                mOnItemClickListener.onItemClick(mBookingsList.get(position));
+            }
+        });
     }
 
     @Override
