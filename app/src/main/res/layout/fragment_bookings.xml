@@ -48,7 +48,6 @@
         android:padding="10sp"
         app:layout_constraintTop_toTopOf="@+id/createBookingRectangle"
         app:layout_constraintStart_toStartOf="@+id/createBookingRectangle"
-        app:layout_constraintEnd_toEndOf="@+id/createBookingRectangle"
         >
 
         <TextView
@@ -62,18 +61,6 @@
             android:textSize="26sp"
             android:textStyle="bold"/>
 
-        <TextView
-            android:id="@+id/see_all_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="85dp"
-            android:layout_marginTop="10dp"
-            android:clickable="true"
-            android:minHeight="48dp"
-            android:text="@string/see_all"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
 
     </LinearLayout>
 

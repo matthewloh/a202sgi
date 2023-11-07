@@ -67,8 +67,6 @@ public class BookingsFragment extends Fragment {
             }
         });
 
-
-
         binding.createABookingButton.setOnClickListener(
                 v -> {
                     NavHostFragment.findNavController(BookingsFragment.this)
@@ -76,12 +74,6 @@ public class BookingsFragment extends Fragment {
                 }
         );
 
-        binding.seeAllText.setOnClickListener(
-                v -> {
-                    NavHostFragment.findNavController(BookingsFragment.this)
-                            .navigate(R.id.action_bookingsFragment_to_showAllBookings);
-                }
-        );
     }
     @Override
     public void onDestroyView() {

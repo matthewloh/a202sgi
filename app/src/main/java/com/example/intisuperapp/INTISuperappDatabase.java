@@ -140,10 +140,10 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
                 UserDao userDao = instance.userDao();
 //                userDao.deleteAllUsers();
 ////
-//                User user = new User("John Doe", "j@.com", "12", "student");
-//                userDao.insert(user);
-//                user = new User("Jane Doe", "g", "12", "student");
-//                userDao.insert(user);
+                User user = new User("John Doe", "j@.com", "12", "student");
+                userDao.insert(user);
+                user = new User("Jane Doe", "g", "12", "student");
+                userDao.insert(user);
 ////
 ////
 //                AppointmentDao appointmentDao = instance.appointmentDao();
@@ -182,16 +182,16 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
 //
 //                String currentTime = new SimpleDateFormat("h:mm a", Locale.getDefault()).format(new Date());
 //
-//                BookingsDao bookingsDao = instance.bookingsDao();
+                BookingsDao bookingsDao = instance.bookingsDao();
 ////              bookingsDao.deleteAllBookings();
 //
-//                Date Date1 = new Date();
-//                Date Date2 = new Date();
-//
-//                Bookings bookings = new Bookings("Title",Date1 , Date2, Date2, "012345678",  1);
-//                bookingsDao.insert(bookings);
-//                bookings = new Bookings("Title 2", Date1, Date2, Date1, "0164527895",  1);
-//                bookingsDao.insert(bookings);
+                Date Date1 = new Date();
+                Date Date2 = new Date();
+
+                Bookings bookings = new Bookings("Title",Date1 , Date2, Date2, "012345678",  1);
+                bookingsDao.insert(bookings);
+                bookings = new Bookings("Title 2", Date1, Date2, Date1, "0164527895",  1);
+                bookingsDao.insert(bookings);
 
             });
         }

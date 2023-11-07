@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.intisuperapp.OldNotes.NoteAdapter;
 import com.example.intisuperapp.R;
 import com.example.intisuperapp.databinding.BookingpageItemBinding;
-import com.example.intisuperapp.databinding.ListviewShowAllBookingsBinding;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class BookingsAdapter extends RecyclerView.Adapter<BookingsAdapter.BookingsViewHolder>{
@@ -50,7 +50,9 @@ public class BookingsAdapter extends RecyclerView.Adapter<BookingsAdapter.Bookin
         Bookings currentBookings = mBookingsList.get(position);
         holder.binding.bookingTitle.setText("Booking "+currentBookings.getAuthorId());
         holder.binding.bookingVenue.setText("Venue: "+currentBookings.getVenue());
+
         holder.binding.bookingDate.setText("Date: "+currentBookings.getDate().toString());
+
         holder.binding.bookingTime.setText("Time: "+currentBookings.getStartTime().toString() + " - " + currentBookings.getEndTime().toString());
     }
 
