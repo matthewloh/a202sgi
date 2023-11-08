@@ -146,6 +146,9 @@
             app:exitAnim="@anim/slide_out"
             app:popEnterAnim="@anim/slide_in"
             app:popExitAnim="@anim/slide_out" />
+        <action
+            android:id="@+id/action_bookingsFragment_to_updateBookings"
+            app:destination="@id/updateBookings" />
     </fragment>
     <fragment
         android:id="@+id/createBookings"
@@ -211,5 +214,32 @@
         android:name="com.example.intisuperapp.Appointments.AddAppointmentFragment"
         android:label=""
         tools:layout="@layout/fragment_add_appointment" >
+    </fragment>
+    <fragment
+        android:id="@+id/updateBookings"
+        android:name="com.example.intisuperapp.Bookings.UpdateBookings"
+        android:label="fragment_update_bookings"
+        tools:layout="@layout/fragment_update_bookings" >
+        <action
+            android:id="@+id/action_updateBookings_to_bookingsFragment"
+            app:destination="@id/bookingsFragment" />
+        <argument
+            android:name="bookingId"
+            app:argType="integer" />
+        <argument
+            android:name="bookingDate"
+            app:argType="string" />
+        <argument
+            android:name="bookingStartTime"
+            app:argType="string" />
+        <argument
+            android:name="bookingEndTime"
+            app:argType="string" />
+        <argument
+            android:name="bookingContact"
+            app:argType="string" />
+        <argument
+            android:name="bookingVenue"
+            app:argType="string" />
     </fragment>
 </navigation>

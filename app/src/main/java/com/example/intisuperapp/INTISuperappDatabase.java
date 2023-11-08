@@ -81,10 +81,10 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
                 UserDao userDao = instance.userDao();
                 userDao.deleteAllUsers();
 
-//                User user = new User("John696969 Doe", "j@.com", "12", "student");
-//                userDao.insert(user);
-//                user = new User("Jane Doe", "g", "12", "student");
-//                userDao.insert(user);
+                User user = new User("John696969 Doe", "j@.com", "12", "student");
+                userDao.insert(user);
+                user = new User("Jane Doe", "g", "12", "student");
+                userDao.insert(user);
 
                 AppointmentDao appointmentDao = instance.appointmentDao();
                 appointmentDao.deleteAllAppointments();

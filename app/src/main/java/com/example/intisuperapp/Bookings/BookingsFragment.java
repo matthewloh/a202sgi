@@ -1,5 +1,6 @@
 package com.example.intisuperapp.Bookings;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -27,7 +28,9 @@ import com.example.intisuperapp.databinding.FragmentBookingsBinding;
 import com.example.intisuperapp.databinding.FragmentRegistrationBinding;
 import com.example.intisuperapp.R;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 
 public class BookingsFragment extends Fragment implements BookingsListener {
@@ -64,7 +67,7 @@ public class BookingsFragment extends Fragment implements BookingsListener {
                 // Now, you can use the bookingsViewModel to fetch bookings.
                 bookings = bookingsViewModel.getAllBookingsForUser(johnId);
                 bookings.observe(getViewLifecycleOwner(), bookings1 -> {
-                    BookingsAdapter adapter = new BookingsAdapter(bookings1, this::onItemClicked);
+                    BookingsAdapter adapter = new BookingsAdapter(bookings1, this::onItemClicked, this::onLongItemClicked);
                     binding.bookingRecyclerView.setAdapter(adapter);
                     binding.bookingRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                 });
@@ -92,27 +95,27 @@ public class BookingsFragment extends Fragment implements BookingsListener {
                                     int selectedPosition = ((AlertDialog)dialog).getListView().getCheckedItemPosition();
                                     if (selectedPosition == 0) {
                                         bookingsViewModel.getAllBookingsForUser(1).observe(getViewLifecycleOwner(), bookings1 -> {
-                                            BookingsAdapter adapter = new BookingsAdapter(bookings1, this::onItemClicked);
+                                            BookingsAdapter adapter = new BookingsAdapter(bookings1, this::onItemClicked, this::onLongItemClicked);
                                             binding.bookingRecyclerView.setAdapter(adapter);
                                             binding.bookingRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                                         });
                                     } else if (selectedPosition == 1) {
                                         bookingsViewModel.getBookingsByVenueAsc(1).observe(getViewLifecycleOwner(), bookings1 -> {
-                                            BookingsAdapter adapter = new BookingsAdapter(bookings1, this::onItemClicked);
+                                            BookingsAdapter adapter = new BookingsAdapter(bookings1, this::onItemClicked, this::onLongItemClicked);
                                             binding.bookingRecyclerView.setAdapter(adapter);
                                             binding.bookingRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                                         });
 
                                     } else if (selectedPosition ==2) {
                                         bookingsViewModel.getBookingsByDateAsc(1).observe(getViewLifecycleOwner(), bookings1 -> {
-                                            BookingsAdapter adapter = new BookingsAdapter(bookings1, this::onItemClicked);
+                                            BookingsAdapter adapter = new BookingsAdapter(bookings1, this::onItemClicked, this::onLongItemClicked);
                                             binding.bookingRecyclerView.setAdapter(adapter);
                                             binding.bookingRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                                         });
 
                                     } else if (selectedPosition == 3) {
                                         bookingsViewModel.getBookingsByDate(1).observe(getViewLifecycleOwner(), bookings1 -> {
-                                            BookingsAdapter adapter = new BookingsAdapter(bookings1, this::onItemClicked);
+                                            BookingsAdapter adapter = new BookingsAdapter(bookings1, this::onItemClicked, this::onLongItemClicked);
                                             binding.bookingRecyclerView.setAdapter(adapter);
                                             binding.bookingRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                                         });
@@ -141,6 +144,32 @@ public class BookingsFragment extends Fragment implements BookingsListener {
     public void onItemClicked(Bookings bookings) {
 //        Toast.makeText(this.getContext(), "Clicked: " + bookings.getId(), Toast.LENGTH_SHORT).show();
 
+        Bundle bundle = new Bundle();
+        bundle.putInt("bookingId", bookings.getId());
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+        String dateString = formatter.format(bookings.getDate());
+
+        SimpleDateFormat timeFormatter = new SimpleDateFormat("hh:mm a", Locale.US);
+        String startTimeString = timeFormatter.format(bookings.getStartTime());
+        String endTimeString = timeFormatter.format(bookings.getEndTime());
+
+        BookingsFragmentDirections.ActionBookingsFragmentToUpdateBookings action = BookingsFragmentDirections.actionBookingsFragmentToUpdateBookings(
+
+                bookings.getId(),  dateString, startTimeString, endTimeString, bookings.getContact(), bookings.getVenue()
+        );
+        NavHostFragment.findNavController(BookingsFragment.this)
+                .navigate(action);
+
+
+
+
+    }
+
+    @Override
+    public void onLongItemClicked(Bookings bookings) {
+//        Toast.makeText(this.getContext(), "Long Clicked: " + bookings.getId(), Toast.LENGTH_SHORT).show();
+
         new AlertDialog.Builder(getActivity())
                 .setTitle("Do you want to delete Booking " + bookings.getId()+ "?")
                 .setPositiveButton("Yes", (dialog, which) -> {
@@ -150,7 +179,6 @@ public class BookingsFragment extends Fragment implements BookingsListener {
 
                 })
                 .show();
-
-
     }
+
 }
