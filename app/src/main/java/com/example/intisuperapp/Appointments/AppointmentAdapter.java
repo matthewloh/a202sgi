@@ -1,19 +1,14 @@
 package com.example.intisuperapp.Appointments;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.intisuperapp.R;
 import com.example.intisuperapp.databinding.AppointmentsItemBinding;
-import com.example.intisuperapp.databinding.FragmentAppointmentsBinding;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,10 +19,6 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
     private OnItemClickListener mListener;
 
     private OnItemLongClickListener mLongListener;
-    private SimpleDateFormat originalDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-    private SimpleDateFormat targetDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-
-    private SimpleDateFormat targetTimeFormat = new SimpleDateFormat("HH:mma", Locale.getDefault());
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
@@ -37,6 +28,10 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         mLongListener = listener;
     }
 
+    private SimpleDateFormat originalDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+    private SimpleDateFormat targetDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+
+    private SimpleDateFormat targetTimeFormat = new SimpleDateFormat("HH:mma", Locale.getDefault());
     // Save a reference to the List of Appointments
     private List<Appointment> mAppointmentList;
 

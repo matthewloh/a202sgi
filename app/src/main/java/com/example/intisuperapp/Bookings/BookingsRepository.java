@@ -12,7 +12,7 @@ public class BookingsRepository {
     private BookingsDao mBookingsDao;
     private LiveData<List<Bookings>> mAllBookings;
 
-    public BookingsRepository(Application application, int authorId) {
+    public BookingsRepository(Application application) {
         INTISuperappDatabase database = INTISuperappDatabase.getInstance(application);
         mBookingsDao = database.bookingsDao();
     }

@@ -32,7 +32,6 @@ public class AppointmentsFragment extends Fragment {
 
     public int userId;
 
-    public User currentUser;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,48 +43,34 @@ public class AppointmentsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Observe the User LiveData to get the user's ID
+        appointmentViewModel = new ViewModelProvider(requireActivity()).get(AppointmentViewModel.class);
         userSharedViewModel = new ViewModelProvider(getActivity()).get(UserSharedViewModel.class);
-        userSharedViewModel.getUser().observe(
-                getViewLifecycleOwner(),
-                user -> {
-                    binding.appointmentsTitle.setText("Appointments for " + user.getFullname());
-                    userId = user.getId();
-                    currentUser = user;
-                    appointmentViewModel = new ViewModelProvider(requireActivity())
-//                            new AppointmentViewModelFactory(requireActivity().getApplication(), userId))
-                            .get(AppointmentViewModel.class);
-                    appointments = appointmentViewModel.getAllAppointmentsForUser(userId);
-                    appointments.observe(
-                            getViewLifecycleOwner(),
-                            retrieved -> {
-                                AppointmentAdapter adapter = new AppointmentAdapter(retrieved);
-                                adapter.setOnItemClickListener(
-                                        appointment -> {
-                                            Toast.makeText(getActivity(), "Appointment Clicked", Toast.LENGTH_SHORT).show();
-                                            Toast.makeText(getActivity(), "Appointment Title" + appointment.getTitle(), Toast.LENGTH_SHORT).show();
-                                            // Navigate to the EditAppointmentFragment
+        userSharedViewModel.getUser().observe(getViewLifecycleOwner(), user -> {
+            binding.appointmentsTitle.setText("Appointments for " + user.getFullname());
+            userId = user.getId();
+            appointments = appointmentViewModel.getAllAppointmentsForUser(userId);
+            appointments.observe(getViewLifecycleOwner(), retrieved -> {
+                AppointmentAdapter adapter = new AppointmentAdapter(retrieved);
+                adapter.setOnItemClickListener(appointment -> {
+                    Toast.makeText(getActivity(), "Appointment Clicked", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Appointment Title" + appointment.getTitle(), Toast.LENGTH_SHORT).show();
+                    // Navigate to the EditAppointmentFragment
 //                                            AppointmentsFragmentDirections.ActionAppointmentsFragmentToEditAppointmentFragment action =
 //                                                    AppointmentsFragmentDirections.actionAppointmentsFragmentToEditAppointmentFragment(appointment.getId(), userId);
 //                                            NavHostFragment.findNavController(AppointmentsFragment.this).navigate(action);
-                                        }
-                                );
-                                adapter.setOnItemLongClickListener(
-                                        appointment -> {
-                                            Toast.makeText(getActivity(), "Appointment Long Clicked", Toast.LENGTH_SHORT).show();
-                                            Toast.makeText(getActivity(), "Appointment Image Url" + appointment.getImageUrl(), Toast.LENGTH_SHORT).show();
-                                        }
-                                );
-                                binding.appointmentsRecyclerView.setAdapter(adapter);
-                                binding.appointmentsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                                binding.addAppointmentFab.setOnClickListener(view1 -> {
-                                    // Navigate to the AddAppointmentFragment
-                                    NavHostFragment.findNavController(AppointmentsFragment.this).navigate(
-                                            R.id.action_appointmentsFragment_to_addAppointmentsFragment
-                                    );
-                                });
-                            });
-                }
-        );
+                });
+                adapter.setOnItemLongClickListener(appointment -> {
+                    Toast.makeText(getActivity(), "Appointment Long Clicked", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Appointment Image Url" + appointment.getImageUrl(), Toast.LENGTH_SHORT).show();
+                });
+                binding.appointmentsRecyclerView.setAdapter(adapter);
+                binding.appointmentsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            });
+        });
+        binding.addAppointmentFab.setOnClickListener(v -> {
+            // Navigate to the AddAppointmentFragment
+            NavHostFragment.findNavController(AppointmentsFragment.this).navigate(R.id.action_appointmentsFragment_to_addAppointmentsFragment);
+        });
     }
 
     @Override
