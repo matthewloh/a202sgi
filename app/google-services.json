@@ -1,14 +1,13 @@
 {
   "project_info": {
-    "project_number": "51628140877",
-    "firebase_url": "https://caramel-galaxy-384708-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "caramel-galaxy-384708",
-    "storage_bucket": "caramel-galaxy-384708.appspot.com"
+    "project_number": "408565987548",
+    "project_id": "intisuperapp",
+    "storage_bucket": "intisuperapp.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:51628140877:android:c6b1c033dd30b06efb2f04",
+        "mobilesdk_app_id": "1:408565987548:android:73c4c0265460ad896adc19",
         "android_client_info": {
           "package_name": "com.example.intisuperapp"
         }
@@ -16,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBUCzOC6H2zAggg47odEjZwRWrcp1k8kdc"
+          "current_key": "AIzaSyAl2Gmmq-JU1dW1DhWchAm4DGzs0MDHowg"
         }
       ],
       "services": {

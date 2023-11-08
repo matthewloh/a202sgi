@@ -44,6 +44,8 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
 
     public abstract BookingsDao bookingsDao();
 
+//    public abstract AppointmentUserJoinDao appointmentUserJoinDao();
+
     // Synchronized means that only one thread at a time can access this method
     public static synchronized INTISuperappDatabase getInstance(Context context) {
         if (instance == null) { // Only want to instantiate this database if we dont have an instance
@@ -193,6 +195,25 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
 //                bookings = new Bookings("Title 2", Date1, Date2, Date1, "0164527895",  1);
 //                bookingsDao.insert(bookings);
 
+//                Date startDate = new Date();
+//                Date endDate = new Date();
+//                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//                try {
+//                    startDate = sdf.parse("2020-12-12 12:12:12");
+//                    endDate = sdf.parse("2020-12-12 12:12:12");
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//                Appointment appointment = new Appointment(
+//                        "Title 3",
+//                        "Description 3",
+//                        "Location 3",
+//                        "Notes 3",
+//                        startDate,
+//                        endDate,
+//                        jane.getId()
+//                );
+//                appointmentDao.insert(appointment);
             });
         }
     };

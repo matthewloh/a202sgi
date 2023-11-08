@@ -11,20 +11,17 @@ import androidx.navigation.fragment.NavHostFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.example.intisuperapp.MainActivity;
-import com.example.intisuperapp.OldNotes.AddNoteFragment;
 import com.example.intisuperapp.R;
 import com.example.intisuperapp.databinding.FragmentLoginBinding;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginFragment extends Fragment {
     private FragmentLoginBinding binding;
-    FirebaseAuth fAuth;
 
     private UserViewModel userViewModel;
+
+    private UserSharedViewModel userSharedViewModel;
 
     @Nullable
     @Override
@@ -37,23 +34,11 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        userViewModel = new ViewModelProvider(getActivity()).get(UserViewModel.class);
-        userViewModel.getUserByEmail("g").observe(getViewLifecycleOwner(), user -> {
-            if (user == null) {
-                Toast.makeText(getActivity(), "User does not exist", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(getActivity(), "User exists", Toast.LENGTH_SHORT).show();
-            }
-        });
-        binding.loginBtn.setOnClickListener(v -> {
+        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+        userSharedViewModel = new ViewModelProvider(requireActivity()).get(UserSharedViewModel.class);
+        binding.loginButton.setOnClickListener(v -> {
             String email = binding.emailEntry.getText().toString();
-            String password = binding.passwordEntry.getText().toString();
-            fAuth = FirebaseAuth.getInstance();
-        });
-
-        binding.loginBtn.setOnClickListener(v -> {
-            String email = binding.emailEntry.getText().toString().trim();
-            String password = binding.passwordEntry.getText().toString().trim();
+            String password = binding.password.getText().toString();
 //
 //            if (email.isEmpty()) {
 //                binding.emailEntry.setError("Email is Required.");
@@ -84,13 +69,19 @@ public class LoginFragment extends Fragment {
                     Toast.makeText(getActivity(), "Login failed. Please check your credentials.", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getActivity(), "Login successful", Toast.LENGTH_SHORT).show();
-                    NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.action_loginFragment_to_homeFragment);
+                    userSharedViewModel.setUser(user);
+                    NavHostFragment.findNavController(LoginFragment.this).navigate(
+                            R.id.action_loginFragment_to_homeFragment
+                    );
                 }
             });
         });
-        binding.registerText.setOnClickListener(v -> {
-            NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.action_loginFragment_to_registrationFragment);
-        });
+        binding.registerText.setOnClickListener(
+                v -> {
+                    NavHostFragment.findNavController(LoginFragment.this)
+                            .navigate(R.id.action_loginFragment_to_registrationFragment);
+                }
+        );
     }
 
     @Override

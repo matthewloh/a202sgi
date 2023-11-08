@@ -5,8 +5,6 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import com.example.intisuperapp.INTISuperappDatabase;
-import com.example.intisuperapp.LoginAndRegistration.User;
-import com.example.intisuperapp.LoginAndRegistration.UserDao;
 
 import java.util.List;
 
@@ -16,7 +14,7 @@ public class AppointmentRepository {
 
     private LiveData<List<Appointment>> mAllAppointments;
 
-    public AppointmentRepository(Application application, int authorId) {
+    public AppointmentRepository(Application application) {
         INTISuperappDatabase database = INTISuperappDatabase.getInstance(application);
         mAppointmentDao = database.appointmentDao();
     }

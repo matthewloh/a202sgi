@@ -2,9 +2,11 @@ package com.example.intisuperapp.LoginAndRegistration;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "User")
+
+@Entity(tableName = "User", indices = {@Index(value = {"email"}, unique = true)})
 public class User {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
@@ -12,6 +14,7 @@ public class User {
 
     @ColumnInfo(name = "full_name")
     private String fullname;
+
 
     @ColumnInfo(name = "email")
     private String email;

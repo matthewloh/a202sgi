@@ -69,4 +69,11 @@ Et odio pellentesque diam volutpat commodo. Fermentum posuere urna nec tincidunt
     <string name="logout">Logout</string>
     <string name="filter"><u>Filter</u></string>
 
+    <string-array name="itemcategories">
+        <item>Electronics</item>
+        <item>Stationery</item>
+        <item>Accessories</item>
+        <item>Others</item>
+    </string-array>
+
 </resources>

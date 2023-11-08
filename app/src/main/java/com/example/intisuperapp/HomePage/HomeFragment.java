@@ -1,11 +1,16 @@
 package com.example.intisuperapp.HomePage;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
@@ -13,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.intisuperapp.LoginAndRegistration.UserSharedViewModel;
 import com.example.intisuperapp.MainActivity;
 import com.example.intisuperapp.R;
 import com.example.intisuperapp.databinding.FragmentHomeBinding;
@@ -22,6 +28,9 @@ public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
 
+    private UserSharedViewModel userSharedViewModel;
+
+    private int userId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,15 +43,20 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
         ActionBar actionBar = ((MainActivity) getActivity()).getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(false);
         actionBar.setDisplayShowHomeEnabled(false);
         // Set title to the fragment
         actionBar.setTitle("");
-        // Obtaining a reference to the hamburger menu icon ImageView
-
+        userSharedViewModel = new ViewModelProvider(getActivity()).get(UserSharedViewModel.class);
+        userSharedViewModel.getUser().observe(
+                getViewLifecycleOwner(),
+                user -> {
+                    userId = user.getId();
+                    Toast.makeText(getActivity(), "User role: " + user.getRole() + " User ID: " + userId
+                            , Toast.LENGTH_SHORT).show();
+                }
+        );
         binding.appointmentsButton.setOnClickListener(
                 v -> {
                     NavHostFragment.findNavController(HomeFragment.this)
@@ -82,5 +96,19 @@ public class HomeFragment extends Fragment {
                             .navigate(R.id.action_homeFragment_to_loginFragment);
                 }
         );
+
+//        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+//            int itemId = item.getItemId();
+//            if (itemId == R.id.home) {
+//                navController.navigate(R.id.homeFragment);
+//            } else if (itemId == R.id.events) {
+//                navController.navigate(R.id.eventsFragment);
+//            } else if (itemId == R.id.profile) {
+//                navController.navigate(R.id.profileFragment);
+//            } else if (itemId == R.id.notifications) {
+//                navController.navigate(R.id.notificationsFragment);
+//            }
+//            return true;
+//        });
     }
 }

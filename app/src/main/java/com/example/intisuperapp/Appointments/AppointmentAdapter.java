@@ -3,22 +3,39 @@ package com.example.intisuperapp.Appointments;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.intisuperapp.OldNotes.NoteAdapter;
+import com.bumptech.glide.Glide;
 import com.example.intisuperapp.R;
 import com.example.intisuperapp.databinding.AppointmentsItemBinding;
 import com.example.intisuperapp.databinding.FragmentAppointmentsBinding;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.AppointmentHolder> {
-    private NoteAdapter.OnItemClickListener mListener;
+    private OnItemClickListener mListener;
+
+    private OnItemLongClickListener mLongListener;
+    private SimpleDateFormat originalDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+    private SimpleDateFormat targetDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+
+    private SimpleDateFormat targetTimeFormat = new SimpleDateFormat("HH:mma", Locale.getDefault());
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
+    }
+
+    public void setOnItemLongClickListener(OnItemLongClickListener listener) {
+        mLongListener = listener;
+    }
 
     // Save a reference to the List of Appointments
     private List<Appointment> mAppointmentList;
@@ -27,9 +44,13 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         void onItemClick(Appointment appointment);
     }
 
+    public interface OnItemLongClickListener {
+        void onItemLongClick(Appointment appointment);
+    }
+
     @NonNull
     @Override
-    public AppointmentAdapter.AppointmentHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AppointmentHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         AppointmentsItemBinding binding = AppointmentsItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new AppointmentHolder(binding);
     }
@@ -54,7 +75,44 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         holder.binding.appointmentDesc.setText(currentAppointment.getDescription());
         holder.binding.appointmentDate.setText(currentAppointment.getStartDate().toString());
         holder.binding.appointmentStartTimeEndTime.setText(currentAppointment.getStartDate().toString() + " - " + currentAppointment.getEndDate().toString());
-        holder.binding.appointmentImage.setImageResource(R.drawable.ic_launcher_foreground);
+        // Image url of currentAppointment is obtained by selecting image_url from photo_table where photo_id = currentAppointment.getPhotoId()
+        //
+        Glide.with(holder.binding.getRoot()).load(currentAppointment.getImageUrl()).into(holder.binding.appointmentImage);
+        Date tempStartDate = currentAppointment.getStartDate();
+        Date tempEndDate = currentAppointment.getEndDate();
+        Date tempStartTime = currentAppointment.getStartDate();
+        Date tempEndTime = currentAppointment.getEndDate();
+        try {
+            tempStartDate = originalDateFormat.parse(currentAppointment.getStartDate().toString());
+            tempEndDate = originalDateFormat.parse(currentAppointment.getEndDate().toString());
+            tempStartTime = originalDateFormat.parse(currentAppointment.getStartDate().toString());
+            tempEndTime = originalDateFormat.parse(currentAppointment.getEndDate().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (tempStartDate != null && tempEndDate != null && tempStartTime != null && tempEndTime != null) {
+            String formattedStartDate = targetDateFormat.format(tempStartDate);
+            String formattedEndDate = targetDateFormat.format(tempEndDate);
+            String formattedStartTime = targetTimeFormat.format(tempStartTime);
+            String formattedEndTime = targetTimeFormat.format(tempEndTime);
+            holder.binding.appointmentDate.setText(formattedStartDate + " - " + formattedEndDate);
+            holder.binding.appointmentStartTimeEndTime.setText(formattedStartTime + " - " + formattedEndTime);
+        }
+//        holder.binding.appointmentImage.setImageResource(R.drawable.intilogo);
+        holder.binding.appointmentLocation.setText(currentAppointment.getLocation());
+        holder.binding.appointmentNotes.setText(currentAppointment.getNotes());
+
+        holder.binding.appointmentImage.setOnClickListener(view -> {
+            if (mListener != null) {
+                mListener.onItemClick(currentAppointment);
+            }
+        });
+        holder.binding.appointmentImage.setOnLongClickListener(view -> {
+            if (mLongListener != null) {
+                mLongListener.onItemLongClick(currentAppointment);
+            }
+            return true;
+        });
     }
 
     @Override

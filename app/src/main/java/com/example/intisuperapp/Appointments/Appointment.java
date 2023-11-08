@@ -1,7 +1,5 @@
 package com.example.intisuperapp.Appointments;
 
-import androidx.annotation.Nullable;
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
@@ -12,7 +10,9 @@ import com.example.intisuperapp.LoginAndRegistration.User;
 
 import java.util.Date;
 
-@Entity(tableName = "Appointment", foreignKeys = @ForeignKey(entity = User.class, parentColumns = "id", childColumns = "authorId", onDelete = ForeignKey.CASCADE))
+@Entity(tableName = "Appointment", foreignKeys = {
+        @ForeignKey(entity = User.class, parentColumns = "id", childColumns = "authorId", onDelete = ForeignKey.CASCADE)
+})
 @TypeConverters(Converters.class)
 public class Appointment {
 
@@ -24,13 +24,14 @@ public class Appointment {
     }
 
     public Appointment(String title, String description, String location, String notes,
-                       Date startDate, Date endDate, int authorId) {
+                       Date startDate, Date endDate, String imageUrl, int authorId) {
         this.title = title;
         this.description = description;
         this.location = location;
         this.notes = notes;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.imageUrl = imageUrl;
         this.authorId = authorId;
     }
 
@@ -46,13 +47,20 @@ public class Appointment {
 
     private String notes;
 
-    private int authorId;
-
     private Date startDate;
 
     private Date endDate;
 
-    private String imageUri;
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    private String imageUrl;
+    private int authorId;
 
     public String getTitle() {
         return title;
@@ -69,7 +77,6 @@ public class Appointment {
     public void setDescription(String description) {
         this.description = description;
     }
-
 
     public String getLocation() {
         return location;
@@ -102,15 +109,6 @@ public class Appointment {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
-
-    public String getImageUri() {
-        return imageUri;
-    }
-
-    public void setImageUri(String imageUri) {
-        this.imageUri = imageUri;
-    }
-
 
     public int getAuthorId() {
         return authorId;
