@@ -64,6 +64,15 @@
             app:destination="@id/homeFragment"
             app:popUpTo="@id/roleRegistrationFragment"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="fullName"
+            app:argType="string" />
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <argument
+            android:name="password"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"

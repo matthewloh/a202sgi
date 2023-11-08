@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1D8DD8"
-    tools:context=".LostAndFound.LostAndFoundReportLostFragment" >
+    tools:context=".LostAndFound.LostAndFoundReportLostFragment">
 
     <TextView
         android:id="@+id/textView4"
@@ -127,7 +127,6 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="68dp"
                 android:layout_marginTop="40dp"
-                android:entries="@array/itemcategories"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine2" />
         </androidx.constraintlayout.widget.ConstraintLayout>
