@@ -50,7 +50,7 @@
         app:queryHint="Search For Lost Items..."/>
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/itemlostbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -61,7 +61,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/itemfoundbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"

@@ -96,14 +96,14 @@
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
         <action
-            android:id="@+id/action_homeFragment_to_lostAndFoundFragment"
-            app:destination="@id/lostAndFoundFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_appointmentsFragment"
             app:destination="@id/appointmentsFragment" />
         <action
             android:id="@+id/action_homeFragment_to_discussionsFragment"
             app:destination="@id/discussionsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_lostAndFoundFragment"
+            app:destination="@id/lostAndFoundFragment" />
     </fragment>
     <fragment
         android:id="@+id/eventsFragment"
@@ -155,18 +155,6 @@
             app:destination="@id/bookingsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/lostAndFoundFragment"
-        android:name="com.example.intisuperapp.LostAndFound.LostAndFoundFragment"
-        android:label=""
-        tools:layout="@layout/lost_and_found_main_page" >
-        <action
-            android:id="@+id/action_lostAndFoundFragment_to_lostAndFoundReportLostFragment"
-            app:destination="@id/lostAndFoundReportLostFragment" />
-        <action
-            android:id="@+id/action_lostAndFoundFragment_to_lostAndFoundReportFoundFragment"
-            app:destination="@id/lostAndFoundReportFoundFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/appointmentsFragment"
         android:name="com.example.intisuperapp.Appointments.AppointmentsFragment"
         android:label=""
@@ -204,5 +192,17 @@
         android:name="com.example.intisuperapp.Appointments.AddAppointmentFragment"
         android:label=""
         tools:layout="@layout/fragment_add_appointment" >
+    </fragment>
+    <fragment
+        android:id="@+id/lostAndFoundFragment"
+        android:name="com.example.intisuperapp.LostAndFound.LostAndFoundFragment"
+        android:label="fragment_lost_and_found"
+        tools:layout="@layout/fragment_lost_and_found" >
+        <action
+            android:id="@+id/action_lostAndFoundFragment_to_lostAndFoundReportLostFragment"
+            app:destination="@id/lostAndFoundReportLostFragment" />
+        <action
+            android:id="@+id/action_lostAndFoundFragment_to_lostAndFoundReportFoundFragment"
+            app:destination="@id/lostAndFoundReportFoundFragment" />
     </fragment>
 </navigation>
