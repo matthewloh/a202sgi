@@ -85,22 +85,10 @@ public class AddAppointmentFragment extends Fragment {
                 v -> pickImagesFromGallery.launch("image/*")
         );
         binding.appointmentUploadImageButton.setOnClickListener(
-                v -> {
-                    binding.indeterminateBar.setVisibility(View.VISIBLE);
-                    firebaseViewModel.uploadImagesToFirebase(mImageUri, photoViewModel);
-                    firebaseViewModel.getTaskMutableLiveData().observe(getViewLifecycleOwner(), documentReferenceTask -> {
-                        if (documentReferenceTask.isSuccessful()) {
-                            // Get the photo_table id from Android Room
-                            binding.appointmentImageView.setImageResource(R.drawable.baseline_upload_24);
-                            Toast.makeText(requireActivity(), "Image uploaded successfully", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(requireActivity(), "Image upload failed" + documentReferenceTask.getException().toString(), Toast.LENGTH_SHORT).show();
-                        }
-                        binding.indeterminateBar.setVisibility(View.GONE);
-                    });
-                }
+                v -> pickImagesFromGallery.launch("image/*")
         );
         binding.appointmentCreateButton.setOnClickListener(view1 -> {
+            binding.indeterminateBar.setVisibility(View.VISIBLE);
             String title = binding.appointmentTitleText.getText().toString();
             String description = binding.appointmentDescriptionText.getText().toString();
             String location = binding.appointmentLocationText.getText().toString();
@@ -118,9 +106,19 @@ public class AddAppointmentFragment extends Fragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            Appointment appointment = new Appointment(title, description, location, notes, startDate, endDate, userId, photoViewModel.getPhotoId());
-            appointmentViewModel.insert(appointment);
-            NavHostFragment.findNavController(AddAppointmentFragment.this).navigateUp();
+            Appointment appointment = new Appointment(title, description, location, notes, startDate, endDate, "null", userId);
+            firebaseViewModel.uploadImagesToAppointment(mImageUri, appointmentViewModel, appointment);
+            firebaseViewModel.getTaskMutableLiveData().observe(getViewLifecycleOwner(), documentReferenceTask -> {
+                if (documentReferenceTask.isSuccessful()) {
+                    // Get the photo_table id from Android Room
+                    binding.appointmentImageView.setImageResource(R.drawable.baseline_upload_24);
+                    Toast.makeText(requireActivity(), "Image uploaded successfully", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(requireActivity(), "Image upload failed" + documentReferenceTask.getException().toString(), Toast.LENGTH_SHORT).show();
+                }
+                binding.indeterminateBar.setVisibility(View.GONE);
+                NavHostFragment.findNavController(AddAppointmentFragment.this).navigateUp();
+            });
         });
     }
 

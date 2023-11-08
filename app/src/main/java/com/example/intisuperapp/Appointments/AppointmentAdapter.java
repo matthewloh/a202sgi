@@ -3,6 +3,7 @@ package com.example.intisuperapp.Appointments;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,7 +23,7 @@ import java.util.Locale;
 public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.AppointmentHolder> {
     private OnItemClickListener mListener;
 
-
+    private OnItemLongClickListener mLongListener;
     private SimpleDateFormat originalDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
     private SimpleDateFormat targetDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
 
@@ -32,11 +33,19 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         mListener = listener;
     }
 
+    public void setOnItemLongClickListener(OnItemLongClickListener listener) {
+        mLongListener = listener;
+    }
+
     // Save a reference to the List of Appointments
-    private List<AppointmentWithPhoto> mAppointmentList;
+    private List<Appointment> mAppointmentList;
 
     public interface OnItemClickListener {
-        void onItemClick(AppointmentWithPhoto appointment);
+        void onItemClick(Appointment appointment);
+    }
+
+    public interface OnItemLongClickListener {
+        void onItemLongClick(Appointment appointment);
     }
 
     @NonNull
@@ -55,22 +64,20 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         }
     }
 
-    public AppointmentAdapter(List<AppointmentWithPhoto> appointmentList) {
+    public AppointmentAdapter(List<Appointment> appointmentList) {
         mAppointmentList = appointmentList;
     }
 
     @Override
     public void onBindViewHolder(@NonNull AppointmentAdapter.AppointmentHolder holder, int position) {
-        AppointmentWithPhoto currentAppointment = mAppointmentList.get(position);
+        Appointment currentAppointment = mAppointmentList.get(position);
         holder.binding.appointmentTitle.setText(currentAppointment.getTitle());
         holder.binding.appointmentDesc.setText(currentAppointment.getDescription());
         holder.binding.appointmentDate.setText(currentAppointment.getStartDate().toString());
         holder.binding.appointmentStartTimeEndTime.setText(currentAppointment.getStartDate().toString() + " - " + currentAppointment.getEndDate().toString());
         // Image url of currentAppointment is obtained by selecting image_url from photo_table where photo_id = currentAppointment.getPhotoId()
         //
-        Glide.with(holder.binding.getRoot()).load(currentAppointment.getImageUrl())
-                .into(holder.binding.appointmentImage);
-        holder.binding.appointmentImage.setImageResource(R.drawable.ic_launcher_foreground);
+        Glide.with(holder.binding.getRoot()).load(currentAppointment.getImageUrl()).into(holder.binding.appointmentImage);
         Date tempStartDate = currentAppointment.getStartDate();
         Date tempEndDate = currentAppointment.getEndDate();
         Date tempStartTime = currentAppointment.getStartDate();
@@ -91,7 +98,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
             holder.binding.appointmentDate.setText(formattedStartDate + " - " + formattedEndDate);
             holder.binding.appointmentStartTimeEndTime.setText(formattedStartTime + " - " + formattedEndTime);
         }
-        holder.binding.appointmentImage.setImageResource(R.drawable.intilogo);
+//        holder.binding.appointmentImage.setImageResource(R.drawable.intilogo);
         holder.binding.appointmentLocation.setText(currentAppointment.getLocation());
         holder.binding.appointmentNotes.setText(currentAppointment.getNotes());
 
@@ -100,12 +107,12 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
                 mListener.onItemClick(currentAppointment);
             }
         });
-        holder.binding.appointmentImage.setOnLongClickListener(
-                view -> {
-                    Toast.makeText(view.getContext(), "Long Clicked", Toast.LENGTH_SHORT).show();
-                    return true;
-                }
-        );
+        holder.binding.appointmentImage.setOnLongClickListener(view -> {
+            if (mLongListener != null) {
+                mLongListener.onItemLongClick(currentAppointment);
+            }
+            return true;
+        });
     }
 
     @Override

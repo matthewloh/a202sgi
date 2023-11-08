@@ -55,7 +55,4 @@ public class AppointmentViewModel extends AndroidViewModel {
         return mRepository.getAllAppointmentsForUser(authorId);
     }
 
-    public LiveData<List<AppointmentWithPhoto>> getAllAppointmentsWithPhoto(int authorId) {
-        return mRepository.getAllAppointmentsWithPhoto(authorId);
-    }
 }
