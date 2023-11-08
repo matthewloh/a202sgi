@@ -6,6 +6,8 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.intisuperapp.Appointments.Appointment;
+import com.example.intisuperapp.Appointments.AppointmentViewModel;
 import com.example.intisuperapp.Firebase.repo.FirebasePhotoRepository;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
@@ -24,6 +26,9 @@ public class FirebaseViewModel extends ViewModel implements FirebasePhotoReposit
         mFirebasePhotoRepository.uploadImage(uri, photoViewModel);
     }
 
+    public void uploadImagesToAppointment(Uri uri, AppointmentViewModel appointmentViewModel, Appointment appointment) {
+        mFirebasePhotoRepository.uploadImageToAppointments(uri, appointmentViewModel, appointment);
+    }
     public void getImagesFromFirebase(PhotoViewModel photoViewModel) {
         mFirebasePhotoRepository.getImages(photoViewModel);
     }

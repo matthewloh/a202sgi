@@ -25,7 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Note.class, User.class, Appointment.class, Photo.class}, version = 1)
+@Database(entities = {Note.class, User.class, Appointment.class}, version = 1)
 // entities = {Note.class} is an array of entities, to add more entities, just add a comma and the next entity
 public abstract class INTISuperappDatabase extends RoomDatabase {
     // We create a singleton, so that we don't create multiple instances of the database
@@ -43,9 +43,8 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
 
     public abstract AppointmentDao appointmentDao();
 
-    public abstract AppointmentUserJoinDao appointmentUserJoinDao();
+//    public abstract AppointmentUserJoinDao appointmentUserJoinDao();
 
-    public abstract PhotoDao photoDao();
     // Synchronized means that only one thread at a time can access this method
     public static synchronized INTISuperappDatabase getInstance(Context context) {
         if (instance == null) { // Only want to instantiate this database if we dont have an instance

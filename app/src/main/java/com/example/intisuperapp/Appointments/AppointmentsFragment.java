@@ -24,7 +24,7 @@ import java.util.List;
 public class AppointmentsFragment extends Fragment {
     private FragmentAppointmentsBinding binding;
 
-    LiveData<List<AppointmentWithPhoto>> appointments;
+    LiveData<List<Appointment>> appointments;
 
     private AppointmentViewModel appointmentViewModel;
 
@@ -54,7 +54,7 @@ public class AppointmentsFragment extends Fragment {
                     appointmentViewModel = new ViewModelProvider(requireActivity())
 //                            new AppointmentViewModelFactory(requireActivity().getApplication(), userId))
                             .get(AppointmentViewModel.class);
-                    appointments = appointmentViewModel.getAllAppointmentsWithPhoto(userId);
+                    appointments = appointmentViewModel.getAllAppointmentsForUser(userId);
                     appointments.observe(
                             getViewLifecycleOwner(),
                             retrieved -> {
@@ -67,6 +67,12 @@ public class AppointmentsFragment extends Fragment {
 //                                            AppointmentsFragmentDirections.ActionAppointmentsFragmentToEditAppointmentFragment action =
 //                                                    AppointmentsFragmentDirections.actionAppointmentsFragmentToEditAppointmentFragment(appointment.getId(), userId);
 //                                            NavHostFragment.findNavController(AppointmentsFragment.this).navigate(action);
+                                        }
+                                );
+                                adapter.setOnItemLongClickListener(
+                                        appointment -> {
+                                            Toast.makeText(getActivity(), "Appointment Long Clicked", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getActivity(), "Appointment Image Url" + appointment.getImageUrl(), Toast.LENGTH_SHORT).show();
                                         }
                                 );
                                 binding.appointmentsRecyclerView.setAdapter(adapter);

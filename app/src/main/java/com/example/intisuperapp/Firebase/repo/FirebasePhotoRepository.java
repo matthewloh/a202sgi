@@ -5,6 +5,8 @@ import android.net.Uri;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.intisuperapp.Appointments.Appointment;
+import com.example.intisuperapp.Appointments.AppointmentViewModel;
 import com.example.intisuperapp.Firebase.model.Photo;
 import com.example.intisuperapp.Firebase.viewmodel.PhotoViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,14 +41,12 @@ public class FirebasePhotoRepository {
                     photoRef.getDownloadUrl().addOnSuccessListener(uri1 -> {
                         Photo photo = new Photo();
                         photo.setImageUrl(uri1.toString());
-                        mFirebaseFirestore.collection("images")
-                                .add(photo)
-                                .addOnCompleteListener(task1 -> {
-                                    if (task1.isSuccessful()) {
-                                        photoViewModel.insertPhoto(photo);
-                                    }
-                                    onDataUploaded.onDataUpload(task1);
-                                });
+                        mFirebaseFirestore.collection("images").add(photo).addOnCompleteListener(task1 -> {
+                            if (task1.isSuccessful()) {
+                                photoViewModel.insertPhoto(photo);
+                            }
+                            onDataUploaded.onDataUpload(task1);
+                        });
 //                                task1 -> {
 //                                    if (task1.isComplete()) {
 //                                        photoViewModel.insertPhoto(photo);
@@ -56,6 +56,32 @@ public class FirebasePhotoRepository {
                 }
             }
         });
+
+    }
+
+    public void uploadImageToAppointments(Uri uri, AppointmentViewModel appointmentViewModel, Appointment appointment) {
+        StorageReference photoRef = mStorageReference.child(String.valueOf(System.currentTimeMillis()));
+        photoRef.putFile(uri).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                if (task.isComplete()) {
+                    photoRef.getDownloadUrl().addOnSuccessListener(uri1 -> {
+                        appointment.setImageUrl(uri1.toString());
+                        mFirebaseFirestore.collection("images").add(appointment).addOnCompleteListener(task1 -> {
+                            if (task1.isSuccessful()) {
+                                appointmentViewModel.insert(appointment);
+                            }
+                            onDataUploaded.onDataUpload(task1);
+                        });
+//                                task1 -> {
+//                                    if (task1.isComplete()) {
+//                                        photoViewModel.insertPhoto(photo);
+//                                    }
+//                                }
+                    });
+                }
+            }
+        });
+
     }
 
     public void getImages(PhotoViewModel photoViewModel) {

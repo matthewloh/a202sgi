@@ -20,8 +20,8 @@ public class PhotoRoomRepository {
 
     public PhotoRoomRepository(Application application) {
         INTISuperappDatabase db = INTISuperappDatabase.getInstance(application);
-        photoDao = db.photoDao();
-        allPhotos = photoDao.getAllPhotos();
+//        photoDao = db.photoDao();
+//        allPhotos = photoDao.getAllPhotos();
     }
 
     public LiveData<List<Photo>> getAllPhotos() {

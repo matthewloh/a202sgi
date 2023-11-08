@@ -6,14 +6,12 @@ import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 import com.example.intisuperapp.DBUtils.Converters;
-import com.example.intisuperapp.Firebase.model.Photo;
 import com.example.intisuperapp.LoginAndRegistration.User;
 
 import java.util.Date;
 
 @Entity(tableName = "Appointment", foreignKeys = {
-        @ForeignKey(entity = User.class, parentColumns = "id", childColumns = "authorId", onDelete = ForeignKey.CASCADE),
-        @ForeignKey(entity = Photo.class, parentColumns = "id", childColumns = "imageId", onDelete = ForeignKey.CASCADE)
+        @ForeignKey(entity = User.class, parentColumns = "id", childColumns = "authorId", onDelete = ForeignKey.CASCADE)
 })
 @TypeConverters(Converters.class)
 public class Appointment {
@@ -26,15 +24,15 @@ public class Appointment {
     }
 
     public Appointment(String title, String description, String location, String notes,
-                       Date startDate, Date endDate, int authorId, int imageId) {
+                       Date startDate, Date endDate, String imageUrl, int authorId) {
         this.title = title;
         this.description = description;
         this.location = location;
         this.notes = notes;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.imageUrl = imageUrl;
         this.authorId = authorId;
-        this.imageId = imageId;
     }
 
     public void setId(int id) {
@@ -53,17 +51,16 @@ public class Appointment {
 
     private Date endDate;
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    private String imageUrl;
     private int authorId;
-
-    public int getImageId() {
-        return imageId;
-    }
-
-    public void setImageId(int imageId) {
-        this.imageId = imageId;
-    }
-
-    private int imageId;
 
     public String getTitle() {
         return title;
