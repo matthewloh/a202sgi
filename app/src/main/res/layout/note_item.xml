@@ -20,7 +20,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
-            android:id="@+id/text_view_title"
+            android:id="@+id/appointment_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -31,10 +31,10 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
-            android:id="@+id/text_view_description"
+            android:id="@+id/appointment_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/text_view_title"
+            android:layout_below="@+id/appointment_title"
             android:layout_alignParentStart="true"
             android:layout_toStartOf="@+id/text_view_priority"
             android:ellipsize="end"
