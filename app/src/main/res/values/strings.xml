@@ -66,4 +66,11 @@ Et odio pellentesque diam volutpat commodo. Fermentum posuere urna nec tincidunt
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string-array name="itemcategories">
+        <item>Electronics</item>
+        <item>Stationery</item>
+        <item>Accessories</item>
+        <item>Others</item>
+    </string-array>
+
 </resources>
