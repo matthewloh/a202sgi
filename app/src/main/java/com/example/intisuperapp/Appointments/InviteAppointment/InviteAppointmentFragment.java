@@ -1,4 +1,4 @@
-package com.example.intisuperapp.Appointments;
+package com.example.intisuperapp.Appointments.InviteAppointment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,41 +11,39 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.intisuperapp.Appointments.Appointment;
+import com.example.intisuperapp.Appointments.AppointmentAdapter;
+import com.example.intisuperapp.Appointments.AppointmentViewModel;
 import com.example.intisuperapp.LoginAndRegistration.UserSharedViewModel;
-import com.example.intisuperapp.R;
-import com.example.intisuperapp.databinding.FragmentAppointmentsBinding;
+import com.example.intisuperapp.databinding.FragmentInviteAppointmentBinding;
 
 import java.util.List;
 
-public class AppointmentsFragment extends Fragment {
-    private FragmentAppointmentsBinding binding;
+public class InviteAppointmentFragment extends Fragment {
 
-    LiveData<List<Appointment>> appointments;
+    private FragmentInviteAppointmentBinding binding;
 
     private AppointmentViewModel appointmentViewModel;
 
     private UserSharedViewModel userSharedViewModel;
 
     public int userId;
+    private LiveData<List<Appointment>> appointments;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentAppointmentsBinding.inflate(inflater, container, false);
+        binding = FragmentInviteAppointmentBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
-    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Observe the User LiveData to get the user's ID
         appointmentViewModel = new ViewModelProvider(requireActivity()).get(AppointmentViewModel.class);
         userSharedViewModel = new ViewModelProvider(getActivity()).get(UserSharedViewModel.class);
         userSharedViewModel.getUser().observe(getViewLifecycleOwner(), user -> {
-            binding.appointmentsTitle.setText("Appointments for " + user.getFullname());
             userId = user.getId();
             appointments = appointmentViewModel.getAllAppointmentsForUser(userId);
             appointments.observe(getViewLifecycleOwner(), retrieved -> {
@@ -62,20 +60,7 @@ public class AppointmentsFragment extends Fragment {
                     Toast.makeText(getActivity(), "Appointment Long Clicked", Toast.LENGTH_SHORT).show();
                     Toast.makeText(getActivity(), "Appointment Image Url" + appointment.getImageUrl(), Toast.LENGTH_SHORT).show();
                 });
-                binding.appointmentsRecyclerView.setAdapter(adapter);
-                binding.appointmentsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             });
-        });
-        binding.inviteButton.setOnClickListener(
-                v -> {
-                    Toast.makeText(getActivity(), "Invite Button Clicked", Toast.LENGTH_SHORT).show();
-                    // Navigate to the InviteFragment
-                    NavHostFragment.findNavController(AppointmentsFragment.this).navigate(R.id.action_appointmentsFragment_to_inviteAppointment);
-                }
-        );
-        binding.addAppointmentFab.setOnClickListener(v -> {
-            // Navigate to the AddAppointmentFragment
-            NavHostFragment.findNavController(AppointmentsFragment.this).navigate(R.id.action_appointmentsFragment_to_addAppointmentsFragment);
         });
     }
 

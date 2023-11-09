@@ -1,12 +1,12 @@
 package com.example.intisuperapp.Appointments;
 
-import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 
 import com.example.intisuperapp.LoginAndRegistration.User;
 
 
+// TODO: 2023-11-10 ALlow users to create appointments in a join table
 @Entity(tableName = "appointment_user_join",
         primaryKeys = {"userId", "appointmentId"},
         foreignKeys = {
