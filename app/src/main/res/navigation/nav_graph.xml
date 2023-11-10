@@ -46,8 +46,9 @@
             app:destination="@id/homeFragment"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
+            app:launchSingleTop="true"
             app:popUpTo="@id/homeFragment"
-            app:launchSingleTop="true" />
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -111,7 +112,11 @@
             app:destination="@id/lostAndFoundFragment" />
         <action
             android:id="@+id/action_homeFragment_to_appointmentsFragment"
-            app:destination="@id/appointmentsFragment" />
+            app:destination="@id/appointmentsFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
         <action
             android:id="@+id/action_homeFragment_to_discussionsFragment"
             app:destination="@id/discussionsFragment" />
@@ -154,7 +159,7 @@
         android:id="@+id/createBookings"
         android:name="com.example.intisuperapp.Bookings.CreateBookings"
         android:label=""
-        tools:layout="@layout/fragment_create_bookings" >
+        tools:layout="@layout/fragment_create_bookings">
         <action
             android:id="@+id/action_createBookings_to_bookingsFragment"
             app:destination="@id/bookingsFragment"
@@ -168,7 +173,7 @@
         android:id="@+id/lostAndFoundFragment"
         android:name="com.example.intisuperapp.LostAndFound.LostAndFoundFragment"
         android:label=""
-        tools:layout="@layout/lost_and_found_main_page" >
+        tools:layout="@layout/lost_and_found_main_page">
         <action
             android:id="@+id/action_lostAndFoundFragment_to_lostAndFoundReportLostFragment"
             app:destination="@id/lostAndFoundReportLostFragment" />
@@ -184,6 +189,9 @@
         <action
             android:id="@+id/action_appointmentsFragment_to_addAppointmentsFragment"
             app:destination="@id/addAppointmentsFragment" />
+        <action
+            android:id="@+id/action_appointmentsFragment_to_inviteAppointment"
+            app:destination="@id/inviteAppointment" />
     </fragment>
     <fragment
         android:id="@+id/discussionsFragment"
@@ -194,7 +202,7 @@
         android:id="@+id/lostAndFoundReportLostFragment"
         android:name="com.example.intisuperapp.LostAndFound.LostAndFoundReportLostFragment"
         android:label="fragment_lost_and_found_report_lost"
-        tools:layout="@layout/fragment_lost_and_found_report_lost" >
+        tools:layout="@layout/fragment_lost_and_found_report_lost">
         <action
             android:id="@+id/action_lostAndFoundReportLostFragment_to_lostAndFoundFragment"
             app:destination="@id/lostAndFoundFragment" />
@@ -203,7 +211,7 @@
         android:id="@+id/lostAndFoundReportFoundFragment"
         android:name="com.example.intisuperapp.LostAndFound.LostAndFoundReportFoundFragment"
         android:label="fragment_lost_and_found_report_found"
-        tools:layout="@layout/fragment_lost_and_found_report_found" >
+        tools:layout="@layout/fragment_lost_and_found_report_found">
         <action
             android:id="@+id/action_lostAndFoundReportFoundFragment_to_lostAndFoundFragment"
             app:destination="@id/lostAndFoundFragment" />
@@ -242,4 +250,9 @@
             android:name="bookingVenue"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/inviteAppointment"
+        android:name="com.example.intisuperapp.Appointments.InviteAppointment.InviteAppointmentFragment"
+        android:label=""
+        tools:layout="@layout/fragment_invite_appointment" />
 </navigation>

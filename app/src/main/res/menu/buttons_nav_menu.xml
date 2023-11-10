@@ -15,6 +15,9 @@
         android:title="@string/bookings"
         android:icon="@drawable/baseline_schedule_24"/>
     <item
+        android:id="@+id/itemEmpty"
+        android:title=""/>
+    <item
         android:id="@+id/events"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

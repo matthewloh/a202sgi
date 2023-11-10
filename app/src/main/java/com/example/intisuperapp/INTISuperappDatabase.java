@@ -3,7 +3,6 @@ package com.example.intisuperapp;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
@@ -18,9 +17,6 @@ import com.example.intisuperapp.LoginAndRegistration.UserDao;
 import com.example.intisuperapp.OldNotes.Note;
 import com.example.intisuperapp.OldNotes.NoteDao;
 
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -68,8 +64,8 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
             databaseWriteExecutor.execute(() -> {
                 // Populate the database in the background.
                 // If you want to start with more notes, just add them.
-                NoteDao dao = instance.noteDao();
-                dao.deleteAllNotes();
+//                NoteDao dao = instance.noteDao();
+//                dao.deleteAllNotes();
 
 //                Note note = new Note("Title 1", "Description 1", 1);
 //                dao.insert(note);
@@ -78,16 +74,16 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
 //                note = new Note("Title 3", "Description 3", 3);
 //                dao.insert(note);
 
-                UserDao userDao = instance.userDao();
-                userDao.deleteAllUsers();
+//                UserDao userDao = instance.userDao();
+//                userDao.deleteAllUsers();
 
                 User user = new User("John696969 Doe", "j@.com", "12", "student");
                 userDao.insert(user);
                 user = new User("Jane Doe", "g", "12", "student");
                 userDao.insert(user);
 
-                AppointmentDao appointmentDao = instance.appointmentDao();
-                appointmentDao.deleteAllAppointments();
+//                AppointmentDao appointmentDao = instance.appointmentDao();
+//                appointmentDao.deleteAllAppointments();
 //                Date startDate = new Date();
 //                Date endDate = new Date();
 //                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -118,8 +114,8 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
 //                );
 //                appointmentDao.insert(appointment);
 
-                BookingsDao bookingsDao = instance.bookingsDao();
-                bookingsDao.deleteAllBookings();
+//                BookingsDao bookingsDao = instance.bookingsDao();
+//                bookingsDao.deleteAllBookings();
 
 
 
@@ -139,7 +135,7 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
 //                dao.insert(note);
 //                note = new Note("Title 3", "Description 3", 3);
 //                dao.insert(note);
-                UserDao userDao = instance.userDao();
+//                UserDao userDao = instance.userDao();
 //                userDao.deleteAllUsers();
 ////
 //                User user = new User("John Doe", "j@.com", "12", "student");
@@ -184,7 +180,7 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
 //
 //                String currentTime = new SimpleDateFormat("h:mm a", Locale.getDefault()).format(new Date());
 //
-                BookingsDao bookingsDao = instance.bookingsDao();
+//                BookingsDao bookingsDao = instance.bookingsDao();
 ////              bookingsDao.deleteAllBookings();
 //
 //                Date Date1 = new Date();

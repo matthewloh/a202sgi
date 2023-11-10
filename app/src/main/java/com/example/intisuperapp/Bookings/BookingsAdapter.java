@@ -7,26 +7,36 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.intisuperapp.OldNotes.NoteAdapter;
-import com.example.intisuperapp.R;
 import com.example.intisuperapp.databinding.BookingpageItemBinding;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-public class BookingsAdapter extends RecyclerView.Adapter<BookingsAdapter.BookingsViewHolder>{
+public class BookingsAdapter extends RecyclerView.Adapter<BookingsAdapter.BookingsViewHolder> {
 
-    private NoteAdapter.OnItemClickListener mListener;
+    private OnItemClickListener mListener;
+
+    private OnItemLongClickListener mLongListener;
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
+    }
+
+    public void setOnItemLongClickListener(OnItemLongClickListener listener) {
+        mLongListener = listener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Bookings appointment);
+    }
+
+    public interface OnItemLongClickListener {
+        void onItemLongClick(Bookings appointment);
+    }
 
     // Save a reference to the List of Bookings
     private List<Bookings> mBookingsList;
 
-    // Create an interface for the OnItemClickListener
-    private OnItemClickListener mOnItemClickListener;
-
-    public interface OnItemClickListener {
-        void onItemClick(Bookings bookings);
-    }
 
     @NonNull
     @Override
@@ -38,40 +48,43 @@ public class BookingsAdapter extends RecyclerView.Adapter<BookingsAdapter.Bookin
     public static class BookingsViewHolder extends RecyclerView.ViewHolder {
         private final BookingpageItemBinding binding;
 
-        public BookingsViewHolder(BookingpageItemBinding binding){
+        public BookingsViewHolder(BookingpageItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-
-
         }
     }
 
-    public BookingsAdapter(List<Bookings> bookingsList, OnItemClickListener listener) {
+    public BookingsAdapter(List<Bookings> bookingsList) {
         mBookingsList = bookingsList;
-        mOnItemClickListener = listener;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BookingsAdapter.BookingsViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull BookingsViewHolder holder, int position) {
         Bookings currentBookings = mBookingsList.get(position);
-        holder.binding.bookingTitle.setText("Booking "+currentBookings.getId());
-        holder.binding.bookingVenue.setText("Venue: "+currentBookings.getVenue());
+        holder.binding.bookingTitle.setText("Booking " + currentBookings.getId());
+        holder.binding.bookingVenue.setText("Venue: " + currentBookings.getVenue());
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String strDate = formatter.format(currentBookings.getDate());
 
-        holder.binding.bookingDate.setText("Date: "+strDate);
+        holder.binding.bookingDate.setText("Date: " + strDate);
 
         SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm a ");
         String strStartTime = timeFormatter.format(currentBookings.getStartTime());
         String strEndTime = timeFormatter.format(currentBookings.getEndTime());
 
-        holder.binding.bookingTime.setText("Time: "+strStartTime + " - " + strEndTime);
+        holder.binding.bookingTime.setText("Time: " + strStartTime + " - " + strEndTime);
 
         holder.binding.currentBookingRow1.setOnClickListener(v -> {
-            if (mOnItemClickListener != null) {
-                mOnItemClickListener.onItemClick(mBookingsList.get(position));
+            if (mListener != null) {
+                mListener.onItemClick(mBookingsList.get(position));
             }
+        });
+        holder.binding.currentBookingRow1.setOnLongClickListener(v -> {
+            if (mLongListener != null) {
+                mLongListener.onItemLongClick(mBookingsList.get(position));
+            }
+            return true;
         });
     }
 

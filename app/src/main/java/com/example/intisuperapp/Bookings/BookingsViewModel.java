@@ -10,9 +10,9 @@ import java.util.List;
 public class BookingsViewModel extends AndroidViewModel {
     private final BookingsRepository mRepository;
 
-    public BookingsViewModel(Application application, int authorId) {
+    public BookingsViewModel(Application application) {
         super(application);
-        mRepository = new BookingsRepository(application, authorId);
+        mRepository = new BookingsRepository(application);
     }
 
     public void insert(Bookings bookings) {
