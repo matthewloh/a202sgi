@@ -1,5 +1,6 @@
 package com.example.intisuperapp.Appointments;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,20 +60,26 @@ public class AppointmentsFragment extends Fragment {
 //                                            NavHostFragment.findNavController(AppointmentsFragment.this).navigate(action);
                 });
                 adapter.setOnItemLongClickListener(appointment -> {
-                    Toast.makeText(getActivity(), "Appointment Long Clicked", Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getActivity(), "Appointment Image Url" + appointment.getImageUrl(), Toast.LENGTH_SHORT).show();
+                    // Delete appointment with alert dialog
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setMessage("Are you sure you want to delete this appointment?");
+                    builder.setPositiveButton("Yes", (dialog, which) -> {
+                        appointmentViewModel.delete(appointment);
+                        Toast.makeText(getActivity(), "Appointment deleted", Toast.LENGTH_SHORT).show();
+                    });
+                    builder.setNegativeButton("No", (dialog, which) -> {
+                    });
+                    builder.create().show();
                 });
                 binding.appointmentsRecyclerView.setAdapter(adapter);
                 binding.appointmentsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             });
         });
-        binding.inviteButton.setOnClickListener(
-                v -> {
-                    Toast.makeText(getActivity(), "Invite Button Clicked", Toast.LENGTH_SHORT).show();
-                    // Navigate to the InviteFragment
-                    NavHostFragment.findNavController(AppointmentsFragment.this).navigate(R.id.action_appointmentsFragment_to_inviteAppointment);
-                }
-        );
+        binding.inviteButton.setOnClickListener(v -> {
+            Toast.makeText(getActivity(), "Invite Button Clicked", Toast.LENGTH_SHORT).show();
+            // Navigate to the InviteFragment
+            NavHostFragment.findNavController(AppointmentsFragment.this).navigate(R.id.action_appointmentsFragment_to_inviteAppointment);
+        });
         binding.addAppointmentFab.setOnClickListener(v -> {
             // Navigate to the AddAppointmentFragment
             NavHostFragment.findNavController(AppointmentsFragment.this).navigate(R.id.action_appointmentsFragment_to_addAppointmentsFragment);

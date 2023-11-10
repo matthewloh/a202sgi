@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,6 +27,15 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
 
     public void setOnItemLongClickListener(OnItemLongClickListener listener) {
         mLongListener = listener;
+    }
+
+    // DiffUtil
+    public void updateAppointmentList(List<Appointment> newAppointmentList) {
+        AppointmentDiffCallback diffCallback = new AppointmentDiffCallback(mAppointmentList, newAppointmentList);
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
+        mAppointmentList.clear();
+        mAppointmentList.addAll(newAppointmentList);
+        diffResult.dispatchUpdatesTo(this);
     }
 
     private SimpleDateFormat originalDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
@@ -60,6 +70,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
     }
 
     public AppointmentAdapter(List<Appointment> appointmentList) {
+
         mAppointmentList = appointmentList;
     }
 
@@ -143,9 +154,15 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
             Appointment oldAppointment = mOldAppointmentList.get(oldItemPosition);
             Appointment newAppointment = mNewAppointmentList.get(newItemPosition);
-            return oldAppointment.getTitle().equals(newAppointment.getTitle()) && oldAppointment.getDescription().equals(newAppointment.getDescription());
+            return oldAppointment.getTitle().equals(newAppointment.getTitle()) &&
+                    oldAppointment.getDescription().equals(newAppointment.getDescription()) &&
+                    oldAppointment.getStartDate().equals(newAppointment.getStartDate()) &&
+                    oldAppointment.getEndDate().equals(newAppointment.getEndDate()) &&
+                    oldAppointment.getLocation().equals(newAppointment.getLocation()) &&
+                    oldAppointment.getNotes().equals(newAppointment.getNotes());
         }
 
+        @Nullable
         @Override
         public Object getChangePayload(int oldItemPosition, int newItemPosition) {
             // Implement method if you're going to use ItemAnimator

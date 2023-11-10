@@ -51,61 +51,26 @@
             android:layout_height="0dp"
             app:defaultNavHost="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
             app:navGraph="@navigation/nav_graph" />
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:id="@+id/coordinatorLayout"
-            android:layout_width="0dp"
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:clipChildren="false"
-            android:clipToPadding="false"
-            android:fitsSystemWindows="false"
+            android:layout_gravity="bottom"
+            android:background="@android:color/transparent"
+            app:labelVisibilityMode="labeled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nav_host_fragment">
+            app:menu="@menu/buttons_nav_menu" />
 
-            <com.google.android.material.bottomappbar.BottomAppBar
-                android:id="@+id/bottomAppBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                app:backgroundTint="@color/white"
-                app:contentInsetEnd="0dp"
-                app:contentInsetStart="0dp"
-                app:fabAlignmentMode="center"
-                app:fabCradleMargin="10dp"
-                app:fabCradleRoundedCornerRadius="58dp"
-                app:fabCradleVerticalOffset="12dp"
-                app:hideOnScroll="false">
-
-                <com.google.android.material.bottomnavigation.BottomNavigationView
-                    android:id="@+id/bottomNavigationView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:background="@android:color/transparent"
-                    app:labelVisibilityMode="labeled"
-                    app:menu="@menu/buttons_nav_menu" />
-            </com.google.android.material.bottomappbar.BottomAppBar>
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/bottom_fab_home"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:elevation="10dp"
-                android:src="@drawable/baseline_home_24"
-                android:tint="@color/colorPrimaryDark"
-                app:backgroundTint="@color/booking_oval"
-                app:layout_anchor="@id/bottomAppBar"
-                app:maxImageSize="40dp"
-                app:shapeAppearanceOverlay="@style/roundedImageView" />
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView

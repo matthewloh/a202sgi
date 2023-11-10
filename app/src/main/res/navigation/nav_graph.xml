@@ -5,34 +5,9 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/loginFragment">
     <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.example.intisuperapp.OldNotes.MainFragment"
-        android:label="INTI Superapp"
-        tools:layout="@layout/fragment_main">
-        <action
-            android:id="@+id/action_mainFragment_to_addNoteFragment"
-            app:destination="@id/addNoteFragment" />
-        <argument android:name="EXTRA_TITLE" />
-        <argument android:name="EXTRA_DESCRIPTION" />
-        <argument
-            android:name="EXTRA_ID"
-            android:defaultValue="-1"
-            app:argType="integer" />
-        <argument android:name="EXTRA_PRIORITY" />
-    </fragment>
-    <fragment
-        android:id="@+id/addNoteFragment"
-        android:name="com.example.intisuperapp.OldNotes.AddNoteFragment"
-        android:label="INTI Superapp"
-        tools:layout="@layout/fragment_add_note">
-        <action
-            android:id="@+id/action_addNoteFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.intisuperapp.LoginAndRegistration.LoginFragment"
-        android:label="fragment_login"
+        android:label=""
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_registrationFragment"
@@ -213,12 +188,11 @@
             android:id="@+id/action_lostAndFoundReportFoundFragment_to_lostAndFoundFragment"
             app:destination="@id/lostAndFoundFragment" />
     </fragment>
-
     <fragment
         android:id="@+id/addAppointmentsFragment"
         android:name="com.example.intisuperapp.Appointments.AddAppointmentFragment"
         android:label=""
-        tools:layout="@layout/fragment_add_appointment"></fragment>
+        tools:layout="@layout/fragment_add_appointment" />
     <fragment
         android:id="@+id/inviteAppointment"
         android:name="com.example.intisuperapp.Appointments.InviteAppointment.InviteAppointmentFragment"
