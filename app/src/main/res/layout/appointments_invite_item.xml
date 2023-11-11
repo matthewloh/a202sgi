@@ -70,7 +70,7 @@
             app:layout_constraintTop_toBottomOf="@+id/appointment_desc" />
 
         <TextView
-            android:id="@+id/appointment_date"
+            android:id="@+id/appointment_start_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/baseline_calendar_month_24"
@@ -101,29 +101,29 @@
             app:layout_constraintBottom_toTopOf="@+id/appointment_location"
             app:layout_constraintEnd_toStartOf="@id/appointment_image"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appointment_date" />
+            app:layout_constraintTop_toBottomOf="@+id/appointment_start_date" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/appointment_image"
             android:layout_width="180dp"
             android:layout_height="180dp"
+            android:layout_marginBottom="8dp"
             android:padding="12dp"
             android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/appointment_notes"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/horizontal_divider"
-            app:layout_constraintVertical_bias="0.100000024"
             app:shapeAppearanceOverlay="@style/roundedImageView"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/appointment_location"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="12dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:drawableStart="@drawable/ic_location"
             android:drawablePadding="4dp"
             android:ellipsize="end"
@@ -133,7 +133,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/invited_by"
             app:layout_constraintEnd_toStartOf="@id/appointment_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appointment_image" />
@@ -155,7 +155,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/invited_by"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/appointment_location"
             app:layout_constraintTop_toBottomOf="@+id/appointment_image" />
@@ -178,6 +178,25 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appointment_notes" />
+        <!--        InviteStatus-->
+        <TextView
+            android:id="@+id/invite_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:drawableStart="@drawable/ic_clock"
+            android:drawablePadding="4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingVertical="12dp"
+            android:text="You have not responded to this invite"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/invited_by" />
+
         <!-- Accept And Decline Buttons-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/accept_decline_layout"
@@ -188,20 +207,22 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/invited_by">
+            app:layout_constraintTop_toBottomOf="@+id/invite_status">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/accept_button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="32dp"
                 android:background="@drawable/greenaccept"
                 android:drawableStart="@drawable/ic_check"
                 android:drawablePadding="4dp"
+                android:drawableTint="@color/colorPrimaryDark"
                 android:padding="12dp"
                 android:text="Accept"
-                android:textColor="@color/white"
-                android:textStyle="bold"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                android:textColor="@color/colorPrimaryDark"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/decline_button"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -210,16 +231,17 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/decline_button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/reddecline"
                 android:drawableStart="@drawable/ic_close"
                 android:drawablePadding="4dp"
                 android:padding="12dp"
                 android:text="Decline"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
                 android:textColor="@color/white"
-                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"

@@ -62,24 +62,12 @@ public class AddAppointmentFragment extends Fragment {
         firebaseViewModel = new ViewModelProvider(requireActivity()).get(FirebaseViewModel.class);
         userId = userSharedViewModel.getUserValue().getId();
         // Setting Home As Up Indicator in Fragment
-        binding.appointmentStartDateText.setOnClickListener(view1 -> showDatePickerDialog(
-                binding.appointmentStartDateText
-        ));
-        binding.appointmentEndDateText.setOnClickListener(view1 -> showDatePickerDialog(
-                binding.appointmentEndDateText
-        ));
-        binding.appointmentStartTimeText.setOnClickListener(
-                view1 -> showTimePickerDialog(binding.appointmentStartTimeText)
-        );
-        binding.appointmentEndTimeText.setOnClickListener(
-                view1 -> showTimePickerDialog(binding.appointmentEndTimeText)
-        );
-        binding.appointmentImageView.setOnClickListener(
-                v -> pickImagesFromGallery.launch("image/*")
-        );
-        binding.appointmentUploadImageButton.setOnClickListener(
-                v -> pickImagesFromGallery.launch("image/*")
-        );
+        binding.appointmentStartDateText.setOnClickListener(view1 -> showDatePickerDialog(binding.appointmentStartDateText));
+        binding.appointmentEndDateText.setOnClickListener(view1 -> showDatePickerDialog(binding.appointmentEndDateText));
+        binding.appointmentStartTimeText.setOnClickListener(view1 -> showTimePickerDialog(binding.appointmentStartTimeText));
+        binding.appointmentEndTimeText.setOnClickListener(view1 -> showTimePickerDialog(binding.appointmentEndTimeText));
+        binding.appointmentImageView.setOnClickListener(v -> pickImagesFromGallery.launch("image/*"));
+        binding.appointmentUploadImageButton.setOnClickListener(v -> pickImagesFromGallery.launch("image/*"));
         binding.appointmentCreateButton.setOnClickListener(view1 -> {
             binding.indeterminateBar.setVisibility(View.VISIBLE);
             String title = binding.appointmentTitleText.getText().toString();
@@ -99,7 +87,7 @@ public class AddAppointmentFragment extends Fragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            Appointment appointment = new Appointment(title, description, location, notes, startDate, endDate, "null", userId);
+            Appointment appointment = new Appointment(title, description, location, notes, startDate, endDate, "pending", "null", userId);
             firebaseViewModel.uploadImagesToAppointment(mImageUri, appointmentViewModel, appointment);
             firebaseViewModel.getTaskMutableLiveData().observe(getViewLifecycleOwner(), documentReferenceTask -> {
                 if (documentReferenceTask.isSuccessful()) {

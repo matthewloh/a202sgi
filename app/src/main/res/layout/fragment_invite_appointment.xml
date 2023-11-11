@@ -26,7 +26,7 @@
             android:background="@drawable/appointment_chip"
             android:gravity="center"
             android:padding="12dp"
-            android:text="Your Appointments"
+            android:text="Your Appointment Invites"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
             android:textColor="@color/black"
@@ -78,8 +78,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    android:backgroundTint="#a3edef"
                     android:background="@drawable/square_appointment"
+                    android:backgroundTint="#a3edef"
                     android:drawableLeft="@drawable/ic_check"
                     android:drawablePadding="8dp"
                     android:padding="16dp"
@@ -105,7 +105,7 @@
                     android:drawableLeft="@drawable/ic_close"
                     android:drawablePadding="8dp"
                     android:padding="16dp"
-                    android:text="View Pending"
+                    android:text="View Declined"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
                     android:textColor="@color/black"
@@ -131,14 +131,4 @@
         app:layout_constraintVertical_bias="1.0"
         tools:listitem="@layout/appointments_invite_item" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_appointment_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|end|bottom"
-        android:layout_margin="32dp"
-        android:contentDescription="Add Appointment"
-        android:src="@drawable/ic_add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

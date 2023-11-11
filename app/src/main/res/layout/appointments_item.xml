@@ -16,7 +16,7 @@
         android:id="@+id/relativeLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:padding="12dp">
 
 
         <TextView
@@ -70,7 +70,7 @@
             app:layout_constraintTop_toBottomOf="@+id/appointment_desc" />
 
         <TextView
-            android:id="@+id/appointment_date"
+            android:id="@+id/appointment_start_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/baseline_calendar_month_24"
@@ -101,7 +101,7 @@
             app:layout_constraintBottom_toTopOf="@+id/appointment_location"
             app:layout_constraintEnd_toStartOf="@id/appointment_image"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appointment_date" />
+            app:layout_constraintTop_toBottomOf="@+id/appointment_start_date" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/appointment_image"
@@ -118,12 +118,9 @@
 
         <TextView
             android:id="@+id/appointment_location"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginBottom="16dp"
             android:drawableStart="@drawable/ic_location"
             android:drawablePadding="4dp"
             android:ellipsize="end"
@@ -134,18 +131,15 @@
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/appointment_image"
+            app:layout_constraintEnd_toStartOf="@+id/appointment_notes"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appointment_image" />
 
         <TextView
             android:id="@+id/appointment_notes"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginBottom="8dp"
             android:drawableStart="@drawable/ic_notes"
             android:drawablePadding="4dp"
             android:ellipsize="end"
@@ -156,8 +150,28 @@
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/appointment_status"
             app:layout_constraintStart_toEndOf="@id/appointment_location"
+            app:layout_constraintTop_toBottomOf="@+id/appointment_image" />
+
+        <TextView
+            android:id="@+id/appointment_status"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="4dp"
+            android:drawableTint="@color/black"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingVertical="12dp"
+            android:text="Status"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_status"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/appointment_notes"
             app:layout_constraintTop_toBottomOf="@+id/appointment_image" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

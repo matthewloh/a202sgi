@@ -70,7 +70,6 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
     }
 
     public AppointmentAdapter(List<Appointment> appointmentList) {
-
         mAppointmentList = appointmentList;
     }
 
@@ -79,10 +78,10 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         Appointment currentAppointment = mAppointmentList.get(position);
         holder.binding.appointmentTitle.setText(currentAppointment.getTitle());
         holder.binding.appointmentDesc.setText(currentAppointment.getDescription());
-        holder.binding.appointmentDate.setText(currentAppointment.getStartDate().toString());
+        holder.binding.appointmentStartDate.setText(currentAppointment.getStartDate().toString());
         holder.binding.appointmentStartTimeEndTime.setText(currentAppointment.getStartDate().toString() + " - " + currentAppointment.getEndDate().toString());
-        // Image url of currentAppointment is obtained by selecting image_url from photo_table where photo_id = currentAppointment.getPhotoId()
-        //
+
+        // Load the image into the ImageView using Glide
         Glide.with(holder.binding.getRoot()).load(currentAppointment.getImageUrl()).into(holder.binding.appointmentImage);
         Date tempStartDate = currentAppointment.getStartDate();
         Date tempEndDate = currentAppointment.getEndDate();
@@ -101,13 +100,18 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
             String formattedEndDate = targetDateFormat.format(tempEndDate);
             String formattedStartTime = targetTimeFormat.format(tempStartTime);
             String formattedEndTime = targetTimeFormat.format(tempEndTime);
-            holder.binding.appointmentDate.setText(formattedStartDate + " - " + formattedEndDate);
+            holder.binding.appointmentStartDate.setText(formattedStartDate + " - " + formattedEndDate);
             holder.binding.appointmentStartTimeEndTime.setText(formattedStartTime + " - " + formattedEndTime);
         }
 //        holder.binding.appointmentImage.setImageResource(R.drawable.intilogo);
         holder.binding.appointmentLocation.setText(currentAppointment.getLocation());
         holder.binding.appointmentNotes.setText(currentAppointment.getNotes());
-
+        holder.binding.appointmentStatus.setText(currentAppointment.getApptStatus());
+        holder.binding.appointmentCardView.setOnClickListener(view -> {
+            if (mListener != null) {
+                mListener.onItemClick(currentAppointment);
+            }
+        });
         holder.binding.appointmentImage.setOnClickListener(view -> {
             if (mListener != null) {
                 mListener.onItemClick(currentAppointment);

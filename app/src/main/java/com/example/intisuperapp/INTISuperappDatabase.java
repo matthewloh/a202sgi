@@ -10,6 +10,8 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.intisuperapp.Appointments.Appointment;
 import com.example.intisuperapp.Appointments.AppointmentDao;
+import com.example.intisuperapp.Appointments.InviteAppointment.AppointmentInvitation;
+import com.example.intisuperapp.Appointments.InviteAppointment.AppointmentInvitationDao;
 import com.example.intisuperapp.Bookings.Bookings;
 import com.example.intisuperapp.Bookings.BookingsDao;
 import com.example.intisuperapp.LoginAndRegistration.User;
@@ -18,7 +20,7 @@ import com.example.intisuperapp.LoginAndRegistration.UserDao;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class, Appointment.class, Bookings.class}, version = 4)
+@Database(entities = {User.class, Appointment.class, AppointmentInvitation.class, Bookings.class}, version = 1)
 public abstract class INTISuperappDatabase extends RoomDatabase {
     // We create a singleton, so that we don't create multiple instances of the database
     private static INTISuperappDatabase instance;
@@ -32,6 +34,8 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
     public abstract UserDao userDao();
 
     public abstract AppointmentDao appointmentDao();
+
+    public abstract AppointmentInvitationDao appointmentInvitationDao();
 
     public abstract BookingsDao bookingsDao();
 

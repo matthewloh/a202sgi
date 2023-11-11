@@ -164,6 +164,9 @@
         <action
             android:id="@+id/action_appointmentsFragment_to_inviteAppointment"
             app:destination="@id/inviteAppointment" />
+        <action
+            android:id="@+id/action_appointmentsFragment_to_viewAppointmentFragment"
+            app:destination="@id/viewAppointmentFragment" />
     </fragment>
     <fragment
         android:id="@+id/discussionsFragment"
@@ -198,4 +201,12 @@
         android:name="com.example.intisuperapp.Appointments.InviteAppointment.InviteAppointmentFragment"
         android:label=""
         tools:layout="@layout/fragment_invite_appointment" />
+    <fragment
+        android:id="@+id/viewAppointmentFragment"
+        android:name="com.example.intisuperapp.Appointments.ViewAppointment.ViewAppointmentFragment"
+        android:label=""
+        tools:layout="@layout/fragment_view_appointment" >
+        <argument android:name="appointmentId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

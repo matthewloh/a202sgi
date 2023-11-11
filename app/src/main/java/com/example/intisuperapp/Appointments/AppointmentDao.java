@@ -1,15 +1,11 @@
 package com.example.intisuperapp.Appointments;
 
 import androidx.lifecycle.LiveData;
-import androidx.room.ColumnInfo;
 import androidx.room.Dao;
 import androidx.room.Delete;
-import androidx.room.Embedded;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
-
-import com.example.intisuperapp.LoginAndRegistration.User;
 
 import java.util.List;
 
@@ -35,6 +31,9 @@ public interface AppointmentDao {
     @Query("SELECT * FROM Appointment WHERE authorId = :authorId ORDER by id DESC")
     LiveData<List<Appointment>> getAllAppointmentsForUser(int authorId);
 
+
+    @Query("UPDATE Appointment SET apptStatus = :status WHERE id = :appointmentId")
+    void updateAppointmentStatus(int appointmentId, String status);
     // Retrieve appointment details by id
     @Query("SELECT * FROM Appointment WHERE id = :id")
     LiveData<Appointment> getAppointmentById(int id);
