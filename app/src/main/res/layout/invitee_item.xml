@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/app_invitee_item_card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="8dp"
+    android:padding="4dp"
+    app:cardBackgroundColor="#ffffef"
+    app:cardCornerRadius="12dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/invitee_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Invitee Name"
+            android:textAlignment="viewStart"
+            android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/horizontal_divider"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintEnd_toStartOf="@id/update_invitee"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/invitee_name" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/invitee_status_updated_at"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Invitee Status Updated At"
+            android:textAlignment="viewStart"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/update_invitee"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/horizontal_divider" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/update_invitee"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:background="@drawable/greenaccept"
+            android:drawableStart="@drawable/ic_edit"
+            android:text="Error"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/horizontal_divider"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

@@ -2,7 +2,6 @@ package com.example.intisuperapp.Appointments;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,18 +16,14 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.intisuperapp.Firebase.viewmodel.FirebaseViewModel;
 import com.example.intisuperapp.Firebase.viewmodel.PhotoViewModel;
 import com.example.intisuperapp.LoginAndRegistration.UserSharedViewModel;
-import com.example.intisuperapp.MainActivity;
 import com.example.intisuperapp.R;
 import com.example.intisuperapp.databinding.FragmentAddAppointmentBinding;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -66,27 +61,13 @@ public class AddAppointmentFragment extends Fragment {
         photoViewModel = new ViewModelProvider(requireActivity()).get(PhotoViewModel.class);
         firebaseViewModel = new ViewModelProvider(requireActivity()).get(FirebaseViewModel.class);
         userId = userSharedViewModel.getUserValue().getId();
-        ((MainActivity) requireActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
         // Setting Home As Up Indicator in Fragment
-        ((MainActivity) requireActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
-        binding.appointmentStartDateText.setOnClickListener(view1 -> showDatePickerDialog(
-                binding.appointmentStartDateText
-        ));
-        binding.appointmentEndDateText.setOnClickListener(view1 -> showDatePickerDialog(
-                binding.appointmentEndDateText
-        ));
-        binding.appointmentStartTimeText.setOnClickListener(
-                view1 -> showTimePickerDialog(binding.appointmentStartTimeText)
-        );
-        binding.appointmentEndTimeText.setOnClickListener(
-                view1 -> showTimePickerDialog(binding.appointmentEndTimeText)
-        );
-        binding.appointmentImageView.setOnClickListener(
-                v -> pickImagesFromGallery.launch("image/*")
-        );
-        binding.appointmentUploadImageButton.setOnClickListener(
-                v -> pickImagesFromGallery.launch("image/*")
-        );
+        binding.appointmentStartDateText.setOnClickListener(view1 -> showDatePickerDialog(binding.appointmentStartDateText));
+        binding.appointmentEndDateText.setOnClickListener(view1 -> showDatePickerDialog(binding.appointmentEndDateText));
+        binding.appointmentStartTimeText.setOnClickListener(view1 -> showTimePickerDialog(binding.appointmentStartTimeText));
+        binding.appointmentEndTimeText.setOnClickListener(view1 -> showTimePickerDialog(binding.appointmentEndTimeText));
+        binding.appointmentImageView.setOnClickListener(v -> pickImagesFromGallery.launch("image/*"));
+        binding.appointmentUploadImageButton.setOnClickListener(v -> pickImagesFromGallery.launch("image/*"));
         binding.appointmentCreateButton.setOnClickListener(view1 -> {
             binding.indeterminateBar.setVisibility(View.VISIBLE);
             String title = binding.appointmentTitleText.getText().toString();
@@ -106,7 +87,7 @@ public class AddAppointmentFragment extends Fragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            Appointment appointment = new Appointment(title, description, location, notes, startDate, endDate, "null", userId);
+            Appointment appointment = new Appointment(title, description, location, notes, startDate, endDate, "pending", "null", userId);
             firebaseViewModel.uploadImagesToAppointment(mImageUri, appointmentViewModel, appointment);
             firebaseViewModel.getTaskMutableLiveData().observe(getViewLifecycleOwner(), documentReferenceTask -> {
                 if (documentReferenceTask.isSuccessful()) {

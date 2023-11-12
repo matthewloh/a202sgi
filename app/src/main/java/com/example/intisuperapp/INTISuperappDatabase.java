@@ -10,17 +10,17 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.intisuperapp.Appointments.Appointment;
 import com.example.intisuperapp.Appointments.AppointmentDao;
+import com.example.intisuperapp.Appointments.InviteAppointment.AppointmentInvitation;
+import com.example.intisuperapp.Appointments.InviteAppointment.AppointmentInvitationDao;
 import com.example.intisuperapp.Bookings.Bookings;
 import com.example.intisuperapp.Bookings.BookingsDao;
 import com.example.intisuperapp.LoginAndRegistration.User;
 import com.example.intisuperapp.LoginAndRegistration.UserDao;
-import com.example.intisuperapp.OldNotes.Note;
-import com.example.intisuperapp.OldNotes.NoteDao;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Note.class, User.class, Appointment.class, Bookings.class}, version = 6)
+@Database(entities = {User.class, Appointment.class, AppointmentInvitation.class, Bookings.class}, version = 1)
 // entities = {Note.class} is an array of entities, to add more entities, just add a comma and the next entity
 public abstract class INTISuperappDatabase extends RoomDatabase {
     // We create a singleton, so that we don't create multiple instances of the database
@@ -32,11 +32,11 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
     public static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    public abstract NoteDao noteDao(); // Returns a NoteDao object, room takes care of the implementation
-
     public abstract UserDao userDao();
 
     public abstract AppointmentDao appointmentDao();
+
+    public abstract AppointmentInvitationDao appointmentInvitationDao();
 
     public abstract BookingsDao bookingsDao();
 
@@ -136,8 +136,8 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
 //                note = new Note("Title 3", "Description 3", 3);
 //                dao.insert(note);
 //                UserDao userDao = instance.userDao();
-////                userDao.deleteAllUsers();
-//////
+//                userDao.deleteAllUsers();
+////
 //                User user = new User("John Doe", "j@.com", "12", "student");
 //                userDao.insert(user);
 //                user = new User("Jane Doe", "g", "12", "student");
