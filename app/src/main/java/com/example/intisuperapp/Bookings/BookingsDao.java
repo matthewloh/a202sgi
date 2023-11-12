@@ -56,6 +56,8 @@ public interface BookingsDao {
     @Query("SELECT * FROM Bookings WHERE authorId = :id ORDER BY venue ASC")
     LiveData<List<Bookings>> getBookingsByVenueAsc(int id);
 
+    @Query("UPDATE Bookings SET venue = :venue, date = :date, startTime = :startTime, endTime = :endTime, contact = :contact, authorId = :userId WHERE id = :id")
+    void updateBookingsById(String venue, String date, String startTime, String endTime, String contact, int userId, int id);
 }
 
 

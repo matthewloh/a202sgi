@@ -21,8 +21,8 @@ public class Bookings {
         return id;
     }
 
-    public Bookings(String venue, Date date, Date startTime,
-                    Date endTime, String contact, int authorId){
+    public Bookings(String venue, String date, String startTime,
+                    String endTime, String contact, int authorId){
         this.venue = venue;
         this.date = date;
         this.startTime = startTime;
@@ -36,9 +36,9 @@ public class Bookings {
     }
 
     private String venue;
-    private Date date;
-    private Date startTime;
-    private Date endTime;
+    private String date;
+    private String startTime;
+    private String endTime;
     private String contact;
     private int authorId;
 
@@ -50,27 +50,27 @@ public class Bookings {
         this.venue = venue;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public Date getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 

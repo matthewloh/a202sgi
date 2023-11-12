@@ -249,6 +249,9 @@
         <argument
             android:name="bookingVenue"
             app:argType="string" />
+        <argument
+            android:name="userId"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/inviteAppointment"

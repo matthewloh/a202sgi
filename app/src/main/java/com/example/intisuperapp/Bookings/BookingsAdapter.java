@@ -63,17 +63,8 @@ public class BookingsAdapter extends RecyclerView.Adapter<BookingsAdapter.Bookin
         Bookings currentBookings = mBookingsList.get(position);
         holder.binding.bookingTitle.setText("Booking " + currentBookings.getId());
         holder.binding.bookingVenue.setText("Venue: " + currentBookings.getVenue());
-
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        String strDate = formatter.format(currentBookings.getDate());
-
-        holder.binding.bookingDate.setText("Date: " + strDate);
-
-        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm a ");
-        String strStartTime = timeFormatter.format(currentBookings.getStartTime());
-        String strEndTime = timeFormatter.format(currentBookings.getEndTime());
-
-        holder.binding.bookingTime.setText("Time: " + strStartTime + " - " + strEndTime);
+        holder.binding.bookingDate.setText("Date: " + currentBookings.getDate());
+        holder.binding.bookingTime.setText("Time: " + currentBookings.getStartTime() + " - " + currentBookings.getEndTime());
 
         holder.binding.currentBookingRow1.setOnClickListener(v -> {
             if (mListener != null) {

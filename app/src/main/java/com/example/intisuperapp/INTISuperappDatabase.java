@@ -20,7 +20,7 @@ import com.example.intisuperapp.OldNotes.NoteDao;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Note.class, User.class, Appointment.class, Bookings.class}, version = 3)
+@Database(entities = {Note.class, User.class, Appointment.class, Bookings.class}, version = 6)
 // entities = {Note.class} is an array of entities, to add more entities, just add a comma and the next entity
 public abstract class INTISuperappDatabase extends RoomDatabase {
     // We create a singleton, so that we don't create multiple instances of the database
@@ -77,10 +77,10 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
 //                UserDao userDao = instance.userDao();
 //                userDao.deleteAllUsers();
 
-                User user = new User("John696969 Doe", "j@.com", "12", "student");
-                userDao.insert(user);
-                user = new User("Jane Doe", "g", "12", "student");
-                userDao.insert(user);
+//                User user = new User("John696969 Doe", "j@.com", "12", "student");
+//                userDao.insert(user);
+//                user = new User("Jane Doe", "g", "12", "student");
+//                userDao.insert(user);
 
 //                AppointmentDao appointmentDao = instance.appointmentDao();
 //                appointmentDao.deleteAllAppointments();
@@ -136,8 +136,8 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
 //                note = new Note("Title 3", "Description 3", 3);
 //                dao.insert(note);
 //                UserDao userDao = instance.userDao();
-//                userDao.deleteAllUsers();
-////
+////                userDao.deleteAllUsers();
+//////
 //                User user = new User("John Doe", "j@.com", "12", "student");
 //                userDao.insert(user);
 //                user = new User("Jane Doe", "g", "12", "student");

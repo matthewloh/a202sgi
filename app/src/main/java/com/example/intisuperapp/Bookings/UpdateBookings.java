@@ -13,27 +13,26 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.intisuperapp.LoginAndRegistration.UserSharedViewModel;
+import com.example.intisuperapp.LoginAndRegistration.User;
+import com.example.intisuperapp.LoginAndRegistration.UserViewModel;
 import com.example.intisuperapp.MainActivity;
 import com.example.intisuperapp.R;
-import com.example.intisuperapp.databinding.FragmentCreateBookingsBinding;
+import com.example.intisuperapp.databinding.FragmentUpdateBookingsBinding;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
 
-public class CreateBookings extends Fragment {
+public class UpdateBookings extends Fragment {
 
-    private FragmentCreateBookingsBinding binding;
-    private UserSharedViewModel userSharedViewModel;
-
-    private BookingsViewModel bookingsViewModel;
     EditText chooseStartTime, chooseEndTime, chooseDate, contactInput;
     TimePickerDialog timePickerDialog;
     DatePickerDialog datePickerDialog;
@@ -43,47 +42,64 @@ public class CreateBookings extends Fragment {
     int year, month, day;
     String amPm;
     Spinner chooseVenueSpinner;
-    Button addBookingButton;
-
-    private int userId;
+    Button saveBookingButton;
+    private FragmentUpdateBookingsBinding binding;
+    private UserViewModel userViewModel;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        binding = FragmentCreateBookingsBinding.inflate(inflater, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+
+        binding = FragmentUpdateBookingsBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        bookingsViewModel = new ViewModelProvider(getActivity()).get(BookingsViewModel.class);
-        userSharedViewModel = new ViewModelProvider(getActivity()).get(UserSharedViewModel.class);
-        userSharedViewModel.getUser().observe(getViewLifecycleOwner(), user -> {
-            if (user != null) {
-                userId = user.getId();
-            }
-        });
 
         ActionBar actionBar = ((MainActivity) getActivity()).getSupportActionBar();
 
         actionBar.setTitle("");
+
+        UpdateBookingsArgs args = UpdateBookingsArgs.fromBundle(getArguments());
+        int bookingId = args.getBookingId();
+        int userId = args.getUserId();
+        String bookingDate = args.getBookingDate();
+        String bookingStartTime = args.getBookingStartTime();
+        String bookingEndTime = args.getBookingEndTime();
+        String bookingContact = args.getBookingContact();
+        String bookingVenue = args.getBookingVenue();
+
+        chooseVenueSpinner = view.findViewById(R.id.booking_venue_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                        requireContext(),
+                        R.array.venue_array,
+                        android.R.layout.simple_spinner_item
+                );
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                chooseVenueSpinner.setAdapter(adapter);
+
+        BookingsViewModel bookingsViewModel = new ViewModelProvider(getActivity()).get(BookingsViewModel.class);
+        bookingsViewModel.getBookingsById(bookingId).observe(getViewLifecycleOwner(), bookings -> {
+                // Set the EditTexts to the values of the selected Bookings object
+                binding.bookingDate.setText(bookingDate);
+                binding.bookingStartTime.setText(bookingStartTime);
+                binding.bookingEndTime.setText(bookingEndTime);
+                binding.bookingContact.setText(bookingContact);
+//
+                binding.bookingVenueSpinner.setSelection(((ArrayAdapter) binding.bookingVenueSpinner.getAdapter()).getPosition(bookingVenue));
+
+        });
+
+        chooseDate = binding.bookingDate;
         chooseStartTime = binding.bookingStartTime;
         chooseEndTime = binding.bookingEndTime;
-        addBookingButton = binding.addBookingBtn;
-        chooseDate = binding.bookingDate;
         contactInput = binding.bookingContact;
-
-
-        chooseVenueSpinner = binding.bookingVenueSpinner;
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(requireContext(), R.array.venue_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        chooseVenueSpinner.setAdapter(adapter);
+        saveBookingButton = binding.saveBookingBtn;
 
         chooseDate.setOnClickListener(v -> {
             showDatePicker();
         });
-
 
         chooseStartTime.setOnClickListener(v -> {
             showTimePicker(chooseStartTime);
@@ -93,29 +109,29 @@ public class CreateBookings extends Fragment {
             showTimePicker(chooseEndTime);
         });
 
-        contactInput.setOnClickListener(v -> {
-            if (chooseDate.getText().toString().isEmpty() || chooseStartTime.getText().toString().isEmpty() || chooseEndTime.getText().toString().isEmpty() || contactInput.getText().toString().isEmpty()) {
-                Toast.makeText(requireContext(), "Please fill in all the fields", Toast.LENGTH_SHORT).show();
+        saveBookingButton.setOnClickListener(v -> {
+
+            if (chooseDate.getText().toString().isEmpty() ||chooseStartTime.getText().toString().isEmpty() || chooseEndTime.getText().toString().isEmpty() || contactInput.getText().toString().isEmpty()) {
+                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
             } else {
-                // add to database
-                String venue = chooseVenueSpinner.getSelectedItem().toString();
-                String date = chooseDate.getText().toString();
-                String strStartTime = chooseStartTime.getText().toString();
-                String strEndTime = chooseEndTime.getText().toString();
-                String contact = contactInput.getText().toString();
+
+            String contact = contactInput.getText().toString();
+            String venue = chooseVenueSpinner.getSelectedItem().toString();
+            String strDate = chooseDate.getText().toString();
+            String strStartTime = chooseStartTime.getText().toString();
+            String strEndTime = chooseEndTime.getText().toString();
 
 
 
-                Bookings bookings = new Bookings(venue, date, strStartTime, strEndTime, contact, userId);
-                bookingsViewModel.insert(bookings);
 
-                Toast.makeText(requireContext(), "Booking Added", Toast.LENGTH_SHORT).show();
-
-                NavHostFragment.findNavController(CreateBookings.this).navigate(R.id.action_createBookings_to_bookingsFragment);
+            bookingsViewModel.updateBookingsById(venue, strDate, strStartTime, strEndTime, contact, userId, bookingId);
+            Toast.makeText(requireContext(), "Booking updated", Toast.LENGTH_SHORT).show();
+            NavHostFragment.findNavController(UpdateBookings.this)
+                    .navigate(R.id.action_updateBookings_to_bookingsFragment);
             }
-
         });
-    }
+        }
+
 
     private void showDatePicker() {
         final Calendar currentDate = Calendar.getInstance();
@@ -164,3 +180,4 @@ public class CreateBookings extends Fragment {
         timePickerDialog.show();
     }
 }
+

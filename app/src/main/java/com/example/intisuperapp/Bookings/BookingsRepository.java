@@ -65,4 +65,7 @@ public class BookingsRepository {
         return mBookingsDao.getBookingsByVenueAsc(authorId);
     }
 
+    public void updateBookingsById(String venue, String date, String startTime, String endTime, String contact, int userId, int id) {
+        INTISuperappDatabase.databaseWriteExecutor.execute(() -> mBookingsDao.updateBookingsById(venue, date, startTime, endTime, contact, userId, id));
+    }
 }
