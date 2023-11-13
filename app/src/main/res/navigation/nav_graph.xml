@@ -172,20 +172,12 @@
         android:id="@+id/lostAndFoundReportLostFragment"
         android:name="com.example.intisuperapp.LostAndFound.LostAndFoundReportLostFragment"
         android:label="fragment_lost_and_found_report_lost"
-        tools:layout="@layout/fragment_lost_and_found_report_lost" >
-        <action
-            android:id="@+id/action_lostAndFoundReportLostFragment_to_lostAndFoundFragment"
-            app:destination="@id/lostAndFoundFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_lost_and_found_report_lost" />
     <fragment
         android:id="@+id/lostAndFoundReportFoundFragment"
         android:name="com.example.intisuperapp.LostAndFound.LostAndFoundReportFoundFragment"
         android:label="fragment_lost_and_found_report_found"
-        tools:layout="@layout/fragment_lost_and_found_report_found" >
-        <action
-            android:id="@+id/action_lostAndFoundReportFoundFragment_to_lostAndFoundFragment"
-            app:destination="@id/lostAndFoundFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_lost_and_found_report_found" />
 
     <fragment
         android:id="@+id/addAppointmentsFragment"
