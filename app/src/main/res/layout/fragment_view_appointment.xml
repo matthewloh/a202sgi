@@ -26,7 +26,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#e3e6eb"
+    android:background="@color/light_grey"
     tools:context=".Appointments.AppointmentsFragment">
 
     <androidx.cardview.widget.CardView
@@ -74,7 +74,7 @@
                         android:background="@android:color/transparent"
                         android:padding="8dp">
 
-                        <TextView
+                        <EditText
                             android:id="@+id/appointment_title"
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
@@ -267,19 +267,34 @@
 
                         <!--                        Buttons to Complete, Cancel or Delete Appointment Pending Completed Cancelled -->
                         <com.google.android.material.button.MaterialButton
-                            android:id="@+id/complete_appointment_button"
+                            android:id="@+id/reset_appointment_status_button"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="12dp"
                             android:layout_marginTop="8dp"
                             android:backgroundTint="#a3edef"
+                            android:text="Reset"
+                            android:textColor="@android:color/white"
+                            app:backgroundTint="@color/grey"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/appointment_status" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/complete_appointment_button"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="#a3edef"
                             android:drawableEnd="@drawable/ic_check"
-                            android:text="Complete"
+                            android:maxLines="1"
+
+                            android:text="Comp"
                             android:textColor="@android:color/white"
                             app:backgroundTint="@color/grey"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/cancel_appointment_button"
-                            app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/appointment_status" />
 
@@ -296,9 +311,18 @@
                             app:backgroundTint="@color/grey"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="1.0"
                             app:layout_constraintStart_toEndOf="@+id/complete_appointment_button"
                             app:layout_constraintTop_toBottomOf="@+id/appointment_status" />
+
+                        <View
+                            android:id="@+id/horizontal_divider4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="3dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@color/colorPrimaryDark"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/appointment_location" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/appointment_status"
@@ -311,7 +335,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/appointment_notes"
+                            app:layout_constraintTop_toBottomOf="@+id/horizontal_divider4"
                             app:layout_constraintVertical_bias="0.0"
                             app:layout_constraintVertical_chainStyle="packed"
                             app:layout_constraintVertical_weight="1"
@@ -358,19 +382,19 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/add_invitee_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:backgroundTint="@color/colorPrimaryDark"
-                        android:drawableEnd="@drawable/ic_add"
-                        android:text="Add Invitee"
-                        android:textColor="@android:color/white"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="1.0"
-                        app:layout_constraintStart_toEndOf="@+id/invitee_title"
-                        app:layout_constraintTop_toTopOf="parent" />
+<!--                    <com.google.android.material.button.MaterialButton-->
+<!--                        android:id="@+id/add_invitee_button"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginEnd="8dp"-->
+<!--                        android:backgroundTint="@color/colorPrimaryDark"-->
+<!--                        android:drawableEnd="@drawable/ic_add"-->
+<!--                        android:text="Add Invitee"-->
+<!--                        android:textColor="@android:color/white"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintHorizontal_bias="1.0"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/invitee_title"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
 
                     <View
                         android:id="@+id/horizontal_divider3"
@@ -381,7 +405,7 @@
                         android:background="@color/colorPrimaryDark"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/add_invitee_button" />
+                        app:layout_constraintTop_toBottomOf="@+id/invitee_title" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/invitee_recycler_view"
