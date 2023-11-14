@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -23,8 +24,11 @@ import com.example.intisuperapp.MainActivity;
 import com.example.intisuperapp.R;
 import com.example.intisuperapp.databinding.FragmentCreateBookingsBinding;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 
@@ -80,40 +84,50 @@ public class CreateBookings extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         chooseVenueSpinner.setAdapter(adapter);
 
-        chooseDate.setOnClickListener(v -> {
-            showDatePicker();
-        });
+        chooseDate.setOnClickListener(v -> showDatePicker());
 
+        chooseStartTime.setOnClickListener(v -> showTimePicker(chooseStartTime));
 
-        chooseStartTime.setOnClickListener(v -> {
-            showTimePicker(chooseStartTime);
-        });
+        chooseEndTime.setOnClickListener(v -> showTimePicker(chooseEndTime));
 
-        chooseEndTime.setOnClickListener(v -> {
-            showTimePicker(chooseEndTime);
-        });
-
-        contactInput.setOnClickListener(v -> {
+        addBookingButton.setOnClickListener(v -> {
             if (chooseDate.getText().toString().isEmpty() || chooseStartTime.getText().toString().isEmpty() || chooseEndTime.getText().toString().isEmpty() || contactInput.getText().toString().isEmpty()) {
                 Toast.makeText(requireContext(), "Please fill in all the fields", Toast.LENGTH_SHORT).show();
+            } else if (chooseStartTime.getText().toString().compareTo(chooseEndTime.getText().toString()) >= 0) {
+                Toast.makeText(requireContext(), "Please choose a valid time", Toast.LENGTH_SHORT).show();
+            } else if (chooseVenueSpinner.getSelectedItem().toString().equals("Please select")) {
+                Toast.makeText(requireContext(), "Please select a venue", Toast.LENGTH_SHORT).show();
+            } else if (contactInput.getText().toString().length() <= 8 || contactInput.getText().toString().length() >= 12) {
+                Toast.makeText(requireContext(), "Please enter a valid contact number", Toast.LENGTH_SHORT).show();
             } else {
-                // add to database
-                String venue = chooseVenueSpinner.getSelectedItem().toString();
-                String date = chooseDate.getText().toString();
-                String strStartTime = chooseStartTime.getText().toString();
-                String strEndTime = chooseEndTime.getText().toString();
-                String contact = contactInput.getText().toString();
+                bookingsViewModel.getBookingsByDateVenue(
+                                chooseVenueSpinner.getSelectedItem().toString(),
+                                chooseDate.getText().toString())
+                        .observe(getViewLifecycleOwner(), overlappedBookingsDateVenue -> {
+                            if (overlappedBookingsDateVenue != null) {
+                                if (isVenueDateTimeRangeOverlapping(overlappedBookingsDateVenue, chooseVenueSpinner.getSelectedItem().toString(), chooseDate.getText().toString(), chooseStartTime.getText().toString(), chooseEndTime.getText().toString())) {
+                                    Toast.makeText(requireContext(), "Booking already exists", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    // add to database
+                                    String venue = chooseVenueSpinner.getSelectedItem().toString();
+                                    String date = chooseDate.getText().toString();
+                                    String strStartTime = chooseStartTime.getText().toString();
+                                    String strEndTime = chooseEndTime.getText().toString();
+                                    String contact = contactInput.getText().toString();
+
+                                    Bookings bookings = new Bookings(venue, date, strStartTime, strEndTime, contact, userId);
+                                    bookingsViewModel.insert(bookings);
+
+                                    Toast.makeText(requireContext(), "Booking Added", Toast.LENGTH_SHORT).show();
+
+                                    NavHostFragment.findNavController(CreateBookings.this)
+                                            .navigate(R.id.action_createBookings_to_bookingsFragment);
+                                }
 
 
-
-                Bookings bookings = new Bookings(venue, date, strStartTime, strEndTime, contact, userId);
-                bookingsViewModel.insert(bookings);
-
-                Toast.makeText(requireContext(), "Booking Added", Toast.LENGTH_SHORT).show();
-
-                NavHostFragment.findNavController(CreateBookings.this).navigate(R.id.action_createBookings_to_bookingsFragment);
+                            }
+                        });
             }
-
         });
     }
 
@@ -163,4 +177,39 @@ public class CreateBookings extends Fragment {
 
         timePickerDialog.show();
     }
+
+    private boolean isDateVenueOverlapping(List<Bookings> bookings, String selectedVenue, String selectedDate) {
+        for (Bookings booking : bookings) {
+            if (booking.getVenue().equals(selectedVenue) && booking.getDate().equals(selectedDate)) {
+                return true; // Overlapping date and venue found
+            }
+        }
+        return false; // No overlapping date and venue
+    }
+
+
+    private boolean isVenueDateTimeRangeOverlapping(List<Bookings> bookings, String selectedVenue, String selectedDate, String startTime, String endTime) {
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a", Locale.US);
+
+        try {
+            Date userStartTime = sdf.parse(startTime);
+            Date userEndTime = sdf.parse(endTime);
+
+            for (Bookings booking : bookings) {
+                if (booking.getVenue().equals(selectedVenue) && booking.getDate().equals(selectedDate)) {
+                    Date bookingStartTime = sdf.parse(booking.getStartTime());
+                    Date bookingEndTime = sdf.parse(booking.getEndTime());
+
+                    if (userStartTime.before(bookingEndTime) && userEndTime.after(bookingStartTime)) {
+                        return true; // Overlapping date, venue, and time range found
+                    }
+                }
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return false; // No overlapping date, venue, and time range
+    }
+
 }

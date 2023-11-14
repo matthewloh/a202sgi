@@ -7,7 +7,6 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import java.util.Date;
 import java.util.List;
 
 @Dao
@@ -58,6 +57,14 @@ public interface BookingsDao {
 
     @Query("UPDATE Bookings SET venue = :venue, date = :date, startTime = :startTime, endTime = :endTime, contact = :contact, authorId = :userId WHERE id = :id")
     void updateBookingsById(String venue, String date, String startTime, String endTime, String contact, int userId, int id);
+
+
+
+    @Query("SELECT * FROM Bookings WHERE venue = :venue AND date = :date AND startTime = :startTime AND endTime = :endTime")
+    LiveData<List<Bookings>> getBookingsByDateTimeVenue(String venue, String date, String startTime, String endTime);
+
+    @Query("SELECT * FROM Bookings WHERE venue = :venue AND date = :date")
+    LiveData<List<Bookings>> getBookingsByDateVenue(String venue, String date);
 }
 
 

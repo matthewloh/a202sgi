@@ -71,6 +71,9 @@ Et odio pellentesque diam volutpat commodo. Fermentum posuere urna nec tincidunt
     <string name="filter"><u>Filter</u></string>
     <string name="update_booking">Update a Booking</string>
     <string name="save_booking_btn">Save</string>
+    <string name="show_venue"><u>Show Venues</u></string>
+    <string name="venues">Venues</string>
+    <string name="image_of_venue">Image of Venue</string>
 
     <string-array name="itemcategories">
         <item>Electronics</item>
