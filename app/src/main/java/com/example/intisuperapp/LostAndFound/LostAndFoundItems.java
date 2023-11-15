@@ -1,56 +1,56 @@
 package com.example.intisuperapp.LostAndFound;
 
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-import androidx.room.TypeConverters;
+import com.google.firebase.firestore.Blob;
 
-import com.example.intisuperapp.DBUtils.Converters;
 
-@Entity(tableName = "LostItems")
-@TypeConverters(Converters.class)
 public class LostAndFoundItems {
 
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    private String itemName;
+    private String contactInfo;
+    private String lastLocation;
+    private String itemDescription;
+    private String itemImageURL;
+    private Blob itemImage;
+    private String itemStatus;
 
-    public int getId() {return id;}
 
-    public LostAndFoundItems(String itemname, String methodofcontact, String lastlocation, String description)
-    {
-        this.itemname = itemname;
-        this.methodofcontact = methodofcontact;
-        this.lastlocation = lastlocation;
-        this.description = description;
+    public LostAndFoundItems(String itemName, String contactInfo, String lastLocation, String itemDescription, String itemImageURL, Blob itemImage, String itemStatus) {
+        this.itemName = itemName;
+        this.contactInfo = contactInfo;
+        this.lastLocation = lastLocation;
+        this.itemDescription = itemDescription;
+        this.itemImageURL = itemImageURL;
+        this.itemImage = itemImage;
+        this.itemStatus = itemStatus;
     }
 
-    public void setId(int id) {this.id = id;}
-    private String itemname;
 
-    private String methodofcontact;
+    public String getItemName() {return itemName;}
 
-    private String lastlocation;
+    public String getContactInfo() {return contactInfo;}
 
-    private String description;
+    public String getLastLocation() {return lastLocation;}
 
-    private String category;
+    public String getItemDescription() {
+        return itemDescription;
+    }
 
-    public String getItemname() {return itemname;}
 
-    public void setItemname(String itemname) {this.itemname = itemname;}
+    public String getItemImageURL() {return itemImageURL;}
 
-    public String getMethodofcontact() {return methodofcontact;}
+    public Blob getItemImage() {
+        return itemImage;
+    }
 
-    public void setMethodofcontact(String methodofcontact) {this.methodofcontact = methodofcontact;}
+    public String getItemStatus() {
+        return itemStatus;
+    }
 
-    public String getLastlocation() {return lastlocation;}
+    public void setLost() {
+        this.itemStatus = "Lost";
+    }
 
-    public void setLastlocation(String lastlocation) {this.lastlocation = lastlocation;}
-
-    public String getDescription() {return description;}
-
-    public void setDescription(String description) {this.description = description;}
-
-    public String getCategory() {return category;}
-
-    public void setCategory(String category) {this.category = category;}
+    public void setFound() {
+        this.itemStatus = "Found";
+    }
 }

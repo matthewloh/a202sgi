@@ -29,6 +29,8 @@ public class FirebaseViewModel extends ViewModel implements FirebasePhotoReposit
     public void uploadImagesToAppointment(Uri uri, AppointmentViewModel appointmentViewModel, Appointment appointment) {
         mFirebasePhotoRepository.uploadImageToAppointments(uri, appointmentViewModel, appointment);
     }
+
+
     public void getImagesFromFirebase(PhotoViewModel photoViewModel) {
         mFirebasePhotoRepository.getImages(photoViewModel);
     }

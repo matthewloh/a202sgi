@@ -48,7 +48,7 @@
             android:background="#D9D9D9">
 
             <EditText
-                android:id="@+id/editTextText5"
+                android:id="@+id/editTextItemName2"
                 android:layout_width="300dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="24dp"
@@ -63,7 +63,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/editTextTextMultiLine"
+                android:id="@+id/editTextContactInfo2"
                 android:layout_width="300dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="24dp"
@@ -76,10 +76,10 @@
                 android:padding="10dp"
                 android:textColorHint="#000000"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextText5" />
+                app:layout_constraintTop_toBottomOf="@+id/editTextItemName2" />
 
             <EditText
-                android:id="@+id/editTextText6"
+                android:id="@+id/editTextLastLocation2"
                 android:layout_width="300dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="24dp"
@@ -91,10 +91,10 @@
                 android:padding="10dp"
                 android:textColorHint="#000000"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
+                app:layout_constraintTop_toBottomOf="@+id/editTextContactInfo2" />
 
             <EditText
-                android:id="@+id/editTextTextMultiLine2"
+                android:id="@+id/editTextItemDesc2"
                 android:layout_width="300dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="24dp"
@@ -107,10 +107,10 @@
                 android:padding="10dp"
                 android:textColorHint="#000000"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextText6" />
+                app:layout_constraintTop_toBottomOf="@+id/editTextLastLocation2" />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/uploadimg2btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="64dp"
@@ -119,7 +119,7 @@
                 android:text="Upload Image of Item"
                 app:icon="@drawable/upload"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine2" />
+                app:layout_constraintTop_toBottomOf="@+id/editTextItemDesc2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
