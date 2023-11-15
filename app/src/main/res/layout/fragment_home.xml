@@ -7,8 +7,9 @@
     tools:context=".HomePage.HomeFragment">
     <!-- fragment_home.xml -->
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/homeTitleLayout"
         android:layout_width="0dp"
-        android:layout_height="260dp"
+        android:layout_height="254dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,6 +64,16 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/homeContentLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/light_grey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/homeTitleLayout"></androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

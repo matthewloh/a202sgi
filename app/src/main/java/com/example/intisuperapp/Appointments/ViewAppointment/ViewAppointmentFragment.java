@@ -32,6 +32,7 @@ public class ViewAppointmentFragment extends Fragment {
     private SimpleDateFormat originalDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
     private SimpleDateFormat targetDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
 
+    private InviteUsersAdapter adapter;
     private SimpleDateFormat targetTimeFormat = new SimpleDateFormat("HH:mma", Locale.getDefault());
 
     @Override
@@ -51,8 +52,6 @@ public class ViewAppointmentFragment extends Fragment {
         userSharedViewModel.getUser().observe(getViewLifecycleOwner(), user -> {
             appointmentViewModel.getAppointmentById(appointmentId).observe(getViewLifecycleOwner(), appointment -> {
                 if (appointment != null) {
-                    //Start Time
-                    // End Time
                     binding.appointmentTitle.setText(appointment.getTitle());
                     binding.appointmentDesc.setText(appointment.getDescription());
                     Date tempStartDate = appointment.getStartDate();
@@ -80,6 +79,19 @@ public class ViewAppointmentFragment extends Fragment {
                     binding.appointmentLocation.setText(appointment.getLocation());
                     binding.appointmentNotes.setText(appointment.getNotes());
                     binding.appointmentStatus.setText("Status: " + appointment.getApptStatus());
+                    if (appointment.getApptStatus().equals("pending")) {
+                        binding.completeAppointmentButton.setVisibility(View.VISIBLE);
+                        binding.cancelAppointmentButton.setVisibility(View.VISIBLE);
+                        binding.resetAppointmentStatusButton.setVisibility(View.GONE);
+                    } else if (appointment.getApptStatus().equals("completed")) {
+                        binding.completeAppointmentButton.setVisibility(View.GONE);
+                        binding.cancelAppointmentButton.setVisibility(View.GONE);
+                        binding.resetAppointmentStatusButton.setVisibility(View.VISIBLE);
+                    } else if (appointment.getApptStatus().equals("cancelled")) {
+                        binding.completeAppointmentButton.setVisibility(View.GONE);
+                        binding.cancelAppointmentButton.setVisibility(View.GONE);
+                        binding.resetAppointmentStatusButton.setVisibility(View.VISIBLE);
+                    }
                     binding.completeAppointmentButton.setOnClickListener(v -> {
                         appointment.setApptStatus("completed");
                         appointmentViewModel.update(appointment);
@@ -90,28 +102,30 @@ public class ViewAppointmentFragment extends Fragment {
                         appointmentViewModel.update(appointment);
                         Toast.makeText(requireContext(), "Appointment Cancelled", Toast.LENGTH_SHORT).show();
                     });
-                    appointmentViewModel.getAllLecturers().observe(getViewLifecycleOwner(), lecturer -> {
-                                if (lecturer != null) {
-                                    InviteUsersAdapter adapter = new InviteUsersAdapter(lecturer, appointmentInvitationViewModel, appointment, user);
-                                    binding.inviteeRecyclerView.setAdapter(adapter);
-//                                    adapter.setOnItemClickListener(user1 -> {
-//                                        Date updateAt = new Date();
-//                                        String updateAtString = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(updateAt);
-//                                        Date updateAtDate = new Date();
-//                                        try {
-//                                            updateAtDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(updateAtString);
-//                                        } catch (Exception e) {
-//                                            e.printStackTrace();
-//                                        }
-//                                        appointmentInvitationViewModel.insert(new AppointmentInvitation(appointment, user, "pending", updateAtDate, user1.getId()));
-//                                        Toast.makeText(requireContext(), "Invitation Sent", Toast.LENGTH_SHORT).show();
-//                                    });
-                                    binding.inviteeRecyclerView.setVisibility(View.VISIBLE);
-                                    binding.inviteeRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-                                }
+                    binding.resetAppointmentStatusButton.setOnClickListener(v -> {
+                        appointment.setApptStatus("pending");
+                        appointmentViewModel.update(appointment);
+                        Toast.makeText(requireContext(), "Appointment Status Reset", Toast.LENGTH_SHORT).show();
+                    });
+                    if (user.getRole().equals("student")) {
+                        appointmentViewModel.getAllLecturers().observe(getViewLifecycleOwner(), lecturer -> {
+                            if (lecturer != null) {
+                                adapter = new InviteUsersAdapter(lecturer, appointmentInvitationViewModel, appointment, user);
+                                binding.inviteeRecyclerView.setAdapter(adapter);
+                                binding.inviteeRecyclerView.setVisibility(View.VISIBLE);
+                                binding.inviteeRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
                             }
-
-                    );
+                        });
+                    } else if (user.getRole().equals("lecturer")) {
+                        appointmentViewModel.getAllStudents().observe(getViewLifecycleOwner(), student -> {
+                            if (student != null) {
+                                adapter = new InviteUsersAdapter(student, appointmentInvitationViewModel, appointment, user);
+                                binding.inviteeRecyclerView.setAdapter(adapter);
+                                binding.inviteeRecyclerView.setVisibility(View.VISIBLE);
+                                binding.inviteeRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+                            }
+                        });
+                    }
                 } else {
                     Toast.makeText(requireContext(), "Appointment not found", Toast.LENGTH_SHORT).show();
                 }
