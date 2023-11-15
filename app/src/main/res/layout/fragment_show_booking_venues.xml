@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/booking_bg"
-    tools:context=".Bookings.BookingsVenues">
+    tools:context=".Venues.ShowVenuesFragment">
 
     <TextView
         android:id="@+id/venuesTitle"
@@ -37,5 +37,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="10dp"
         tools:listitem="@layout/venues_list_item"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addVenueButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|end|bottom"
+        android:layout_margin="32dp"
+        android:src="@drawable/ic_add"
+        android:backgroundTint="#62AFA7"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -142,6 +142,9 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_createBookings_to_bookingsVenues"
+            app:destination="@id/bookingsVenues" />
     </fragment>
 
     <fragment
@@ -242,5 +245,23 @@
         tools:layout="@layout/fragment_view_appointment" >
         <argument android:name="appointmentId"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookingsVenues"
+        android:name="com.example.intisuperapp.Venues.ShowVenuesFragment"
+        android:label="fragment_show_booking_venues"
+        tools:layout="@layout/fragment_show_booking_venues" >
+        <action
+            android:id="@+id/action_bookingsVenues_to_addVenuesFragment"
+            app:destination="@id/addVenuesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addVenuesFragment"
+        android:name="com.example.intisuperapp.Venues.AddVenuesFragment"
+        android:label="fragment_add_booking_venues"
+        tools:layout="@layout/fragment_add_booking_venues" >
+        <action
+            android:id="@+id/action_addVenuesFragment_to_bookingsVenues"
+            app:destination="@id/bookingsVenues" />
     </fragment>
 </navigation>

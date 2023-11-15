@@ -129,6 +129,11 @@ public class CreateBookings extends Fragment {
                         });
             }
         });
+
+        binding.showVenueText.setOnClickListener(v -> {
+            NavHostFragment.findNavController(CreateBookings.this)
+                    .navigate(R.id.action_createBookings_to_bookingsVenues);
+        });
     }
 
     private void showDatePicker() {

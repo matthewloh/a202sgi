@@ -9,6 +9,8 @@ import com.example.intisuperapp.Appointments.Appointment;
 import com.example.intisuperapp.Appointments.AppointmentViewModel;
 import com.example.intisuperapp.Firebase.model.Photo;
 import com.example.intisuperapp.Firebase.viewmodel.PhotoViewModel;
+import com.example.intisuperapp.Venues.Venues;
+import com.example.intisuperapp.Venues.VenuesViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentChange;
@@ -84,6 +86,22 @@ public class FirebasePhotoRepository {
 
     }
 
+    public void uploadImageToVenues(Uri uri, VenuesViewModel venuesViewModel, Venues venues) {
+        StorageReference photoRef = mStorageReference.child(String.valueOf(System.currentTimeMillis()));
+        photoRef.putFile(uri).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                if (task.isComplete()) {
+                    photoRef.getDownloadUrl().addOnSuccessListener(uri1 -> {
+                        venues.setVenueImageURL(uri1.toString());
+                        mFirebaseFirestore.collection("venues").add(venues).addOnCompleteListener(task1 -> {
+                            if (task1.isSuccessful()) {
+                                venuesViewModel.insert(venues);
+                            }
+                            onDataUploaded.onDataUpload(task1);
+                        });
+                    });
+                }}});}
+
     public void getImages(PhotoViewModel photoViewModel) {
         mFirebaseFirestore.collection("images").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -97,6 +115,8 @@ public class FirebasePhotoRepository {
             }
         });
     }
+
+
 
     public interface OnDataUploaded {
         void onDataUpload(Task<DocumentReference> task);

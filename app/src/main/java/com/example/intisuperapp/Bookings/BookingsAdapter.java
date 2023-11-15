@@ -27,11 +27,11 @@ public class BookingsAdapter extends RecyclerView.Adapter<BookingsAdapter.Bookin
     }
 
     public interface OnItemClickListener {
-        void onItemClick(Bookings appointment);
+        void onItemClick(Bookings bookings);
     }
 
     public interface OnItemLongClickListener {
-        void onItemLongClick(Bookings appointment);
+        void onItemLongClick(Bookings bookings);
     }
 
     // Save a reference to the List of Bookings
