@@ -16,6 +16,9 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModel;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.Blob;
@@ -123,7 +126,7 @@ public class LostAndFoundReportFoundFragment extends Fragment {
 
 
     private void handleData(String itemName, String contactInfo, String lastKnownLocation, String itemDescription, String itemimageUrl) {
-        LostAndFoundItems lostAndFoundItem = new LostAndFoundItems(itemName, contactInfo, lastKnownLocation, itemDescription, itemimageUrl, null, "Found");
+        LostAndFoundItems lostAndFoundItem = new LostAndFoundItems(itemName, contactInfo, lastKnownLocation, itemDescription, itemimageUrl, "Found");
 
 
         // Add the LostAndFoundItems to Firestore

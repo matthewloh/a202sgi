@@ -2,6 +2,9 @@ package com.example.intisuperapp.LostAndFound;
 
 import android.os.Bundle;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import java.io.ByteArrayOutputStream;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -15,6 +18,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModel;
 import androidx.fragment.app.Fragment;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -123,7 +129,10 @@ public class LostAndFoundReportLostFragment extends Fragment {
 
 
     private void handleData(String itemName, String contactInfo, String lastKnownLocation, String itemDescription, String itemimageUrl) {
-        LostAndFoundItems lostAndFoundItem = new LostAndFoundItems(itemName, contactInfo, lastKnownLocation, itemDescription, itemimageUrl, null, "Lost");
+        //Convert Image URL to Blob
+        Blob itemImageBlob = convertImageUrlToBlob(itemimageUrl);
+
+        LostAndFoundItems lostAndFoundItem = new LostAndFoundItems(itemName, contactInfo, lastKnownLocation, itemDescription, itemimageUrl, "Lost");
 
 
     // Add the LostAndFoundItems to Firestore
@@ -141,6 +150,29 @@ public class LostAndFoundReportLostFragment extends Fragment {
                     Toast.makeText(getContext(), "Failed to add item. Please try again.", Toast.LENGTH_SHORT).show();
                 });
     }
+
+    private Blob convertImageUrlToBlob(String imageUrl) {
+        try {
+            // Download the image using Glide
+            Bitmap bitmap = Glide.with(requireContext())
+                    .asBitmap()
+                    .load(imageUrl)
+                    .submit()
+                    .get();
+
+            // Convert Bitmap to byte array
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] data = baos.toByteArray();
+
+            // Create a Blob from the byte array
+            return Blob.fromBytes(data);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null; // Handle errors appropriately
+        }
+    }
+
 
 }
 
