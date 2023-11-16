@@ -31,7 +31,7 @@ public class LostAndFoundAdapter extends RecyclerView.Adapter<LAFViewHolder>{
 
     @NonNull
     @Override
-    public LAFViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public LAFViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int position) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lafitems, parent, false);
         return new LAFViewHolder(view);
     }

@@ -1,10 +1,12 @@
 package com.example.intisuperapp.LostAndFound;
 
-import com.google.firebase.firestore.Blob;
+import com.google.firebase.firestore.DocumentId;
 
 
 public class LostAndFoundItems {
 
+    @DocumentId
+    private String documentId;
     private String itemName;
     private String contactInfo;
     private String lastLocation;

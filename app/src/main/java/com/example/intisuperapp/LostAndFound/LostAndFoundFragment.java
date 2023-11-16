@@ -18,11 +18,11 @@ import android.widget.Toast;
 
 import com.example.intisuperapp.R;
 import com.example.intisuperapp.databinding.FragmentLostAndFoundBinding;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.ListenerRegistration;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -31,8 +31,8 @@ public class LostAndFoundFragment extends Fragment {
     private FragmentLostAndFoundBinding binding;
     private RecyclerView recyclerView;
     List<LostAndFoundItems> lostAndFoundItemsList;
-    DatabaseReference databaseReference;
-    ValueEventListener eventListener;
+    CollectionReference lostAndFoundCollection;
+    ListenerRegistration eventListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,26 +49,24 @@ public class LostAndFoundFragment extends Fragment {
         LostAndFoundAdapter adapter = new LostAndFoundAdapter(requireContext(), lostAndFoundItemsList);
         recyclerView.setAdapter(adapter);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("LostAndFoundItems");
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        lostAndFoundCollection = db.collection("lostAndFoundItems");
 
-        eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+        eventListener = lostAndFoundCollection.addSnapshotListener((value, error) -> {
+            if (error != null) {
+                Log.e("Firestore", "Error in snapshot listener", error);
+                Toast.makeText(requireContext(), "Error fetching data. Please try again.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (value != null) {
                 lostAndFoundItemsList.clear();
-                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
-                    LostAndFoundItems lostAndFoundItems = itemSnapshot.getValue(LostAndFoundItems.class);
+                for (QueryDocumentSnapshot doc : value) {
+                    LostAndFoundItems lostAndFoundItems = doc.toObject(LostAndFoundItems.class);
                     lostAndFoundItemsList.add(lostAndFoundItems);
                 }
                 adapter.notifyDataSetChanged();
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Error handling
-                Log.e("LostAndFoundFragment", "Error fetching data: " + error.getMessage());
-                Toast.makeText(requireContext(), "Error fetching data. Please try again.", Toast.LENGTH_SHORT).show();
-            }
-
         });
 
 
@@ -90,6 +88,9 @@ public class LostAndFoundFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        if (eventListener != null) {
+            eventListener.remove();
+        }
         binding = null;
     }
 }
