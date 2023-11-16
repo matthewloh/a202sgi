@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.intisuperapp.R;
 import com.example.intisuperapp.databinding.VenuesListItemBinding;
 
 import java.util.List;
@@ -16,8 +17,14 @@ import java.util.List;
 public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.VenuesHolder> {
     private OnItemClickListener mListener;
 
+    private OnLongItemClickListener mLongListener;
+
     public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
+    }
+
+    public void setOnLongItemClickListener(OnLongItemClickListener listener) {
+        mLongListener = listener;
     }
 
     private List<Venues> mVenuesList;
@@ -31,6 +38,10 @@ public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.VenuesHold
     }
     public interface OnItemClickListener {
         void onItemClick(Venues venues);
+    }
+
+    public interface OnLongItemClickListener {
+        void onLongItemClick(Venues venues);
     }
 
     @NonNull
@@ -54,12 +65,16 @@ public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.VenuesHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull VenuesHolder holder, int position) {
+    public void onBindViewHolder(@NonNull VenuesAdapter.VenuesHolder holder, int position) {
         Venues currentVenues = mVenuesList.get(position);
         holder.binding.title.setText(currentVenues.getVenueName());
 
         //load image
-        Glide.with(holder.binding.getRoot()).load(currentVenues.getVenueImageURL()).into(holder.binding.venueImage);
+        Glide.with(holder.binding.getRoot())
+                .load(currentVenues.getVenueImageURL())
+//                .error(R.drawable.no_image)
+                .into(holder.binding.venueImage);
+
 
         holder.binding.venueImage.setOnClickListener(v -> {
             if (mListener != null) {

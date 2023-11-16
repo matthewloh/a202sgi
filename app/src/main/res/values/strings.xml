@@ -66,6 +66,7 @@
     <string name="upload_image">Upload Venue Image</string>
     <string name="upload_image_btn">Upload Venue Image</string>
     <string name="venue_image_preview">Venue Image Preview</string>
+    <string name="view_venue_image_in_full_screen">View venue image in full screen</string>
 
     <string-array name="itemcategories">
         <item>Electronics</item>

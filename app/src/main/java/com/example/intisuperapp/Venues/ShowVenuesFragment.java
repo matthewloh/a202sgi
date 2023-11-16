@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
@@ -53,8 +54,24 @@ public class ShowVenuesFragment extends Fragment {
         venues.observe(getViewLifecycleOwner(), data -> {
             VenuesAdapter adapter = new VenuesAdapter(data);
             adapter.setOnItemClickListener(venue ->{
-                Toast.makeText(getContext(), "Venue: " + venue.getVenueName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),  venue.getVenueName(), Toast.LENGTH_SHORT).show();
+                ShowVenuesFragmentDirections.ActionBookingsVenuesToViewVenueFragment action = ShowVenuesFragmentDirections.actionBookingsVenuesToViewVenueFragment(venue.getVenueId());
+                NavHostFragment.findNavController(ShowVenuesFragment.this).navigate(action);
             });
+
+            adapter.setOnLongItemClickListener(venue ->{
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Delete Venue");
+                builder.setMessage("Are you sure you want to delete " +  venue.getVenueName()+ " ?");
+                builder.setPositiveButton("Yes", (dialog, which) -> {
+                    venuesViewModel.deleteVenuesById(venue.getVenueId());
+                    Toast.makeText(getContext(), "Venue deleted", Toast.LENGTH_SHORT).show();
+                });
+                builder.setNegativeButton("No", (dialog, which) -> {
+                });
+            });
+
+
 
 
         binding.venuesRecyclerView.setAdapter(adapter);

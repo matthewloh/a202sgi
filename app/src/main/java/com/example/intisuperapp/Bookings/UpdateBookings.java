@@ -58,7 +58,6 @@ public class UpdateBookings extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         ActionBar actionBar = ((MainActivity) getActivity()).getSupportActionBar();
-
         actionBar.setTitle("");
 
         UpdateBookingsArgs args = UpdateBookingsArgs.fromBundle(getArguments());
