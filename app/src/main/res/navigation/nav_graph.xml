@@ -171,12 +171,10 @@
     <fragment
         android:id="@+id/lostAndFoundReportLostFragment"
         android:name="com.example.intisuperapp.LostAndFound.LostAndFoundReportLostFragment"
-        android:label="fragment_lost_and_found_report_lost"
         tools:layout="@layout/fragment_lost_and_found_report_lost" />
     <fragment
         android:id="@+id/lostAndFoundReportFoundFragment"
         android:name="com.example.intisuperapp.LostAndFound.LostAndFoundReportFoundFragment"
-        android:label="fragment_lost_and_found_report_found"
         tools:layout="@layout/fragment_lost_and_found_report_found" />
 
     <fragment
@@ -188,8 +186,7 @@
     <fragment
         android:id="@+id/lostAndFoundFragment"
         android:name="com.example.intisuperapp.LostAndFound.LostAndFoundFragment"
-        android:label="fragment_lost_and_found"
-        tools:layout="@layout/fragment_lost_and_found" >
+        tools:layout="@layout/fragment_lost_and_found">
         <action
             android:id="@+id/action_lostAndFoundFragment_to_lostAndFoundReportLostFragment"
             app:destination="@id/lostAndFoundReportLostFragment" />
@@ -203,6 +200,5 @@
     <fragment
         android:id="@+id/itemDetailFragment"
         android:name="com.example.intisuperapp.LostAndFound.ItemDetailFragment"
-        android:label="fragment_item_detail"
         tools:layout="@layout/fragment_item_detail" />
 </navigation>

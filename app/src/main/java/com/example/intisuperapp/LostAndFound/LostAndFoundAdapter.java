@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.navigation.Navigation;
 import androidx.navigation.NavController;
 import java.util.List;
+import java.util.ArrayList;
 import com.example.intisuperapp.R;
 import com.bumptech.glide.Glide;
 
@@ -23,10 +24,12 @@ public class LostAndFoundAdapter extends RecyclerView.Adapter<LAFViewHolder>{
 
     private Context context;
     private List<LostAndFoundItems> lostAndFoundItemsList;
+    private List<LostAndFoundItems> originalList;
 
     public LostAndFoundAdapter(Context context, List<LostAndFoundItems> lostAndFoundItemsList) {
         this.context = context;
         this.lostAndFoundItemsList = lostAndFoundItemsList;
+        this.originalList = new ArrayList<>(lostAndFoundItemsList);
     }
 
     @NonNull
@@ -74,6 +77,19 @@ public class LostAndFoundAdapter extends RecyclerView.Adapter<LAFViewHolder>{
     public int getItemCount() {
         return lostAndFoundItemsList.size();
     }
+
+    public void filterList(List<LostAndFoundItems> filteredList) {
+        lostAndFoundItemsList.clear();
+        lostAndFoundItemsList.addAll(filteredList);
+        notifyDataSetChanged(); // Notify the adapter that the data set has changed
+    }
+
+    public void resetList() {
+        lostAndFoundItemsList.clear();
+        lostAndFoundItemsList.addAll(originalList);
+        notifyDataSetChanged(); // Notify the adapter that the data set has changed
+    }
+
 }
 
 class LAFViewHolder extends RecyclerView.ViewHolder {

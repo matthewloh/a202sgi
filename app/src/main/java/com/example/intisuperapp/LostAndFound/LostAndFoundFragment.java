@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.util.Log;
 import android.widget.Toast;
+import android.widget.SearchView;
 
 
 import com.example.intisuperapp.R;
@@ -21,7 +22,6 @@ import com.example.intisuperapp.databinding.FragmentLostAndFoundBinding;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.ListenerRegistration;
 import java.util.List;
 import java.util.ArrayList;
@@ -29,25 +29,30 @@ import java.util.ArrayList;
 public class LostAndFoundFragment extends Fragment {
 
     private FragmentLostAndFoundBinding binding;
-    private RecyclerView recyclerView;
-    List<LostAndFoundItems> lostAndFoundItemsList;
-    CollectionReference lostAndFoundCollection;
-    ListenerRegistration eventListener;
+    private RecyclerView itemlist;
+    private List<LostAndFoundItems> lostAndFoundItemsList;
+    private CollectionReference lostAndFoundCollection;
+    private ListenerRegistration eventListener;
+    private SearchView itemsearch;
+    private LostAndFoundAdapter adapter;
+    private List<LostAndFoundItems> originalList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentLostAndFoundBinding.inflate(inflater, container, false);
         View rootView = binding.getRoot();
 
-        recyclerView = rootView.findViewById(R.id.itemlist);
+        itemlist = rootView.findViewById(R.id.itemlist);
+
 
         GridLayoutManager layoutManager = new GridLayoutManager(requireContext(), 1);
-        recyclerView.setLayoutManager(layoutManager);
+        itemlist.setLayoutManager(layoutManager);
 
         lostAndFoundItemsList = new ArrayList<>();
 
-        LostAndFoundAdapter adapter = new LostAndFoundAdapter(requireContext(), lostAndFoundItemsList);
-        recyclerView.setAdapter(adapter);
+
+        adapter = new LostAndFoundAdapter(requireContext(), lostAndFoundItemsList);
+        itemlist.setAdapter(adapter);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         lostAndFoundCollection = db.collection("lostAndFoundItems");
@@ -61,16 +66,47 @@ public class LostAndFoundFragment extends Fragment {
 
             if (value != null) {
                 lostAndFoundItemsList.clear();
+                originalList.clear();
                 for (QueryDocumentSnapshot doc : value) {
                     LostAndFoundItems lostAndFoundItems = doc.toObject(LostAndFoundItems.class);
                     lostAndFoundItemsList.add(lostAndFoundItems);
+                    originalList.add(lostAndFoundItems);
                 }
                 adapter.notifyDataSetChanged();
             }
         });
 
+        itemsearch = rootView.findViewById(R.id.itemsearch);
+        itemsearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                adapter.resetList();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.filterList(filter(newText));
+                return true;
+            }
+
+
+        });
+
 
         return rootView;
+    }
+
+    private List<LostAndFoundItems> filter(String query) {
+        List<LostAndFoundItems> filteredList = new ArrayList<>();
+
+        for (LostAndFoundItems item : originalList) {
+            if (item.getItemName().toLowerCase().contains(query.toLowerCase())) {
+                filteredList.add(item);
+            }
+        }
+
+        return filteredList;
     }
 
 

@@ -37,7 +37,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <SearchView
-        android:id="@+id/searchView"
+        android:id="@+id/itemsearch"
         android:layout_width="320dp"
         android:layout_height="40dp"
         android:layout_marginStart="45dp"
@@ -79,6 +79,6 @@
         android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+        app:layout_constraintTop_toBottomOf="@+id/itemsearch" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
