@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
-    android:background="@drawable/ic_launcher"
+    android:background="@drawable/baseline_image_24"
     app:cardCornerRadius="8dp"
     app:cardElevation="8dp">
 
@@ -23,7 +23,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_launcher" />
+            app:srcCompat="@drawable/baseline_image_24" />
 
         <TextView
             android:id="@+id/textView6"

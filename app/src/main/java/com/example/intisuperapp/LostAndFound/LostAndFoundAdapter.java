@@ -34,7 +34,12 @@ public class LostAndFoundAdapter extends RecyclerView.Adapter<LAFViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull LAFViewHolder holder, int position) {
-        Glide.with(context).load(lostAndFoundItemsList.get(position).getItemImageURL()).into(holder.cardimage);
+        Glide.with(context)
+                .load(lostAndFoundItemsList.get(position).getItemImageURL())
+                .placeholder(R.drawable.baseline_image_24)
+                .error(R.drawable.ic_launcher)
+                .into(holder.cardimage);
+
         holder.itemname1.setText(lostAndFoundItemsList.get(position).getItemName());
         holder.lastlocation1.setText(lostAndFoundItemsList.get(position).getLastLocation());
         holder.itemstatus.setText(lostAndFoundItemsList.get(position).getItemStatus());

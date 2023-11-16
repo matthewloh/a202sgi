@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.util.Log;
+import android.widget.Toast;
 
 
 import com.example.intisuperapp.R;
@@ -22,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.List;
+import java.util.ArrayList;
 
 public class LostAndFoundFragment extends Fragment {
 
@@ -40,6 +43,34 @@ public class LostAndFoundFragment extends Fragment {
 
         GridLayoutManager layoutManager = new GridLayoutManager(requireContext(), 1);
         recyclerView.setLayoutManager(layoutManager);
+
+        lostAndFoundItemsList = new ArrayList<>();
+
+        LostAndFoundAdapter adapter = new LostAndFoundAdapter(requireContext(), lostAndFoundItemsList);
+        recyclerView.setAdapter(adapter);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("LostAndFoundItems");
+
+        eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                lostAndFoundItemsList.clear();
+                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
+                    LostAndFoundItems lostAndFoundItems = itemSnapshot.getValue(LostAndFoundItems.class);
+                    lostAndFoundItemsList.add(lostAndFoundItems);
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Error handling
+                Log.e("LostAndFoundFragment", "Error fetching data: " + error.getMessage());
+                Toast.makeText(requireContext(), "Error fetching data. Please try again.", Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
 
         return rootView;
     }
