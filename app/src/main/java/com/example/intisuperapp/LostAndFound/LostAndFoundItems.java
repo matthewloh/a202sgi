@@ -14,6 +14,9 @@ public class LostAndFoundItems {
     private String itemImageURL;
     private String itemStatus;
 
+    public LostAndFoundItems() {
+        //No-Arguement constructor required for Firestore deserialization
+    }
 
     public LostAndFoundItems(String itemName, String contactInfo, String lastLocation, String itemDescription, String itemImageURL,  String itemStatus) {
         this.itemName = itemName;

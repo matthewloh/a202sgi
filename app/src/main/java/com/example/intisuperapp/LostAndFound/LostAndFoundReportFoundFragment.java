@@ -2,6 +2,8 @@ package com.example.intisuperapp.LostAndFound;
 
 import android.os.Bundle;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import java.io.ByteArrayOutputStream;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -126,6 +128,9 @@ public class LostAndFoundReportFoundFragment extends Fragment {
 
 
     private void handleData(String itemName, String contactInfo, String lastKnownLocation, String itemDescription, String itemimageUrl) {
+        //Convert Image URL to Blob
+        Blob itemImageBlob = convertImageUrlToBlob(itemimageUrl);
+
         LostAndFoundItems lostAndFoundItem = new LostAndFoundItems(itemName, contactInfo, lastKnownLocation, itemDescription, itemimageUrl, "Found");
 
 
@@ -144,5 +149,28 @@ public class LostAndFoundReportFoundFragment extends Fragment {
                     Toast.makeText(getContext(), "Failed to add item. Please try again.", Toast.LENGTH_SHORT).show();
                 });
     }
+
+    private Blob convertImageUrlToBlob(String imageUrl) {
+        try {
+            // Download the image using Glide
+            Bitmap bitmap = Glide.with(requireContext())
+                    .asBitmap()
+                    .load(imageUrl)
+                    .submit()
+                    .get();
+
+            // Convert Bitmap to byte array
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] data = baos.toByteArray();
+
+            // Create a Blob from the byte array
+            return Blob.fromBytes(data);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null; // Handle errors appropriately
+        }
+    }
+
 
 }
