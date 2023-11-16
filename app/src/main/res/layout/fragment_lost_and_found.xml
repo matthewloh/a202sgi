@@ -53,32 +53,32 @@
         android:id="@+id/itemlostbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="69dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
         android:backgroundTint="#00337C"
         android:text="Report Lost Item"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemlist" />
 
     <Button
         android:id="@+id/itemfoundbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="69dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
         android:backgroundTint="#00337C"
         android:text="Found An Item?"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemlist" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/itemlist"
         android:layout_width="397dp"
-        android:layout_height="500dp"
+        android:layout_height="470dp"
         android:layout_marginTop="32dp"
+        android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView"
-        android:scrollbars="vertical"/>
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
