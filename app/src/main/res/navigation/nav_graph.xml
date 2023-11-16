@@ -196,5 +196,13 @@
         <action
             android:id="@+id/action_lostAndFoundFragment_to_lostAndFoundReportFoundFragment"
             app:destination="@id/lostAndFoundReportFoundFragment" />
+        <action
+            android:id="@+id/action_lostAndFoundFragment_to_itemDetailFragment"
+            app:destination="@id/itemDetailFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/itemDetailFragment"
+        android:name="com.example.intisuperapp.LostAndFound.ItemDetailFragment"
+        android:label="fragment_item_detail"
+        tools:layout="@layout/fragment_item_detail" />
 </navigation>

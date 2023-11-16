@@ -6,11 +6,15 @@ import android.view.LayoutInflater;
 import android.widget.TextView;
 import android.widget.ImageView;
 import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
+import android.app.Activity;
+
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.navigation.Navigation;
+import androidx.navigation.NavController;
 import java.util.List;
 import com.example.intisuperapp.R;
 import com.bumptech.glide.Glide;
@@ -47,16 +51,22 @@ public class LostAndFoundAdapter extends RecyclerView.Adapter<LAFViewHolder>{
         holder.itemcard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, ItemDetailFragment.class);
-                intent.putExtra("ItemName", lostAndFoundItemsList.get(holder.getAdapterPosition()).getItemName());
-                intent.putExtra("Image", lostAndFoundItemsList.get(holder.getAdapterPosition()).getItemImageURL());
-                intent.putExtra("ContactInfo", lostAndFoundItemsList.get(holder.getAdapterPosition()).getContactInfo());
-                intent.putExtra("LastLocation", lostAndFoundItemsList.get(holder.getAdapterPosition()).getLastLocation());
-                intent.putExtra("ItemDescription", lostAndFoundItemsList.get(holder.getAdapterPosition()).getItemDescription());
 
-                context.startActivity(intent);
+                NavController navController = Navigation.findNavController((Activity) context, R.id.nav_host_fragment);
+
+                // Create a bundle to pass data to the ItemDetailFragment
+                Bundle bundle = new Bundle();
+                bundle.putString("ItemName", lostAndFoundItemsList.get(holder.getAdapterPosition()).getItemName());
+                bundle.putString("Image", lostAndFoundItemsList.get(holder.getAdapterPosition()).getItemImageURL());
+                bundle.putString("ContactInfo", lostAndFoundItemsList.get(holder.getAdapterPosition()).getContactInfo());
+                bundle.putString("LastLocation", lostAndFoundItemsList.get(holder.getAdapterPosition()).getLastLocation());
+                bundle.putString("ItemDescription", lostAndFoundItemsList.get(holder.getAdapterPosition()).getItemDescription());
+
+                // Navigate to the ItemDetailFragment with the bundle
+                navController.navigate(R.id.action_lostAndFoundFragment_to_itemDetailFragment, bundle);
             }
         });
+
 
     }
 
