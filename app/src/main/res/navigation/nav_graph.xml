@@ -254,9 +254,6 @@
         <action
             android:id="@+id/action_bookingsVenues_to_addVenuesFragment"
             app:destination="@id/addVenuesFragment" />
-        <action
-            android:id="@+id/action_bookingsVenues_to_viewVenueFragment"
-            app:destination="@id/viewVenueFragment" />
     </fragment>
     <fragment
         android:id="@+id/addVenuesFragment"
@@ -267,13 +264,5 @@
             android:id="@+id/action_addVenuesFragment_to_bookingsVenues"
             app:destination="@id/bookingsVenues" />
     </fragment>
-    <fragment
-        android:id="@+id/viewVenueFragment"
-        android:name="com.example.intisuperapp.Venues.ViewVenueFragment"
-        android:label="fragment_view_venue"
-        tools:layout="@layout/fragment_view_venue" >
-        <argument
-            android:name="venueId"
-            app:argType="integer" />
-    </fragment>
+
 </navigation>

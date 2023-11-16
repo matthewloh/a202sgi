@@ -20,14 +20,19 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.intisuperapp.Firebase.viewmodel.FirebaseViewModel;
 import com.example.intisuperapp.LoginAndRegistration.User;
 import com.example.intisuperapp.LoginAndRegistration.UserViewModel;
 import com.example.intisuperapp.MainActivity;
 import com.example.intisuperapp.R;
+import com.example.intisuperapp.Venues.Venues;
+import com.example.intisuperapp.Venues.VenuesViewModel;
 import com.example.intisuperapp.databinding.FragmentUpdateBookingsBinding;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 
@@ -45,9 +50,11 @@ public class UpdateBookings extends Fragment {
     Button saveBookingButton;
     private FragmentUpdateBookingsBinding binding;
     private UserViewModel userViewModel;
+    private FirebaseViewModel firebaseViewModel;
+    private VenuesViewModel venuesViewModel;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentUpdateBookingsBinding.inflate(inflater, container, false);
         return binding.getRoot();
@@ -56,6 +63,8 @@ public class UpdateBookings extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        venuesViewModel = new ViewModelProvider(getActivity()).get(VenuesViewModel.class);
+        firebaseViewModel = new ViewModelProvider(getActivity()).get(FirebaseViewModel.class);
 
         ActionBar actionBar = ((MainActivity) getActivity()).getSupportActionBar();
         actionBar.setTitle("");
@@ -69,24 +78,32 @@ public class UpdateBookings extends Fragment {
         String bookingContact = args.getBookingContact();
         String bookingVenue = args.getBookingVenue();
 
-        chooseVenueSpinner = view.findViewById(R.id.booking_venue_spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                        requireContext(),
-                        R.array.venue_array,
-                        android.R.layout.simple_spinner_item
-                );
+        chooseVenueSpinner = binding.bookingVenueSpinner;
+        final List<String> venueList = new ArrayList<>();
+        venueList.add("Please select");
+
+        firebaseViewModel.getVenuesFromFirebase(venuesViewModel).observe(getViewLifecycleOwner(), venues -> {
+            if (venues != null) {
+                for (Venues venue : venues) {
+                    venueList.add(venue.getVenueName());
+                }
+
+                // Create and set the adapter after obtaining the venue list
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, venueList);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 chooseVenueSpinner.setAdapter(adapter);
+            }
+        });
 
         BookingsViewModel bookingsViewModel = new ViewModelProvider(getActivity()).get(BookingsViewModel.class);
         bookingsViewModel.getBookingsById(bookingId).observe(getViewLifecycleOwner(), bookings -> {
-                // Set the EditTexts to the values of the selected Bookings object
-                binding.bookingDate.setText(bookingDate);
-                binding.bookingStartTime.setText(bookingStartTime);
-                binding.bookingEndTime.setText(bookingEndTime);
-                binding.bookingContact.setText(bookingContact);
+            // Set the EditTexts to the values of the selected Bookings object
+            binding.bookingDate.setText(bookingDate);
+            binding.bookingStartTime.setText(bookingStartTime);
+            binding.bookingEndTime.setText(bookingEndTime);
+            binding.bookingContact.setText(bookingContact);
 //
-                binding.bookingVenueSpinner.setSelection(((ArrayAdapter) binding.bookingVenueSpinner.getAdapter()).getPosition(bookingVenue));
+            binding.bookingVenueSpinner.setSelection(venueList.indexOf(bookingVenue));
 
         });
 
@@ -110,26 +127,24 @@ public class UpdateBookings extends Fragment {
 
         saveBookingButton.setOnClickListener(v -> {
 
-            if (chooseDate.getText().toString().isEmpty() ||chooseStartTime.getText().toString().isEmpty() || chooseEndTime.getText().toString().isEmpty() || contactInput.getText().toString().isEmpty()) {
+            if (chooseDate.getText().toString().isEmpty() || chooseStartTime.getText().toString().isEmpty() || chooseEndTime.getText().toString().isEmpty() || contactInput.getText().toString().isEmpty()) {
                 Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
             } else {
 
-            String contact = contactInput.getText().toString();
-            String venue = chooseVenueSpinner.getSelectedItem().toString();
-            String strDate = chooseDate.getText().toString();
-            String strStartTime = chooseStartTime.getText().toString();
-            String strEndTime = chooseEndTime.getText().toString();
+                String contact = contactInput.getText().toString();
+                String venue = chooseVenueSpinner.getSelectedItem().toString();
+                String strDate = chooseDate.getText().toString();
+                String strStartTime = chooseStartTime.getText().toString();
+                String strEndTime = chooseEndTime.getText().toString();
 
 
-
-
-            bookingsViewModel.updateBookingsById(venue, strDate, strStartTime, strEndTime, contact, userId, bookingId);
-            Toast.makeText(requireContext(), "Booking updated", Toast.LENGTH_SHORT).show();
-            NavHostFragment.findNavController(UpdateBookings.this)
-                    .navigate(R.id.action_updateBookings_to_bookingsFragment);
+                bookingsViewModel.updateBookingsById(venue, strDate, strStartTime, strEndTime, contact, userId, bookingId);
+                Toast.makeText(requireContext(), "Booking updated", Toast.LENGTH_SHORT).show();
+                NavHostFragment.findNavController(UpdateBookings.this)
+                        .navigate(R.id.action_updateBookings_to_bookingsFragment);
             }
         });
-        }
+    }
 
 
     private void showDatePicker() {
@@ -178,5 +193,15 @@ public class UpdateBookings extends Fragment {
 
         timePickerDialog.show();
     }
+
+    @Override
+    public void onDestroyView() {
+
+        super.onDestroyView();
+        venuesViewModel.deleteAllVenues();
+        binding = null;
+    }
 }
+
+
 

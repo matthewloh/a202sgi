@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -19,13 +20,17 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.intisuperapp.Firebase.viewmodel.FirebaseViewModel;
 import com.example.intisuperapp.LoginAndRegistration.UserSharedViewModel;
 import com.example.intisuperapp.MainActivity;
 import com.example.intisuperapp.R;
+import com.example.intisuperapp.Venues.Venues;
+import com.example.intisuperapp.Venues.VenuesViewModel;
 import com.example.intisuperapp.databinding.FragmentCreateBookingsBinding;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -36,6 +41,8 @@ public class CreateBookings extends Fragment {
 
     private FragmentCreateBookingsBinding binding;
     private UserSharedViewModel userSharedViewModel;
+    private VenuesViewModel venuesViewModel;
+    private FirebaseViewModel firebaseViewModel;
 
     private BookingsViewModel bookingsViewModel;
     EditText chooseStartTime, chooseEndTime, chooseDate, contactInput;
@@ -63,6 +70,8 @@ public class CreateBookings extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         bookingsViewModel = new ViewModelProvider(getActivity()).get(BookingsViewModel.class);
         userSharedViewModel = new ViewModelProvider(getActivity()).get(UserSharedViewModel.class);
+        venuesViewModel = new ViewModelProvider(getActivity()).get(VenuesViewModel.class);
+        firebaseViewModel = new ViewModelProvider(getActivity()).get(FirebaseViewModel.class);
         userSharedViewModel.getUser().observe(getViewLifecycleOwner(), user -> {
             if (user != null) {
                 userId = user.getId();
@@ -78,17 +87,31 @@ public class CreateBookings extends Fragment {
         chooseDate = binding.bookingDate;
         contactInput = binding.bookingContact;
 
-
         chooseVenueSpinner = binding.bookingVenueSpinner;
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(requireContext(), R.array.venue_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        chooseVenueSpinner.setAdapter(adapter);
+
+        final List<String> venueList = new ArrayList<>();
+        venueList.add("Please select");
+
+        firebaseViewModel.getVenuesFromFirebase(venuesViewModel).observe(getViewLifecycleOwner(), venues -> {
+            if (venues != null) {
+                for (Venues venue : venues) {
+                    venueList.add(venue.getVenueName());
+                }
+
+                // Create and set the adapter after obtaining the venue list
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, venueList);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                chooseVenueSpinner.setAdapter(adapter);
+            }
+        });
+
 
         chooseDate.setOnClickListener(v -> showDatePicker());
 
         chooseStartTime.setOnClickListener(v -> showTimePicker(chooseStartTime));
 
         chooseEndTime.setOnClickListener(v -> showTimePicker(chooseEndTime));
+
 
         addBookingButton.setOnClickListener(v -> {
             if (chooseDate.getText().toString().isEmpty() || chooseStartTime.getText().toString().isEmpty() || chooseEndTime.getText().toString().isEmpty() || contactInput.getText().toString().isEmpty()) {
@@ -130,11 +153,13 @@ public class CreateBookings extends Fragment {
             }
         });
 
+
         binding.showVenueText.setOnClickListener(v -> {
             NavHostFragment.findNavController(CreateBookings.this)
                     .navigate(R.id.action_createBookings_to_bookingsVenues);
         });
     }
+
 
     private void showDatePicker() {
         final Calendar currentDate = Calendar.getInstance();
@@ -216,5 +241,14 @@ public class CreateBookings extends Fragment {
 
         return false; // No overlapping date, venue, and time range
     }
+
+    @Override
+    public void onDestroyView() {
+
+        super.onDestroyView();
+        venuesViewModel.deleteAllVenues();
+        binding = null;
+    }
+
 
 }

@@ -45,9 +45,16 @@ public class VenuesRepository {
         return mVenuesDao.getVenuesByName(venueName);
     }
 
+    public LiveData<Integer> getVenuesCount(){
+        return mVenuesDao.getVenuesCount();
+    }
+
     public void deleteVenuesById(int venueId){
         INTISuperappDatabase.databaseWriteExecutor.execute(() -> mVenuesDao.deleteVenuesById(venueId));
     }
 
 
+    public void deleteVenuesByName(String venueName) {
+        INTISuperappDatabase.databaseWriteExecutor.execute(() -> mVenuesDao.deleteVenuesByName(venueName));
+    }
 }

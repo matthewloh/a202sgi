@@ -5,6 +5,7 @@ import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 import com.example.intisuperapp.DBUtils.Converters;
+import com.google.firebase.firestore.Exclude;
 
 @Entity(tableName = "Venues")
 @TypeConverters(Converters.class)
@@ -13,6 +14,7 @@ public class Venues {
     @PrimaryKey(autoGenerate = true)
     private int venueId;
 
+    @Exclude
     public int getVenueId() {
         return venueId;
     }
@@ -24,6 +26,10 @@ public class Venues {
     public Venues(String venueName, String venueImageURL){
         this.venueName = venueName;
         this.venueImageURL = venueImageURL;
+    }
+
+    public Venues(){
+
     }
 
     private String venueName;

@@ -4,6 +4,7 @@ import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.LiveData;
 
 import com.example.intisuperapp.Appointments.Appointment;
 import com.example.intisuperapp.Appointments.AppointmentViewModel;
@@ -21,6 +22,8 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.util.List;
 
 public class FirebasePhotoRepository {
     private FirebaseFirestore mFirebaseFirestore;
@@ -116,6 +119,28 @@ public class FirebasePhotoRepository {
         });
     }
 
+    public LiveData<List<Venues>> getVenues(VenuesViewModel venuesViewModel) {
+        mFirebaseFirestore.collection("venues").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                for (DocumentChange doc : value.getDocumentChanges()) {
+                    if (doc.getType() == DocumentChange.Type.ADDED) {
+                        Venues venues = doc.getDocument().toObject(Venues.class);
+                        venuesViewModel.insert(venues);
+                    }
+                }
+            }
+        });
+        return venuesViewModel.getAllVenues();
+    }
+
+    public void deleteVenue(VenuesViewModel venuesViewModel, String venueName) {
+        mFirebaseFirestore.collection("venues").document(venueName).delete().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                venuesViewModel.deleteVenuesByName(venueName);
+            }
+        });
+    }
 
 
     public interface OnDataUploaded {

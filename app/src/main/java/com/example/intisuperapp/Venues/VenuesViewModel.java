@@ -48,4 +48,12 @@ public class VenuesViewModel extends AndroidViewModel {
         return mRepository.getVenuesByName(venueName);
     }
 
+    public LiveData<Integer> getVenuesCount() {
+        return mRepository.getVenuesCount();
+    }
+
+
+    public void deleteVenuesByName(String venueName) {
+        mRepository.deleteVenuesByName(venueName);
+    }
 }

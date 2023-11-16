@@ -40,5 +40,9 @@ public interface VenuesDao {
     @Query("SELECT * FROM Venues WHERE venueName = :venueName")
     LiveData<List<Venues>> getVenuesByName(String venueName);
 
+    @Query("SELECT COUNT(venueId) FROM Venues")
+    LiveData<Integer> getVenuesCount();
 
+    @Query("DELETE FROM Venues WHERE venueName = :venueName")
+    void deleteVenuesByName(String venueName);
 }

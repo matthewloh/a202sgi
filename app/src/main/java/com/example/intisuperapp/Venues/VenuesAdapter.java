@@ -17,13 +17,13 @@ import java.util.List;
 public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.VenuesHolder> {
     private OnItemClickListener mListener;
 
-    private OnLongItemClickListener mLongListener;
+    private OnItemLongClickListener mLongListener;
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
     }
 
-    public void setOnLongItemClickListener(OnLongItemClickListener listener) {
+    public void setOnItemLongClickListener(OnItemLongClickListener listener) {
         mLongListener = listener;
     }
 
@@ -40,8 +40,8 @@ public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.VenuesHold
         void onItemClick(Venues venues);
     }
 
-    public interface OnLongItemClickListener {
-        void onLongItemClick(Venues venues);
+    public interface OnItemLongClickListener {
+        void onItemLongClick(Venues venues);
     }
 
     @NonNull
@@ -80,6 +80,13 @@ public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.VenuesHold
             if (mListener != null) {
                 mListener.onItemClick(currentVenues);
             }
+        });
+
+        holder.binding.venueImage.setOnLongClickListener(v -> {
+            if (mLongListener != null) {
+                mLongListener.onItemLongClick(currentVenues);
+            }
+            return true;
         });
     }
 

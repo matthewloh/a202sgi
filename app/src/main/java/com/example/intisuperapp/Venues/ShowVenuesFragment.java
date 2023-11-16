@@ -16,11 +16,13 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.intisuperapp.Firebase.viewmodel.FirebaseViewModel;
 import com.example.intisuperapp.LoginAndRegistration.UserSharedViewModel;
 import com.example.intisuperapp.MainActivity;
 import com.example.intisuperapp.databinding.FragmentShowBookingVenuesBinding;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ShowVenuesFragment extends Fragment {
 
@@ -30,6 +32,7 @@ public class ShowVenuesFragment extends Fragment {
 
     private VenuesViewModel venuesViewModel;
     private UserSharedViewModel userSharedViewModel;
+    private FirebaseViewModel firebaseViewModel;
 
     public int userId;
 
@@ -43,53 +46,57 @@ public class ShowVenuesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         // insert code here
         ActionBar actionBar = ((MainActivity) getActivity()).getSupportActionBar();
         actionBar.setTitle("");
 
         venuesViewModel = new ViewModelProvider(requireActivity()).get(VenuesViewModel.class);
         userSharedViewModel = new ViewModelProvider(requireActivity()).get(UserSharedViewModel.class);
-
-        venues = venuesViewModel.getAllVenues();
+        firebaseViewModel = new ViewModelProvider(requireActivity()).get(FirebaseViewModel.class);
+        venues = firebaseViewModel.getVenuesFromFirebase(venuesViewModel);
         venues.observe(getViewLifecycleOwner(), data -> {
             VenuesAdapter adapter = new VenuesAdapter(data);
-            adapter.setOnItemClickListener(venue ->{
-                Toast.makeText(getContext(),  venue.getVenueName(), Toast.LENGTH_SHORT).show();
-                ShowVenuesFragmentDirections.ActionBookingsVenuesToViewVenueFragment action = ShowVenuesFragmentDirections.actionBookingsVenuesToViewVenueFragment(venue.getVenueId());
-                NavHostFragment.findNavController(ShowVenuesFragment.this).navigate(action);
-            });
 
-            adapter.setOnLongItemClickListener(venue ->{
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle("Delete Venue");
-                builder.setMessage("Are you sure you want to delete " +  venue.getVenueName()+ " ?");
-                builder.setPositiveButton("Yes", (dialog, which) -> {
-                    venuesViewModel.deleteVenuesById(venue.getVenueId());
-                    Toast.makeText(getContext(), "Venue deleted", Toast.LENGTH_SHORT).show();
+
+            if (Objects.equals(userSharedViewModel.getUserValue().getRole(), "lecturer")) {
+
+                adapter.setOnItemLongClickListener(venue -> {
+                    new AlertDialog.Builder(getActivity()).setTitle("Do you want to delete " + venue.getVenueName() + " ?")
+                            .setPositiveButton("Yes", (dialog, which) -> {
+                                venuesViewModel.deleteVenuesByName(venue.getVenueName());
+                                Toast.makeText(getContext(), "Venue deleted", Toast.LENGTH_SHORT).show();
+                            })
+                            .setNegativeButton("No", (dialog, which) -> {
+                            }).show();
                 });
-                builder.setNegativeButton("No", (dialog, which) -> {
-                });
-            });
+            }
+                binding.venuesRecyclerView.setAdapter(adapter);
+                binding.venuesRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-
-
-        binding.venuesRecyclerView.setAdapter(adapter);
-        binding.venuesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         });
 
 
 
+        if (Objects.equals(userSharedViewModel.getUserValue().getRole(), "lecturer")) {
+            binding.addVenueButton.setVisibility(View.VISIBLE);
+            binding.addVenueButton.setOnClickListener(v->{
+                NavHostFragment.findNavController(ShowVenuesFragment.this).navigate(ShowVenuesFragmentDirections.actionBookingsVenuesToAddVenuesFragment());
+            });
+        } else {
+            binding.addVenueButton.setVisibility(View.GONE);
+        }
 
-        binding.addVenueButton.setOnClickListener(v->{
-            NavHostFragment.findNavController(ShowVenuesFragment.this).navigate(ShowVenuesFragmentDirections.actionBookingsVenuesToAddVenuesFragment());
-        });
+
 
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+
+        venuesViewModel.deleteAllVenues();
         binding = null;
     }
 }
