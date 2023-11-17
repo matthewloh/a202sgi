@@ -16,16 +16,19 @@ import com.example.intisuperapp.Bookings.Bookings;
 import com.example.intisuperapp.Bookings.BookingsDao;
 import com.example.intisuperapp.LoginAndRegistration.User;
 import com.example.intisuperapp.LoginAndRegistration.UserDao;
+import com.example.intisuperapp.Venues.Venues;
+import com.example.intisuperapp.Venues.VenuesDao;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class, Appointment.class, AppointmentInvitation.class, Bookings.class}, version = 2)
+@Database(entities = {User.class, Appointment.class, AppointmentInvitation.class, Bookings.class, Venues.class}, version = 6)
+// entities = {Note.class} is an array of entities, to add more entities, just add a comma and the next entity
 public abstract class INTISuperappDatabase extends RoomDatabase {
     // We create a singleton, so that we don't create multiple instances of the database
     private static INTISuperappDatabase instance;
 
-    private static final int NUMBER_OF_THREADS = 4;
+    private static final int NUMBER_OF_THREADS = 5;
 
     // We create an executor service, so that we can run database operations in the background
     public static final ExecutorService databaseWriteExecutor =
@@ -38,6 +41,8 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
     public abstract AppointmentInvitationDao appointmentInvitationDao();
 
     public abstract BookingsDao bookingsDao();
+
+    public abstract VenuesDao venuesDao();
 
 //    public abstract AppointmentUserJoinDao appointmentUserJoinDao();
 
@@ -68,6 +73,9 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
 //                userDao.insert(user);
 //                user = new User("Jane Doe", "g", "12", "student");
 //                userDao.insert(user);
+
+                VenuesDao venuesDao = instance.venuesDao();
+                venuesDao.deleteAllVenues();
 
 //                AppointmentDao appointmentDao = instance.appointmentDao();
 //                appointmentDao.deleteAllAppointments();
@@ -105,6 +113,8 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
 //                bookingsDao.deleteAllBookings();
 
 
+
+
             });
         }
 
@@ -119,7 +129,10 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
 //                userDao.insert(user);
 //                user = new User("Jane Doe", "g", "12", "student");
 //                userDao.insert(user);
-//////
+
+                VenuesDao venuesDao = instance.venuesDao();
+                venuesDao.deleteAllVenues();
+//
 ////
 //                AppointmentDao appointmentDao = instance.appointmentDao();
 ////                appointmentDao.deleteAllAppointments();

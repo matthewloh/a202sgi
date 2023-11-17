@@ -127,6 +127,9 @@
             app:exitAnim="@anim/slide_out"
             app:popEnterAnim="@anim/slide_in"
             app:popExitAnim="@anim/slide_out" />
+        <action
+            android:id="@+id/action_bookingsFragment_to_updateBookings"
+            app:destination="@id/updateBookings" />
     </fragment>
     <fragment
         android:id="@+id/createBookings"
@@ -140,6 +143,9 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_createBookings_to_bookingsVenues"
+            app:destination="@id/bookingsVenues" />
     </fragment>
 
     <fragment
@@ -196,7 +202,38 @@
         android:id="@+id/addAppointmentsFragment"
         android:name="com.example.intisuperapp.Appointments.AddAppointmentFragment"
         android:label=""
-        tools:layout="@layout/fragment_add_appointment" />
+        tools:layout="@layout/fragment_add_appointment" >
+    </fragment>
+    <fragment
+        android:id="@+id/updateBookings"
+        android:name="com.example.intisuperapp.Bookings.UpdateBookings"
+        android:label="fragment_update_bookings"
+        tools:layout="@layout/fragment_update_bookings" >
+        <action
+            android:id="@+id/action_updateBookings_to_bookingsFragment"
+            app:destination="@id/bookingsFragment" />
+        <argument
+            android:name="bookingId"
+            app:argType="integer" />
+        <argument
+            android:name="bookingDate"
+            app:argType="string" />
+        <argument
+            android:name="bookingStartTime"
+            app:argType="string" />
+        <argument
+            android:name="bookingEndTime"
+            app:argType="string" />
+        <argument
+            android:name="bookingContact"
+            app:argType="string" />
+        <argument
+            android:name="bookingVenue"
+            app:argType="string" />
+        <argument
+            android:name="userId"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/inviteAppointment"
         android:name="com.example.intisuperapp.Appointments.InviteAppointment.InviteAppointmentFragment"
@@ -219,4 +256,23 @@
             android:name="appointmentId"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/bookingsVenues"
+        android:name="com.example.intisuperapp.Venues.ShowVenuesFragment"
+        android:label="fragment_show_booking_venues"
+        tools:layout="@layout/fragment_show_booking_venues" >
+        <action
+            android:id="@+id/action_bookingsVenues_to_addVenuesFragment"
+            app:destination="@id/addVenuesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addVenuesFragment"
+        android:name="com.example.intisuperapp.Venues.AddVenuesFragment"
+        android:label="fragment_add_booking_venues"
+        tools:layout="@layout/fragment_add_booking_venues" >
+        <action
+            android:id="@+id/action_addVenuesFragment_to_bookingsVenues"
+            app:destination="@id/bookingsVenues" />
+    </fragment>
+
 </navigation>
