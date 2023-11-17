@@ -13,23 +13,14 @@ public class UserViewModel extends AndroidViewModel {
         mRepository = new UserRepository(application);
     }
 
-
     // First Login Command - Check if the email exists
     public LiveData<User> getUserByEmail(String email) {
         return mRepository.getUserByEmail(email);
     }
 
-    // Second Login Command - After getting the email, check if the password is correct
-    public LiveData<User> getUserByEmailAndPassword(String email, String password) {
-        return mRepository.queryUserByEmailAndPassword(email, password);
-    }
-
-    public LiveData<User> getUserByFullName(String fullName) {
-        return mRepository.getUserByFullName(fullName);
-    }
-
-    // Sign up button
     public void insert(User user) {
         mRepository.insert(user);
     }
+
+    // TODO: Add a method to update the user's password, administrator-level only
 }

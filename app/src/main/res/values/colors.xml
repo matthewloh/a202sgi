@@ -14,5 +14,7 @@
     <color name="booking_btn">#FFCCCB</color>
     <color name="booking_bg">#799496</color>
     <color name="appointmenttag_bg">#e3cca3</color>
+    <color name="venue_card_bg">#93A9AB</color>
+    <color name="light_grey">#e3e6eb</color>
 
 </resources>

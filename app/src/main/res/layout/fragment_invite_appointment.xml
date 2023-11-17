@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#799496"
+    tools:context=".Appointments.AppointmentsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bookingsTitleLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#799496"
+        android:paddingVertical="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/invites_appointmentsTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/appointment_chip"
+            android:gravity="center"
+            android:padding="12dp"
+            android:text="Your Appointment Invites"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/invites_appointmentsTitle"
+            app:layout_constraintVertical_bias="1.0">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/invites_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/square_appointment"
+                    android:backgroundTint="#ffffff"
+                    android:drawablePadding="8dp"
+                    android:padding="16dp"
+                    android:text="Back"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:shapeAppearanceOverlay="@drawable/square_appointment" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/viewAccepted"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/square_appointment"
+                    android:backgroundTint="#a3edef"
+                    android:drawableLeft="@drawable/ic_check"
+                    android:drawablePadding="8dp"
+                    android:padding="16dp"
+                    android:text="Accepted"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                    android:textColor="@color/black"
+                    app:drawableTint="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/invites_back"
+                    app:shapeAppearanceOverlay="@drawable/square_appointment" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/viewDeclined"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/square_appointment"
+                    android:backgroundTint="#fa8a91"
+                    android:drawableLeft="@drawable/ic_close"
+                    android:drawablePadding="8dp"
+                    android:padding="16dp"
+                    android:text="Declined"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                    android:textColor="@color/black"
+                    app:drawableTint="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/viewAccepted"
+                    app:shapeAppearanceOverlay="@drawable/square_appointment" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/invites_viewPending"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/square_appointment"
+                    android:backgroundTint="#b59df9"
+                    android:padding="16dp"
+                    android:text="Pending"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                    android:textColor="@color/black"
+                    app:drawableTint="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/viewDeclined"
+                    app:shapeAppearanceOverlay="@drawable/square_appointment" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/invites_viewAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/square_appointment"
+                    android:backgroundTint="#30b3fa"
+                    android:drawablePadding="8dp"
+                    android:padding="16dp"
+                    android:text="All Invites"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                    android:textColor="@color/black"
+                    app:drawableTint="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/invites_viewPending"
+                    app:shapeAppearanceOverlay="@drawable/square_appointment" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </HorizontalScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/appointments_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bookingsTitleLayout"
+        app:layout_constraintVertical_bias="1.0"
+        tools:listitem="@layout/appointments_invite_item" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

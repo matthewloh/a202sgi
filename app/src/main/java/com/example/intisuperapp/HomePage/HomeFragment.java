@@ -4,17 +4,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.intisuperapp.LoginAndRegistration.UserSharedViewModel;
-import com.example.intisuperapp.MainActivity;
 import com.example.intisuperapp.R;
 import com.example.intisuperapp.databinding.FragmentHomeBinding;
 
@@ -38,19 +35,13 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ActionBar actionBar = ((MainActivity) getActivity()).getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(false);
-        actionBar.setDisplayShowHomeEnabled(false);
-        // Set title to the fragment
-        actionBar.setTitle("");
-        userSharedViewModel = new ViewModelProvider(getActivity()).get(UserSharedViewModel.class);
+//        ((HideShowIconInterface) getActivity()).showHamburgerIcon();
+//        actionBar.setHomeAsUpIndicator(R.drawable.baseline_menu_24);
+//        actionBar.setDisplayHomeAsUpEnabled(true);
+        userSharedViewModel = new ViewModelProvider(requireActivity()).get(UserSharedViewModel.class);
         userSharedViewModel.getUser().observe(
                 getViewLifecycleOwner(),
-                user -> {
-                    userId = user.getId();
-                    Toast.makeText(getActivity(), "User role: " + user.getRole() + " User ID: " + userId
-                            , Toast.LENGTH_SHORT).show();
-                }
+                user -> userId = user.getId()
         );
         binding.appointmentsButton.setOnClickListener(
                 v -> {
@@ -58,10 +49,10 @@ public class HomeFragment extends Fragment {
                             .navigate(R.id.action_homeFragment_to_appointmentsFragment);
                 }
         );
-        binding.discussionsButton.setOnClickListener(
+        binding.bookingsButton.setOnClickListener(
                 v -> {
                     NavHostFragment.findNavController(HomeFragment.this)
-                            .navigate(R.id.action_homeFragment_to_discussionsFragment);
+                            .navigate(R.id.action_homeFragment_to_bookingsFragment);
                 }
         );
         binding.lostAndFoundButton.setOnClickListener(
@@ -74,13 +65,6 @@ public class HomeFragment extends Fragment {
                 v -> {
                     NavHostFragment.findNavController(HomeFragment.this)
                             .navigate(R.id.action_homeFragment_to_eventsFragment);
-                }
-        );
-
-        binding.goToBookingsPageBtn.setOnClickListener(
-                v -> {
-                    NavHostFragment.findNavController(HomeFragment.this)
-                            .navigate(R.id.action_homeFragment_to_bookingsFragment);
                 }
         );
 
