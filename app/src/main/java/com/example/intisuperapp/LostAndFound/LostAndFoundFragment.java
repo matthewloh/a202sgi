@@ -4,15 +4,18 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.Toast;
 import android.widget.SearchView;
 
@@ -29,6 +32,7 @@ import java.util.ArrayList;
 public class LostAndFoundFragment extends Fragment {
 
     private FragmentLostAndFoundBinding binding;
+    private Button filterbtn;
     private RecyclerView itemlist;
     private List<LostAndFoundItems> lostAndFoundItemsList;
     private CollectionReference lostAndFoundCollection;
@@ -42,8 +46,9 @@ public class LostAndFoundFragment extends Fragment {
         binding = FragmentLostAndFoundBinding.inflate(inflater, container, false);
         View rootView = binding.getRoot();
 
-        itemlist = rootView.findViewById(R.id.itemlist);
+        filterbtn = rootView.findViewById(R.id.itemfilterbtn);
 
+        itemlist = rootView.findViewById(R.id.itemlist);
 
         GridLayoutManager layoutManager = new GridLayoutManager(requireContext(), 1);
         itemlist.setLayoutManager(layoutManager);
@@ -72,6 +77,7 @@ public class LostAndFoundFragment extends Fragment {
                     lostAndFoundItemsList.add(lostAndFoundItems);
                     originalList.add(lostAndFoundItems);
                 }
+
                 adapter.notifyDataSetChanged();
             }
         });
@@ -97,6 +103,8 @@ public class LostAndFoundFragment extends Fragment {
         return rootView;
     }
 
+
+
     private List<LostAndFoundItems> filter(String query) {
         List<LostAndFoundItems> filteredList = new ArrayList<>();
 
@@ -119,6 +127,45 @@ public class LostAndFoundFragment extends Fragment {
         binding.itemlostbtn.setOnClickListener(
                 v -> NavHostFragment.findNavController(LostAndFoundFragment.this).navigate(R.id.action_lostAndFoundFragment_to_lostAndFoundReportLostFragment)
         );
+
+        filterbtn.setOnClickListener(this::showFilterOptions);
+
+    }
+
+    private void showFilterOptions(View view) {
+        PopupMenu popupMenu = new PopupMenu(requireContext(), view);
+        MenuInflater inflater = popupMenu.getMenuInflater();
+        inflater.inflate(R.menu.filterpopup_laf, popupMenu.getMenu());
+
+        popupMenu.setOnMenuItemClickListener(item -> {
+            handleFilterItemClick(item.getItemId());
+            return true;
+        });
+
+        popupMenu.show();
+    }
+
+    private void handleFilterItemClick(int itemId) {
+        if (itemId == R.id.menu_lost_items) {
+            // Handle lost items filter
+            filterItems("Lost");
+        } else if (itemId == R.id.menu_found_items) {
+            // Handle found items filter
+            filterItems("Found");
+        }
+    }
+
+
+    private void filterItems(String filterStatus) {
+        List<LostAndFoundItems> filteredList = new ArrayList<>();
+
+        for (LostAndFoundItems item : originalList) {
+            if (item.getItemStatus().equalsIgnoreCase(filterStatus)) {
+                filteredList.add(item);
+            }
+        }
+
+        adapter.filterList(filteredList);
     }
 
     @Override

@@ -9,14 +9,15 @@
 
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/itemfilterbtn"
         android:layout_width="108dp"
-        android:layout_height="42dp"
+        android:layout_height="48dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:backgroundTint="#FEFEFE"
         android:text="Filter"
         android:textColor="#000000"
+        android:onClick="showfilterPopup"
         app:icon="@drawable/filter"
         app:iconTint="#000000"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +34,7 @@
         android:text="Lost And Found"
         android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/button3"
+        app:layout_constraintEnd_toStartOf="@+id/itemfilterbtn"
         app:layout_constraintTop_toTopOf="parent" />
 
     <SearchView
@@ -46,7 +47,7 @@
         android:background="@drawable/edittext_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3"
+        app:layout_constraintTop_toBottomOf="@+id/itemfilterbtn"
         app:queryHint="Search For Lost Items..."/>
 
     <Button

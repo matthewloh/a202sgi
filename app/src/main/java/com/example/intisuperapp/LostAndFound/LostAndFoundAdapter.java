@@ -1,5 +1,6 @@
 package com.example.intisuperapp.LostAndFound;
 
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
@@ -87,8 +88,11 @@ public class LostAndFoundAdapter extends RecyclerView.Adapter<LAFViewHolder>{
     public void resetList() {
         lostAndFoundItemsList.clear();
         lostAndFoundItemsList.addAll(originalList);
-        notifyDataSetChanged(); // Notify the adapter that the data set has changed
+        notifyDataSetChanged();
     }
+
+
+
 
 }
 
