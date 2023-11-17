@@ -43,7 +43,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
     private SimpleDateFormat originalDateFormat = new SimpleDateFormat(TimeConstants.DATE_FORMAT, Locale.getDefault());
     private SimpleDateFormat targetDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-    private SimpleDateFormat targetTimeFormat = new SimpleDateFormat("HH:mm");
+    private SimpleDateFormat targetTimeFormat = new SimpleDateFormat("hh:mma");
     // Save a reference to the List of Appointments
     private List<Appointment> mAppointmentList;
 

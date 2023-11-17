@@ -49,30 +49,34 @@ public class AppointmentsFragment extends Fragment {
         appointmentInvitationViewModel = new ViewModelProvider(requireActivity()).get(AppointmentInvitationViewModel.class);
         userSharedViewModel = new ViewModelProvider(requireActivity()).get(UserSharedViewModel.class);
         userSharedViewModel.getUser().observe(getViewLifecycleOwner(), user -> {
-            binding.appointmentsTitle.setText("Appointments for " + user.getFullname());
+            binding.appointmentsTitle.setText("All Appointments for " + user.getFullname().split(" ")[0]);
             userId = user.getId();
             appointments = appointmentViewModel.getAllAppointmentsForUser(userId);
             loadAppsIntoRecyclerView(appointments);
             binding.viewCompleted.setOnClickListener(
                     v -> {
+                        binding.appointmentsTitle.setText("Completed appointments for " + user.getFullname().split(" ")[0]);
                         appointments = appointmentViewModel.getAllCompletedAppointmentsForUser(userId);
                         loadAppsIntoRecyclerView(appointments);
                     }
             );
             binding.viewPending.setOnClickListener(
                     v -> {
+                        binding.appointmentsTitle.setText("Pending appointments for " + user.getFullname().split(" ")[0]);
                         appointments = appointmentViewModel.getAllPendingAppointmentsForUser(userId);
                         loadAppsIntoRecyclerView(appointments);
                     }
             );
             binding.viewCancelled.setOnClickListener(
                     v -> {
+                        binding.appointmentsTitle.setText("Cancelled appointments for " + user.getFullname().split(" ")[0]);
                         appointments = appointmentViewModel.getAllCancelledAppointmentsForUser(userId);
                         loadAppsIntoRecyclerView(appointments);
                     }
             );
             binding.viewAll.setOnClickListener(
                     v -> {
+                        binding.appointmentsTitle.setText("All Appointments for " + user.getFullname().split(" ")[0]);
                         appointments = appointmentViewModel.getAllAppointmentsForUser(userId);
                         loadAppsIntoRecyclerView(appointments);
                     }

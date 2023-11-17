@@ -21,6 +21,7 @@ public class RegistrationFragment extends Fragment {
     private FragmentRegistrationBinding binding;
 
     private UserViewModel userViewModel;
+    boolean isEmailValid = false;
 
     @Nullable
     @Override
@@ -69,8 +70,14 @@ public class RegistrationFragment extends Fragment {
             if (user != null) {
                 binding.emailText.setError("Email already exists");
                 Toast.makeText(requireContext(), "Email already exists", Toast.LENGTH_SHORT).show();
+                isEmailValid = false;
+            } else {
+                isEmailValid = true;
             }
         });
+        if (!isEmailValid) {
+            return false;
+        }
         if (password.isEmpty()) {
             binding.password.setError("Password is required");
             Toast.makeText(requireContext(), "Password is required", Toast.LENGTH_SHORT).show();

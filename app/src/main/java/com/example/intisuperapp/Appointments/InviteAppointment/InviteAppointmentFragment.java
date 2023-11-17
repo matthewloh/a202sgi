@@ -48,7 +48,7 @@ public class InviteAppointmentFragment extends Fragment {
         userSharedViewModel = new ViewModelProvider(requireActivity()).get(UserSharedViewModel.class);
         userSharedViewModel.getUser().observe(getViewLifecycleOwner(), user -> {
             userId = user.getId();
-            binding.invitesAppointmentsTitle.setText("Invites for " + user.getFullname().split(" ")[0]);
+            binding.invitesAppointmentsTitle.setText("All Invites for " + user.getFullname().split(" ")[0]);
             invites = appointmentViewModel.getAppointmentInvitationByInviteeId(userId);
             loadInvitesIntoRecyclerView(invites);
             binding.invitesBack.setOnClickListener(v -> {
@@ -57,18 +57,22 @@ public class InviteAppointmentFragment extends Fragment {
                         .navigateUp();
             });
             binding.viewAccepted.setOnClickListener(v -> {
+                binding.invitesAppointmentsTitle.setText("Accepted invites for " + user.getFullname().split(" ")[0]);
                 invites = appointmentViewModel.getAppointmentInvitationByInviteeIdAndStatus(userId, "accepted");
                 loadInvitesIntoRecyclerView(invites);
             });
             binding.viewDeclined.setOnClickListener(v -> {
+                binding.invitesAppointmentsTitle.setText("Declined invites for " + user.getFullname().split(" ")[0]);
                 invites = appointmentViewModel.getAppointmentInvitationByInviteeIdAndStatus(userId, "declined");
                 loadInvitesIntoRecyclerView(invites);
             });
             binding.invitesViewPending.setOnClickListener(v -> {
+                binding.invitesAppointmentsTitle.setText("Pending invites for " + user.getFullname().split(" ")[0]);
                 invites = appointmentViewModel.getAppointmentInvitationByInviteeIdAndStatus(userId, "pending");
                 loadInvitesIntoRecyclerView(invites);
             });
             binding.invitesViewAll.setOnClickListener(v -> {
+                binding.invitesAppointmentsTitle.setText("All Invites for " + user.getFullname().split(" ")[0]);
                 invites = appointmentViewModel.getAppointmentInvitationByInviteeId(userId);
                 loadInvitesIntoRecyclerView(invites);
             });

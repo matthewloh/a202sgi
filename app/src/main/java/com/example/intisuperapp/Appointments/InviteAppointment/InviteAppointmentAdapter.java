@@ -41,7 +41,7 @@ public class InviteAppointmentAdapter extends RecyclerView.Adapter<InviteAppoint
 
     private SimpleDateFormat targetDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-    private SimpleDateFormat targetTimeFormat = new SimpleDateFormat("HH:mm");
+    private SimpleDateFormat targetTimeFormat = new SimpleDateFormat("hh:mma");
 
 
     public interface OnItemClickListener {
