@@ -4,9 +4,10 @@ import androidx.room.TypeConverter;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class Converters {
-    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(TimeConstants.DATE_FORMAT, Locale.getDefault());
 
     @TypeConverter
     public static Date fromTimestamp(String value) {

@@ -52,37 +52,68 @@ public class AppointmentsFragment extends Fragment {
             binding.appointmentsTitle.setText("Appointments for " + user.getFullname());
             userId = user.getId();
             appointments = appointmentViewModel.getAllAppointmentsForUser(userId);
-            appointments.observe(getViewLifecycleOwner(), retrieved -> {
-                AppointmentAdapter adapter = new AppointmentAdapter(retrieved);
-                adapter.setOnItemClickListener(appointment -> {
-                    // View or Edit Appointment
-                    AppointmentsFragmentDirections.ActionAppointmentsFragmentToViewAppointmentFragment action = AppointmentsFragmentDirections.actionAppointmentsFragmentToViewAppointmentFragment(appointment.getId());
-                    NavHostFragment.findNavController(AppointmentsFragment.this).navigate(action);
-                });
-                adapter.setOnItemLongClickListener(appointment -> {
-                    // Delete appointment with alert dialog
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    builder.setMessage("Are you sure you want to delete this appointment?");
-                    builder.setPositiveButton("Yes", (dialog, which) -> {
-                        appointmentViewModel.delete(appointment);
-                        Toast.makeText(getActivity(), "Appointment deleted", Toast.LENGTH_SHORT).show();
-                    });
-                    builder.setNegativeButton("No", (dialog, which) -> {
-                    });
-                    builder.create().show();
-                });
-                binding.appointmentsRecyclerView.setAdapter(adapter);
-                binding.appointmentsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            });
+            loadAppsIntoRecyclerView(appointments);
+            binding.viewCompleted.setOnClickListener(
+                    v -> {
+                        appointments = appointmentViewModel.getAllCompletedAppointmentsForUser(userId);
+                        loadAppsIntoRecyclerView(appointments);
+                    }
+            );
+            binding.viewPending.setOnClickListener(
+                    v -> {
+                        appointments = appointmentViewModel.getAllPendingAppointmentsForUser(userId);
+                        loadAppsIntoRecyclerView(appointments);
+                    }
+            );
+            binding.viewCancelled.setOnClickListener(
+                    v -> {
+                        appointments = appointmentViewModel.getAllCancelledAppointmentsForUser(userId);
+                        loadAppsIntoRecyclerView(appointments);
+                    }
+            );
+            binding.viewAll.setOnClickListener(
+                    v -> {
+                        appointments = appointmentViewModel.getAllAppointmentsForUser(userId);
+                        loadAppsIntoRecyclerView(appointments);
+                    }
+            );
         });
         binding.inviteButton.setOnClickListener(v -> {
-            Toast.makeText(getActivity(), "Invite Button Clicked", Toast.LENGTH_SHORT).show();
             // Navigate to the InviteFragment
             NavHostFragment.findNavController(AppointmentsFragment.this).navigate(R.id.action_appointmentsFragment_to_inviteAppointment);
         });
         binding.addAppointmentFab.setOnClickListener(v -> {
             // Navigate to the AddAppointmentFragment
             NavHostFragment.findNavController(AppointmentsFragment.this).navigate(R.id.action_appointmentsFragment_to_addAppointmentsFragment);
+        });
+    }
+
+    private void loadAppsIntoRecyclerView(LiveData<List<Appointment>> appointments) {
+        appointments.observe(getViewLifecycleOwner(), retrieved -> {
+            if (retrieved == null) {
+                Toast.makeText(getActivity(), "No appointments found.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            AppointmentAdapter adapter = new AppointmentAdapter(retrieved);
+            adapter.setOnItemClickListener(appointment -> {
+                // View or Edit Appointment
+                AppointmentsFragmentDirections.ActionAppointmentsFragmentToViewAppointmentFragment action = AppointmentsFragmentDirections.actionAppointmentsFragmentToViewAppointmentFragment(appointment.getId());
+                NavHostFragment.findNavController(AppointmentsFragment.this).navigate(action);
+            });
+            adapter.setOnItemLongClickListener(appointment -> {
+                // Delete appointment with alert dialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage("Are you sure you want to delete this appointment?");
+                builder.setPositiveButton("Yes", (dialog, which) -> {
+                    appointmentViewModel.delete(appointment);
+                    Toast.makeText(getActivity(), "Appointment deleted", Toast.LENGTH_SHORT).show();
+                });
+                builder.setNegativeButton("No", (dialog, which) -> {
+                });
+                builder.create().show();
+            });
+            binding.appointmentsRecyclerView.setAdapter(adapter);
+            binding.appointmentsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         });
     }
 

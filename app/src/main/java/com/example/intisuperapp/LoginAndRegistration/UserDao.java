@@ -51,13 +51,6 @@ public interface UserDao {
     @Query("SELECT * FROM User WHERE full_name = :name")
     LiveData<User> getUserByFullName(String name);
 
-    // Get use by name
-    @Query("SELECT * FROM User WHERE full_name = :name")
-    User getUserByFullNameSync(String name);
-
-    @Query("SELECT * FROM User WHERE full_name LIKE '%' || :name || '%'")
-    LiveData<List<User>> getUserByFullNameLike(String name);
-
     // Get all Students
     @Query("SELECT * FROM User WHERE role = 'student'")
     LiveData<List<User>> getAllStudents();

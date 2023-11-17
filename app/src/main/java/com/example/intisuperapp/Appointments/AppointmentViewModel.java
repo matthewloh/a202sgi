@@ -62,6 +62,22 @@ public class AppointmentViewModel extends AndroidViewModel {
         return mRepository.getAllAppointmentsForUser(authorId);
     }
 
+    public LiveData<List<Appointment>> getAllCompletedAppointmentsForUser(int authorId) {
+        return mRepository.getAllCompletedAppointmentsForUser(authorId);
+    }
+
+    public LiveData<List<Appointment>> getAllPendingAppointmentsForUser(int authorId) {
+        return mRepository.getAllPendingAppointmentsForUser(authorId);
+    }
+
+    public LiveData<List<Appointment>> getAllCancelledAppointmentsForUser(int authorId) {
+        return mRepository.getAllCancelledAppointmentsForUser(authorId);
+    }
+
+    public LiveData<List<AppointmentInvitation>> getAppointmentInvitationByInviteeIdAndStatus(int invitee_id, String status) {
+        return mRepository.getAppointmentInvitationByInviteeIdAndStatus(invitee_id, status);
+    }
+
     public LiveData<List<AppointmentInvitation>> getAppointmentInvitationByAppointmentId(int appointment_id) {
         return mRepository.getAppointmentInvitationByAppointmentId(appointment_id);
     }

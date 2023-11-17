@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.intisuperapp.DBUtils.TimeConstants;
 import com.example.intisuperapp.databinding.AppointmentsItemBinding;
 
 import java.text.SimpleDateFormat;
@@ -38,10 +39,11 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         diffResult.dispatchUpdatesTo(this);
     }
 
-    private SimpleDateFormat originalDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-    private SimpleDateFormat targetDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+    // 2023-11-16 15:16:48
+    private SimpleDateFormat originalDateFormat = new SimpleDateFormat(TimeConstants.DATE_FORMAT, Locale.getDefault());
+    private SimpleDateFormat targetDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-    private SimpleDateFormat targetTimeFormat = new SimpleDateFormat("HH:mma", Locale.getDefault());
+    private SimpleDateFormat targetTimeFormat = new SimpleDateFormat("HH:mm");
     // Save a reference to the List of Appointments
     private List<Appointment> mAppointmentList;
 
@@ -83,6 +85,8 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
 
         // Load the image into the ImageView using Glide
         Glide.with(holder.binding.getRoot()).load(currentAppointment.getImageUrl()).into(holder.binding.appointmentImage);
+
+        // Format the date and time
         Date tempStartDate = currentAppointment.getStartDate();
         Date tempEndDate = currentAppointment.getEndDate();
         Date tempStartTime = currentAppointment.getStartDate();
@@ -100,10 +104,13 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
             String formattedEndDate = targetDateFormat.format(tempEndDate);
             String formattedStartTime = targetTimeFormat.format(tempStartTime);
             String formattedEndTime = targetTimeFormat.format(tempEndTime);
-            holder.binding.appointmentStartDate.setText(formattedStartDate + " - " + formattedEndDate);
+            if (formattedStartDate.equals(formattedEndDate)) {
+                holder.binding.appointmentStartDate.setText(formattedStartDate);
+            } else {
+                holder.binding.appointmentStartDate.setText(formattedStartDate + " - " + formattedEndDate);
+            }
             holder.binding.appointmentStartTimeEndTime.setText(formattedStartTime + " - " + formattedEndTime);
         }
-//        holder.binding.appointmentImage.setImageResource(R.drawable.intilogo);
         holder.binding.appointmentLocation.setText(currentAppointment.getLocation());
         holder.binding.appointmentNotes.setText(currentAppointment.getNotes());
         holder.binding.appointmentStatus.setText(currentAppointment.getApptStatus());

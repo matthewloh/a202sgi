@@ -15,7 +15,6 @@ public class User {
     @ColumnInfo(name = "full_name")
     private String fullname;
 
-
     @ColumnInfo(name = "email")
     private String email;
 

@@ -1,6 +1,10 @@
 package com.example.intisuperapp.LoginAndRegistration;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,22 +12,15 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
-
-import com.example.intisuperapp.R;
 import com.example.intisuperapp.databinding.FragmentRegistrationBinding;
+
+import at.favre.lib.crypto.bcrypt.BCrypt;
 
 public class RegistrationFragment extends Fragment {
 
     private FragmentRegistrationBinding binding;
 
-
     private UserViewModel userViewModel;
-
-    private UserSharedViewModel userSharedViewModel;
 
     @Nullable
     @Override
@@ -37,75 +34,68 @@ public class RegistrationFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
-        userSharedViewModel = new ViewModelProvider(requireActivity()).get(UserSharedViewModel.class);
 
         binding.proceedToRoleButton.setOnClickListener(v -> {
             String fullName = binding.fullnameText.getText().toString();
             String email = binding.emailText.getText().toString();
             String password = binding.password.getText().toString();
-            RegistrationFragmentDirections.ActionRegistrationFragmentToRoleRegistrationFragment action = RegistrationFragmentDirections.actionRegistrationFragmentToRoleRegistrationFragment(
-                    fullName, email, password
-            );
-            NavHostFragment.findNavController(RegistrationFragment.this)
-                    .navigate(action);
+            String confirmPassword = binding.confirmPassword.getText().toString();
+            if (isValidated(fullName, email, password, confirmPassword)) {
+                String bcryptHash = BCrypt.withDefaults().hashToString(12, password.toCharArray());
+                RegistrationFragmentDirections.ActionRegistrationFragmentToRoleRegistrationFragment action = RegistrationFragmentDirections.actionRegistrationFragmentToRoleRegistrationFragment(fullName, email, bcryptHash);
+                NavHostFragment.findNavController(RegistrationFragment.this).navigate(action);
+            }
         });
-//        binding.materialButton.setOnClickListener(
-//                v -> {
-//                    String email = binding.editTextEmailAddress.getText().toString().trim();
-//                    String password = binding.passwordEntry.getText().toString().trim();
-//                    String confirmPassword = binding.editTextConfirmPass.getText().toString().trim();
-//                    String fullName = binding.editTextFullName.getText().toString().trim();
-//
-//
-//                    if(TextUtils.isEmpty(email)){
-//                        binding.editTextEmailAddress.setError("Email is Required.");
-//                        return;
-//                    }
-//
-//                    if(TextUtils.isEmpty(password)){
-//                        binding.editTextConfirmPass.setError("Password is Required.");
-//                        return;
-//                    }
-//
-//                    if(password.length() < 6){
-//                        binding.passwordEntry.setError("Password must have more than 6 characters");
-//                        return;
-//                    }
-//
-//                    if(TextUtils.isEmpty(confirmPassword)){
-//                        binding.editTextConfirmPass.setError("Confirm Password is Required.");
-//                        return;
-//                    }
-//
-//                    if(TextUtils.isEmpty(fullName)){
-//                        binding.editTextFullName.setError("Full Name is Required.");
-//                        return;
-//                    }
-//
-//                    if(!TextUtils.equals(password, confirmPassword)){
-//                        binding.editTextConfirmPass.setError("Passwords do not match.");
-//                        return;
-//                    }
-//
-//                    binding.progressBar.setVisibility(View.VISIBLE);
-//
-//                    fAuth.createUserWithEmailAndPassword(email, confirmPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<AuthResult> task) {
-//                            if(task.isSuccessful()){
-//                                Toast.makeText(requireContext(), "User Created.", Toast.LENGTH_SHORT).show();
-//                                NavHostFragment.findNavController(RegistrationFragment.this)
-//                                        .navigate(R.id.action_registrationFragment_to_roleRegistrationFragment);
-//                            }else {
-//                                Toast.makeText(requireContext(), "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-//                                binding.progressBar.setVisibility(View.GONE);
-//                                NavHostFragment.findNavController(RegistrationFragment.this)
-//                                        .navigate(R.id.action_registrationFragment_to_loginFragment);
-//                            }
-//                        }
-//                    });
-//                }
-//        );
+    }
+
+    public boolean isValidated(String fullName, String email, String password, String confirmPassword) {
+        if (fullName.isEmpty()) {
+            binding.fullnameText.setError("Full name is required");
+            Toast.makeText(requireContext(), "Full name is required", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (email.isEmpty()) {
+            binding.emailText.setError("Email is required");
+            Toast.makeText(requireContext(), "Email is required", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        // Check email ends in @student.newinti.edu.my or @newinti.edu.my
+        if (!email.endsWith("@student.newinti.edu.my") && !email.endsWith("@newinti.edu.my")) {
+            binding.emailText.setError("Please enter a valid INTI email");
+            Toast.makeText(requireContext(), "Please enter a valid INTI email", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        userViewModel.getUserByEmail(email).observe(getViewLifecycleOwner(), user -> {
+            if (user != null) {
+                binding.emailText.setError("Email already exists");
+                Toast.makeText(requireContext(), "Email already exists", Toast.LENGTH_SHORT).show();
+            }
+        });
+        if (password.isEmpty()) {
+            binding.password.setError("Password is required");
+            Toast.makeText(requireContext(), "Password is required", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (password.length() < 6) {
+            binding.password.setError("Password must have more than 6 characters");
+            Toast.makeText(requireContext(), "Password must have more than 6 characters", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (password.contains(" ")) {
+            binding.password.setError("Password cannot contain spaces");
+            Toast.makeText(requireContext(), "Password cannot contain spaces", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (confirmPassword.isEmpty()) {
+            binding.confirmPassword.setError("Confirm password is required");
+            Toast.makeText(requireContext(), "Please confirm your password", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (!password.equals(confirmPassword)) {
+            binding.confirmPassword.setError("Passwords do not match");
+            Toast.makeText(requireContext(), "Password do not match", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
     @Override

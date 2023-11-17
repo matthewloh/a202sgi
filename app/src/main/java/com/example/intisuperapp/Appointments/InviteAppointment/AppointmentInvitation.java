@@ -3,6 +3,7 @@ package com.example.intisuperapp.Appointments.InviteAppointment;
 import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
@@ -13,7 +14,12 @@ import com.example.intisuperapp.LoginAndRegistration.User;
 import java.util.Date;
 
 
-@Entity(tableName = "appointment_invitation")
+@Entity(tableName = "appointment_invitation",
+        foreignKeys = {
+                @ForeignKey(entity = Appointment.class, parentColumns = "id", childColumns = "appointment_id", onDelete = ForeignKey.CASCADE),
+                @ForeignKey(entity = User.class, parentColumns = "id", childColumns = "invitee_id", onDelete = ForeignKey.CASCADE),
+                @ForeignKey(entity = User.class, parentColumns = "id", childColumns = "author_id", onDelete = ForeignKey.CASCADE)
+        })
 @TypeConverters(Converters.class)
 public class AppointmentInvitation {
     @PrimaryKey(autoGenerate = true)
@@ -30,16 +36,6 @@ public class AppointmentInvitation {
     @ColumnInfo(name = "status_update_at")
     public Date statusUpdateAt;
 
-    public int getLinkedAppointmentId() {
-        return linkedAppointmentId;
-    }
-
-    public void setLinkedAppointmentId(int linkedAppointmentId) {
-        this.linkedAppointmentId = linkedAppointmentId;
-    }
-
-    @ColumnInfo(name = "linked_appointment_id")
-    public int linkedAppointmentId;
     @ColumnInfo(name = "invitee_id")
     public int inviteeId;
 

@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.intisuperapp.Appointments.AppointmentViewModel;
@@ -30,7 +31,7 @@ public class InviteAppointmentFragment extends Fragment {
     private UserSharedViewModel userSharedViewModel;
 
     public int userId;
-    private LiveData<List<AppointmentInvitation>> appointments;
+    private LiveData<List<AppointmentInvitation>> invites;
 
 
     @Override
@@ -47,44 +48,46 @@ public class InviteAppointmentFragment extends Fragment {
         userSharedViewModel = new ViewModelProvider(requireActivity()).get(UserSharedViewModel.class);
         userSharedViewModel.getUser().observe(getViewLifecycleOwner(), user -> {
             userId = user.getId();
-            appointmentViewModel.getAppointmentInvitationByInviteeId(userId).observe(getViewLifecycleOwner(), appointmentInvitations -> {
-                if (appointmentInvitations != null) {
-                    InviteAppointmentAdapter adapter = new InviteAppointmentAdapter(appointmentInvitations, appointmentInvitationViewModel);
-                    adapter.setOnItemClickListener(appointment -> {
-                    });
-                    adapter.setOnItemLongClickListener(appointment -> {
-                    });
-                    binding.appointmentsRecyclerView.setAdapter(adapter);
-                    binding.appointmentsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                } else {
-                    Toast.makeText(getActivity(), "Appointments Not Retrieved", Toast.LENGTH_SHORT).show();
-                }
+            binding.invitesAppointmentsTitle.setText("Invites for " + user.getFullname().split(" ")[0]);
+            invites = appointmentViewModel.getAppointmentInvitationByInviteeId(userId);
+            loadInvitesIntoRecyclerView(invites);
+            binding.invitesBack.setOnClickListener(v -> {
+                // Return to the main appointments fragment
+                NavHostFragment.findNavController(InviteAppointmentFragment.this)
+                        .navigateUp();
             });
-//            if (appointments.getValue() != null) {
-//                Toast.makeText(getActivity(), "Appointments Retrieved", Toast.LENGTH_SHORT).show();
-//                appointments.observe(getViewLifecycleOwner(), retrieved -> {
-//                    InviteAppointmentAdapter adapter = new InviteAppointmentAdapter(retrieved, appointmentInvitationViewModel);
-//                    adapter.setOnItemClickListener(appointment -> {
-//                        Toast.makeText(getActivity(), "Appointment Clicked", Toast.LENGTH_SHORT).show();
-//                        Toast.makeText(getActivity(), "Appointment Image Url" + appointment.getImageUrl(), Toast.LENGTH_SHORT).show();
-//                    });
-//                    adapter.setOnItemLongClickListener(appointment -> {
-//                        Toast.makeText(getActivity(), "Appointment Long Clicked", Toast.LENGTH_SHORT).show();
-//                        Toast.makeText(getActivity(), "Appointment Image Url" + appointment.getImageUrl(), Toast.LENGTH_SHORT).show();
-//                    });
-//                });
-//            } else {
-//                Toast.makeText(getActivity(), "Appointments Not Retrieved", Toast.LENGTH_SHORT).show();
-//            }
+            binding.viewAccepted.setOnClickListener(v -> {
+                invites = appointmentViewModel.getAppointmentInvitationByInviteeIdAndStatus(userId, "accepted");
+                loadInvitesIntoRecyclerView(invites);
+            });
+            binding.viewDeclined.setOnClickListener(v -> {
+                invites = appointmentViewModel.getAppointmentInvitationByInviteeIdAndStatus(userId, "declined");
+                loadInvitesIntoRecyclerView(invites);
+            });
+            binding.invitesViewPending.setOnClickListener(v -> {
+                invites = appointmentViewModel.getAppointmentInvitationByInviteeIdAndStatus(userId, "pending");
+                loadInvitesIntoRecyclerView(invites);
+            });
+            binding.invitesViewAll.setOnClickListener(v -> {
+                invites = appointmentViewModel.getAppointmentInvitationByInviteeId(userId);
+                loadInvitesIntoRecyclerView(invites);
+            });
         });
-        binding.viewAll.setOnClickListener(v -> {
-            Toast.makeText(getActivity(), "View All Clicked", Toast.LENGTH_SHORT).show();
-        });
-        binding.viewAccepted.setOnClickListener(v -> {
-            Toast.makeText(getActivity(), "View Accepted Clicked", Toast.LENGTH_SHORT).show();
-        });
-        binding.viewDeclined.setOnClickListener(v -> {
-            Toast.makeText(getActivity(), "View Declined Clicked", Toast.LENGTH_SHORT).show();
+    }
+
+    private void loadInvitesIntoRecyclerView(LiveData<List<AppointmentInvitation>> invites) {
+        invites.observe(getViewLifecycleOwner(), appointmentInvitations -> {
+            if (appointmentInvitations != null) {
+                InviteAppointmentAdapter adapter = new InviteAppointmentAdapter(appointmentInvitations, appointmentInvitationViewModel);
+                adapter.setOnItemClickListener(appointment -> {
+                });
+                adapter.setOnItemLongClickListener(appointment -> {
+                });
+                binding.appointmentsRecyclerView.setAdapter(adapter);
+                binding.appointmentsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            } else {
+                Toast.makeText(getActivity(), "Appointments Not Retrieved", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 

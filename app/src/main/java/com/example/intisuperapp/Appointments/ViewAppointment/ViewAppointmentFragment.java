@@ -7,16 +7,19 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.intisuperapp.Appointments.AppointmentViewModel;
 import com.example.intisuperapp.Appointments.InviteAppointment.AppointmentInvitationViewModel;
+import com.example.intisuperapp.LoginAndRegistration.User;
 import com.example.intisuperapp.LoginAndRegistration.UserSharedViewModel;
 import com.example.intisuperapp.databinding.FragmentViewAppointmentBinding;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class ViewAppointmentFragment extends Fragment {
@@ -32,7 +35,9 @@ public class ViewAppointmentFragment extends Fragment {
     private SimpleDateFormat originalDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
     private SimpleDateFormat targetDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
 
-    private SimpleDateFormat targetTimeFormat = new SimpleDateFormat("HH:mma", Locale.getDefault());
+    private SimpleDateFormat targetTimeFormat = new SimpleDateFormat("hh:mma", Locale.getDefault());
+
+    private LiveData<List<User>> listOfInvitees;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -90,22 +95,15 @@ public class ViewAppointmentFragment extends Fragment {
                         appointmentViewModel.update(appointment);
                         Toast.makeText(requireContext(), "Appointment Cancelled", Toast.LENGTH_SHORT).show();
                     });
-                    appointmentViewModel.getAllLecturers().observe(getViewLifecycleOwner(), lecturer -> {
-                                if (lecturer != null) {
-                                    InviteUsersAdapter adapter = new InviteUsersAdapter(lecturer, appointmentInvitationViewModel, appointment, user);
+                    if (user.getRole().equals("student")) {
+                        listOfInvitees = appointmentViewModel.getAllLecturers();
+                    } else {
+                        listOfInvitees = appointmentViewModel.getAllStudents();
+                    }
+                    listOfInvitees.observe(getViewLifecycleOwner(), invitees -> {
+                                if (invitees != null) {
+                                    InviteUsersAdapter adapter = new InviteUsersAdapter(invitees, appointmentInvitationViewModel, appointment, user);
                                     binding.inviteeRecyclerView.setAdapter(adapter);
-//                                    adapter.setOnItemClickListener(user1 -> {
-//                                        Date updateAt = new Date();
-//                                        String updateAtString = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(updateAt);
-//                                        Date updateAtDate = new Date();
-//                                        try {
-//                                            updateAtDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(updateAtString);
-//                                        } catch (Exception e) {
-//                                            e.printStackTrace();
-//                                        }
-//                                        appointmentInvitationViewModel.insert(new AppointmentInvitation(appointment, user, "pending", updateAtDate, user1.getId()));
-//                                        Toast.makeText(requireContext(), "Invitation Sent", Toast.LENGTH_SHORT).show();
-//                                    });
                                     binding.inviteeRecyclerView.setVisibility(View.VISIBLE);
                                     binding.inviteeRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
                                 }

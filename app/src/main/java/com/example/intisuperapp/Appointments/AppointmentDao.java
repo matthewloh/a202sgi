@@ -31,9 +31,21 @@ public interface AppointmentDao {
     @Query("SELECT * FROM Appointment WHERE authorId = :authorId ORDER by id DESC")
     LiveData<List<Appointment>> getAllAppointmentsForUser(int authorId);
 
+    // Get all completed appointments for a user
+    @Query("SELECT * FROM Appointment WHERE authorId = :authorId AND apptStatus = 'completed' ORDER by id DESC")
+    LiveData<List<Appointment>> getAllCompletedAppointmentsForUser(int authorId);
+
+    // get all cancelled appointments for a user
+    @Query("SELECT * FROM Appointment WHERE authorId = :authorId AND apptStatus = 'cancelled' ORDER by id DESC")
+    LiveData<List<Appointment>> getAllCancelledAppointmentsForUser(int authorId);
+
+    // Get all pending appointments
+    @Query("SELECT * FROM Appointment WHERE authorId = :authorId AND apptStatus = 'pending' ORDER by id DESC")
+    LiveData<List<Appointment>> getAllPendingAppointmentsForUser(int authorId);
 
     @Query("UPDATE Appointment SET apptStatus = :status WHERE id = :appointmentId")
     void updateAppointmentStatus(int appointmentId, String status);
+
     // Retrieve appointment details by id
     @Query("SELECT * FROM Appointment WHERE id = :id")
     LiveData<Appointment> getAppointmentById(int id);

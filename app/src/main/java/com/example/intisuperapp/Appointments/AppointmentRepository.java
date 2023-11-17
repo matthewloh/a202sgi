@@ -32,6 +32,18 @@ public class AppointmentRepository {
         return mAppointmentDao.getAllAppointmentsForUser(authorId);
     }
 
+    public LiveData<List<Appointment>> getAllCompletedAppointmentsForUser(int authorId) {
+        return mAppointmentDao.getAllCompletedAppointmentsForUser(authorId);
+    }
+
+    public LiveData<List<Appointment>> getAllCancelledAppointmentsForUser(int authorId) {
+        return mAppointmentDao.getAllCancelledAppointmentsForUser(authorId);
+    }
+
+    public LiveData<List<Appointment>> getAllPendingAppointmentsForUser(int authorId) {
+        return mAppointmentDao.getAllPendingAppointmentsForUser(authorId);
+    }
+
     public void insert(Appointment appointment) {
         INTISuperappDatabase.databaseWriteExecutor.execute(() -> mAppointmentDao.insert(appointment));
     }
@@ -84,6 +96,10 @@ public class AppointmentRepository {
         return mAppointmentInvitationDao.getAppointmentInvitationByInviteeId(inviteeId);
     }
 
+    public LiveData<List<AppointmentInvitation>> getAppointmentInvitationByInviteeIdAndStatus(int inviteeId, String status) {
+        return mAppointmentInvitationDao.getAppointmentInvitationByInviteeIdAndStatus(inviteeId, status);
+    }
+
     public LiveData<List<AppointmentInvitation>> getPendingAppointmentInvitationByInviteeId(int inviteeId) {
         return mAppointmentInvitationDao.getPendingAppointmentInvitationByInviteeId(inviteeId);
     }
@@ -91,6 +107,7 @@ public class AppointmentRepository {
     public LiveData<AppointmentInvitation> getAppointmentInvitationByAppointmentIdAndUserId(int appointmentId, int userId) {
         return mAppointmentInvitationDao.getAppointmentInvitationByAppointmentIdAndUserId(appointmentId, userId);
     }
+
     public LiveData<List<User>> getAllStudents() {
         return mUserDao.getAllStudents();
     }

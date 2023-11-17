@@ -29,14 +29,11 @@ public interface AppointmentInvitationDao {
     @Query("SELECT * FROM appointment_invitation WHERE invitee_id = :invitee_id")
     LiveData<List<AppointmentInvitation>> getAppointmentInvitationByInviteeId(int invitee_id);
 
+    @Query("SELECT * FROM appointment_invitation WHERE invitee_id = :invitee_id AND invite_status = :status")
+    LiveData<List<AppointmentInvitation>> getAppointmentInvitationByInviteeIdAndStatus(int invitee_id, String status);
+
     @Query("SELECT * FROM appointment_invitation WHERE invitee_id = :invitee_id AND invite_status = 'pending'")
     LiveData<List<AppointmentInvitation>> getPendingAppointmentInvitationByInviteeId(int invitee_id);
-
-    @Query("SELECT * FROM appointment_invitation WHERE invitee_id = :invitee_id AND invite_status = 'accepted'")
-    LiveData<List<AppointmentInvitation>> getAcceptedAppointmentInvitationByInviteeId(int invitee_id);
-
-    @Query("SELECT * FROM appointment_invitation WHERE invitee_id = :invitee_id AND invite_status = 'declined'")
-    LiveData<List<AppointmentInvitation>> getDeclinedAppointmentInvitationByInviteeId(int invitee_id);
 
     @Query("SELECT * FROM appointment_invitation WHERE appointment_id = :appointmentId AND invitee_id = :userId")
     LiveData<AppointmentInvitation> getAppointmentInvitationByAppointmentIdAndUserId(int appointmentId, int userId);

@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/appointmentsTitle"
+            android:id="@+id/invites_appointmentsTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -43,7 +43,7 @@
             android:scrollbars="none"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appointmentsTitle"
+            app:layout_constraintTop_toBottomOf="@+id/invites_appointmentsTitle"
             app:layout_constraintVertical_bias="1.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -52,17 +52,16 @@
 
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/viewAll"
+                    android:id="@+id/invites_back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/square_appointment"
                     android:backgroundTint="#ffffff"
-                    android:drawableLeft="@drawable/ic_invite"
                     android:drawablePadding="8dp"
                     android:padding="16dp"
-                    android:text="View All"
+                    android:text="Back"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
                     android:textColor="@color/black"
@@ -83,7 +82,7 @@
                     android:drawableLeft="@drawable/ic_check"
                     android:drawablePadding="8dp"
                     android:padding="16dp"
-                    android:text="View Accepted"
+                    android:text="Accepted"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
                     android:textColor="@color/black"
@@ -91,7 +90,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/viewAll"
+                    app:layout_constraintStart_toEndOf="@+id/invites_back"
                     app:shapeAppearanceOverlay="@drawable/square_appointment" />
 
                 <com.google.android.material.textview.MaterialTextView
@@ -105,7 +104,7 @@
                     android:drawableLeft="@drawable/ic_close"
                     android:drawablePadding="8dp"
                     android:padding="16dp"
-                    android:text="View Declined"
+                    android:text="Declined"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
                     android:textColor="@color/black"
@@ -114,6 +113,47 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/viewAccepted"
+                    app:shapeAppearanceOverlay="@drawable/square_appointment" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/invites_viewPending"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/square_appointment"
+                    android:backgroundTint="#b59df9"
+                    android:padding="16dp"
+                    android:text="Pending"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                    android:textColor="@color/black"
+                    app:drawableTint="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/viewDeclined"
+                    app:shapeAppearanceOverlay="@drawable/square_appointment" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/invites_viewAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/square_appointment"
+                    android:backgroundTint="#30b3fa"
+                    android:drawablePadding="8dp"
+                    android:padding="16dp"
+                    android:text="All Invites"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                    android:textColor="@color/black"
+                    app:drawableTint="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/invites_viewPending"
                     app:shapeAppearanceOverlay="@drawable/square_appointment" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </HorizontalScrollView>

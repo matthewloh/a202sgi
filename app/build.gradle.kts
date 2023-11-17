@@ -60,4 +60,6 @@ dependencies {
     implementation("com.google.firebase:firebase-storage:20.3.0")
     // Glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
+    // Bcrypt
+    implementation("at.favre.lib:bcrypt:0.10.2")
 }

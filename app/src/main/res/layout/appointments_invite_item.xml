@@ -187,7 +187,6 @@
             android:drawableStart="@drawable/ic_clock"
             android:drawablePadding="4dp"
             android:ellipsize="end"
-            android:maxLines="1"
             android:paddingVertical="12dp"
             android:text="You have not responded to this invite"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"

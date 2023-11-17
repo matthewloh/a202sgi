@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.intisuperapp.Appointments.Appointment;
+import com.example.intisuperapp.DBUtils.TimeConstants;
 import com.example.intisuperapp.LoginAndRegistration.User;
 import com.example.intisuperapp.databinding.AppointmentsInviteItemBinding;
 
@@ -35,11 +36,11 @@ public class InviteAppointmentAdapter extends RecyclerView.Adapter<InviteAppoint
 
     private List<AppointmentInvitation> mAppointmentList;
 
-    private SimpleDateFormat originalDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+    private SimpleDateFormat originalDateFormat = new SimpleDateFormat(TimeConstants.DATE_FORMAT, Locale.getDefault());
 
-    private SimpleDateFormat targetDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+    private SimpleDateFormat targetDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-    private SimpleDateFormat targetTimeFormat = new SimpleDateFormat("HH:mma", Locale.getDefault());
+    private SimpleDateFormat targetTimeFormat = new SimpleDateFormat("HH:mm");
 
 
     public interface OnItemClickListener {
@@ -99,7 +100,11 @@ public class InviteAppointmentAdapter extends RecyclerView.Adapter<InviteAppoint
             String formattedEndDate = targetDateFormat.format(tempEndDate);
             String formattedStartTime = targetTimeFormat.format(tempStartTime);
             String formattedEndTime = targetTimeFormat.format(tempEndTime);
-            holder.binding.appointmentStartDate.setText(formattedStartDate + " - " + formattedEndDate);
+            if (formattedStartDate.equals(formattedEndDate)) {
+                holder.binding.appointmentStartDate.setText(formattedStartDate);
+            } else {
+                holder.binding.appointmentStartDate.setText(formattedStartDate + " - " + formattedEndDate);
+            }
             holder.binding.appointmentStartTimeEndTime.setText(formattedStartTime + " - " + formattedEndTime);
         }
         holder.binding.appointmentLocation.setText(currentAppointment.getLocation());

@@ -20,7 +20,7 @@ import com.example.intisuperapp.LoginAndRegistration.UserDao;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class, Appointment.class, AppointmentInvitation.class, Bookings.class}, version = 1)
+@Database(entities = {User.class, Appointment.class, AppointmentInvitation.class, Bookings.class}, version = 2)
 public abstract class INTISuperappDatabase extends RoomDatabase {
     // We create a singleton, so that we don't create multiple instances of the database
     private static INTISuperappDatabase instance;
@@ -61,8 +61,8 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
             // If you want to keep data through app restarts,
             // comment out the following block
             databaseWriteExecutor.execute(() -> {
-//                UserDao userDao = instance.userDao();
-//                userDao.deleteAllUsers();
+                UserDao userDao = instance.userDao();
+                userDao.deleteAllUsers();
 
 //                User user = new User("John696969 Doe", "j@.com", "12", "student");
 //                userDao.insert(user);

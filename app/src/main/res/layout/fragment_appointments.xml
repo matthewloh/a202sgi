@@ -71,7 +71,7 @@
                     app:shapeAppearanceOverlay="@drawable/square_appointment" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/viewAccepted"
+                    android:id="@+id/viewCompleted"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -93,7 +93,7 @@
                     app:shapeAppearanceOverlay="@drawable/square_appointment" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/viewDeclined"
+                    android:id="@+id/viewCancelled"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -111,7 +111,49 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/viewAccepted"
+                    app:layout_constraintStart_toEndOf="@+id/viewCompleted"
+                    app:shapeAppearanceOverlay="@drawable/square_appointment" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/viewPending"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/square_appointment"
+                    android:backgroundTint="#b59df9"
+                    android:drawablePadding="8dp"
+                    android:padding="16dp"
+                    android:text="Pending"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                    android:textColor="@color/black"
+                    app:drawableTint="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/viewCancelled"
+                    app:shapeAppearanceOverlay="@drawable/square_appointment" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/viewAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/square_appointment"
+                    android:backgroundTint="#30b3fa"
+                    android:drawablePadding="8dp"
+                    android:padding="16dp"
+                    android:text="All"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                    android:textColor="@color/black"
+                    app:drawableTint="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/viewPending"
                     app:shapeAppearanceOverlay="@drawable/square_appointment" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </HorizontalScrollView>
