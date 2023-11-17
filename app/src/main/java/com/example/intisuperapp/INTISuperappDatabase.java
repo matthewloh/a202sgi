@@ -3,7 +3,6 @@ package com.example.intisuperapp;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
@@ -11,37 +10,39 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.intisuperapp.Appointments.Appointment;
 import com.example.intisuperapp.Appointments.AppointmentDao;
-import com.example.intisuperapp.Appointments.AppointmentUserJoin;
-import com.example.intisuperapp.Appointments.AppointmentUserJoinDao;
-import com.example.intisuperapp.Firebase.dao.PhotoDao;
-import com.example.intisuperapp.Firebase.model.Photo;
+import com.example.intisuperapp.Appointments.InviteAppointment.AppointmentInvitation;
+import com.example.intisuperapp.Appointments.InviteAppointment.AppointmentInvitationDao;
+import com.example.intisuperapp.Bookings.Bookings;
+import com.example.intisuperapp.Bookings.BookingsDao;
 import com.example.intisuperapp.LoginAndRegistration.User;
 import com.example.intisuperapp.LoginAndRegistration.UserDao;
-import com.example.intisuperapp.OldNotes.Note;
-import com.example.intisuperapp.OldNotes.NoteDao;
+import com.example.intisuperapp.Venues.Venues;
+import com.example.intisuperapp.Venues.VenuesDao;
 
-import java.util.Date;
-import java.text.SimpleDateFormat;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Note.class, User.class, Appointment.class}, version = 1)
+@Database(entities = {User.class, Appointment.class, AppointmentInvitation.class, Bookings.class, Venues.class}, version = 6)
 // entities = {Note.class} is an array of entities, to add more entities, just add a comma and the next entity
 public abstract class INTISuperappDatabase extends RoomDatabase {
     // We create a singleton, so that we don't create multiple instances of the database
     private static INTISuperappDatabase instance;
 
-    private static final int NUMBER_OF_THREADS = 4;
+    private static final int NUMBER_OF_THREADS = 5;
 
     // We create an executor service, so that we can run database operations in the background
     public static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    public abstract NoteDao noteDao(); // Returns a NoteDao object, room takes care of the implementation
-
     public abstract UserDao userDao();
 
     public abstract AppointmentDao appointmentDao();
+
+    public abstract AppointmentInvitationDao appointmentInvitationDao();
+
+    public abstract BookingsDao bookingsDao();
+
+    public abstract VenuesDao venuesDao();
 
 //    public abstract AppointmentUserJoinDao appointmentUserJoinDao();
 
@@ -65,23 +66,19 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
             // If you want to keep data through app restarts,
             // comment out the following block
             databaseWriteExecutor.execute(() -> {
-                // Populate the database in the background.
-                // If you want to start with more notes, just add them.
-                NoteDao dao = instance.noteDao();
-                dao.deleteAllNotes();
-
-                Note note = new Note("Title 1", "Description 1", 1);
-                dao.insert(note);
-                note = new Note("Title 2", "Description 2", 2);
-                dao.insert(note);
-                note = new Note("Title 3", "Description 3", 3);
-                dao.insert(note);
-
                 UserDao userDao = instance.userDao();
                 userDao.deleteAllUsers();
 
-                AppointmentDao appointmentDao = instance.appointmentDao();
-                appointmentDao.deleteAllAppointments();
+//                User user = new User("John696969 Doe", "j@.com", "12", "student");
+//                userDao.insert(user);
+//                user = new User("Jane Doe", "g", "12", "student");
+//                userDao.insert(user);
+
+                VenuesDao venuesDao = instance.venuesDao();
+                venuesDao.deleteAllVenues();
+
+//                AppointmentDao appointmentDao = instance.appointmentDao();
+//                appointmentDao.deleteAllAppointments();
 //                Date startDate = new Date();
 //                Date endDate = new Date();
 //                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -111,6 +108,13 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
 //                        1
 //                );
 //                appointmentDao.insert(appointment);
+
+//                BookingsDao bookingsDao = instance.bookingsDao();
+//                bookingsDao.deleteAllBookings();
+
+
+
+
             });
         }
 
@@ -118,25 +122,64 @@ public abstract class INTISuperappDatabase extends RoomDatabase {
         public void onOpen(@NonNull SupportSQLiteDatabase db) {
             super.onOpen(db);
             databaseWriteExecutor.execute(() -> {
-//                NoteDao dao = instance.noteDao();
-//                dao.deleteAllNotes();
-//                Note note = new Note("Title 1", "Description 1", 1);
-//                dao.insert(note);
-//                note = new Note("Title 2", "Description 2", 2);
-//                dao.insert(note);
-//                note = new Note("Title 3", "Description 3", 3);
-//                dao.insert(note);
-                UserDao userDao = instance.userDao();
+//                UserDao userDao = instance.userDao();
 //                userDao.deleteAllUsers();
 ////
 //                User user = new User("John Doe", "j@.com", "12", "student");
 //                userDao.insert(user);
 //                user = new User("Jane Doe", "g", "12", "student");
 //                userDao.insert(user);
+
+                VenuesDao venuesDao = instance.venuesDao();
+                venuesDao.deleteAllVenues();
 //
+////
+//                AppointmentDao appointmentDao = instance.appointmentDao();
+////                appointmentDao.deleteAllAppointments();
 //
-                AppointmentDao appointmentDao = instance.appointmentDao();
-//                appointmentDao.deleteAllAppointments();
+//                Date startDate = new Date();
+//                Date endDate = new Date();
+//                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//                try {
+//                    startDate = sdf.parse("2020-12-12 12:12:12");
+//                    endDate = sdf.parse("2020-12-12 12:12:12");
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//                User john = userDao.getUserByFullNameSync("John Doe");
+//                Appointment appointment = new Appointment(
+//                        "Title",
+//                        "Description",
+//                        "Location",
+//                        "Notes",
+//                        startDate,
+//                        endDate,
+//                        john.getId()
+//                );
+//                appointmentDao.insert(appointment);
+//                appointment = new Appointment(
+//                        "Title 2",
+//                        "Description 2",
+//                        "Location 2",
+//                        "Notes 2",
+//                        startDate,
+//                        endDate,
+//                        john.getId()
+//                );
+//                appointmentDao.insert(appointment);
+//
+//                String currentTime = new SimpleDateFormat("h:mm a", Locale.getDefault()).format(new Date());
+//
+//                BookingsDao bookingsDao = instance.bookingsDao();
+////              bookingsDao.deleteAllBookings();
+//
+//                Date Date1 = new Date();
+//                Date Date2 = new Date();
+//
+//                Bookings bookings = new Bookings("Title",Date1 , Date2, Date2, "012345678",  1);
+//                bookingsDao.insert(bookings);
+//                bookings = new Bookings("Title 2", Date1, Date2, Date1, "0164527895",  1);
+//                bookingsDao.insert(bookings);
 
 //                Date startDate = new Date();
 //                Date endDate = new Date();

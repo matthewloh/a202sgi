@@ -5,6 +5,9 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.example.intisuperapp.Appointments.InviteAppointment.AppointmentInvitation;
+import com.example.intisuperapp.LoginAndRegistration.User;
+
 import java.util.List;
 
 public class AppointmentViewModel extends AndroidViewModel {
@@ -21,6 +24,10 @@ public class AppointmentViewModel extends AndroidViewModel {
 
     public void update(Appointment appointment) {
         mRepository.update(appointment);
+    }
+
+    public void updateAppointmentStatus(int id, String status) {
+        mRepository.updateAppointmentStatus(id, status);
     }
 
     public void delete(Appointment appointment) {
@@ -53,6 +60,40 @@ public class AppointmentViewModel extends AndroidViewModel {
 
     public LiveData<List<Appointment>> getAllAppointmentsForUser(int authorId) {
         return mRepository.getAllAppointmentsForUser(authorId);
+    }
+
+    public LiveData<List<Appointment>> getAllCompletedAppointmentsForUser(int authorId) {
+        return mRepository.getAllCompletedAppointmentsForUser(authorId);
+    }
+
+    public LiveData<List<Appointment>> getAllPendingAppointmentsForUser(int authorId) {
+        return mRepository.getAllPendingAppointmentsForUser(authorId);
+    }
+
+    public LiveData<List<Appointment>> getAllCancelledAppointmentsForUser(int authorId) {
+        return mRepository.getAllCancelledAppointmentsForUser(authorId);
+    }
+
+    public LiveData<List<AppointmentInvitation>> getAppointmentInvitationByInviteeIdAndStatus(int invitee_id, String status) {
+        return mRepository.getAppointmentInvitationByInviteeIdAndStatus(invitee_id, status);
+    }
+
+    public LiveData<List<AppointmentInvitation>> getAppointmentInvitationByAppointmentId(int appointment_id) {
+        return mRepository.getAppointmentInvitationByAppointmentId(appointment_id);
+    }
+
+    public LiveData<List<AppointmentInvitation>> getAppointmentInvitationByInviteeId(int invitee_id) {
+        return mRepository.getAppointmentInvitationByInviteeId(invitee_id);
+    }
+
+    // Get all students
+    public LiveData<List<User>> getAllStudents() {
+        return mRepository.getAllStudents();
+    }
+
+    // Get all lecturers
+    public LiveData<List<User>> getAllLecturers() {
+        return mRepository.getAllLecturers();
     }
 
 }

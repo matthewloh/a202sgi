@@ -6,60 +6,74 @@
     android:layout_height="match_parent"
     tools:context=".HomePage.HomeFragment">
     <!-- fragment_home.xml -->
-
-    <ImageButton
-        android:id="@+id/eventsButton"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/homeTitleLayout"
         android:layout_width="0dp"
-        android:layout_height="113dp"
-        android:background="@null"
-        android:src="@drawable/eventsimage"
+        android:layout_height="254dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/lostAndFoundButton"
-        app:layout_constraintTop_toBottomOf="@+id/discussionsButton" />
-
-    <ImageButton
-        android:id="@+id/appointmentsButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@null"
-        android:src="@drawable/appointmentsimage"
-        app:layout_constraintBottom_toTopOf="@+id/lostAndFoundButton"
-        app:layout_constraintEnd_toStartOf="@+id/discussionsButton"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageButton
-        android:id="@+id/lostAndFoundButton"
+        <ImageButton
+            android:id="@+id/eventsButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/events_image"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/lostAndFoundButton"
+            app:layout_constraintTop_toBottomOf="@+id/bookingsButton" />
+
+        <ImageButton
+            android:id="@+id/appointmentsButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/appointments_image"
+            app:layout_constraintBottom_toTopOf="@+id/lostAndFoundButton"
+            app:layout_constraintEnd_toStartOf="@+id/bookingsButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/lostAndFoundButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/lostandfound_image"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/eventsButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appointmentsButton" />
+
+        <ImageButton
+            android:id="@+id/bookingsButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/bookings_image"
+            app:layout_constraintBottom_toTopOf="@+id/eventsButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/appointmentsButton"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/homeContentLayout"
         android:layout_width="0dp"
-        android:layout_height="113dp"
-        android:background="@null"
-        android:src="@drawable/lostandfoundimage"
-        app:layout_constraintEnd_toStartOf="@+id/eventsButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appointmentsButton" />
-
-    <ImageButton
-        android:id="@+id/discussionsButton"
-        android:layout_width="0dp"
-        android:layout_height="113dp"
-        android:layout_marginTop="16dp"
-        android:background="@null"
-        android:src="@drawable/discussionsimage"
-        app:layout_constraintBottom_toTopOf="@+id/eventsButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/appointmentsButton"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/goToBookingsPageBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:text="@string/go_to_bookings_page"
+        android:layout_height="0dp"
+        android:background="@color/light_grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/homeTitleLayout"></androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,8 +9,8 @@ import com.example.intisuperapp.INTISuperappDatabase;
 import java.util.List;
 
 public class UserRepository {
-    private UserDao mUserDao;
-    private LiveData<List<User>> mAllUsers;
+    private final UserDao mUserDao;
+    private final LiveData<List<User>> mAllUsers;
 
     public UserRepository(Application application) {
         INTISuperappDatabase database = INTISuperappDatabase.getInstance(application);
@@ -33,20 +33,12 @@ public class UserRepository {
         INTISuperappDatabase.databaseWriteExecutor.execute(() -> mUserDao.update(user));
     }
 
-    public LiveData<User> queryUserByEmailAndPassword(String email, String password) {
-        return mUserDao.queryUserByEmailAndPassword(email, password);
-    }
-
     public LiveData<User> getUserById(int id) {
         return mUserDao.getUserById(id);
     }
 
     public LiveData<User> getUserByEmail(String email) {
         return mUserDao.getUserByEmail(email);
-    }
-
-    public LiveData<User> getUserByFullName(String name) {
-        return mUserDao.getUserByFullName(name);
     }
 
     public void deleteAllUsers() {

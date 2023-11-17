@@ -1,19 +1,16 @@
 package com.example.intisuperapp.Appointments;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.intisuperapp.R;
+import com.example.intisuperapp.DBUtils.TimeConstants;
 import com.example.intisuperapp.databinding.AppointmentsItemBinding;
-import com.example.intisuperapp.databinding.FragmentAppointmentsBinding;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,10 +21,6 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
     private OnItemClickListener mListener;
 
     private OnItemLongClickListener mLongListener;
-    private SimpleDateFormat originalDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-    private SimpleDateFormat targetDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-
-    private SimpleDateFormat targetTimeFormat = new SimpleDateFormat("HH:mma", Locale.getDefault());
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
@@ -37,6 +30,20 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         mLongListener = listener;
     }
 
+    // DiffUtil
+    public void updateAppointmentList(List<Appointment> newAppointmentList) {
+        AppointmentDiffCallback diffCallback = new AppointmentDiffCallback(mAppointmentList, newAppointmentList);
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
+        mAppointmentList.clear();
+        mAppointmentList.addAll(newAppointmentList);
+        diffResult.dispatchUpdatesTo(this);
+    }
+
+    // 2023-11-16 15:16:48
+    private SimpleDateFormat originalDateFormat = new SimpleDateFormat(TimeConstants.DATE_FORMAT, Locale.getDefault());
+    private SimpleDateFormat targetDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+    private SimpleDateFormat targetTimeFormat = new SimpleDateFormat("hh:mma");
     // Save a reference to the List of Appointments
     private List<Appointment> mAppointmentList;
 
@@ -73,11 +80,13 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         Appointment currentAppointment = mAppointmentList.get(position);
         holder.binding.appointmentTitle.setText(currentAppointment.getTitle());
         holder.binding.appointmentDesc.setText(currentAppointment.getDescription());
-        holder.binding.appointmentDate.setText(currentAppointment.getStartDate().toString());
+        holder.binding.appointmentStartDate.setText(currentAppointment.getStartDate().toString());
         holder.binding.appointmentStartTimeEndTime.setText(currentAppointment.getStartDate().toString() + " - " + currentAppointment.getEndDate().toString());
-        // Image url of currentAppointment is obtained by selecting image_url from photo_table where photo_id = currentAppointment.getPhotoId()
-        //
+
+        // Load the image into the ImageView using Glide
         Glide.with(holder.binding.getRoot()).load(currentAppointment.getImageUrl()).into(holder.binding.appointmentImage);
+
+        // Format the date and time
         Date tempStartDate = currentAppointment.getStartDate();
         Date tempEndDate = currentAppointment.getEndDate();
         Date tempStartTime = currentAppointment.getStartDate();
@@ -95,13 +104,21 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
             String formattedEndDate = targetDateFormat.format(tempEndDate);
             String formattedStartTime = targetTimeFormat.format(tempStartTime);
             String formattedEndTime = targetTimeFormat.format(tempEndTime);
-            holder.binding.appointmentDate.setText(formattedStartDate + " - " + formattedEndDate);
+            if (formattedStartDate.equals(formattedEndDate)) {
+                holder.binding.appointmentStartDate.setText(formattedStartDate);
+            } else {
+                holder.binding.appointmentStartDate.setText(formattedStartDate + " - " + formattedEndDate);
+            }
             holder.binding.appointmentStartTimeEndTime.setText(formattedStartTime + " - " + formattedEndTime);
         }
-//        holder.binding.appointmentImage.setImageResource(R.drawable.intilogo);
         holder.binding.appointmentLocation.setText(currentAppointment.getLocation());
         holder.binding.appointmentNotes.setText(currentAppointment.getNotes());
-
+        holder.binding.appointmentStatus.setText(currentAppointment.getApptStatus());
+        holder.binding.appointmentCardView.setOnClickListener(view -> {
+            if (mListener != null) {
+                mListener.onItemClick(currentAppointment);
+            }
+        });
         holder.binding.appointmentImage.setOnClickListener(view -> {
             if (mListener != null) {
                 mListener.onItemClick(currentAppointment);
@@ -148,9 +165,15 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
             Appointment oldAppointment = mOldAppointmentList.get(oldItemPosition);
             Appointment newAppointment = mNewAppointmentList.get(newItemPosition);
-            return oldAppointment.getTitle().equals(newAppointment.getTitle()) && oldAppointment.getDescription().equals(newAppointment.getDescription());
+            return oldAppointment.getTitle().equals(newAppointment.getTitle()) &&
+                    oldAppointment.getDescription().equals(newAppointment.getDescription()) &&
+                    oldAppointment.getStartDate().equals(newAppointment.getStartDate()) &&
+                    oldAppointment.getEndDate().equals(newAppointment.getEndDate()) &&
+                    oldAppointment.getLocation().equals(newAppointment.getLocation()) &&
+                    oldAppointment.getNotes().equals(newAppointment.getNotes());
         }
 
+        @Nullable
         @Override
         public Object getChangePayload(int oldItemPosition, int newItemPosition) {
             // Implement method if you're going to use ItemAnimator

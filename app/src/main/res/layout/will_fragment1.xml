@@ -77,44 +77,11 @@
         tools:layout_editor_absoluteY="657dp" />
 
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="143dp"
-        android:layout_height="148dp"
-        android:src="@drawable/bigicon"
-        tools:layout_editor_absoluteX="134dp"
-        tools:layout_editor_absoluteY="580dp" />
 
-    <ImageButton
-        android:id="@+id/Homepage1"
-        android:layout_width="44dp"
-        android:layout_height="52dp"
-        android:src="@drawable/homeicon"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="663dp" />
 
-    <ImageButton
-        android:id="@+id/Homepage2"
-        android:layout_width="44dp"
-        android:layout_height="52dp"
-        android:src="@drawable/calendaricon"
-        tools:layout_editor_absoluteX="267dp"
-        tools:layout_editor_absoluteY="663dp" />
 
-    <ImageButton
-        android:id="@+id/Homepage3"
-        android:layout_width="44dp"
-        android:layout_height="52dp"
-        android:src="@drawable/notificationicon"
-        tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="663dp" />
 
-    <ImageButton
-        android:id="@+id/Homepage4"
-        android:layout_width="44dp"
-        android:layout_height="52dp"
-        android:src="@drawable/people"
-        tools:layout_editor_absoluteX="351dp"
-        tools:layout_editor_absoluteY="663dp" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

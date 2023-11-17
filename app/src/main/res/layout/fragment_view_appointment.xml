@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?><!--TODO :
+    Appointment View
+    Information to present:
+    App Info:
+        - Title
+        - Description
+        - Date
+        - Time
+        - Image
+        - Location
+        - Status
+        - Notes
+    Invitees:
+        - Name
+        - Email
+        - Status
+        - Notes
+    Buttons to:
+        - Edit Appointment
+        - Delete Appointment
+        - Add Invitee
+        - Remove Invitee
+        -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_grey"
+    tools:context=".Appointments.AppointmentsFragment">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        app:cardBackgroundColor="@color/colorPrimaryDark"
+        app:cardCornerRadius="34dp"
+        app:cardElevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:padding="8dp">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/appointment_card_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="8dp"
+                app:cardBackgroundColor="#edf5fe"
+                app:cardCornerRadius="34dp"
+                app:cardElevation="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/invitee_card_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintVertical_chainStyle="packed">
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:padding="8dp">
+
+                        <EditText
+                            android:id="@+id/appointment_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="12dp"
+                            android:drawableRight="@drawable/ic_edit"
+                            android:drawablePadding="4dp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Title"
+                            android:textAlignment="center"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <View
+                            android:id="@+id/horizontal_divider"
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@color/colorPrimaryDark"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/appointment_title" />
+
+                        <TextView
+                            android:id="@+id/appointment_desc"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:drawableEnd="@drawable/ic_edit"
+                            android:ellipsize="end"
+                            android:paddingVertical="12dp"
+                            android:text="Description"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/horizontal_divider" />
+
+                        <!--        Half Width of the Card Horizontal Divider-->
+                        <!--        End connected to the start of the Image Display-->
+                        <View
+                            android:id="@+id/half_width_horizontal_divider"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginBottom="8dp"
+                            android:background="@color/colorPrimaryDark"
+                            app:layout_constraintBottom_toTopOf="@+id/appointment_location"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/appointment_desc"
+                            app:layout_constraintVertical_bias="0.0" />
+
+                        <TextView
+                            android:id="@+id/start_time_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="304dp"
+                            android:text="Start"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/half_width_horizontal_divider" />
+
+
+                        <TextView
+                            android:id="@+id/appointment_start_date"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/baseline_calendar_month_24"
+                            android:drawablePadding="4dp"
+                            android:ellipsize="end"
+                            android:paddingVertical="12dp"
+                            android:text="Date"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            app:layout_constraintEnd_toStartOf="@+id/appointment_start_time"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/start_time_text" />
+
+
+                        <TextView
+                            android:id="@+id/appointment_start_time"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/ic_clock"
+                            android:drawablePadding="4dp"
+                            android:ellipsize="end"
+                            android:paddingVertical="12dp"
+                            android:text="Time"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/appointment_start_date"
+                            app:layout_constraintTop_toBottomOf="@id/start_time_text" />
+
+                        <View
+                            android:id="@+id/half_width_horizontal_divider2"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@color/colorPrimaryDark"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/appointment_start_date" />
+
+                        <TextView
+                            android:id="@+id/end_time_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="304dp"
+                            android:text="End"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/half_width_horizontal_divider2" />
+
+                        <TextView
+                            android:id="@+id/appointment_end_date"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/baseline_calendar_month_24"
+                            android:drawablePadding="4dp"
+                            android:ellipsize="end"
+                            android:paddingVertical="12dp"
+                            android:text="Date"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            app:layout_constraintEnd_toStartOf="@+id/appointment_end_time"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/end_time_text" />
+
+                        <TextView
+                            android:id="@+id/appointment_end_time"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/ic_clock"
+                            android:drawablePadding="4dp"
+                            android:ellipsize="end"
+                            android:paddingVertical="12dp"
+                            android:text="Time"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/appointment_end_date"
+                            app:layout_constraintTop_toBottomOf="@id/end_time_text" />
+
+                        <View
+                            android:id="@+id/half_width_horizontal_divider3"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@color/colorPrimaryDark"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/appointment_end_date" />
+
+                        <TextView
+                            android:id="@+id/appointment_location"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/ic_location"
+                            android:drawablePadding="4dp"
+                            android:ellipsize="end"
+                            android:paddingVertical="12dp"
+                            android:text="Location"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/appointment_notes"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/half_width_horizontal_divider3"
+                            app:layout_constraintVertical_bias="0.0" />
+
+
+                        <TextView
+                            android:id="@+id/appointment_notes"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/ic_notes"
+                            android:ellipsize="end"
+                            android:paddingVertical="12dp"
+                            android:text="Notes"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/appointment_location"
+                            app:layout_constraintTop_toBottomOf="@+id/half_width_horizontal_divider3"
+                            app:layout_constraintVertical_bias="0.0" />
+
+                        <!--                        Buttons to Complete, Cancel or Delete Appointment Pending Completed Cancelled -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/reset_appointment_status_button"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="12dp"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="#a3edef"
+                            android:text="Reset"
+                            android:textColor="@android:color/white"
+                            app:backgroundTint="@color/grey"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/appointment_status" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/complete_appointment_button"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="#a3edef"
+                            android:drawableEnd="@drawable/ic_check"
+                            android:maxLines="1"
+
+                            android:text="Comp"
+                            android:textColor="@android:color/white"
+                            app:backgroundTint="@color/grey"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/cancel_appointment_button"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/appointment_status" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/cancel_appointment_button"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="#fa8a91"
+                            android:drawableEnd="@drawable/ic_close"
+                            android:paddingHorizontal="12dp"
+                            android:text="Cancel"
+                            android:textColor="@android:color/white"
+                            app:backgroundTint="@color/grey"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/complete_appointment_button"
+                            app:layout_constraintTop_toBottomOf="@+id/appointment_status" />
+
+                        <View
+                            android:id="@+id/horizontal_divider4"
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@color/colorPrimaryDark"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/appointment_location" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/appointment_status_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Status"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                            android:textColor="@color/colorPrimaryDark"
+                            app:layout_constraintBottom_toTopOf="@+id/appointment_status"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/horizontal_divider4"
+                            app:layout_constraintVertical_bias="0.0"
+                            app:layout_constraintVertical_chainStyle="packed"
+                            app:layout_constraintVertical_weight="1"
+                            app:layout_constraintWidth_default="wrap" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/appointment_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="You have not completed this appointment yet."
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/colorPrimaryDark"
+                            app:layout_constraintBottom_toTopOf="@+id/complete_appointment_button"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/appointment_status_title"
+                            app:layout_constraintVertical_bias="0.0"
+                            app:layout_constraintVertical_chainStyle="packed"
+                            app:layout_constraintVertical_weight="1"
+                            app:layout_constraintWidth_default="wrap" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.core.widget.NestedScrollView>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/invitee_card_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="8dp"
+                app:cardBackgroundColor="#edf5fe"
+                app:cardCornerRadius="34dp"
+                app:cardElevation="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appointment_card_view"
+                app:layout_constraintVertical_bias="0.0">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:id="@+id/invitee_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:drawablePadding="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="Invitees"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        app:layout_constraintBottom_toTopOf="@+id/horizontal_divider3"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:id="@+id/horizontal_divider3"
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@color/colorPrimaryDark"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/invitee_title" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/invitee_recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@android:color/transparent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/horizontal_divider3"
+                        tools:listitem="@layout/invitee_item" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

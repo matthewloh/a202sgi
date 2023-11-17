@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+<!-- This is the shape of the button -->
+    <solid android:color="#fa8a91" />
+    <!-- This is the border of the button -->
+    <stroke
+        android:width="2dp"
+        android:color="#000000" />
+    <!-- This is the corner radius -->
+    <corners android:radius="10dp" />
+    <!-- This is the padding of the button -->
+    <padding
+        android:bottom="8dp"
+        android:left="8dp"
+        android:right="8dp"
+        android:top="8dp" />
+</shape>
