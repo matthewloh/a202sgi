@@ -68,9 +68,6 @@
         android:label=""
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_homeFragment_to_eventsFragment"
-            app:destination="@id/eventsFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
         <action
@@ -99,12 +96,11 @@
         <action
             android:id="@+id/action_homeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_eventMainFragment"
+            app:destination="@id/eventMainFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/eventsFragment"
-        android:name="com.example.intisuperapp.Events.EventsFragment"
-        android:label=""
-        tools:layout="@layout/fragment_events" />
+
     <fragment
         android:id="@+id/notificationsFragment"
         android:name="com.example.intisuperapp.NotificationsFragment"
@@ -148,20 +144,6 @@
             app:destination="@id/bookingsVenues" />
     </fragment>
 
-    <fragment
-        android:id="@+id/lostAndFoundFragment"
-        android:name="com.example.intisuperapp.LostAndFound.LostAndFoundFragment"
-        android:label=""
-        tools:layout="@layout/lost_and_found_main_page">
-        <action
-            android:id="@+id/action_lostAndFoundFragment_to_lostAndFoundReportLostFragment"
-            app:destination="@id/lostAndFoundReportLostFragment" />
-        <action
-            android:id="@+id/action_lostAndFoundFragment_to_lostAndFoundReportFoundFragment"
-            app:destination="@id/lostAndFoundReportFoundFragment" />
-            android:id="@+id/action_showAllBookings_to_bookingsFragment"
-            app:destination="@id/bookingsFragment" />
-    </fragment>
     <fragment
         android:id="@+id/appointmentsFragment"
         android:name="com.example.intisuperapp.Appointments.AppointmentsFragment"
@@ -285,5 +267,28 @@
             android:id="@+id/action_addVenuesFragment_to_bookingsVenues"
             app:destination="@id/bookingsVenues" />
     </fragment>
+    <fragment
+        android:id="@+id/eventMainFragment"
+        android:name="com.example.intisuperapp.Events.EventMainFragment"
+        android:label="fragment_event_main"
+        tools:layout="@layout/fragment_event_main" >
+        <action
+            android:id="@+id/action_eventMainFragment_to_eventRegisterFragment"
+            app:destination="@id/eventRegisterFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventRegisterFragment"
+        android:name="com.example.intisuperapp.Events.EventRegisterFragment"
+        android:label="fragment_event_register"
+        tools:layout="@layout/fragment_event_register" >
+        <action
+            android:id="@+id/action_eventRegisterFragment_to_eventInfoFragment"
+            app:destination="@id/eventInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventInfoFragment"
+        android:name="com.example.intisuperapp.Events.EventInfoFragment"
+        android:label="fragment_event_info"
+        tools:layout="@layout/fragment_event_info" />
 
 </navigation>
