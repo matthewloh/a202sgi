@@ -32,8 +32,10 @@ import com.example.intisuperapp.databinding.FragmentUpdateBookingsBinding;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 
 public class UpdateBookings extends Fragment {
@@ -52,6 +54,7 @@ public class UpdateBookings extends Fragment {
     private UserViewModel userViewModel;
     private FirebaseViewModel firebaseViewModel;
     private VenuesViewModel venuesViewModel;
+    final List<String> venueList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -79,7 +82,7 @@ public class UpdateBookings extends Fragment {
         String bookingVenue = args.getBookingVenue();
 
         chooseVenueSpinner = binding.bookingVenueSpinner;
-        final List<String> venueList = new ArrayList<>();
+
         venueList.add("Please select");
 
         firebaseViewModel.getVenuesFromFirebase(venuesViewModel).observe(getViewLifecycleOwner(), venues -> {
@@ -126,22 +129,34 @@ public class UpdateBookings extends Fragment {
         });
 
         saveBookingButton.setOnClickListener(v -> {
+            SimpleDateFormat formatter = new SimpleDateFormat("hh:mm a", Locale.US);
+            Date startTime = formatter.parse(chooseStartTime.getText().toString(), new java.text.ParsePosition(0));
+            Date endTime = formatter.parse(chooseEndTime.getText().toString(), new java.text.ParsePosition(0));
 
             if (chooseDate.getText().toString().isEmpty() || chooseStartTime.getText().toString().isEmpty() || chooseEndTime.getText().toString().isEmpty() || contactInput.getText().toString().isEmpty()) {
                 Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
             } else {
+                assert startTime != null && endTime != null;
+                if (endTime.before(startTime) || startTime.equals(endTime)) {
+                    Toast.makeText(requireContext(), "Please choose a valid time", Toast.LENGTH_SHORT).show();
+                } else if (chooseVenueSpinner.getSelectedItem().toString().equals("Please select")) {
+                    Toast.makeText(requireContext(), "Please select a venue", Toast.LENGTH_SHORT).show();
+                } else if (contactInput.getText().toString().length() <= 8 || contactInput.getText().toString().length() >= 12) {
+                    Toast.makeText(requireContext(), "Please enter a valid contact number", Toast.LENGTH_SHORT).show();
+                } else {
 
-                String contact = contactInput.getText().toString();
-                String venue = chooseVenueSpinner.getSelectedItem().toString();
-                String strDate = chooseDate.getText().toString();
-                String strStartTime = chooseStartTime.getText().toString();
-                String strEndTime = chooseEndTime.getText().toString();
+                    String contact = contactInput.getText().toString();
+                    String venue = chooseVenueSpinner.getSelectedItem().toString();
+                    String strDate = chooseDate.getText().toString();
+                    String strStartTime = chooseStartTime.getText().toString();
+                    String strEndTime = chooseEndTime.getText().toString();
 
 
-                bookingsViewModel.updateBookingsById(venue, strDate, strStartTime, strEndTime, contact, userId, bookingId);
-                Toast.makeText(requireContext(), "Booking updated", Toast.LENGTH_SHORT).show();
-                NavHostFragment.findNavController(UpdateBookings.this)
-                        .navigate(R.id.action_updateBookings_to_bookingsFragment);
+                    bookingsViewModel.updateBookingsById(venue, strDate, strStartTime, strEndTime, contact, userId, bookingId);
+                    Toast.makeText(requireContext(), "Booking updated", Toast.LENGTH_SHORT).show();
+                    NavHostFragment.findNavController(UpdateBookings.this)
+                            .navigate(R.id.action_updateBookings_to_bookingsFragment);
+                }
             }
         });
     }
@@ -196,7 +211,7 @@ public class UpdateBookings extends Fragment {
 
     @Override
     public void onDestroyView() {
-
+        venueList.clear();
         super.onDestroyView();
         venuesViewModel.deleteAllVenues();
         binding = null;

@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements DrawerLocker {
             } else if (itemId == R.id.loginFragment) {
                 setDrawerEnabled(false);
                 navController.navigate(R.id.loginFragment);
+            } else if (itemId == R.id.profileFragment) {
+                navController.navigate(R.id.profileFragment);
             }
             binding.drawerLayout.closeDrawer(GravityCompat.START);
             return true;
