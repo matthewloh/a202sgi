@@ -1,5 +1,7 @@
 package com.example.intisuperapp.Bookings;
 
+import static java.time.LocalTime.parse;
+
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
@@ -30,11 +32,15 @@ import com.example.intisuperapp.databinding.FragmentCreateBookingsBinding;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 
 public class CreateBookings extends Fragment {
@@ -55,6 +61,7 @@ public class CreateBookings extends Fragment {
     String amPm;
     Spinner chooseVenueSpinner;
     Button addBookingButton;
+    List<String> venueList;
 
     private int userId;
 
@@ -90,7 +97,10 @@ public class CreateBookings extends Fragment {
         chooseVenueSpinner = binding.bookingVenueSpinner;
 
         final List<String> venueList = new ArrayList<>();
-        venueList.add("Please select");
+        final HashSet<String> venueSet = new HashSet<>();
+
+
+
 
         firebaseViewModel.getVenuesFromFirebase(venuesViewModel).observe(getViewLifecycleOwner(), venues -> {
             if (venues != null) {
@@ -98,12 +108,23 @@ public class CreateBookings extends Fragment {
                     venueList.add(venue.getVenueName());
                 }
 
+                venueSet.addAll(venueList);
+                venueList.clear();
+
+                venueList.addAll(venueSet);
+
+
                 // Create and set the adapter after obtaining the venue list
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, venueList);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 chooseVenueSpinner.setAdapter(adapter);
+
+
+
             }
         });
+
+
 
 
         chooseDate.setOnClickListener(v -> showDatePicker());
@@ -112,44 +133,50 @@ public class CreateBookings extends Fragment {
 
         chooseEndTime.setOnClickListener(v -> showTimePicker(chooseEndTime));
 
-
         addBookingButton.setOnClickListener(v -> {
+            SimpleDateFormat formatter = new SimpleDateFormat("hh:mm a", Locale.US);
+            Date startTime = formatter.parse(chooseStartTime.getText().toString(), new java.text.ParsePosition(0));
+            Date endTime = formatter.parse(chooseEndTime.getText().toString(), new java.text.ParsePosition(0));
+
             if (chooseDate.getText().toString().isEmpty() || chooseStartTime.getText().toString().isEmpty() || chooseEndTime.getText().toString().isEmpty() || contactInput.getText().toString().isEmpty()) {
                 Toast.makeText(requireContext(), "Please fill in all the fields", Toast.LENGTH_SHORT).show();
-            } else if (chooseStartTime.getText().toString().compareTo(chooseEndTime.getText().toString()) >= 0) {
-                Toast.makeText(requireContext(), "Please choose a valid time", Toast.LENGTH_SHORT).show();
-            } else if (chooseVenueSpinner.getSelectedItem().toString().equals("Please select")) {
-                Toast.makeText(requireContext(), "Please select a venue", Toast.LENGTH_SHORT).show();
-            } else if (contactInput.getText().toString().length() <= 8 || contactInput.getText().toString().length() >= 12) {
-                Toast.makeText(requireContext(), "Please enter a valid contact number", Toast.LENGTH_SHORT).show();
             } else {
-                bookingsViewModel.getBookingsByDateVenue(
-                                chooseVenueSpinner.getSelectedItem().toString(),
-                                chooseDate.getText().toString())
-                        .observe(getViewLifecycleOwner(), overlappedBookingsDateVenue -> {
-                            if (overlappedBookingsDateVenue != null) {
-                                if (isVenueDateTimeRangeOverlapping(overlappedBookingsDateVenue, chooseVenueSpinner.getSelectedItem().toString(), chooseDate.getText().toString(), chooseStartTime.getText().toString(), chooseEndTime.getText().toString())) {
-                                    Toast.makeText(requireContext(), "Booking already exists", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    // add to database
-                                    String venue = chooseVenueSpinner.getSelectedItem().toString();
-                                    String date = chooseDate.getText().toString();
-                                    String strStartTime = chooseStartTime.getText().toString();
-                                    String strEndTime = chooseEndTime.getText().toString();
-                                    String contact = contactInput.getText().toString();
+                assert startTime != null && endTime != null;
+                if (endTime.before(startTime) || startTime.equals(endTime)) {
+                    Toast.makeText(requireContext(), "Please choose a valid time", Toast.LENGTH_SHORT).show();
+                } else if (chooseVenueSpinner.getSelectedItem().toString().equals("Please select")) {
+                    Toast.makeText(requireContext(), "Please select a venue", Toast.LENGTH_SHORT).show();
+                } else if (contactInput.getText().toString().length() <= 8 || contactInput.getText().toString().length() >= 12) {
+                    Toast.makeText(requireContext(), "Please enter a valid contact number", Toast.LENGTH_SHORT).show();
+                } else {
+                    bookingsViewModel.getBookingsByDateVenue(
+                                    chooseVenueSpinner.getSelectedItem().toString(),
+                                    chooseDate.getText().toString())
+                            .observe(getViewLifecycleOwner(), overlappedBookingsDateVenue -> {
+                                if (overlappedBookingsDateVenue != null) {
+                                    if (isVenueDateTimeRangeOverlapping(overlappedBookingsDateVenue, chooseVenueSpinner.getSelectedItem().toString(), chooseDate.getText().toString(), chooseStartTime.getText().toString(), chooseEndTime.getText().toString())) {
+                                        Toast.makeText(requireContext(), "Booking already exists", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        // add to database
+                                        String venue = chooseVenueSpinner.getSelectedItem().toString();
+                                        String date = chooseDate.getText().toString();
+                                        String strStartTime = chooseStartTime.getText().toString();
+                                        String strEndTime = chooseEndTime.getText().toString();
+                                        String contact = contactInput.getText().toString();
 
-                                    Bookings bookings = new Bookings(venue, date, strStartTime, strEndTime, contact, userId);
-                                    bookingsViewModel.insert(bookings);
+                                        Bookings bookings = new Bookings(venue, date, strStartTime, strEndTime, contact, userId);
+                                        bookingsViewModel.insert(bookings);
 
-                                    Toast.makeText(requireContext(), "Booking Added", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(requireContext(), "Booking Added", Toast.LENGTH_SHORT).show();
 
-                                    NavHostFragment.findNavController(CreateBookings.this)
-                                            .navigate(R.id.action_createBookings_to_bookingsFragment);
+                                        NavHostFragment.findNavController(CreateBookings.this)
+                                                .navigate(R.id.action_createBookings_to_bookingsFragment);
+                                    }
+
+
                                 }
-
-
-                            }
-                        });
+                            });
+                }
             }
         });
 
@@ -244,6 +271,7 @@ public class CreateBookings extends Fragment {
 
     @Override
     public void onDestroyView() {
+
 
         super.onDestroyView();
         venuesViewModel.deleteAllVenues();

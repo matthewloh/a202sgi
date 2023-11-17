@@ -64,7 +64,7 @@ public class ShowVenuesFragment extends Fragment {
                 adapter.setOnItemLongClickListener(venue -> {
                     new AlertDialog.Builder(getActivity()).setTitle("Do you want to delete " + venue.getVenueName() + " ?")
                             .setPositiveButton("Yes", (dialog, which) -> {
-                                venuesViewModel.deleteVenuesByName(venue.getVenueName());
+                                firebaseViewModel.deleteVenueFromFirebase(venuesViewModel, venue.getVenueName());
                                 Toast.makeText(getContext(), "Venue deleted", Toast.LENGTH_SHORT).show();
                             })
                             .setNegativeButton("No", (dialog, which) -> {
