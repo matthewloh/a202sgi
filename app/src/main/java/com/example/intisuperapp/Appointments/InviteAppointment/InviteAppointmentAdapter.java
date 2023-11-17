@@ -25,6 +25,7 @@ public class InviteAppointmentAdapter extends RecyclerView.Adapter<InviteAppoint
 
     private AppointmentInvitationViewModel appointmentInvitationViewModel;
     private User appointmentCreator;
+    private String msg;
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
@@ -110,14 +111,30 @@ public class InviteAppointmentAdapter extends RecyclerView.Adapter<InviteAppoint
         holder.binding.appointmentLocation.setText(currentAppointment.getLocation());
         holder.binding.appointmentNotes.setText(currentAppointment.getNotes());
         holder.binding.invitedBy.setText("You were invited by " + appointmentCreator.getFullname());
+        long timeAgo = appInv.getStatusUpdateAt().getTime();
+        long now = new Date().getTime();
+        long diff = now - timeAgo;
+        long diffSeconds = diff / 1000;
+        long diffMinutes = diff / (60 * 1000);
+        long diffHours = diff / (60 * 60 * 1000);
+        long diffDays = diff / (24 * 60 * 60 * 1000);
+        if (diffSeconds < 60) {
+            msg = diffSeconds + " seconds ago";
+        } else if (diffMinutes < 60) {
+            msg = diffMinutes + " minutes ago";
+        } else if (diffHours < 24) {
+            msg = diffHours + " hours ago";
+        } else {
+            msg = diffDays + " days ago";
+        }
         if (appInv.getInviteStatus().equals("accepted")) {
             holder.binding.acceptButton.setVisibility(View.GONE);
             holder.binding.declineButton.setVisibility(View.GONE);
-            holder.binding.inviteStatus.setText("You have accepted this appointment at " + appInv.getStatusUpdateAt().toString() + "");
+            holder.binding.inviteStatus.setText("You have accepted this appointment " + msg);
         } else if (appInv.getInviteStatus().equals("declined")) {
             holder.binding.acceptButton.setVisibility(View.GONE);
             holder.binding.declineButton.setVisibility(View.GONE);
-            holder.binding.inviteStatus.setText("You have declined this appointment " + appInv.getStatusUpdateAt().toString() + "");
+            holder.binding.inviteStatus.setText("You have declined this appointment " + msg);
         } else {
             holder.binding.acceptButton.setVisibility(View.VISIBLE);
             holder.binding.declineButton.setVisibility(View.VISIBLE);
@@ -139,6 +156,7 @@ public class InviteAppointmentAdapter extends RecyclerView.Adapter<InviteAppoint
                     appointmentInvitationViewModel.update(appointmentInvitation);
                 }
         );
+
         holder.binding.inviteStatus.setOnClickListener(
                 v -> {
                     AppointmentInvitation appointmentInvitation = mAppointmentList.get(position);

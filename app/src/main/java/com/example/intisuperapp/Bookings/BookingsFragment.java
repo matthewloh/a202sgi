@@ -8,18 +8,23 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.intisuperapp.LoginAndRegistration.UserSharedViewModel;
 import com.example.intisuperapp.R;
 import com.example.intisuperapp.databinding.FragmentBookingsBinding;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 
 public class BookingsFragment extends Fragment {
@@ -53,12 +58,10 @@ public class BookingsFragment extends Fragment {
                 bookings.observe(getViewLifecycleOwner(), bookings1 -> {
                     BookingsAdapter adapter = new BookingsAdapter(bookings1);
                     adapter.setOnItemClickListener(booking -> {
-//                                Toast.makeText(getActivity(), "Booking Clicked", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getActivity(), "Booking:" + booking.getDate(), Toast.LENGTH_SHORT).show();
-//                                // Navigate to the EditBookingsFragment
-//                                BookingsFragmentDirections.ActionBookingsFragmentToEditBookingsFragment action =
-//                                        BookingsFragmentDirections.actionBookingsFragmentToEditBookingsFragment(booking.getId(), userId);
-//                                NavHostFragment.findNavController(BookingsFragment.this).navigate(action);
+
+                                BookingsFragmentDirections.ActionBookingsFragmentToUpdateBookings action =
+                                        BookingsFragmentDirections.actionBookingsFragmentToUpdateBookings(booking.getId(), booking.getDate(), booking.getStartTime(), booking.getEndTime(), booking.getContact(), booking.getVenue(), userId);
+                                NavHostFragment.findNavController(BookingsFragment.this).navigate(action);
                     });
                     adapter.setOnItemLongClickListener(booking -> {
                         new AlertDialog.Builder(getActivity()).setTitle("Do you want to delete Booking " + booking.getId() + "?").setPositiveButton("Yes", (dialog, which) -> {
@@ -87,11 +90,10 @@ public class BookingsFragment extends Fragment {
                             bookingsViewModel.getAllBookingsForUser(userId).observe(getViewLifecycleOwner(), bookings1 -> {
                                 BookingsAdapter adapter = new BookingsAdapter(bookings1);
                                 adapter.setOnItemClickListener(booking -> {
-                                    Toast.makeText(getActivity(), "Booking:" + booking.getDate(), Toast.LENGTH_SHORT).show();
 //                                // Navigate to the EditBookingsFragment
-//                                BookingsFragmentDirections.ActionBookingsFragmentToEditBookingsFragment action =
-//                                        BookingsFragmentDirections.actionBookingsFragmentToEditBookingsFragment(booking.getId(), userId);
-//                                NavHostFragment.findNavController(BookingsFragment.this).navigate(action);
+                                    BookingsFragmentDirections.ActionBookingsFragmentToUpdateBookings action =
+                                            BookingsFragmentDirections.actionBookingsFragmentToUpdateBookings(booking.getId(), booking.getDate(), booking.getStartTime(), booking.getEndTime(), booking.getContact(), booking.getVenue(), userId);
+                                    NavHostFragment.findNavController(BookingsFragment.this).navigate(action);
                                 });
                                 adapter.setOnItemLongClickListener(booking -> {
                                     new AlertDialog.Builder(getActivity()).setTitle("Do you want to delete Booking " + booking.getId() + "?").setPositiveButton("Yes", (dialog_, which_) -> {
@@ -107,11 +109,10 @@ public class BookingsFragment extends Fragment {
                             bookingsViewModel.getBookingsByVenueAsc(userId).observe(getViewLifecycleOwner(), bookings1 -> {
                                 BookingsAdapter adapter = new BookingsAdapter(bookings1);
                                 adapter.setOnItemClickListener(booking -> {
-                                    Toast.makeText(getActivity(), "Booking:" + booking.getDate(), Toast.LENGTH_SHORT).show();
 //                                // Navigate to the EditBookingsFragment
-//                                BookingsFragmentDirections.ActionBookingsFragmentToEditBookingsFragment action =
-//                                        BookingsFragmentDirections.actionBookingsFragmentToEditBookingsFragment(booking.getId(), userId);
-//                                NavHostFragment.findNavController(BookingsFragment.this).navigate(action);
+                                    BookingsFragmentDirections.ActionBookingsFragmentToUpdateBookings action =
+                                            BookingsFragmentDirections.actionBookingsFragmentToUpdateBookings(booking.getId(), booking.getDate(), booking.getStartTime(), booking.getEndTime(), booking.getContact(), booking.getVenue(), userId);
+                                    NavHostFragment.findNavController(BookingsFragment.this).navigate(action);
                                 });
                                 adapter.setOnItemLongClickListener(booking -> {
                                     new AlertDialog.Builder(getActivity()).setTitle("Do you want to delete Booking " + booking.getId() + "?").setPositiveButton("Yes", (dialog_, which_) -> {
@@ -128,11 +129,10 @@ public class BookingsFragment extends Fragment {
                             bookingsViewModel.getBookingsByDateAsc(userId).observe(getViewLifecycleOwner(), bookings1 -> {
                                 BookingsAdapter adapter = new BookingsAdapter(bookings1);
                                 adapter.setOnItemClickListener(booking -> {
-                                    Toast.makeText(getActivity(), "Booking:" + booking.getDate(), Toast.LENGTH_SHORT).show();
 //                                // Navigate to the EditBookingsFragment
-//                                BookingsFragmentDirections.ActionBookingsFragmentToEditBookingsFragment action =
-//                                        BookingsFragmentDirections.actionBookingsFragmentToEditBookingsFragment(booking.getId(), userId);
-//                                NavHostFragment.findNavController(BookingsFragment.this).navigate(action);
+                                    BookingsFragmentDirections.ActionBookingsFragmentToUpdateBookings action =
+                                            BookingsFragmentDirections.actionBookingsFragmentToUpdateBookings(booking.getId(), booking.getDate(), booking.getStartTime(), booking.getEndTime(), booking.getContact(), booking.getVenue(), userId);
+                                    NavHostFragment.findNavController(BookingsFragment.this).navigate(action);
                                 });
                                 adapter.setOnItemLongClickListener(booking -> {
                                     new AlertDialog.Builder(getActivity()).setTitle("Do you want to delete Booking " + booking.getId() + "?").setPositiveButton("Yes", (dialog_, which_) -> {
@@ -149,11 +149,10 @@ public class BookingsFragment extends Fragment {
                             bookingsViewModel.getBookingsByDate(userId).observe(getViewLifecycleOwner(), bookings1 -> {
                                 BookingsAdapter adapter = new BookingsAdapter(bookings1);
                                 adapter.setOnItemClickListener(booking -> {
-                                    Toast.makeText(getActivity(), "Booking:" + booking.getDate(), Toast.LENGTH_SHORT).show();
 //                                // Navigate to the EditBookingsFragment
-//                                BookingsFragmentDirections.ActionBookingsFragmentToEditBookingsFragment action =
-//                                        BookingsFragmentDirections.actionBookingsFragmentToEditBookingsFragment(booking.getId(), userId);
-//                                NavHostFragment.findNavController(BookingsFragment.this).navigate(action);
+                                    BookingsFragmentDirections.ActionBookingsFragmentToUpdateBookings action =
+                                            BookingsFragmentDirections.actionBookingsFragmentToUpdateBookings(booking.getId(), booking.getDate(), booking.getStartTime(), booking.getEndTime(), booking.getContact(), booking.getVenue(), userId);
+                                    NavHostFragment.findNavController(BookingsFragment.this).navigate(action);
                                 });
                                 adapter.setOnItemLongClickListener(booking -> {
                                     new AlertDialog.Builder(getActivity()).setTitle("Do you want to delete Booking " + booking.getId() + "?").setPositiveButton("Yes", (dialog_, which_) -> {
@@ -178,10 +177,12 @@ public class BookingsFragment extends Fragment {
 
     }
 
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
+
 
 }

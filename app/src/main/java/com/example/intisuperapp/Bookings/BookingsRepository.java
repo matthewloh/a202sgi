@@ -65,4 +65,16 @@ public class BookingsRepository {
         return mBookingsDao.getBookingsByVenueAsc(authorId);
     }
 
+    public LiveData<List<Bookings>> getBookingsByDateTimeVenue(String venue, String date, String startTime, String endTime) {
+        return mBookingsDao.getBookingsByDateTimeVenue(venue, date, startTime, endTime);
+    }
+
+    public void updateBookingsById(String venue, String date, String startTime, String endTime, String contact, int userId, int id) {
+        INTISuperappDatabase.databaseWriteExecutor.execute(() -> mBookingsDao.updateBookingsById(venue, date, startTime, endTime, contact, userId, id));
+    }
+
+
+    public LiveData<List<Bookings>> getBookingsByDateVenue(String venue, String date) {
+        return mBookingsDao.getBookingsByDateVenue(venue, date);
+    }
 }

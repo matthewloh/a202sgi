@@ -23,6 +23,7 @@ public class BookingsViewModel extends AndroidViewModel {
         mRepository.update(bookings);
     }
 
+
     public void delete(Bookings bookings) {
         mRepository.delete(bookings);
     }
@@ -60,6 +61,18 @@ public class BookingsViewModel extends AndroidViewModel {
     }
 
 
+    public void updateBookingsById(String venue, String date, String startTime, String endTime, String contact, int userId, int id) {
+        mRepository.updateBookingsById(venue, date, startTime, endTime, contact, userId, id);
+
+    }
+
+    public LiveData<List<Bookings>> getBookingsByDateVenue(String venue, String date) {
+        return mRepository.getBookingsByDateVenue(venue, date);
+    }
+
+    public LiveData<List<Bookings>> getBookingsByDateTimeVenue(String venue, String date, String startTime, String endTime) {
+        return mRepository.getBookingsByDateTimeVenue(venue, date, startTime, endTime);
+    }
 
 
 }

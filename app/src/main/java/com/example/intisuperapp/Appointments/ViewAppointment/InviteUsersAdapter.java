@@ -79,7 +79,19 @@ public class InviteUsersAdapter extends RecyclerView.Adapter<InviteUsersAdapter.
                     });
                     builder.create().show();
                 });
-                holder.binding.inviteeStatusUpdatedAt.setText("Invitation Sent: " + appointmentInvitation.getInviteStatus());
+                long timeAgo = appointmentInvitation.getStatusUpdateAt().getTime();
+                long now = new Date().getTime();
+                long diff = now - timeAgo;
+                long diffMinutes = diff / (60 * 1000);
+                long diffHours = diff / (60 * 60 * 1000);
+                long diffDays = diff / (24 * 60 * 60 * 1000);
+                if (diffMinutes < 60) {
+                    holder.binding.inviteeStatusUpdatedAt.setText("Invitation Sent: " + appointmentInvitation.getInviteStatus() + " \n" + diffMinutes + " minutes ago");
+                } else if (diffHours < 24) {
+                    holder.binding.inviteeStatusUpdatedAt.setText("Invitation Sent: " + appointmentInvitation.getInviteStatus() + " \n" + diffHours + " hours ago");
+                } else {
+                    holder.binding.inviteeStatusUpdatedAt.setText("Invitation Sent: " + appointmentInvitation.getInviteStatus() + " \n" + diffDays + " days ago");
+                }
             } else {
                 holder.binding.updateInvitee.setText("Invite");
                 holder.binding.inviteeStatusUpdatedAt.setText("Invitation Not Sent");
