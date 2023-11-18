@@ -43,6 +43,8 @@ public class HomeFragment extends Fragment {
                 getViewLifecycleOwner(),
                 user -> userId = user.getId()
         );
+
+        binding.welcomeText.setText("Welcome, " + userSharedViewModel.getUser().getValue().getFullname() );
         binding.appointmentsButton.setOnClickListener(
                 v -> {
                     NavHostFragment.findNavController(HomeFragment.this)
@@ -68,18 +70,6 @@ public class HomeFragment extends Fragment {
                 }
         );
 
-//        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
-//            int itemId = item.getItemId();
-//            if (itemId == R.id.home) {
-//                navController.navigate(R.id.homeFragment);
-//            } else if (itemId == R.id.events) {
-//                navController.navigate(R.id.eventsFragment);
-//            } else if (itemId == R.id.profile) {
-//                navController.navigate(R.id.profileFragment);
-//            } else if (itemId == R.id.notifications) {
-//                navController.navigate(R.id.notificationsFragment);
-//            }
-//            return true;
-//        });
+
     }
 }

@@ -9,10 +9,6 @@
             android:icon="@drawable/baseline_home_24"
             android:title="Return Home" />
         <item
-            android:id="@+id/appointmentsFragment"
-            android:icon="@drawable/baseline_person_24"
-            android:title="Appointments" />
-        <item
             android:id="@+id/bookingsFragment"
             android:icon="@drawable/baseline_schedule_24"
             android:title="Bookings" />
@@ -20,6 +16,10 @@
             android:id="@+id/eventsFragment"
             android:icon="@drawable/baseline_calendar_month_24"
             android:title="Events" />
+        <item
+            android:id="@+id/appointmentsFragment"
+            android:icon="@drawable/baseline_supervised_user_circle_24"
+            android:title="Appointments" />
     </group>
     <item android:title="Services">
         <menu>
@@ -29,6 +29,10 @@
                 android:tooltipText="@string/all_bookings"
                 android:title="Go to Lost and Found" />
             <item
+                android:id="@+id/createBookingsFragment"
+                android:icon="@drawable/baseline_checklist_24"
+                android:title="Create Bookings" />
+            <item
                 android:id="@+id/addAppointmentsFragment"
                 android:icon="@drawable/ic_add"
                 android:title="Add Appointments" />
@@ -37,10 +41,6 @@
     </item>
     <item android:title="Account">
         <menu>
-            <item
-                android:id="@+id/profileFragment"
-                android:icon="@drawable/baseline_person_24"
-                android:title="Profile" />
             <item
                 android:id="@+id/loginFragment"
                 android:icon="@drawable/baseline_logout_24"
