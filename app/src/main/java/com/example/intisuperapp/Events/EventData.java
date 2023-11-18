@@ -9,6 +9,8 @@ public class EventData {
     @DocumentId
     private String documentId;
 
+    private Integer eventID;
+
     private String eventName;
     private String eventVenue;
     private Date eventDate;
@@ -21,7 +23,8 @@ public class EventData {
         //No-Arguement constructor required for Firestore deserialization
     }
 
-    public EventData(String eventName, String eventVenue, Date eventDate, Date eventStartTime, Date eventEndTime, String eventDescription, String eventImageURL) {
+    public EventData(Integer eventID, String eventName, String eventVenue, Date eventDate, Date eventStartTime, Date eventEndTime, String eventDescription, String eventImageURL) {
+        this.eventID = eventID;
         this.eventName = eventName;
         this.eventVenue = eventVenue;
         this.eventDate = eventDate;
@@ -30,6 +33,8 @@ public class EventData {
         this.eventDescription = eventDescription;
         this.eventImageURL = eventImageURL;
     }
+
+    public Integer getEventID() {return eventID;}
 
     public String getEventName() {return eventName;}
 
