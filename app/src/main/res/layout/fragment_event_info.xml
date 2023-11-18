@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
-                android:text="Venue"
+                android:text="LR401A"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/textView35"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:text="Start T"
+                android:text="1:30 pm"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/textView37"
                 app:layout_constraintTop_toBottomOf="@+id/textView35" />
@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:text="End T"
+                android:text="2:30 pm"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/textView42"
                 app:layout_constraintTop_toBottomOf="@+id/eventinfovenue" />
@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:text="Event Date"
+                android:text="8th November"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/textView44"
                 app:layout_constraintTop_toBottomOf="@+id/eventinfostartt" />
@@ -120,7 +120,7 @@
                 android:layout_height="411dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="Event Description"
+                android:text="A focus on web development topics carefully curated in collaboration with their team to gain valueble insights."
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -150,7 +150,7 @@
         android:layout_marginEnd="57dp"
         android:background="@drawable/eventboxbg"
         android:gravity="center"
-        android:text="Event Name"
+        android:text="Sharing Session on Web Development w/ Veeco Tech"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -162,7 +162,7 @@
         android:layout_marginStart="56dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="57dp"
-        android:src="@drawable/baseline_image_24"
+        android:src="@drawable/webdevelop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/eventname" />
