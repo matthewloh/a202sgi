@@ -58,8 +58,11 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-firestore:24.9.1")
     implementation("com.google.firebase:firebase-storage:20.3.0")
+    //Viewpager
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
     // Glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
     // Bcrypt
     implementation("at.favre.lib:bcrypt:0.10.2")
 }
