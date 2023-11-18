@@ -6,14 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".HomePage.HomeFragment">
     <!-- fragment_home.xml -->
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/homeTitleLayout"
         android:layout_width="0dp"
-        android:layout_height="254dp"
+        android:layout_height="600dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/welcomeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome_text"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="2dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/eventsButton"
@@ -21,11 +34,11 @@
             android:layout_height="0dp"
             android:background="@null"
             android:scaleType="fitCenter"
-            android:src="@drawable/events_image"
+            android:src="@drawable/events"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/lostAndFoundButton"
-            app:layout_constraintTop_toBottomOf="@+id/bookingsButton" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lostAndFoundButton" />
 
         <ImageButton
             android:id="@+id/appointmentsButton"
@@ -33,11 +46,11 @@
             android:layout_height="0dp"
             android:background="@null"
             android:scaleType="fitCenter"
-            android:src="@drawable/appointments_image"
-            app:layout_constraintBottom_toTopOf="@+id/lostAndFoundButton"
-            app:layout_constraintEnd_toStartOf="@+id/bookingsButton"
+            android:src="@drawable/appointments"
+            app:layout_constraintBottom_toTopOf="@+id/bookingsButton"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/welcomeText" />
 
         <ImageButton
             android:id="@+id/lostAndFoundButton"
@@ -45,11 +58,11 @@
             android:layout_height="0dp"
             android:background="@null"
             android:scaleType="fitCenter"
-            android:src="@drawable/lostandfound_image"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/eventsButton"
+            android:src="@drawable/lostandfound"
+            app:layout_constraintBottom_toTopOf="@id/eventsButton"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appointmentsButton" />
+            app:layout_constraintTop_toBottomOf="@+id/bookingsButton" />
 
         <ImageButton
             android:id="@+id/bookingsButton"
@@ -57,11 +70,11 @@
             android:layout_height="0dp"
             android:background="@null"
             android:scaleType="fitCenter"
-            android:src="@drawable/bookings_image"
-            app:layout_constraintBottom_toTopOf="@+id/eventsButton"
+            android:src="@drawable/bookings"
+            app:layout_constraintBottom_toTopOf="@+id/lostAndFoundButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/appointmentsButton"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appointmentsButton" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

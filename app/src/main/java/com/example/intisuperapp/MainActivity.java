@@ -54,9 +54,11 @@ public class MainActivity extends AppCompatActivity implements DrawerLocker {
             } else if (itemId == R.id.lostAndFoundFragment) {
                 navController.navigate(R.id.lostAndFoundFragment);
             } else if (itemId == R.id.createBookingsFragment) {
-                navController.navigate(R.id.createBookingsFragment);
+                navController.navigate(R.id.createBookings);
             } else if (itemId == R.id.addAppointmentsFragment) {
                 navController.navigate(R.id.addAppointmentsFragment);
+            } else if (itemId == R.id.createBookingsFragment) {
+                navController.navigate(R.id.createBookingsFragment);
             } else if (itemId == R.id.loginFragment) {
                 setDrawerEnabled(false);
                 navController.navigate(R.id.loginFragment);
@@ -70,8 +72,8 @@ public class MainActivity extends AppCompatActivity implements DrawerLocker {
                 navController.navigate(R.id.homeFragment);
             } else if (itemId == R.id.eventsFragment) {
                 navController.navigate(R.id.eventsFragment);
-            } else if (itemId == R.id.profileFragment) {
-                navController.navigate(R.id.profileFragment);
+            } else if (itemId == R.id.appointmentsFragment) {
+                navController.navigate(R.id.appointmentsFragment);
             } else if (itemId == R.id.bookingsFragment) {
                 navController.navigate(R.id.bookingsFragment);
             }
