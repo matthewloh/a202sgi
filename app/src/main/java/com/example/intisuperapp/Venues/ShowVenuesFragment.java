@@ -58,26 +58,9 @@ public class ShowVenuesFragment extends Fragment {
         venues.observe(getViewLifecycleOwner(), data -> {
             VenuesAdapter adapter = new VenuesAdapter(data);
 
-
-            if (Objects.equals(userSharedViewModel.getUserValue().getRole(), "lecturer")) {
-
-                adapter.setOnItemLongClickListener(venue -> {
-                    new AlertDialog.Builder(getActivity()).setTitle("Do you want to delete " + venue.getVenueName() + " ?")
-                            .setPositiveButton("Yes", (dialog, which) -> {
-                                firebaseViewModel.deleteVenueFromFirebase(venuesViewModel, venue.getVenueName());
-                                Toast.makeText(getContext(), "Venue deleted", Toast.LENGTH_SHORT).show();
-                            })
-                            .setNegativeButton("No", (dialog, which) -> {
-                            }).show();
-                });
-            }
                 binding.venuesRecyclerView.setAdapter(adapter);
                 binding.venuesRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-
         });
-
-
 
         if (Objects.equals(userSharedViewModel.getUserValue().getRole(), "lecturer")) {
             binding.addVenueButton.setVisibility(View.VISIBLE);
@@ -87,9 +70,6 @@ public class ShowVenuesFragment extends Fragment {
         } else {
             binding.addVenueButton.setVisibility(View.GONE);
         }
-
-
-
     }
 
     @Override
