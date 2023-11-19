@@ -10,22 +10,22 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="200dp"
+        android:layout_width="240dp"
         android:layout_height="40dp"
+        android:layout_marginStart="76dp"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="104dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/laftitlebg"
         android:gravity="center"
         android:shape="rectangle"
+
+
         android:text="Found Item Report"
         android:textAlignment="center"
-
-
         android:textColor="#000000"
         android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@+id/nestedScrollView"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
@@ -128,13 +128,12 @@
         android:id="@+id/reportfoundbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
+        android:layout_marginStart="149dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="162dp"
+        android:layout_marginEnd="150dp"
         android:backgroundTint="#00337C"
         android:text="Submit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nestedScrollView" />
 
