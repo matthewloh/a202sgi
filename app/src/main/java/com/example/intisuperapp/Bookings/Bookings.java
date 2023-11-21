@@ -12,7 +12,7 @@ import java.util.Date;
 
 @Entity(tableName = "Bookings", foreignKeys = @ForeignKey(entity = User.class, parentColumns = "id", childColumns = "authorId", onDelete = ForeignKey.CASCADE))
 @TypeConverters(Converters.class)
-public class Bookings {
+public class  Bookings {
 
     @PrimaryKey(autoGenerate = true)
     private int id;

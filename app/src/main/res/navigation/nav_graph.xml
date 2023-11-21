@@ -97,6 +97,9 @@
             android:id="@+id/action_homeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
         <action
+            android:id="@+id/action_homeFragment_to_createBookings"
+            app:destination="@id/createBookings" />
+        <action
             android:id="@+id/action_homeFragment_to_eventMainFragment"
             app:destination="@id/eventMainFragment" />
     </fragment>
@@ -126,6 +129,9 @@
         <action
             android:id="@+id/action_bookingsFragment_to_updateBookings"
             app:destination="@id/updateBookings" />
+        <action
+            android:id="@+id/action_createBookings_to_bookingsFragment"
+            app:destination="@id/bookingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/createBookings"
@@ -143,7 +149,6 @@
             android:id="@+id/action_createBookings_to_bookingsVenues"
             app:destination="@id/bookingsVenues" />
     </fragment>
-
     <fragment
         android:id="@+id/appointmentsFragment"
         android:name="com.example.intisuperapp.Appointments.AppointmentsFragment"

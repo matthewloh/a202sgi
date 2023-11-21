@@ -68,7 +68,7 @@ public class AddVenuesFragment extends Fragment {
                 } else {
                     Toast.makeText(getContext(), "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
-                NavHostFragment.findNavController(AddVenuesFragment.this).navigate(R.id.action_addVenuesFragment_to_bookingsVenues);
+
             });
         });
     }
