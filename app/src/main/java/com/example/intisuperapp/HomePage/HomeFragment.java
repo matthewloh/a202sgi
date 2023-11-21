@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment {
         binding.eventsButton.setOnClickListener(
                 v -> {
                     NavHostFragment.findNavController(HomeFragment.this)
-                            .navigate(R.id.action_homeFragment_to_eventsFragment);
+                            .navigate(R.id.action_homeFragment_to_eventMainFragment);
                 }
         );
 
