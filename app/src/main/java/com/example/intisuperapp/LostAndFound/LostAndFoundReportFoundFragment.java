@@ -1,10 +1,9 @@
 package com.example.intisuperapp.LostAndFound;
 
-import android.os.Bundle;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import java.io.ByteArrayOutputStream;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,24 +12,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.lifecycle.ViewModel;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.example.intisuperapp.R;
 import com.google.firebase.firestore.Blob;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.firestore.CollectionReference;
 
-import com.example.intisuperapp.R;
+import java.io.ByteArrayOutputStream;
 
 public class LostAndFoundReportFoundFragment extends Fragment {
 

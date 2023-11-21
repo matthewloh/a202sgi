@@ -28,9 +28,9 @@
 
         <ImageButton
             android:id="@+id/studentButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@android:color/transparent"
             android:src="@drawable/student_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/lecturerButton"
@@ -39,24 +39,29 @@
 
         <ImageButton
             android:id="@+id/lecturerButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@android:color/transparent"
             android:src="@drawable/lecturer_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/studentButton"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageView"
             android:layout_width="0dp"
-            android:layout_height="160dp"
+            android:layout_height="220dp"
             android:background="#FFFFFF"
             android:contentDescription="INTI LOGO"
+            android:elevation="12dp"
+            android:outlineSpotShadowColor="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:shapeAppearanceOverlay="@style/roundedLogoView"
             app:srcCompat="@drawable/main_logo" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,7 +15,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.intisuperapp.Firebase.viewmodel.FirebaseViewModel;
 import com.example.intisuperapp.Firebase.viewmodel.PhotoViewModel;

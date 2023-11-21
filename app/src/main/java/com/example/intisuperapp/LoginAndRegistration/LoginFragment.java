@@ -37,11 +37,32 @@ public class LoginFragment extends Fragment {
 
         userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
         userSharedViewModel = new ViewModelProvider(requireActivity()).get(UserSharedViewModel.class);
+        binding.emailEntry.setOnFocusChangeListener(
+                (v, hasFocus) -> { // Clear hint
+                    if (hasFocus) {
+                        binding.emailEntry.setHint("");
+                    } else {
+                        binding.emailEntry.setHint("Email");
+                    }
+                }
+        );
+        binding.password.setOnFocusChangeListener(
+                (v, hasFocus) -> { // Clear hint
+                    if (hasFocus) {
+                        binding.password.setHint("");
+                    } else {
+                        binding.password.setHint("Password");
+                    }
+                }
+        );
         binding.loginButton.setOnClickListener(v -> {
             String email = binding.emailEntry.getText().toString();
             String password = binding.password.getText().toString();
-            if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(getActivity(), "Please fill in all the fields", Toast.LENGTH_SHORT).show();
+            if (email.isEmpty()) {
+                binding.emailEntry.setError("Email is required");
+                return;
+            } else if (password.isEmpty()) {
+                binding.password.setError("Password is required");
                 return;
             }
             userViewModel.getUserByEmail(email).observe(getViewLifecycleOwner(), user -> {

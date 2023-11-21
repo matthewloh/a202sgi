@@ -2,7 +2,6 @@ package com.example.intisuperapp.Firebase.repo;
 
 import android.net.Uri;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 
@@ -12,7 +11,6 @@ import com.example.intisuperapp.Firebase.model.Photo;
 import com.example.intisuperapp.Firebase.viewmodel.PhotoViewModel;
 import com.example.intisuperapp.Venues.Venues;
 import com.example.intisuperapp.Venues.VenuesViewModel;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;

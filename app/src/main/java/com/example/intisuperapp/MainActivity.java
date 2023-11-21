@@ -49,8 +49,8 @@ public class MainActivity extends AppCompatActivity implements DrawerLocker {
                 navController.navigate(R.id.appointmentsFragment);
             } else if (itemId == R.id.bookingsFragment) {
                 navController.navigate(R.id.bookingsFragment);
-            } else if (itemId == R.id.eventsFragment) {
-                navController.navigate(R.id.eventsFragment);
+            } else if (itemId == R.id.eventMainFragment) {
+                navController.navigate(R.id.eventMainFragment);
             } else if (itemId == R.id.lostAndFoundFragment) {
                 navController.navigate(R.id.lostAndFoundFragment);
             } else if (itemId == R.id.createBookingsFragment) {
@@ -72,12 +72,14 @@ public class MainActivity extends AppCompatActivity implements DrawerLocker {
             int itemId = item.getItemId();
             if (itemId == R.id.homeFragment) {
                 navController.navigate(R.id.homeFragment);
-            } else if (itemId == R.id.eventsFragment) {
-                navController.navigate(R.id.eventsFragment);
+            } else if (itemId == R.id.eventMainFragment) {
+                navController.navigate(R.id.eventMainFragment);
             } else if (itemId == R.id.appointmentsFragment) {
                 navController.navigate(R.id.appointmentsFragment);
             } else if (itemId == R.id.bookingsFragment) {
                 navController.navigate(R.id.bookingsFragment);
+            } else if (itemId == R.id.lostAndFoundFragment) {
+                navController.navigate(R.id.lostAndFoundFragment);
             }
             return true;
         });

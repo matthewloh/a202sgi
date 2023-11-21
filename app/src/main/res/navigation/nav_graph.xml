@@ -182,8 +182,7 @@
         android:id="@+id/addAppointmentsFragment"
         android:name="com.example.intisuperapp.Appointments.AddAppointmentFragment"
         android:label=""
-        tools:layout="@layout/fragment_add_appointment" >
-    </fragment>
+        tools:layout="@layout/fragment_add_appointment" />
     <fragment
         android:id="@+id/lostAndFoundFragment"
         android:name="com.example.intisuperapp.LostAndFound.LostAndFoundFragment"
@@ -206,7 +205,7 @@
         android:id="@+id/updateBookings"
         android:name="com.example.intisuperapp.Bookings.UpdateBookings"
         android:label="fragment_update_bookings"
-        tools:layout="@layout/fragment_update_bookings" >
+        tools:layout="@layout/fragment_update_bookings">
         <action
             android:id="@+id/action_updateBookings_to_bookingsFragment"
             app:destination="@id/bookingsFragment" />
@@ -258,7 +257,7 @@
         android:id="@+id/bookingsVenues"
         android:name="com.example.intisuperapp.Venues.ShowVenuesFragment"
         android:label=""
-        tools:layout="@layout/fragment_show_booking_venues" >
+        tools:layout="@layout/fragment_show_booking_venues">
         <action
             android:id="@+id/action_bookingsVenues_to_addVenuesFragment"
             app:destination="@id/addVenuesFragment" />
@@ -267,7 +266,7 @@
         android:id="@+id/addVenuesFragment"
         android:name="com.example.intisuperapp.Venues.AddVenuesFragment"
         android:label=""
-        tools:layout="@layout/fragment_add_booking_venues" >
+        tools:layout="@layout/fragment_add_booking_venues">
         <action
             android:id="@+id/action_addVenuesFragment_to_bookingsVenues"
             app:destination="@id/bookingsVenues" />
@@ -276,7 +275,7 @@
         android:id="@+id/eventMainFragment"
         android:name="com.example.intisuperapp.Events.EventMainFragment"
         android:label=""
-        tools:layout="@layout/fragment_event_main" >
+        tools:layout="@layout/fragment_event_main">
         <action
             android:id="@+id/action_eventMainFragment_to_eventRegisterFragment"
             app:destination="@id/eventRegisterFragment" />
@@ -285,7 +284,7 @@
         android:id="@+id/eventRegisterFragment"
         android:name="com.example.intisuperapp.Events.EventRegisterFragment"
         android:label=""
-        tools:layout="@layout/fragment_event_register" >
+        tools:layout="@layout/fragment_event_register">
         <action
             android:id="@+id/action_eventRegisterFragment_to_eventInfoFragment"
             app:destination="@id/eventInfoFragment" />

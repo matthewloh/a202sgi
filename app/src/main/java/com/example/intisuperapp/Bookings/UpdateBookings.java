@@ -18,11 +18,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.intisuperapp.Firebase.viewmodel.FirebaseViewModel;
-import com.example.intisuperapp.LoginAndRegistration.User;
-import com.example.intisuperapp.LoginAndRegistration.UserViewModel;
 import com.example.intisuperapp.MainActivity;
 import com.example.intisuperapp.R;
 import com.example.intisuperapp.Venues.Venues;
@@ -35,7 +32,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.TimeZone;
 
 
 public class UpdateBookings extends Fragment {
@@ -51,7 +47,6 @@ public class UpdateBookings extends Fragment {
     Spinner chooseVenueSpinner;
     Button saveBookingButton;
     private FragmentUpdateBookingsBinding binding;
-    private UserViewModel userViewModel;
     private FirebaseViewModel firebaseViewModel;
     private VenuesViewModel venuesViewModel;
     final List<String> venueList = new ArrayList<>();

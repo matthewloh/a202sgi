@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="MyButton" parent="Widget.MaterialComponents.Button.TextButton">
-        <item name="shapeAppearanceOverlay">@style/MyShapeAppearance</item>
+        <item name="shapeAppearanceOverlay">@style/ConfirmInfoGoToRoleBtn</item>
     </style>
 
-    <style name="MyShapeAppearance">
+    <style name="ConfirmInfoGoToRoleBtn">
         <item name="cornerFamily">rounded</item>
         <item name="cornerFamilyTopRight">rounded</item>
         <item name="cornerSizeTopRight">0.1dp</item>
@@ -14,8 +15,30 @@
         <item name="backgroundTint">#e30613</item>
     </style>
 
+    <style name="LoginButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="shapeAppearanceOverlay">@style/LoginButtonStyle</item>
+    </style>
+
+    <style name="LoginButtonStyle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerFamilyTopRight">rounded</item>
+        <item name="cornerSizeTopRight">90dp</item>
+        <item name="cornerSizeBottomRight">90dp</item>
+        <item name="cornerSizeTopLeft">90dp</item>
+        <item name="cornerSizeBottomLeft">90dp</item>
+    </style>
+
     <style name="roundedImageView">
         <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="roundedLogoView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">0.1dp</item>
+        <item name="cornerSizeTopLeft">0.1dp</item>
+        <item name="cornerSizeBottomRight">45dp</item>
+        <item name="cornerSizeBottomLeft">45dp</item>
         <item name="cornerSize">50%</item>
     </style>
 

@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.intisuperapp.databinding.BookingpageItemBinding;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class BookingsAdapter extends RecyclerView.Adapter<BookingsAdapter.BookingsViewHolder> {

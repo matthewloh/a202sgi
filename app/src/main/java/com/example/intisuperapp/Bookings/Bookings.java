@@ -8,8 +8,6 @@ import androidx.room.TypeConverters;
 import com.example.intisuperapp.DBUtils.Converters;
 import com.example.intisuperapp.LoginAndRegistration.User;
 
-import java.util.Date;
-
 @Entity(tableName = "Bookings", foreignKeys = @ForeignKey(entity = User.class, parentColumns = "id", childColumns = "authorId", onDelete = ForeignKey.CASCADE))
 @TypeConverters(Converters.class)
 public class  Bookings {

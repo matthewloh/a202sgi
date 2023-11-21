@@ -2,27 +2,34 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/homeFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:icon="@drawable/baseline_home_24"
-        android:title="@string/home" />
-    <item
         android:id="@+id/bookingsFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/baseline_schedule_24"
         android:title="@string/bookings" />
     <item
-        android:id="@+id/eventsFragment"
+        android:id="@+id/eventMainFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/baseline_calendar_month_24"
         android:title="@string/events" />
+    <item
+        android:id="@+id/homeFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/baseline_home_24"
+        android:title="@string/home" />
     <item
         android:id="@+id/appointmentsFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/baseline_supervised_user_circle_24"
         android:title="@string/appointments" />
+    <item
+        android:id="@+id/lostAndFoundFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/ic_lost_and_found"
+        android:title="@string/lost_and_found" />
+
 </menu>

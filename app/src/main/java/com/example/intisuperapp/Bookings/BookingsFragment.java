@@ -8,23 +8,18 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.intisuperapp.LoginAndRegistration.UserSharedViewModel;
 import com.example.intisuperapp.R;
 import com.example.intisuperapp.databinding.FragmentBookingsBinding;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Locale;
 
 
 public class BookingsFragment extends Fragment {
